@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YOY | homepage</title>
     <!-- stylesheets -->
-    <link type="text/css" rel="stylesheet" href="../css/homepage.css"/>
+    <link type="text/css" rel="stylesheet" href="../../static/css/homepage.css"/>
     <link rel="stylesheet" type="text/css" href="../Utilities/Chico-effect.css"/>
 
 <!--     bootstrap: de y' 2 file: ajax phai dat truoc maxcdn thi moi dung` duoc modal (Form)-->
@@ -705,13 +705,13 @@
         /*Put icon inside input element in a form: http://stackoverflow.com/questions/917610/put-icon-inside-input-element-in-a-form*/
         /*dag thieu' nut' clear cua type = search*/
         input[type='search'] {
-            background: url(../img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
+            background: url(../../static/img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
             padding-left: 30px;
             background-color: #ffffff;
         }
 
         input[type='date'] {
-            background: url(../img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
+            background: url(../../static/img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
             padding-left: 35px;
             background-color: #ffffff;
         }
@@ -1064,7 +1064,7 @@
         }
 
         input[type='date'] {
-            background: url(../img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
+            background: url(../../static/img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
             /*glyphicon glyphicon-calendar*/
             padding-left: 35px;
             background-color: #ffffff;
@@ -1307,26 +1307,26 @@
         }
 
         .main section.page1 {
-            background: url(../img/download-apps/pic-mobileapps1.jpg) no-repeat;
+            background: url(../../static/img/download-apps/pic-mobileapps1.jpg) no-repeat;
             /*http://stackoverflow.com/questions/9262861/css-background-image-to-fit-width-height-should-auto-scale-in-proportion */
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page2 {
-            background: url(../img/download-apps/pic-mobileapps2.jpg) no-repeat;
+            background: url(../../static/img/download-apps/pic-mobileapps2.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page3 {
-            background: url(../img/download-apps/pic-mobileapps3.jpg) no-repeat;
+            background: url(../../static/img/download-apps/pic-mobileapps3.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page4 {
-            background: url(../img/download-apps/pic-mobileapps4.jpg) no-repeat;
+            background: url(../../static/img/download-apps/pic-mobileapps4.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
@@ -1365,35 +1365,37 @@
     </style>
 
 
-    <script type="text/javascript" language="javascript">
-        $(document).ready(function () {
-//        http://www.w3schools.com/jquery/jquery_ajax_load.asp
-//      http://stackoverflow.com/questions/18712338/make-header-and-footer-files-to-be-included-in-multiple-html-pages-->
-//      tach' rieng de su? dung cho nhieu trang
-//      neu' mo? truc tiep' file o ben ngoai` thi` ko chay. 2 file nay`, khac o? noi dung Address: localhost: & file:///D:/
-//      nhu*ng code khac neu dat rieng file deu bi.: 4 Modal
-//      khi nhap chung cac file vao folder rieng thi ko the load cac' img
-            $("#header").load("header-footer/part-header.html");
-            $("#footer").load("header-footer/part-footer.html");
-            // sau khi load xong thi check user da~ login hay chua
-            // phai them delay thi moi' kich hoat duoc localStorage + id tu` file header1
-//      se~ check + load sau khi load xong part-header1.html
-//      bien' localStorage.check_login luu tai file user-login
-            var timer;
-//      neu thoi gian load body nhieu hon delay thi co the xay ra loi
-            var delay = 1000;
-            timer = setTimeout(function () {
-                if (localStorage.check_login === 'true') {
-//                    alert('DA DANG NHAP');
-                    $('#welcome').fadeIn(10);
-                    $('#signup-signin').fadeOut(10);
-                } else {
-                    $('#welcome').fadeOut(10);
-                    $('#signup-signin').fadeIn(10);
-                }
-            }, delay);
-        });
-    </script>
+
+
+<!--    <script type="text/javascript" language="javascript">-->
+<!--        $(document).ready(function () {-->
+<!--//        http://www.w3schools.com/jquery/jquery_ajax_load.asp-->
+<!--//      http://stackoverflow.com/questions/18712338/make-header-and-footer-files-to-be-included-in-multiple-html-pages&ndash;&gt;-->
+<!--//      tach' rieng de su? dung cho nhieu trang-->
+<!--//      neu' mo? truc tiep' file o ben ngoai` thi` ko chay. 2 file nay`, khac o? noi dung Address: localhost: & file:///D:/-->
+<!--//      nhu*ng code khac neu dat rieng file deu bi.: 4 Modal-->
+<!--//      khi nhap chung cac file vao folder rieng thi ko the load cac' img-->
+<!--            $("#header").load("Pages/header-footer/part-header.html");-->
+<!--            $("#footer").load("Pages/header-footer/part-footer.html");-->
+<!--            // sau khi load xong thi check user da~ login hay chua-->
+<!--            // phai them delay thi moi' kich hoat duoc localStorage + id tu` file header1-->
+<!--//      se~ check + load sau khi load xong part-header1.html-->
+<!--//      bien' localStorage.check_login luu tai file user-login-->
+<!--            var timer;-->
+<!--//      neu thoi gian load body nhieu hon delay thi co the xay ra loi-->
+<!--            var delay = 1000;-->
+<!--            timer = setTimeout(function () {-->
+<!--                if (localStorage.check_login === 'true') {-->
+<!--//                    alert('DA DANG NHAP');-->
+<!--                    $('#welcome').fadeIn(10);-->
+<!--                    $('#signup-signin').fadeOut(10);-->
+<!--                } else {-->
+<!--                    $('#welcome').fadeOut(10);-->
+<!--                    $('#signup-signin').fadeIn(10);-->
+<!--                }-->
+<!--            }, delay);-->
+<!--        });-->
+<!--    </script>-->
 </head>
 <body>
 <!-- co' 2 ung' dung. Feedback, Can tu van? tu` trang web ngoai` (phai online)
@@ -1692,7 +1694,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
 
                 <form action="search-hotels.html" method="get" style="position: absolute; padding: 15px">
                     <div id="search-locations">
-                        <img src="../img/homepage/Delete-25.png" width="16px"
+                        <img src="../../static/img/homepage/Delete-25.png" width="16px"
                              style="position: absolute; margin-left: 405px; margin-top: 14px; display: none"/>
                         <!--<input class="form-control" id="focusedInput" type="search" value="" placeholder="Nhập tên thành phố, khu vực, khách sạn ..." size="100%" style="height:45px">-->
                         <!--http://designshack.net/articles/javascript/create-a-simple-autocomplete-with-html5-jquery/-->
@@ -1759,7 +1761,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
             </div>
         </div>
 
-        <img src="../img/homepage/Center_1440x860.jpg" width="100%" height="100%"/>
+        <img src="/img/homepage/Center_1440x860.jpg" width="100%" height="100%"/>
         <!--</div>-->
     </div>
 
@@ -1772,27 +1774,27 @@ Tab (toi') nguoc lai thi` Shift + Tab
                 <div class="col-sm-2 col-md-2">
                     <p>Điều hòa nhiệt độ</p>
                     <!--do co' class="img-responsive" nen ko the? canh vao` center-->
-                    <img class="img-responsive" src="../img/homepage/tiennghi-AC_Rooms.png"/>
+                    <img class="img-responsive" src="/img/homepage/tiennghi-AC_Rooms.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Truyền hình cáp</p>
-                    <img class="img-responsive" src="../img/homepage/tiennghi-Cable_TV.png"/>
+                    <img class="img-responsive" src="/img/homepage/tiennghi-Cable_TV.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Ra trải giường sạch sẽ</p>
-                    <img class="img-responsive" src="../img/homepage/tiennghi-Spotless_Linen.png"/>
+                    <img class="img-responsive" src="/img/homepage/tiennghi-Spotless_Linen.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Bữa sáng miễn phí</p>
-                    <img class="img-responsive" src="../img/homepage/tiennghi-Complimentary_Breakfast.png"/>
+                    <img class="img-responsive" src="/img/homepage/tiennghi-Complimentary_Breakfast.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Miễn phí Wi-Fi</p>
-                    <img class="img-responsive" src="../img/homepage/tiennghi-Free_Wi-Fi.png"/>
+                    <img class="img-responsive" src="/img/homepage/tiennghi-Free_Wi-Fi.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Nhà vệ sinh đạt chuẩn</p>
-                    <img class="img-responsive" src="../img/homepage/tiennghi-Hygienic_Washrooms.png"/>
+                    <img class="img-responsive" src="/img/homepage/tiennghi-Hygienic_Washrooms.png"/>
                 </div>
             </div>
         </div>
@@ -1808,7 +1810,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
             <div class="container" style="margin-top: 10px">
                 <div class="grid">
                     <figure class="effect-chico">
-                        <img src="../img/homepage/promotion_1.jpg" width="550px" alt="img15"/>
+                        <img src="/img/homepage/promotion_1.jpg" width="550px" alt="img15"/>
                         <figcaption>
                             <!--<strong>YOY <span class="txt-name-location">ĐÀ NẴNG</span></strong>-->
                             <h3 style="margin-top: 20%">
@@ -1820,7 +1822,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                     </figure>
                     <!--mac dinh the figure dag cai` float: left-->
                     <figure class="effect-chico">
-                        <img src="../img/homepage/promotion_2.jpg" width="550px" height="200px" alt="img04"/>
+                        <img src="/img/homepage/promotion_2.jpg" width="550px" height="200px" alt="img04"/>
                         <figcaption>
                             <h3>
                                 YOY <span class="txt-name-location">HÀ NỘI</span>
@@ -1830,7 +1832,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                         </figcaption>
                     </figure>
                     <figure class="effect-chico">
-                        <img src="../img/homepage/promotion_3.jpg" width="550px" height="200px" alt="img04"/>
+                        <img src="/img/homepage/promotion_3.jpg" width="550px" height="200px" alt="img04"/>
                         <figcaption>
                             <h3>
                                 YOY <span class="txt-name-location">HỒ CHÍ MINH</span>
@@ -1855,10 +1857,10 @@ Tab (toi') nguoc lai thi` Shift + Tab
                 <div class="col-xs-5 col-sm-5 col-md-5" style="display: inline-flex">
                     <div style="width: 22%">
                         <!--khi co' responsive + display: inline-flex => ko cai` duoc width, height -->
-                        <img class="effect-shadow img-responsive" src="../img/homepage/comment1_gordonramsay.jpg"
+                        <img class="effect-shadow img-responsive" src="/img/homepage/comment1_gordonramsay.jpg"
                              style="border-radius: 5px"/>
                     </div>
-                    <img src="../img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
+                    <img src="/img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
                     <p style="width: 70%">
                         Tôi đánh giá cao về ẩm thực ở các khu nghỉ dưỡng của các bạn.
                         Bạn đã mang đến nhiều trải nghiệm tuyệt vời về ẩm thực Việt Nam với những món ăn
@@ -1868,10 +1870,10 @@ Tab (toi') nguoc lai thi` Shift + Tab
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-5" style="display: inline-flex">
                     <div style="width: 22%">
-                        <img class="effect-shadow img-responsive" src="../img/homepage/comment1_davidbeckham.jpg"
+                        <img class="effect-shadow img-responsive" src="/img/homepage/comment1_davidbeckham.jpg"
                              style="border-radius: 5px"/>
                     </div>
-                    <img src="../img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
+                    <img src="/img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
                     <p style="width: 70%">
                         Thật tuyệt vời, lần đầu tiên tôi đến Việt Nam. Thật tuyệt khi được một nhà
                         cung cấp dịch vụ về nghỉ dưỡng tốt như các bạn. Mong rằng ở Việt Nam sẽ có những dịch
@@ -1887,11 +1889,11 @@ Tab (toi') nguoc lai thi` Shift + Tab
 
                 <div class="col-xs-5 col-sm-5 col-md-5" style="display: inline-flex">
                     <div style="width: 22%">
-                        <img class="effect-shadow img-responsive" src="../img/homepage/comment1_mrbean.jpg"
+                        <img class="effect-shadow img-responsive" src="/img/homepage/comment1_mrbean.jpg"
                              style="border-radius: 5px"/>
                         <!--<img src="../img/homepage/quote.png" style="margin-top: -85px; float: right"/>-->
                     </div>
-                    <img src="../img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
+                    <img src="/img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
                     <p style="width: 70%">
                         Lần đầu tiên tôi đặt phòng ở YOY, đó là một trải nghiệm tuyệt vời về dịch vụ nghỉ
                         dưỡng của các khu nghỉ dưỡng cao cấp mà các bạn giới thiệu cho chúng tôi.
@@ -1902,10 +1904,10 @@ Tab (toi') nguoc lai thi` Shift + Tab
 
                 <div class="col-xs-5 col-sm-5 col-md-5" style="display: inline-flex">
                     <div style="width: 22%">
-                        <img class="effect-shadow img-responsive" src="../img/homepage/comment1_binladen.jpg"
+                        <img class="effect-shadow img-responsive" src="/img/homepage/comment1_binladen.jpg"
                              style="border-radius: 5px"/>
                     </div>
-                    <img src="../img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
+                    <img src="/img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
                     <p style="width: 70%">
                         Thật tuyệt vời!!! Đó là lí do tôi không bao giờ khủng bố Việt Nam !!!<br/>
                         <!--Lần đầu tiên tôi đặt phòng ở YOY, đó là một trải nghiệm tuyệt vời về dịch vụ nghỉ-->
@@ -1923,20 +1925,20 @@ Tab (toi') nguoc lai thi` Shift + Tab
             <div class="container" style="margin: 0 auto; margin-top: 25px; width: 90%; clear: both">
                 <div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4">
-                        <img class="img-responsive" src="../img/homepage/comment2_forbes.png"><br/>
+                        <img class="img-responsive" src="/img/homepage/comment2_forbes.png"><br/>
                         <p>...YOY hotels provide standardization on 30 measures in each room including free wifi and
                             breakfast, flatscreen TVs, spotless white bed linen and so on...
                         </p>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
-                        <img class="img-responsive" src="../img/homepage/comment2_techcrucnch.png"><br/>
+                        <img class="img-responsive" src="/img/homepage/comment2_techcrucnch.png"><br/>
                         <p>...On the YOY platform, guests can do on-demand booking without waiting for a reply from a
                             host, and they can check in and out instantaneously instead of waiting at a reservation
                             desk...
                         </p>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
-                        <img class="img-responsive" src="../img/homepage/comment2_thehindu.png"><br/>
+                        <img class="img-responsive" src="/img/homepage/comment2_thehindu.png"><br/>
                         <p>...The YOY Rooms mobile app is the world’s first personal room service app that allows guests
                             staying
                             at an YOY to order room service directly from their smartphones...
@@ -1948,20 +1950,20 @@ Tab (toi') nguoc lai thi` Shift + Tab
     </div>
     <!-- ban dau` dat trong id comment + dug` margin-top => khi zoom browser se~ ko chinh xac -->
     <div id="scrolltop">
-        <!--<a href="#header" title="Về đầu trang">-->
+        <a href="#header" title="Về đầu trang">
         <!--them width de noi' rong the? a khi hover vao`-->
         <span style="color: rgb(197,196,196); width: 50px" class="glyphicon glyphicon-menu-up"></span>
-        <!--</a>-->
+        </a>
     </div>
 
     <div id="footer"></div> <!-- dung` Script - load() method trang html -->
 
     <!-- JavaScript -->
-    <script src="../js/homepage.js"></script>
+    <script src="/static/js/homepage.js"></script>
 
-    <script src="../Utilities/smoothscroll-for-websites-master/SmoothScroll.js"></script>
+    <script src="/Utilities/smoothscroll-for-websites-master/SmoothScroll.js"></script>
 
-    <script src="../Utilities/LiveChat.js"></script>
+    <script src="/Utilities/LiveChat.js"></script>
     <!--Form Feedback (position: fixed): https://webengage.com/ , phai dang ky', chua tach ra duoc file rieng do co' kem` id-->
     <script id="_webengage_script_tag" type="text/javascript">
         var webengage;
@@ -1991,6 +1993,13 @@ Tab (toi') nguoc lai thi` Shift + Tab
     </script>
 
 </div>
+<script>
+    $(document).ready(function () {
+        $("#header").load("/header-footer/part-header.html");
+        $("#footer").load("/header-footer/part-footer.html");
+    })
+
+</script>
 <script>
     /** Created by Group6 on 15/12/2015. **/
     $(document).ready(function () {
