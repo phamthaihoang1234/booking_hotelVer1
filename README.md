@@ -9,4 +9,4 @@ Member : 1. Trần Nguyễn Tiến Dũng
          2. Phạm Thái Hoàng
          3. Từ Minh Quang
          4. Trương Quốc Tuấn
-         5. Nguyễn Quang
+         5. Nguyễn Hồng Quang
