@@ -1,85 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <!--http://www.w3schools.com/icons/fontawesome_icons_brand.asp-->
-    <!--download file nay` ve` de? chay. offline-->
+    <!-- bootstrap: de y' 2 file: ajax phai dat truoc maxcdn thi moi dung` duoc modal (Form)-->
+    <!-- Online -->
+    <!--neu dung`: bootstrap.css (chua nen') de co the xem dc code, khi chay chinh thuc thi dung` ban min-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Offline -->
+    <link rel="stylesheet" href="/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script src="/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <!--Google Action Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Font Awesome Web Application Icons-->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <style>
-        /*** footer ***/
-        footer {
-            /*height: 370px; ko de? co dinh & dung class cua bootstrap*/
-            background-color: rgb(46, 45, 45);
-            /*group: background-image: http://www.css3.info/preview/multiple-backgrounds/ */
-            background-image: url('header-footer/img/footer.png'), url('header-footer/img/footer.png');
-            background-size: 50% 100px;
-            background-position: left bottom, right bottom;
-            background-repeat: no-repeat;
-            /*khi ben tren co' 2 the div dung` float (+ height = auto) thi phai cai them thuoc tinh' clear de ko bi. troi len tren*/
-            clear: both;
-            padding-bottom: 150px;
+        header {
+            /*height: 65px;*/
+            width: 100%;
+            /*border-bottom: solid thin black;*/
+            /*background-color: white;*/
+            /*color: black;*/
         }
 
-        #left-footer {
+        #left-header {
             float: left;
-            /*width: 40%;*/
-            margin-left: 80px;
-            margin-top: 30px;
-            color: #969595;
+            margin-left: 20px;
+            /*sau khi them jquery-1.11.3.min.js thi css moi co tac dung*/
+            line-height: 60px;
         }
 
-        #left-footer a:nth-child(1):hover {
-            /*the a dau tien la` logo YOY*/
+        #left-header a:hover {
             text-decoration: none;
         }
 
-        /*http://blog.antonakoglou.com/change-font-awesome-icon-content-hover/*/
-        /*set all*/
-        #icon-socialnetwork a:hover .fa:before {
-            color: rgb(197, 196, 196);
-        }
-
-        #icon-socialnetwork .fa {
-            /*cursor: pointer;*/
-            transition-property: all;
-            transition-duration: 200ms;
-            transition-timing-function: ease; /* transition-timing-function: ease (default); in: vao dau cham, out: ket thuc cham, linear: toc do nhu* nhau */
-            /**/
-            -webkit-transition-property: all;
-            -webkit-transition-duration: 200ms;
-            -moz-transition-property: all;
-            -moz-transition-duration: 200ms;
-        }
-
-        #icon-socialnetwork a:hover .fa {
-            transform: scale(1.2);
-            -webkit-transform: scale(1.2);
-            -o-transform: scale(1.2);
-            -moz-transform: scale(1.2);
-        }
-
-        #right-footer {
-            /*float: left;*/
+        #right-header {
             float: right;
-            /*width: 50%;*/
-            margin-top: 15px;
+            /*neu tach so' dt ra lam 2 thi co the bi anh huong*/
+            line-height: 60px;
         }
 
-        #right-footer a {
-            color: #969595;
+        #right-header a {
+            color: black;
         }
 
-        #right-footer a:hover {
-
+        #right-header a:hover {
+            /*loai bo dau gach. duoi'*/
+            text-decoration: none;
         }
 
-        .myTitle {
-            font-size: 18px;
-            font-weight: bold;
-            color: rgb(197, 197, 197);
+        #language {
+            cursor: pointer;
+        }
 
+        button[type="button"].mybtn-style1 {
+            border: 0;
+        }
+
+        #welcome {
+            float: left;
+            margin-right: 10px;
+            /*display: inline-flex; bi xoa' khi load tu` home page*/
+            display: none;
+        }
+
+        .dropdown-menu a {
+            /*do ko su dung thuoc tinh href*/
+            cursor: pointer;
         }
     </style>
     <style>
@@ -2568,101 +2559,134 @@
     </script>
 </head>
 <body>
-<footer>
-    <div class="container-fluid">
-        <div id="left-footer">
-            <a href="../Pages/homepage.html" style="color: #969595">
-                <span style="font-size: 30px; font-weight: bold">YOY</span>
+<!-- dung` cho cac trang con` lai
+search-hotels.html & book-now -->
+<header>
+    <!--class="container-fluid" su dung khi lien quan den float-->
+    <div class="container-fluid" th:fragment="header-part">
+        <!--khi zoom trinh duyet den' gioi han. nho nhat' thi` se~ cho phep' trôi xuống dưới    -->
+        <div id="left-header">
+            <!--neu load tu` home page thi ghi day du thu* muc ngoai`-->
+            <!--<img src="header-footer/img/header_logo.png" width="150"/>-->
+            <!--<span style="color: white">Mạng đặt phòng khách sạn Online</span>-->
+
+            <a href="../Pages/homepage.html" target="_self" title="Về trang chủ">
+                <img src="header-footer/img/logo.png" width="110px"/>
             </a>
-            <span style="margin-top: 0; position: absolute">&reg;</span>
-            <!-- http://www.w3schools.com/html/html_symbols.asp -->
-            <br/>
-            <span>Mạng đặt phòng khách sạn Online</span><br/>
+            <span>Mạng đặt phòng khách sạn Online</span>
 
-            <!--<div style="height: 30px; margin-top: 10px" id="icon-socialnetwork">-->
-            <div style="margin-top: 10px" id="icon-socialnetwork">
-                <table>
-                    <tr>
-                        <td width="40px"> <!-- do co' position: absolute => ko the dung line-height + margin -->
-                            <!--<img src="header-footer/img/icon_facebook.png" style="opacity: 0.2; position: absolute"/> &lt;!&ndash; xay ra truoc' the a + 2 abosolute &ndash;&gt;-->
-                            <!-- cach' 2: chong` 2 pic len voi' nhau -->
-                            <!--<a href="https://www.facebook.com/phuc.nguyenhuu.7927" target="_blank" class="icon_followus">-->
-                            <!--<div style="height: 24px; width: 24px; border-radius: 4px; position: absolute"></div>-->
-                            <!--</a>-->
-                            <a href="https://www.facebook.com/" target="_blank">
-                                <i class="fa fa-facebook-official" style="font-size: 24px; color: rgb(122,118,118)"></i>
-                                <!--<i class="fa fa-facebook-official facebook-icon"></i>-->
-                            </a>
-                        </td>
-                        <td width="40px">
-                            <a href="https://twitter.com/" target="_blank">
-                                <i class="fa fa-twitter-square" style="font-size: 24px; color: rgb(122,118,118)"></i>
-                            </a>
-                        </td>
-                        <td width="40px">
-                            <a href="https://www.pinterest.com/" target="_blank">
-                                <i class="fa fa-pinterest-square" style="font-size: 24px; color: rgb(122,118,118)"></i>
-                            </a>
-                        </td>
-                        <td width="40px">
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <i class="fa fa-youtube-play" style="font-size: 24px; color: rgb(122,118,118)"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="https://plus.google.com/" target="_blank">
-                                <i class="fa fa-google-plus-square"
-                                   style="font-size: 24px; color: rgb(122,118,118)"></i>
-                            </a>
-                        </td>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div style="margin-top: 25px">
-                <span>Liên hệ:</span><br/>
-                <!-- http://www.w3schools.com/bootstrap/bootstrap_ref_comp_glyphs.asp -->
-                <span class="glyphicon glyphicon-map-marker"></span> 38 Yên Bái, Quận Hải Châu, tp Đà Nẵng<br/>
-                <span class="glyphicon glyphicon-earphone"></span> 0123 - 456 - 789<br/>
-                <span class="glyphicon glyphicon-envelope"></span> aptech@gmail.com<br/>
-            </div>
         </div>
 
-        <div id="right-footer">
-            <div class="container-fluid">
-                <!--<div class="row" style="font-size: 18px; font-weight: bold; color: rgb(197,197,197)">-->
-                <div class="row">
-                    <div style="float: left; margin: 25px">
-                        <p class="myTitle">YOY</p>
-                        <a href="#url">Giới thiệu</a><br/>
-                        <a href="#url">Nghề nghiệp</a><br/>
-                        <a href="#url">Hỗ trợ người dùng</a><br/>
-                    </div>
-                    <!--<div class="col-xs-5 col-sm-5 col-md-5">-->
-                    <div style="float: left; width: 200px; margin: 25px">
-                        <p class="myTitle">Dịch vụ cung cấp</p>
-                        <a href="#url">Ứng dụng di động - tìm kiếm mọi lúc, mọi nơi YOY Hotel Manager - dành cho chủ
-                            khách</a>
-                    </div>
-                    <!--<div class="col-xs-4 col-sm-4 col-md-4">-->
-                    <div style="float: left; margin: 25px">
-                        <p class="myTitle">Info</p>
-                        <a href="#url">Điều khoản sử dụng</a><br/>
-                        <a href="#url">Thông tin pháp lý</a><br/>
-                        <a href="#url">Chính sách bảo mật</a><br/>
-                        <a href="#url">Sơ đồ website</a><br/>
-                    </div>
+        <div id="right-header">
+            <div style="float: left; border-right: solid thin rgb(238,238,238)">
+                <a href="download-apps.html" target="_self" style="color: black" title="Tải ứng dụng YOY">
+                    <!-- trang chu co rat nhieu the a => ko the cai thuoc tinh' color white cho tung` the -->
+                    <!-- khi doi ten file, se~ tim` ra cac dong` lenh dang cai` co lien quan, chinh sua xong thi` ra ngoai folder doi ten -->
+                    <img src="header-footer/img/mobile-icon.png" height="40px"/>
+                    <span style="margin-right: 10px">Download App </span>
+                </a>
+            </div>
+
+            <div id="welcome" style="padding-left: 10px">
+                <i class="material-icons" style="float: left; margin-top: 15px; font-size: 30px">
+                    supervisor_account
+                </i>
+                <!--Dropdown Divider: http://www.w3schools.com/bootstrap/bootstrap_dropdowns.asp-->
+                <div class="dropdown" style="float: left;">
+                    <button class="btn btn-default dropdown-toggle mybtn-style1" type="button" data-toggle="dropdown">
+                        <!--<span class="glyphicon glyphicon-search"></span>-->
+                        Xin chào Group 6
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li style="line-height: 30px">
+                            <a onclick="alert('Đang cập nhật...')">
+                                <i class="material-icons" style="color: rgb(166, 166, 166)">info</i>
+                                <span>Thông tin tài khoản</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="alert('Đang cập nhật...')">
+                                <i class="material-icons" style="color: rgb(166, 166, 166)">card_travel</i>
+                                <span>Các chuyến đi đã lưu</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="container-fluid"
+                               onclick="
+//                                  alert('ĐÃ ĐĂNG XUẤT');
+                                    localStorage.check_login = 'false';
+                                    history.go(0); ">
+                                <span style="float: left">Đăng xuất</span>
+                                <i class="fa fa-sign-out"
+                                   style="font-size: 20px; float: right; color: rgb(166, 166, 166)"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
+            <div id="signup-signin" style="float: left; margin-right: 5px; margin-left: 10px">
+                <!--khi thoat form ma` ko dung` &time thi so lieu van con luu (luc nay form dag an? chu' chua thoat-->
+                <!--=> so lieu van~ con` luu lai)-->
+                <!--http://stackoverflow.com/questions/15827262/how-to-reset-form-body-in-bootstrap-modal-box-->
+                <a href="modal-user/user-signup.html" data-toggle="modal" data-target="#theModal"
+                   onclick="
+                        $('.modal').on('hidden.bs.modal', function(){
+                            $(this).find('form')[0].reset();
+                        });
+                        ">THAM GIA</a>
+
+                <span>&nbsp;|&nbsp;</span>
+
+                <a href="modal-user/user-login.html" data-toggle="modal" data-target="#theModal"
+                   style="margin-right: 10px"
+                   onclick="
+                        $('.modal').on('hidden.bs.modal', function(){
+                            $(this).find('form')[0].reset();
+                        });
+                        ">ĐĂNG NHẬP</a>
+            </div>
+
+            <div style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">
+                <img id="language" src="header-footer/img/flagvn_thumbnail.png"
+                     onclick="var $src = $(this).attr('src');
+                            if ($src == 'header-footer/img/flagvn_thumbnail.png'){
+                                $(this).attr('src','header-footer/img/flageng_thumbnail.png');
+                                } else {
+                                $(this).attr('src','header-footer/img/flagvn_thumbnail.png');
+                            }"
+                     style="margin-right: 15px; " width="32px" height="24px" title="Chọn ngôn ngữ"/>
+            </div>
+
+            <!--them style="float: left", doi luc xay ra loi khi refresh trang-->
+            <a href="modal-user/user-24h.html" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
+               style="color: white; float: left">
+                <img src="header-footer/img/24h_white.png"/>
+            </a>
         </div>
     </div>
-</footer>
-<!-- neu' dat ben trong footer thi` phai them 1 the div bao quoanh left-footer, right-footer -->
-<p style="color: rgb(150,149,149); margin-top: -30px; width: 100%; text-align: center; font-size: small">
-    <!-- http://www.w3schools.com/html/html_symbols.asp -->
-    &copy; 2015-16 Batch124.Sem1.Group6 | Thực hiện
-</p>
+</header>
 
+<!-- dat. tai trang chu hoac dat o day -->
+<!-- Form Sign-Up & Log In: Ho tro link den' file Sign-up -->
+<!--<a href="Sign-up.html" data-toggle="modal" data-target="#theModal">Lab 6</a>-->
+<!--http://stackoverflow.com/questions/32958219/getting-bootstraps-modal-content-from-another-page
+http://plnkr.co/edit/Y7jDj2hORWmJ95c96qoG?p=preview
+-->
+<div class="modal fade" id="theModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<!--do khac' width => dung` id khac-->
+<div class="modal fade" id="myModal-24h">
+    <div class="modal-dialog" style="height: 150px">
+        <div class="modal-content" style="width: 70%; margin: auto; margin-top: 150px">
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -238,6 +238,8 @@ $(document).ready(function () {
     });
 });
 
+
+
 $(document).ready(function () {
     // Add smooth scrolling to all links
     // https://css-tricks.com/examples/SmoothPageScroll/

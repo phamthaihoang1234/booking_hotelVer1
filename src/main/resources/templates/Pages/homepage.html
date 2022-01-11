@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YOY | homepage</title>
     <!-- stylesheets -->
-    <link type="text/css" rel="stylesheet" href="../../static/css/homepage.css"/>
-    <link rel="stylesheet" type="text/css" href="../Utilities/Chico-effect.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/homepage.css"/>
+    <link rel="stylesheet" type="text/css" href="/Utilities/Chico-effect.css"/>
 
 <!--     bootstrap: de y' 2 file: ajax phai dat truoc maxcdn thi moi dung` duoc modal (Form)-->
 <!--     Online -->
@@ -16,15 +16,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Offline -->
-    <link rel="stylesheet" href="../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-    <script src="../Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
-    <script src="../Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script src="/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
     <!--autocomplete-suggestions-->
-    <link rel="stylesheet" type="text/css" media="all" href="../Utilities/autocomplete-suggestions/style.css">
+    <link rel="stylesheet" type="text/css" media="all" href="/Utilities/autocomplete-suggestions/style.css">
     <!--<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>-->
-    <script type="text/javascript" src="../Utilities/autocomplete-suggestions/jquery.autocomplete.min.js"></script>
-    <script type="text/javascript" src="../Utilities/autocomplete-suggestions/locations-autocomplete.js"></script>
+    <script type="text/javascript" src="/Utilities/autocomplete-suggestions/jquery.autocomplete.min.js"></script>
+    <script type="text/javascript" src="/Utilities/autocomplete-suggestions/locations-autocomplete.js"></script>
 
     <style>
         * {
@@ -1403,7 +1403,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
 -->
 <div id="container">
 
-    <div id="header"></div> <!-- dung` Scrip - Function - load trang html -->
+    <div th:replace="part-header :: header-part"></div> <!-- dung` Scrip - Function - load trang html -->
 
     <nav>
         <div class="container-fluid">
@@ -1956,8 +1956,8 @@ Tab (toi') nguoc lai thi` Shift + Tab
         </a>
     </div>
 
-    <div id="footer"></div> <!-- dung` Script - load() method trang html -->
-
+<!--    <div th:replace="header-footer/part-footer.html" id="footer"></div> &lt;!&ndash; dung` Script - load() method trang html &ndash;&gt;-->
+    <div th:replace="part-footer :: footer-part"></div>
     <!-- JavaScript -->
     <script src="/static/js/homepage.js"></script>
 
@@ -1993,13 +1993,16 @@ Tab (toi') nguoc lai thi` Shift + Tab
     </script>
 
 </div>
-<script>
-    $(document).ready(function () {
-        $("#header").load("/header-footer/part-header.html");
-        $("#footer").load("/header-footer/part-footer.html");
-    })
 
-</script>
+<!--<script>-->
+<!--    console.log(document.documentURI);-->
+<!--    $(document).ready(function () {-->
+<!--        $("#header").load("/header-footer/part-header.html");-->
+<!--        $("#footer").load("/part-footer.html");-->
+<!--    })-->
+
+<!--</script>-->
+
 <script>
     /** Created by Group6 on 15/12/2015. **/
     $(document).ready(function () {
