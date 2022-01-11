@@ -17,4 +17,18 @@ public class HomePage {
         return "Pages/homepage";
 
     }
+
+    @GetMapping("/header")
+    public String getHeader(){
+
+        return "Pages/Common-pages/part-header";
+
+    }
+
+    @GetMapping("/footer")
+    public String getFooter(){
+
+        return "Pages/Common-pages/part-footer";
+
+    }
 }

@@ -1367,35 +1367,35 @@
 
 
 
-<!--    <script type="text/javascript" language="javascript">-->
-<!--        $(document).ready(function () {-->
-<!--//        http://www.w3schools.com/jquery/jquery_ajax_load.asp-->
-<!--//      http://stackoverflow.com/questions/18712338/make-header-and-footer-files-to-be-included-in-multiple-html-pages&ndash;&gt;-->
-<!--//      tach' rieng de su? dung cho nhieu trang-->
-<!--//      neu' mo? truc tiep' file o ben ngoai` thi` ko chay. 2 file nay`, khac o? noi dung Address: localhost: & file:///D:/-->
-<!--//      nhu*ng code khac neu dat rieng file deu bi.: 4 Modal-->
-<!--//      khi nhap chung cac file vao folder rieng thi ko the load cac' img-->
-<!--            $("#header").load("Pages/header-footer/part-header.html");-->
-<!--            $("#footer").load("Pages/header-footer/part-footer.html");-->
-<!--            // sau khi load xong thi check user da~ login hay chua-->
-<!--            // phai them delay thi moi' kich hoat duoc localStorage + id tu` file header1-->
-<!--//      se~ check + load sau khi load xong part-header1.html-->
-<!--//      bien' localStorage.check_login luu tai file user-login-->
-<!--            var timer;-->
-<!--//      neu thoi gian load body nhieu hon delay thi co the xay ra loi-->
-<!--            var delay = 1000;-->
-<!--            timer = setTimeout(function () {-->
-<!--                if (localStorage.check_login === 'true') {-->
-<!--//                    alert('DA DANG NHAP');-->
-<!--                    $('#welcome').fadeIn(10);-->
-<!--                    $('#signup-signin').fadeOut(10);-->
-<!--                } else {-->
-<!--                    $('#welcome').fadeOut(10);-->
-<!--                    $('#signup-signin').fadeIn(10);-->
-<!--                }-->
-<!--            }, delay);-->
-<!--        });-->
-<!--    </script>-->
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+//        http://www.w3schools.com/jquery/jquery_ajax_load.asp
+//      http://stackoverflow.com/questions/18712338/make-header-and-footer-files-to-be-included-in-multiple-html-pages-->
+//      tach' rieng de su? dung cho nhieu trang
+//      neu' mo? truc tiep' file o ben ngoai` thi` ko chay. 2 file nay`, khac o? noi dung Address: localhost: & file:///D:/
+//      nhu*ng code khac neu dat rieng file deu bi.: 4 Modal
+//      khi nhap chung cac file vao folder rieng thi ko the load cac' img
+            $("#header").load("/header");
+            $("#footer").load("/footer");
+            // sau khi load xong thi check user da~ login hay chua
+            // phai them delay thi moi' kich hoat duoc localStorage + id tu` file header1
+//      se~ check + load sau khi load xong part-header1.html
+//      bien' localStorage.check_login luu tai file user-login
+            var timer;
+//      neu thoi gian load body nhieu hon delay thi co the xay ra loi
+            var delay = 1000;
+            timer = setTimeout(function () {
+                if (localStorage.check_login === 'true') {
+//                    alert('DA DANG NHAP');
+                    $('#welcome').fadeIn(10);
+                    $('#signup-signin').fadeOut(10);
+                } else {
+                    $('#welcome').fadeOut(10);
+                    $('#signup-signin').fadeIn(10);
+                }
+            }, delay);
+        });
+    </script>
 </head>
 <body>
 <!-- co' 2 ung' dung. Feedback, Can tu van? tu` trang web ngoai` (phai online)
@@ -1403,7 +1403,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
 -->
 <div id="container">
 
-    <div th:replace="part-header :: header-part"></div> <!-- dung` Scrip - Function - load trang html -->
+    <div id="header"></div> <!-- dung` Scrip - Function - load trang html -->
 
     <nav>
         <div class="container-fluid">
@@ -1957,7 +1957,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
     </div>
 
 <!--    <div th:replace="header-footer/part-footer.html" id="footer"></div> &lt;!&ndash; dung` Script - load() method trang html &ndash;&gt;-->
-    <div th:replace="part-footer :: footer-part"></div>
+    <div id="footer"></div>
     <!-- JavaScript -->
     <script src="/static/js/homepage.js"></script>
 

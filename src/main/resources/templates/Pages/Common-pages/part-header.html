@@ -11,8 +11,8 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Offline -->
     <link rel="stylesheet" href="/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-    <script src="/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
-    <script src="/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script src="./Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="./Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <!--Google Action Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Font Awesome Web Application Icons-->
@@ -752,13 +752,13 @@
         /*Put icon inside input element in a form: http://stackoverflow.com/questions/917610/put-icon-inside-input-element-in-a-form*/
         /*dag thieu' nut' clear cua type = search*/
         input[type='search'] {
-            background: url(../img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
+            background: url(/img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
             padding-left: 30px;
             background-color: #ffffff;
         }
 
         input[type='date'] {
-            background: url(../img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
+            background: url(/img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
             padding-left: 35px;
             background-color: #ffffff;
         }
@@ -1111,7 +1111,7 @@
         }
 
         input[type='date'] {
-            background: url(../img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
+            background: url(/img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
             /*glyphicon glyphicon-calendar*/
             padding-left: 35px;
             background-color: #ffffff;
@@ -1354,26 +1354,26 @@
         }
 
         .main section.page1 {
-            background: url(../img/download-apps/pic-mobileapps1.jpg) no-repeat;
+            background: url(/img/download-apps/pic-mobileapps1.jpg) no-repeat;
             /*http://stackoverflow.com/questions/9262861/css-background-image-to-fit-width-height-should-auto-scale-in-proportion */
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page2 {
-            background: url(../img/download-apps/pic-mobileapps2.jpg) no-repeat;
+            background: url(/img/download-apps/pic-mobileapps2.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page3 {
-            background: url(../img/download-apps/pic-mobileapps3.jpg) no-repeat;
+            background: url(/img/download-apps/pic-mobileapps3.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page4 {
-            background: url(../img/download-apps/pic-mobileapps4.jpg) no-repeat;
+            background: url(/img/download-apps/pic-mobileapps4.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
@@ -2563,15 +2563,15 @@
 search-hotels.html & book-now -->
 <header>
     <!--class="container-fluid" su dung khi lien quan den float-->
-    <div class="container-fluid" th:fragment="header-part">
+    <div class="container-fluid" >
         <!--khi zoom trinh duyet den' gioi han. nho nhat' thi` se~ cho phep' trôi xuống dưới    -->
         <div id="left-header">
             <!--neu load tu` home page thi ghi day du thu* muc ngoai`-->
             <!--<img src="header-footer/img/header_logo.png" width="150"/>-->
             <!--<span style="color: white">Mạng đặt phòng khách sạn Online</span>-->
 
-            <a href="../Pages/homepage.html" target="_self" title="Về trang chủ">
-                <img src="header-footer/img/logo.png" width="110px"/>
+            <a href="/Pages/homepage.html" target="_self" title="Về trang chủ">
+                <img src="/img/header-footer/logo.png" width="110px"/>
             </a>
             <span>Mạng đặt phòng khách sạn Online</span>
 
@@ -2582,7 +2582,7 @@ search-hotels.html & book-now -->
                 <a href="download-apps.html" target="_self" style="color: black" title="Tải ứng dụng YOY">
                     <!-- trang chu co rat nhieu the a => ko the cai thuoc tinh' color white cho tung` the -->
                     <!-- khi doi ten file, se~ tim` ra cac dong` lenh dang cai` co lien quan, chinh sua xong thi` ra ngoai folder doi ten -->
-                    <img src="header-footer/img/mobile-icon.png" height="40px"/>
+                    <img src="/img/header-footer/mobile-icon.png" height="40px"/>
                     <span style="margin-right: 10px">Download App </span>
                 </a>
             </div>
@@ -2650,12 +2650,12 @@ search-hotels.html & book-now -->
             </div>
 
             <div style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">
-                <img id="language" src="header-footer/img/flagvn_thumbnail.png"
+                <img id="language" src="/img/header-footer/flagvn_thumbnail.png"
                      onclick="var $src = $(this).attr('src');
-                            if ($src == 'header-footer/img/flagvn_thumbnail.png'){
-                                $(this).attr('src','header-footer/img/flageng_thumbnail.png');
+                            if ($src == 'header-footer/flagvn_thumbnail.png'){
+                                $(this).attr('src','/img/header-footer/flageng_thumbnail.png');
                                 } else {
-                                $(this).attr('src','header-footer/img/flagvn_thumbnail.png');
+                                $(this).attr('src','/img/header-footer/flagvn_thumbnail.png');
                             }"
                      style="margin-right: 15px; " width="32px" height="24px" title="Chọn ngôn ngữ"/>
             </div>
@@ -2663,7 +2663,7 @@ search-hotels.html & book-now -->
             <!--them style="float: left", doi luc xay ra loi khi refresh trang-->
             <a href="modal-user/user-24h.html" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
                style="color: white; float: left">
-                <img src="header-footer/img/24h_white.png"/>
+                <img src="/img/header-footer/24h_white.png"/>
             </a>
         </div>
     </div>
