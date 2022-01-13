@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
@@ -17,14 +17,25 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Font Awesome Web Application Icons-->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Offline -->
+    <link rel="stylesheet" href="/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script src="/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <style>
+
         header {
             /*height: 65px;*/
             width: 100%;
             /*border-bottom: solid thin black;*/
             /*background-color: white;*/
             /*color: black;*/
+        }
+        #myBtn:hover {
+
+            text-decoration: none;
         }
 
         #left-header {
@@ -1411,6 +1422,49 @@
 
     </style>
 
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
     <script>
         /** Created by Group6 on 15/12/2015. **/
         $(document).ready(function () {
@@ -1686,9 +1740,8 @@
 
     </script>
     <script>
-        /**
-         * Created by Group6 on 02/01/2016.
-         */
+
+
 
         //http://www.w3schools.com/jquery/css_scrolltop.asp
         // http://stackoverflow.com/questions/28452235/make-a-nav-bar-stick-to-the-top-when-scrolling-with-css
@@ -2631,16 +2684,113 @@ search-hotels.html & book-now -->
                 <!--khi thoat form ma` ko dung` &time thi so lieu van con luu (luc nay form dag an? chu' chua thoat-->
                 <!--=> so lieu van~ con` luu lai)-->
                 <!--http://stackoverflow.com/questions/15827262/how-to-reset-form-body-in-bootstrap-modal-box-->
-                <a href="modal-user/user-signup.html" data-toggle="modal" data-target="#theModal"
-                   onclick="
-                        $('.modal').on('hidden.bs.modal', function(){
-                            $(this).find('form')[0].reset();
-                        });
-                        ">THAM GIA</a>
+
+
+<!--                Modal register-->
+
+
+                <a id="myBtn" href="#" >THAM GIA</a>
+
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header"> <!-- style="padding:35px 50px;" -->
+                            <button type="button" class="close" data-dismiss="modal" id="refreshDIV" onClick="history.go(0)">&times;
+                            </button>
+                            <h4>THAM GIA</h4>
+                        </div>
+
+                        <div class="modal-body" style="padding:30px 30px 30px 30px">
+                            <div class="row">
+                                <div class="col-sm-6"
+                                     style="margin-left: -10px; margin-top: -20px; border-right: 2px dashed rgb(246,245,245)">
+
+                                    <form name="MyForm" role="form" method="get" action="modal-user/user-verify.html">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control clear-border" id="usrname" placeholder="HỌ VÀ TÊN"
+                                                   required pattern="[A-Za-z]+$" title="HỌ VÀ TÊN: Vui lòng nhập ký tự A-Z, a-z">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control clear-border" id="mobilenumber"
+                                                   placeholder="SỐ ĐIỆN THOẠI"
+                                                   required pattern="[0-9]{1,10}" title="SỐ ĐIỆN THOẠI: Vui lòng nhập số (tối đa 10 số)">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="email" class="form-control clear-border" id="emailaddress"
+                                                   placeholder="ĐỊA CHỈ EMAIL"
+                                                   required title="EMAIL">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control clear-border" id="psw" placeholder="MẬT KHẨU"
+                                                   required>
+                                        </div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <h5  >NGÀY SINH</h5>
+                                                        <input type="date" class="form-control clear-border" id="dateofbirth"
+                                                               placeholder="NGÀY SINH"
+                                                               required title="DateOfBirth" style="padding-right: 18px">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+
+                                                        <h5 style="margin-left: 140px">NGÀY TẠO</h5>
+                                                        <input type="date" class="form-control clear-border" id="dateofcreate"
+                                                               placeholder="N"
+                                                               required title="NGÀY TẠO" style="margin-left: 140px">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+
+
+
+
+                                        <button type="submit" class="btn btn-success btn-block" style="margin-top: 30px">
+                                            ĐĂNG KÝ
+                                        </button>
+
+                                    </form>
+                                </div>
+                                <div class="col-sm-6" style="margin-top: -20px; font-size: small">
+                                    <ul style="margin: 0; padding-left: 20px; list-style-image:url('modal-user/img_audio/Checkmark-20.png') ">
+                                        <li> Tăng tốc quy trình đặt phòng</li>
+                                        <li> Xem hoặc thay đổi các đặt phòng của mình</li>
+                                        <li> Trở thành người đầu tiên nhận thông tin về các ưu đãi đặt biệt</li>
+                                    </ul>
+                                    <!-- dung span: noi dung ko canh deu 2 ben -->
+                                    <div style="margin-left: 10px; margin-top: 15px">
+                                        Chúng tôi không bao giờ bán thông tin cá nhân của bạn. Vui lòng đọc
+                                        <span style="color: rgb(220, 30, 40)">Chính sách bảo mật</span> của chúng tôi để biết thêm thông
+                                        tin.
+                                    </div>
+                                </div>
+                            </div>
+                            <!--dat trong class="modal-body"-->
+                            <div style="text-align: right; margin-top: -80px; margin-right: -30px">
+                                <!--mac du` dat chung thu* muc nhu*ng chay tu` file khac dag nam` tai folder Pages -->
+                                <img src="/img_audio/stay-awesome.png"/>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
 
                 <span>&nbsp;|&nbsp;</span>
 
-                <a href="modal-user/user-login.html" data-toggle="modal" data-target="#theModal"
+<!--                Modal login-->
+
+                <a  data-toggle="modal" data-target="#theModal"
                    style="margin-right: 10px"
                    onclick="
                         $('.modal').on('hidden.bs.modal', function(){
@@ -2675,6 +2825,8 @@ search-hotels.html & book-now -->
 <!--http://stackoverflow.com/questions/32958219/getting-bootstraps-modal-content-from-another-page
 http://plnkr.co/edit/Y7jDj2hORWmJ95c96qoG?p=preview
 -->
+
+
 <div class="modal fade" id="theModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -2688,5 +2840,34 @@ http://plnkr.co/edit/Y7jDj2hORWmJ95c96qoG?p=preview
         </div>
     </div>
 </div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>

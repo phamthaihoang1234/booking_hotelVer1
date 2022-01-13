@@ -10,6 +10,8 @@ public class Hotel {
     private Long id;
     private Boolean status = true;
 
+
+
     public Hotel() {
     }
 

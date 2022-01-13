@@ -12,9 +12,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Offline -->
-    <link rel="stylesheet" href="../../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-    <script src="../../Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
-    <script src="../../Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script src="/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
     <style>
         .modal-header, h4, .close {
@@ -2562,28 +2562,19 @@
 <!--<div clas+s="modal fade" id="myModal" role="dialog">-->
 <!--<div class="modal-dialog" style="width: 50%">-->
 <!-- Modal content-->
-<div class="modal-content">
+<div id="myModal" class="modal">
+    <div class="modal-content">
     <div class="modal-header"> <!-- style="padding:35px 50px;" -->
         <button type="button" class="close" data-dismiss="modal" id="refreshDIV" onClick="history.go(0)">&times;
         </button>
         <h4>THAM GIA</h4>
     </div>
-    <!-- khi nut' click lan` 2 tro di:
-    - width cua Trangchu bi. thu nho? lai, giong nhu* Form Sign-Up
-    - modal cu~ van con` luu lai khi mo? sang modal thu' 2
-    van chua duoc thoat hoan toan` khi click X
-    how to refresh already opened page with button click [closed]
-    http://stackoverflow.com/questions/20371394/how-to-refresh-already-opened-page-with-button-click
-    them su* kien: id="refreshDIV" onClick="history.go(0)"
-    Neu' ko dung` nut' X nay` ma` bam' ra ben ngoai` de? thoat' Form thi` van~ con` bi => cai vao su* kien khi Form Unload.
-    -->
-    <!-- cai` padding (top, right, bottom, left): ko anh huong den' img -->
+
     <div class="modal-body" style="padding:30px 30px 0px 30px">
         <div class="row">
             <div class="col-sm-6"
                  style="margin-left: -10px; margin-top: -20px; border-right: 2px dashed rgb(246,245,245)">
-                <!--method="get" (Can not be bookmarked. | More difficult to hack) http://www.diffen.com/difference/GET_(HTTP)_vs_POST_(HTTP)-->
-                <!--mac du dac chung thu* muc nhu*ng do kich hoat tu` 1 file dat tai folder Pages, nhin` address (localhost ...) se thay -->
+
                 <form name="MyForm" role="form" method="get" action="modal-user/user-verify.html">
                     <div class="form-group">
                         <input type="text" class="form-control clear-border" id="usrname" placeholder="HỌ VÀ TÊN"
@@ -2591,24 +2582,34 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control clear-border" id="mobilenumber"
-                               placeholder="SỐ ĐIỆN THOẠI"
+                               placeholder="SỐ ĐIỆN THOẠI123243"
                                required pattern="[0-9]{1,10}" title="SỐ ĐIỆN THOẠI: Vui lòng nhập số (tối đa 10 số)">
                     </div>
-                    <!--required pattern="^[0-9]+$" title="Chỉ nhập số từ 0-9">-->
-                    <!--pattern="[0]{1}[0-9]{9,12}"-->
-                    <div class="form-group">
-                        <input type="email" class="form-control clear-border" id="emailaddress"
-                               placeholder="ĐỊA CHỈ EMAIL"
-                               required title="EMAIL">
-                    </div>
+
                     <div class="form-group">
                         <input type="password" class="form-control clear-border" id="psw" placeholder="MẬT KHẨU"
                                required>
                     </div>
+
+                    <div class="form-group">
+                        <input type="date" class="form-control clear-border" id="dateofbirth"
+                               placeholder="NGÀY SINH"
+                               required title="DateOfBirth">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="date" class="form-control clear-border" id="dateofcreate"
+                               placeholder="N"
+                               required title="NGÀY TẠO">
+                    </div>
+
+
+
+
                     <button type="submit" class="btn btn-success btn-block" style="margin-top: 30px">
                         ĐĂNG KÝ
                     </button>
-                    <!--sau khi đăng ký thành công sẽ xuất hiện modal verify-->
+
                 </form>
             </div>
             <div class="col-sm-6" style="margin-top: -20px; font-size: small">
@@ -2633,26 +2634,11 @@
 
     </div>
 
-    <!--<div class="modal-footer">-->
-    <!--<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Hủy</button>-->
-    <!--</div>-->
+
 </div>
 
-<!--</div>-->
-<!--</div>-->
+</div>
 
-<!-- dang dat. tai part-header1 -->
-<!-- Form Sign-Up & Log In: Ho tro link den' file Sign-up -->
-<!--<a href="Sign-up.html" data-toggle="modal" data-target="#theModal">Lab 6</a>-->
-<!--http://stackoverflow.com/questions/32958219/getting-bootstraps-modal-content-from-another-page
-http://plnkr.co/edit/Y7jDj2hORWmJ95c96qoG?p=preview
--->
-<!--<div class="modal fade" id="theModal">-->
-<!--<div class="modal-dialog">-->
-<!--<div class="modal-content">-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
 
 </body>
 </html>
