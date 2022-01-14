@@ -5,10 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
@@ -20,36 +17,56 @@ public class UserInfo extends AbstractEntity implements Serializable {
 
     public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
+    @NotBlank
     @NotNull
     @Size(min = 3)
     private String name;
-
     private String username;
 
+
+    @NotEmpty
     @Column(unique = true)
     @Email
     private String email;
 
     //    @JsonIgnore
+    @NotEmpty
     @Size(min = 6)
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")
     private String password;
 
-    private Boolean gender;
-    private LocalDate dateOfBirth;
+    @NotNull
+    @NotEmpty
+    private String gender;
+//    private LocalDate dateOfBirth;
+
 
     //    @Pattern(regexp = "\"^[\\\\+]?[(]?[0-9]{3}[)]?[-\\\\s\\\\.]?[0-9]{3}[-\\\\s\\\\.]?[0-9]{4,6}$\"" )
+    @NotNull
+    @NotEmpty
     private String phoneNumber;
 
     private Boolean active = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")}
-    )
+//    @JoinTable(
+//            name = "users_roles",
+//            joinColumns = {@JoinColumn(name = "user_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "role_id")}
+//    )
     private Set<Role> roles;
+
+    public UserInfo(String name, String username, String email, String password, String gender, LocalDate dateOfBirth, String phoneNumber, Boolean active, Set<Role> roles, String token) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+//        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.active = active;
+        this.roles = roles;
+        this.token = token;
+    }
 
     @Transient
     private String token;
@@ -99,21 +116,14 @@ public class UserInfo extends AbstractEntity implements Serializable {
         this.password = PASSWORD_ENCODER.encode(password);
     }
 
-    public Boolean getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Boolean gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;

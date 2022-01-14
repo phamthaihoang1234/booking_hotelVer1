@@ -1,6 +1,7 @@
 package com.example.bookinghotel.configuration;
 
 
+
 import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +11,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -34,11 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 //
 //    }
-
+//
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.POST,"/saves" ).permitAll()
+        http.authorizeRequests().antMatchers("/","/register").permitAll()
+                .antMatchers(HttpMethod.POST,"/**" ).permitAll()
                 .antMatchers("/carts").access("hasAnyRole('ROLE_USER','ROLE_SELLER')")
 //                .antMatchers("/carts").access("hasRole('ROLE_SELLER')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
@@ -47,4 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
     }
+
+
 }

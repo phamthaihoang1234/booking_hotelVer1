@@ -15,10 +15,10 @@ public abstract class AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreatedDate
-    private LocalDateTime createdDate = LocalDateTime.now();
-    @LastModifiedDate
-    private LocalDateTime modifiedDate = LocalDateTime.now();
+//    @CreatedDate
+//    private LocalDateTime createdDate = LocalDateTime.now();
+//    @LastModifiedDate
+//    private LocalDateTime modifiedDate = LocalDateTime.now();
 
     public Long getId() {
         return id;
@@ -28,19 +28,19 @@ public abstract class AbstractEntity {
         this.id = id;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public LocalDateTime getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(LocalDateTime modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
+//    public LocalDateTime getCreatedDate() {
+//        return createdDate;
+//    }
+//
+//    public void setCreatedDate(LocalDateTime createdDate) {
+//        this.createdDate = createdDate;
+//    }
+//
+//    public LocalDateTime getModifiedDate() {
+//        return modifiedDate;
+//    }
+//
+//    public void setModifiedDate(LocalDateTime modifiedDate) {
+//        this.modifiedDate = modifiedDate;
+//    }
 }
