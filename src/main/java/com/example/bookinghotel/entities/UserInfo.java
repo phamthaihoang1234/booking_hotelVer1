@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,6 +25,7 @@ public class UserInfo extends AbstractEntity implements Serializable {
     private String name;
     private String username;
 
+    private String avatar;
 
     @NotEmpty
     @Column(unique = true)
@@ -55,6 +58,9 @@ public class UserInfo extends AbstractEntity implements Serializable {
 //    )
     private Set<Role> roles;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<WebReview> comments;
+
     public UserInfo(String name, String username, String email, String password, String gender, LocalDate dateOfBirth, String phoneNumber, Boolean active, Set<Role> roles, String token) {
         this.name = name;
         this.username = username;
@@ -82,6 +88,22 @@ public class UserInfo extends AbstractEntity implements Serializable {
         this.name = name;
         this.username = username;
         this.email = email;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public List<WebReview> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<WebReview> comments) {
+        this.comments = comments;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getName() {

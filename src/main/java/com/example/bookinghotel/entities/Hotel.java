@@ -19,6 +19,17 @@ public class Hotel {
         this.id = id;
         this.status = status;
     }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hotel_property_id")
+    private Hotel_Property hotel_property;
+
+    public Hotel_Property getHotel_property() {
+        return hotel_property;
+    }
+
+    public void setHotel_property(Hotel_Property hotel_property) {
+        this.hotel_property = hotel_property;
+    }
 
     public String getNameOfHotel() {
         return nameOfHotel;
