@@ -24,8 +24,16 @@ public class UserInfo extends AbstractEntity implements Serializable {
     @Size(min = 3)
     private String name;
     private String username;
-
+    private String address;
     private String avatar;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @NotEmpty
     @Column(unique = true)

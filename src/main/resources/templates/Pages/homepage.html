@@ -105,29 +105,35 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                 <!-- width: 75%: do da~ cai`  margin-left: 10px cua div tren -->
                                 <div class="row">
                                     <div class="col-sm-4 col-md-4">
-                                        <span class="nav-title-loaiphong">CUỘC SỐNG VỀ ĐÊM</span>
+                                        <span class="nav-title-loaiphong" th:text="${hanoiType1}"></span>
                                         <ul style="list-style-type: none">
-                                            <li>Lotte Hotel</li>
-                                            <li>Spring Flower Hotel</li>
-                                            <li>Fortuna Hotel</li>
+                                            <th:block th:each="hotel:${hanoihotelType1}">
+                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                            </th:block>
+
+
                                             <li class="left-nav-A-lastli">Tất cả ...</li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-4 col-md-4">
-                                        <span class="nav-title-loaiphong">KHÁCH QUỐC TẾ</span>
+                                        <span class="nav-title-loaiphong" th:text="${hanoiType2}"></span>
                                         <ul style="list-style-type: none">
-                                            <li>Hanoi Advisor Hotel</li>
-                                            <li>Box Hotel Hanoi</li>
-                                            <li>Hanoi Party Backpacker Hostel</li>
+                                            <th:block th:each="hotel:${hanoihotelType2}">
+                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                            </th:block>
+
+
                                             <li class="left-nav-A-lastli">Tất cả ...</li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-4 col-md-4">
-                                        <span class="nav-title-loaiphong">GẦN NHÀ GA XE LỬA</span>
+                                        <span class="nav-title-loaiphong" th:text="${hanoiType3}"></span>
                                         <ul style="list-style-type: none">
-                                            <li>Hotel Nikko Hanoi</li>
-                                            <li>Grand Plaza Hanoi Hotel</li>
-                                            <li>Hanoi L'Heritage Hotel</li>
+                                            <th:block th:each="hotel:${hanoihotelType3}">
+                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                            </th:block>
+
+
                                             <li class="left-nav-A-lastli">Tất cả ...</li>
                                         </ul>
                                     </div>
@@ -135,29 +141,35 @@ Tab (toi') nguoc lai thi` Shift + Tab
 
                                 <div class="row">
                                     <div class="col-sm-4 col-md-4">
-                                        <span class="nav-title-loaiphong">DÀNH CHO CẶP ĐÔI</span>
+                                        <span class="nav-title-loaiphong" th:text="${hanoiType4}"></span>
                                         <ul style="list-style-type: none">
-                                            <li>Tirant Hotel</li>
-                                            <li>Baoson International Hotel</li>
-                                            <li>Super Hotel Candle</li>
+                                            <th:block th:each="hotel:${hanoihotelType4}">
+                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                            </th:block>
+
+
                                             <li class="left-nav-A-lastli">Tất cả ...</li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-4 col-md-4">
-                                        <span class="nav-title-loaiphong">HẠNG THƯƠNG GIA</span>
+                                        <span class="nav-title-loaiphong" th:text="${hanoiType5}"></span>
                                         <ul style="list-style-type: none">
-                                            <li>Eco Hotel Hanoi</li>
-                                            <li>Parkside Sunline Hotel</li>
-                                            <li>Crystal Hotel Hanoi</li>
+                                            <th:block th:each="hotel:${hanoihotelType5}">
+                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                            </th:block>
+
+
                                             <li class="left-nav-A-lastli">Tất cả ...</li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-4 col-md-4">
-                                        <span class="nav-title-loaiphong">GẦN SÂN BAY</span>
+                                        <span class="nav-title-loaiphong" th:text="${hanoiType6}"></span>
                                         <ul style="list-style-type: none">
-                                            <li>Golden Sun Moment Hotel</li>
-                                            <li>Sunline Hotel</li>
-                                            <li>Thaison Palace Hotel</li>
+                                            <th:block th:each="hotel:${hanoihotelType6}">
+                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                            </th:block>
+
+
                                             <li class="left-nav-A-lastli">Tất cả ...</li>
                                         </ul>
                                     </div>
@@ -537,7 +549,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                     <p style="width: 70%">
                         <span th:text="${review.comment}"></span>
                         <br/>
-                        <span class="comment_name" th:text="${review.user.getName()}"></span><span class="comment_country" > - Scotland</span>
+                        <span class="comment_name" th:text="${review.user.getName()}"></span> - <span class="comment_country" th:text="${review.user.getAddress()}"> </span>
                     </p>
                 </div>
 
@@ -563,7 +575,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                         <p style="width: 70%">
                             <span th:text="${review.comment}"></span>
                             <br/>
-                            <span class="comment_name" th:text="${review.user.getName()}"></span><span class="comment_country" > - Scotland</span>
+                            <span class="comment_name" th:text="${review.user.getName()}"></span> - <span class="comment_country" th:text="${review.user.getAddress()}"></span>
                         </p>
                     </div>
 
