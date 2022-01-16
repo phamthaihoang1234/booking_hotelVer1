@@ -31,13 +31,22 @@ public class HomePage {
     private HotelRepository hotelRepository;
     @GetMapping("/")
     public String homepage(Model model) {
+
+        model = getTopReview(model);
+        model = getHotelProperty(model,"Hà Nội");// hanoi hotel - all property
+
+        return "Pages/homepage";
+
+    }
+    private Model getTopReview(Model model){
         // get reviews for review table webpage
         List<WebReview> reviews1 = webReviewRepo.findTop4Comment((Pageable) PageRequest.of(0,2));
         List<WebReview> reviews2 = webReviewRepo.findTop4Comment((Pageable) PageRequest.of(1,2));
-
-
         model.addAttribute("reviews1",reviews1);// row 1 in review table
         model.addAttribute("reviews2",reviews2);// row 2 in review table
+        return model;
+    }
+    private Model getHotelProperty(Model model,String location){
         // get hotel type for nav bar
         String type1 = "Khách sạn quốc tế";
         String type2 = "Hạng Thương Gia";
@@ -55,19 +64,18 @@ public class HomePage {
 
 
         model.addAttribute("hanoihotelType1",
-                hotelRepository.findByHotel_addressContainingAndHotel_property("Hà Nội",type1));
+                hotelRepository.findByHotel_addressContainingAndHotel_property(location,type1));
         model.addAttribute("hanoihotelType2",
-                hotelRepository.findByHotel_addressContainingAndHotel_property("Hà Nội",type2));
+                hotelRepository.findByHotel_addressContainingAndHotel_property(location,type2));
         model.addAttribute("hanoihotelType3",
-                hotelRepository.findByHotel_addressContainingAndHotel_property("Hà Nội",type3));
+                hotelRepository.findByHotel_addressContainingAndHotel_property(location,type3));
         model.addAttribute("hanoihotelType4",
-                hotelRepository.findByHotel_addressContainingAndHotel_property("Hà Nội",type4));
+                hotelRepository.findByHotel_addressContainingAndHotel_property(location,type4));
         model.addAttribute("hanoihotelType5",
-                hotelRepository.findByHotel_addressContainingAndHotel_property("Hà Nội",type5));
+                hotelRepository.findByHotel_addressContainingAndHotel_property(location,type5));
         model.addAttribute("hanoihotelType6",
-                hotelRepository.findByHotel_addressContainingAndHotel_property("Hà Nội",type6));
-        return "Pages/homepage";
-
+                hotelRepository.findByHotel_addressContainingAndHotel_property(location,type6));
+        return model;
     }
 
 
