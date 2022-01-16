@@ -33,7 +33,7 @@ public class HomePage {
     public String homepage(Model model) {
 
         model = getTopReview(model);
-        model = getHotelProperty(model,"Hà Nội");// hanoi hotel - all property
+        model = getHotelProperty(model,"Hà Nội","hanoi");// hanoi hotel - all property
 
         return "Pages/homepage";
 
@@ -46,7 +46,7 @@ public class HomePage {
         model.addAttribute("reviews2",reviews2);// row 2 in review table
         return model;
     }
-    private Model getHotelProperty(Model model,String location){
+    private Model getHotelProperty(Model model,String location,String pattern){
         // get hotel type for nav bar
         String type1 = "Khách sạn quốc tế";
         String type2 = "Hạng Thương Gia";
@@ -55,25 +55,25 @@ public class HomePage {
         String type5 = "Gần Ga Xe Lửa";
         String type6 = "Cuộc Sống Về Đêm";
 
-        model.addAttribute("hanoiType1",type1);
-        model.addAttribute("hanoiType2",type2);
-        model.addAttribute("hanoiType3",type3);
-        model.addAttribute("hanoiType4",type4);
-        model.addAttribute("hanoiType5",type5);
-        model.addAttribute("hanoiType6",type6);
+        model.addAttribute(pattern+"Type1",type1);
+        model.addAttribute(pattern+"Type2",type2);
+        model.addAttribute(pattern+"Type3",type3);
+        model.addAttribute(pattern+"Type4",type4);
+        model.addAttribute(pattern+"Type5",type5);
+        model.addAttribute(pattern+"Type6",type6);
 
 
-        model.addAttribute("hanoihotelType1",
+        model.addAttribute(pattern+"hotelType1",
                 hotelRepository.findByHotel_addressContainingAndHotel_property(location,type1));
-        model.addAttribute("hanoihotelType2",
+        model.addAttribute(pattern+"hotelType2",
                 hotelRepository.findByHotel_addressContainingAndHotel_property(location,type2));
-        model.addAttribute("hanoihotelType3",
+        model.addAttribute(pattern+"hotelType3",
                 hotelRepository.findByHotel_addressContainingAndHotel_property(location,type3));
-        model.addAttribute("hanoihotelType4",
+        model.addAttribute(pattern+"hotelType4",
                 hotelRepository.findByHotel_addressContainingAndHotel_property(location,type4));
-        model.addAttribute("hanoihotelType5",
+        model.addAttribute(pattern+"hotelType5",
                 hotelRepository.findByHotel_addressContainingAndHotel_property(location,type5));
-        model.addAttribute("hanoihotelType6",
+        model.addAttribute(pattern+"hotelType6",
                 hotelRepository.findByHotel_addressContainingAndHotel_property(location,type6));
         return model;
     }
