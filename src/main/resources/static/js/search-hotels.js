@@ -436,7 +436,7 @@ $(document).ready(function () {
         } else {
             alert("Sorry, your browser does not support web storage...");
         }
-        //hoac window.open("search-hotels.html","_self");
+        //hoac window.open("/searchHotel","_self");
         //window.location = 'room-bookings.html';
         //return false;
     });

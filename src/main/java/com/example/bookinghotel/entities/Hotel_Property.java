@@ -7,7 +7,7 @@ import java.util.List;
 @Table(name = "hotel_property")
 public class Hotel_Property {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
     private Boolean status;

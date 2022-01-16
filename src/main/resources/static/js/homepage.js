@@ -186,12 +186,12 @@ $(document).ready(function () {
 
         if (bcheck === 'true') {
             //alert('bcheck = true');
-            //hoac window.open("search-hotels.html","_self");
-            window.location = 'search-hotels.html';
+            //hoac window.open("/searchHotel","_self");
+            window.location = '/searchHotel';
             return false;
         } else {
             if (local === 'Địa điểm nổi tiếng' || $(this).text() === 'Tất cả ...') {
-                window.location = 'search-hotels.html';
+                window.location = '/searchHotel';
                 return false;
             } else {
                 //luu tru ten bien' khach san, nhu*ng ko co' dia chi => viec xac dinh Google se~ co the bi. co' dinh
@@ -222,8 +222,8 @@ $(document).ready(function () {
         } else {
             alert("Sorry, your browser does not support web storage...");
         }
-        //hoac window.open("search-hotels.html","_self");
-        window.location = 'search-hotels.html';
+        //hoac window.open("/searchHotel","_self");
+        window.location = '/searchHotel';
     });
 
 });

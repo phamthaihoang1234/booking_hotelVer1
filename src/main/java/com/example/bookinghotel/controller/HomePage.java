@@ -86,6 +86,10 @@ public class HomePage {
 
     }
 
+    @GetMapping(path = "/searchHotel")
+    public String getSearchHotel(){
+        return "Pages/search-hotels";
+    }
     @GetMapping("/footer")
     public String getFooter(){
 
