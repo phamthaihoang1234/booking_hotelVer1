@@ -8,8 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute UserInfo user) throws Exception {
+    public String registerUser(@Validated @ModelAttribute("user") UserInfo user , BindingResult result , RedirectAttributes redirect) throws Exception {
 
 
 
@@ -50,7 +55,7 @@ public class UserController {
 
         user.setRoles(roles);
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setPassword(passwordEncoder.encode("12345678"));
+
         user.setToken("user");
         user.setActive(true);
         user.setName(user.getUsername());
@@ -62,10 +67,21 @@ public class UserController {
         System.out.println(user.getRoles());
         System.out.println(user.getPhoneNumber());
         System.out.println(user.getGender());
-//        System.out.println(user.getModifiedDate());
-//        System.out.println(user.getCreatedDate());
-        userService.save(user);
-        return "redirect:/signup";
+
+
+        if (result.hasErrors()) {
+            System.out.println("vao loi nhe");
+            return "/Pages/modal-user/user-signup";
+        }
+        else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            redirect.addFlashAttribute("globalMessage", "Register successfully.");
+                userService.save(user);
+                return "redirect:/signup";
+//                  return "redirect:/";
+            }
+
+
     }
 
 //    @GetMapping("/register2")

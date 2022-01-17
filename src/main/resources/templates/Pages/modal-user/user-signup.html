@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <!-- Required meta tags-->
@@ -14,7 +14,7 @@
 <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>-->
     <!-- Title Page-->
     <title>Au Register Forms by Colorlib</title>
-
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">-->
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -35,29 +35,30 @@
         <div class="card card-4">
             <div class="card-body">
                 <h2 class="title">Registration Form</h2>
-                <form th:action="@{/register}" th:object="${user}" method="post" id="form">
+                <form th:action="@{/register}" th:object="${user}" method="post" >
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Username</label>
-                                <input class="input--style-4" type="text" id="username" th:field="*{username}" required>
+                                <input class="input--style-4" type="text"  th:field="*{username}" required>
+                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" />
+
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Password</label>
-                                <input class="input--style-4" type="text" id="password" th:field="*{password}" required>
+                                <input class="input--style-4" type="text" th:field="*{password}" required>
+                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
                             </div>
                         </div>
                     </div>
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
-                                <label class="label">Birthday</label>
-                                <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="text" id="birthday" required >
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                </div>
+                                <label class="label">Address</label>
+                                <input class="input--style-4" type="text"  th:field="*{address}" required>
+<!--                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />-->
                             </div>
                         </div>
                         <div class="col-2">
@@ -80,21 +81,51 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Email</label>
-                                <input class="input--style-4" type="email" id="email" th:field="*{email}" required>
+                                <input class="input--style-4" type="text" th:field="*{email}" required>
+                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Phone Number</label>
                                 <input class="input--style-4" type="text" id="phone"  th:field="*{phoneNumber}" required>
+                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" />
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-t-15">
-                        <a class="btn btn--radius-2 btn--blue"  id="submit">Submit</a>
-                    </div>
+
+
+
+
+<!--                    <div class="alert alert-success" id="success" style="color: #4dae3c ; font-size: 20px" th:if="${globalMessage}" th:text="${globalMessage}" hidden></div>-->
+
+<!--                            <td>-->
+<!--                                <div class="p-t-15">-->
+<!--                                    <a class="btn btn&#45;&#45;radius-2 btn&#45;&#45;blue" style="text-decoration: none" th:href="@{/}">Homepage</a>-->
+<!--                                </div>-->
+<!--                            </td>-->
+                    <table>
+                        <tr>
+                            <td><div class="p-t-15">
+                                <button class="btn btn--radius-2 btn--blue" type="submit"  id="submit">Submit</button>
+                            </div></td>
+                            <td><div>
+                                <a th:href="@{/}" style="text-decoration: none ;margin-left: 10px;">Homepage</a>
+                            </div></td>
+                        </tr>
+                    </table>
+
+
+
+
                 </form>
+
+                <div class="alert alert-success" style="color: #4dae3c ; font-size: 20px" th:if="${globalMessage}" th:text="${globalMessage}"></div>
+
+
+
+
             </div>
         </div>
     </div>
@@ -114,6 +145,25 @@
 <!--            $.bootstrapGrawl()-->
 <!--        }-->
 <!--    }-->
+<!--</script>-->
+
+<!--<script>-->
+<!--    $("#submit").click(function(){-->
+
+<!--        var success = $("#success").val();-->
+
+
+<!--        if(success != ''){-->
+<!--            console.log("vao thanhcong");-->
+<!--            swal({-->
+<!--                title: "Successfully register",-->
+<!--                icon: "success",-->
+
+<!--            });-->
+
+
+<!--        }-->
+<!--    })-->
 <!--</script>-->
 
 <!-- Jquery JS-->
@@ -151,7 +201,7 @@
 
 <!--            });-->
 
-<!--            $("#form").onsubmit;-->
+<!--            // $("#form").onsubmit;-->
 <!--        }-->
 <!--    })-->
 
@@ -161,41 +211,39 @@
 
 <!--</script>-->
 
-<script>
+<!--<script>-->
 
-    $("#submit").click(function (e){
-        // e.preventDefault();
+<!--    $("#submit").click(function (e){-->
+<!--        // e.preventDefault();-->
 
-        var username = $("#username").val();
-        var password = $("#password").val();
-        var email = $("#email").val();
-        var phone = $("#phone").val();
-        var male = $("#male").val();
-        var female = $("#female").val();
+<!--        var username = $("#username").val();-->
+<!--        var password = $("#password").val();-->
+<!--        var email = $("#email").val();-->
+<!--        var phone = $("#phone").val();-->
+<!--        var male = $("#male").val();-->
+<!--        var female = $("#female").val();-->
 
-        if(username == '' || password == '' || email == '' ||phone == '' ||male == '' ||female == ''){
-            swal({
-                title: "Field empty!",
-                text: "Please check again!",
-                icon: "warning",
-                button: "Ok",
-            });
-        }else {
-            swal({
-                title: "Successfully register",
-                icon: "success",
+<!--        if(username == '' || password == '' || email == '' ||phone == '' ||male == '' ||female == ''){-->
+<!--            swal({-->
+<!--                title: "Field empty!",-->
+<!--                text: "Please check again!",-->
+<!--                icon: "warning",-->
+<!--                button: "Ok",-->
+<!--            });-->
+<!--        } else {-->
+<!--            swal({-->
+<!--                title: "Successfully register",-->
+<!--                icon: "success",-->
 
-            });
-            setTimeout(function (){
-                console.log(document.getElementById("form"));
-                document.getElementById("form").submit();
-            },2000);
+<!--            });-->
+<!--            setTimeout(function (){-->
+<!--                console.log(document.getElementById("form"));-->
+<!--                document.getElementById("form").submit();-->
+<!--            },2000);-->
 
-        }
+<!--        }-->
 
-    })
-
-
+<!--    })-->
 
 
 
@@ -203,7 +251,9 @@
 
 
 
-</script>
+
+
+<!--</script>-->
 
 
 </html>

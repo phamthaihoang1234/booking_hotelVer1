@@ -19,9 +19,12 @@ public class UserInfo extends AbstractEntity implements Serializable {
 
     @NotBlank
     @NotNull
-    @Size(min = 3)
-    private String name;
+    @Size(min = 5, message = "Username should be more than 4 letters")
     private String username;
+    private String name;
+
+    private String address;
+
 
 
     @NotEmpty
@@ -31,7 +34,7 @@ public class UserInfo extends AbstractEntity implements Serializable {
 
     //    @JsonIgnore
     @NotEmpty
-    @Size(min = 6)
+    @Size(min = 6, message = "Password should be more than 5 letters" )
     private String password;
 
     @NotNull
@@ -40,7 +43,8 @@ public class UserInfo extends AbstractEntity implements Serializable {
 //    private LocalDate dateOfBirth;
 
 
-    //    @Pattern(regexp = "\"^[\\\\+]?[(]?[0-9]{3}[)]?[-\\\\s\\\\.]?[0-9]{3}[-\\\\s\\\\.]?[0-9]{4,6}$\"" )
+    @Size(max = 10, min = 10, message = "Mobile number should be of 10 digits")
+//    @Pattern(regexp = "[09][7-9][0-9]{10}" ,message = "Phone number is invalid!!" )
     @NotNull
     @NotEmpty
     private String phoneNumber;
@@ -82,6 +86,14 @@ public class UserInfo extends AbstractEntity implements Serializable {
         this.name = name;
         this.username = username;
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getName() {
