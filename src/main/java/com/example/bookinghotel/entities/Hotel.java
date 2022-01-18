@@ -11,9 +11,18 @@ public class Hotel {
     private Boolean status = true;
     private String nameOfHotel ;
     private String hotel_address;
+    private int hotel_standard;
 
 
     public Hotel() {
+    }
+
+    public int getHotel_standard() {
+        return hotel_standard;
+    }
+
+    public void setHotel_standard(int hotel_standard) {
+        this.hotel_standard = hotel_standard;
     }
 
     public String getHotel_address() {
