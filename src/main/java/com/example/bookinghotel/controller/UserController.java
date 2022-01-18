@@ -78,7 +78,7 @@ public class UserController {
             redirect.addFlashAttribute("globalMessage", "Register successfully.");
                 userService.save(user);
                 return "redirect:/signup";
-//                  return "redirect:/";
+
             }
 
 
