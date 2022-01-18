@@ -33,7 +33,7 @@
 <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
-            <div class="card-body">
+            <div class="card-body" style="margin-top: -53px">
                 <h2 class="title">Registration Form</h2>
                 <form th:action="@{/register}" th:object="${user}" method="post" >
                     <div class="row row-space">
@@ -113,6 +113,13 @@
                             <td><div>
                                 <a th:href="@{/}" style="text-decoration: none ;margin-left: 10px;">Homepage</a>
                             </div></td>
+                        </tr>
+                        <tr>
+                           <td>
+                               <div style="padding-top: 10px">
+                                <a th:href="@{/signupOwn}" style="margin-left: 10px;">Register hotel owner</a>
+                            </div>
+                           </td>
                         </tr>
                     </table>
 
