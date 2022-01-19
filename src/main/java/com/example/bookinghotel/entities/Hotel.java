@@ -10,7 +10,15 @@ public class Hotel {
     private Long id;
     private Boolean status = true;
     private String nameOfHotel ;
+    private String addressOfHotel;
 
+    public String getAddressOfHotel() {
+        return addressOfHotel;
+    }
+
+    public void setAddressOfHotel(String addressOfHotel) {
+        this.addressOfHotel = addressOfHotel;
+    }
 
     public Hotel() {
     }

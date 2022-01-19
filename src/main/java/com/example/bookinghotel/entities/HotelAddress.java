@@ -11,9 +11,9 @@ public class HotelAddress {
     private Long id;
     private String addressOfHotel;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hotel_id",nullable = false,updatable = true)
-    private Hotel hotel;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "hotel_id",nullable = false,updatable = true)
+//    private Hotel hotel;
 
 
     public HotelAddress() {
@@ -22,7 +22,7 @@ public class HotelAddress {
     public HotelAddress(Long id, String addressOfHotel, Hotel hotel) {
         this.id = id;
         this.addressOfHotel = addressOfHotel;
-        this.hotel = hotel;
+//        this.hotel = hotel;
     }
 
     public Long getId() {
@@ -41,11 +41,11 @@ public class HotelAddress {
         this.addressOfHotel = addressOfHotel;
     }
 
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
+//    public Hotel getHotel() {
+//        return hotel;
+//    }
+//
+//    public void setHotel(Hotel hotel) {
+//        this.hotel = hotel;
+//    }
 }

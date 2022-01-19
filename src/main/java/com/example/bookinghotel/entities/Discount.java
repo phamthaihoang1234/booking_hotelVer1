@@ -14,8 +14,8 @@ public class Discount {
     public Discount() {
     }
 
-    public Discount(Long id, Double disRate) {
-        this.id = id;
+    public Discount( Double disRate) {
+
         this.disRate = disRate;
     }
 
