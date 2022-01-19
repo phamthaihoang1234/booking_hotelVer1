@@ -6,7 +6,7 @@ import javax.persistence.*;
 //@NamedNativeQuery(name = "getTop4ReviewByRate",query = "select * from web_review order by " +
 //        "rate desc limit 4 ",resultClass = WebReview.class)
 public class WebReview {
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id ;
     private String comment;

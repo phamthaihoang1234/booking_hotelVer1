@@ -69,6 +69,9 @@ public class UserInfo extends AbstractEntity implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<WebReview> comments;
 
+
+
+
     public UserInfo(String name, String username, String email, String password, String gender, LocalDate dateOfBirth, String phoneNumber, Boolean active, Set<Role> roles, String token) {
         this.name = name;
         this.username = username;

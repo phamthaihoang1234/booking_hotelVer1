@@ -1109,13 +1109,13 @@ neu dung` css thi` ko the kiem tra dc input dang empty hay la ko? */
 /*Put icon inside input element in a form: http://stackoverflow.com/questions/917610/put-icon-inside-input-element-in-a-form*/
 /*dag thieu' nut' clear cua type = search*/
 input[type='search'] {
-    background: url(static/img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
+    background: url(/img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
     padding-left: 30px;
     background-color: #ffffff;
 }
 
 input[type='date'] {
-    background: url(static/img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
+    background: url(/img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
     padding-left: 35px;
     background-color: #ffffff;
 }
@@ -1466,7 +1466,7 @@ neu chi co' 1 thuoc tinh thi nhap chung voi @keyframes tren */
 }
 
 input[type='date'] {
-    background: url(static/img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
+    background: url(/img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
     /*glyphicon glyphicon-calendar*/
     padding-left: 35px;
     background-color: #ffffff;
@@ -1707,26 +1707,26 @@ body.disabled-onepage-scroll .onepage-wrapper section {
 }
 
 .main section.page1 {
-    background: url(static/img/download-apps/pic-mobileapps1.jpg) no-repeat;
+    background: url(/img/download-apps/pic-mobileapps1.jpg) no-repeat;
     /*http://stackoverflow.com/questions/9262861/css-background-image-to-fit-width-height-should-auto-scale-in-proportion */
     background-position: center center;
     background-size: cover;
 }
 
 .main section.page2 {
-    background: url(static/img/download-apps/pic-mobileapps2.jpg) no-repeat;
+    background: url(/img/download-apps/pic-mobileapps2.jpg) no-repeat;
     background-position: center center;
     background-size: cover;
 }
 
 .main section.page3 {
-    background: url(static/img/download-apps/pic-mobileapps3.jpg) no-repeat;
+    background: url(/img/download-apps/pic-mobileapps3.jpg) no-repeat;
     background-position: center center;
     background-size: cover;
 }
 
 .main section.page4 {
-    background: url(static/img/download-apps/pic-mobileapps4.jpg) no-repeat;
+    background: url(/img/download-apps/pic-mobileapps4.jpg) no-repeat;
     background-position: center center;
     background-size: cover;
 }

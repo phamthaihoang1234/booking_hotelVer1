@@ -1,6 +1,7 @@
 package com.example.bookinghotel.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "hotel")
@@ -40,6 +41,9 @@ public class Hotel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_property_id")
     private Hotel_Property hotel_property;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hotel")
+    private List<Hotel_Preview_Image> images;
 
     public Hotel_Property getHotel_property() {
         return hotel_property;

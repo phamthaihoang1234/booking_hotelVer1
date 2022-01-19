@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YOY | room-bookings</title>
-    <link rel="stylesheet" type="text/css" href="static/css/room-bookings.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/room-bookings.css"/>
     <!-- bootstrap: de y' 2 file ajax phai dat truoc maxcdn thi moi dung` duoc modal (Form)-->
     <!-- Online -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -701,13 +701,13 @@
         /*Put icon inside input element in a form: http://stackoverflow.com/questions/917610/put-icon-inside-input-element-in-a-form*/
         /*dag thieu' nut' clear cua type = search*/
         input[type='search'] {
-            background: url(static/img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
+            background: url(/img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
             padding-left: 30px;
             background-color: #ffffff;
         }
 
         input[type='date'] {
-            background: url(static/img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
+            background: url(/img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
             padding-left: 35px;
             background-color: #ffffff;
         }
@@ -1060,7 +1060,7 @@
         }
 
         input[type='date'] {
-            background: url(static/img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
+            background: url(/img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
             /*glyphicon glyphicon-calendar*/
             padding-left: 35px;
             background-color: #ffffff;
@@ -1303,26 +1303,26 @@
         }
 
         .main section.page1 {
-            background: url(static/img/download-apps/pic-mobileapps1.jpg) no-repeat;
+            background: url(/img/download-apps/pic-mobileapps1.jpg) no-repeat;
             /*http://stackoverflow.com/questions/9262861/css-background-image-to-fit-width-height-should-auto-scale-in-proportion */
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page2 {
-            background: url(static/img/download-apps/pic-mobileapps2.jpg) no-repeat;
+            background: url(/img/download-apps/pic-mobileapps2.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page3 {
-            background: url(static/img/download-apps/pic-mobileapps3.jpg) no-repeat;
+            background: url(/img/download-apps/pic-mobileapps3.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
 
         .main section.page4 {
-            background: url(static/img/download-apps/pic-mobileapps4.jpg) no-repeat;
+            background: url(/img/download-apps/pic-mobileapps4.jpg) no-repeat;
             background-position: center center;
             background-size: cover;
         }
@@ -1594,7 +1594,7 @@
                         //luu tru ten bien' khach san, nhu*ng ko co' dia chi => viec xac dinh Google se~ co the bi. co' dinh
                         //alert('bcheck = false 2');
                         localStorage.searchhotels_tmp_nameofhotel = $(this).text();
-                        window.location = 'room-bookings.html';
+                        window.location = '/room_booking';
                         return false;
                     }
                 }
@@ -2507,7 +2507,7 @@
                     alert("Sorry, your browser does not support web storage...");
                 }
                 //hoac window.open("/searchHotel","_self");
-                //window.location = 'room-bookings.html';
+                //window.location = '/room_booking';
                 //return false;
             });
 
@@ -2804,23 +2804,23 @@
                                         <table class="table borderless">
                                             <ul>
                                                 <!--chen pic truc tiep vao tung li-->
-                                                <li style="list-style-image:url('static/img/room-bookings/Parking-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Parking-26.png')">
                                                     Bãi đậu xe
                                                 </li>
-                                                <li style="list-style-image:url('static/img/room-bookings/Bank%20Cards-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Bank%20Cards-26.png')">
                                                     Có thể thanh toán bằng thẻ
                                                 </li>
-                                                <li style="list-style-image:url('static/img/room-bookings/Elevator-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Elevator-26.png')">
                                                     Thang máy
                                                 </li>
-                                                <li style="list-style-image:url('static/img/room-bookings/Beer%20Bottle-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Beer%20Bottle-26.png')">
                                                     Minibar
                                                 </li>
-                                                <li style="list-style-image:url('static/img/room-bookings/Fridge-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Fridge-26.png')">
                                                     Tủ lạnh nhỏ
                                                 </li>
                                                 <li class="del"
-                                                    style="list-style-image:url('static/img/room-bookings/Wheelchair-26.png')">
+                                                    style="list-style-image:url('/img/room-bookings/Wheelchair-26.png')">
                                                     Xe lăn cho người khuyết tật
                                                 </li>
                                             </ul>
@@ -2829,23 +2829,23 @@
                                     <td>
                                         <table class="table borderless">
                                             <ul>
-                                                <li style="list-style-image:url('static/img/room-bookings/Wi-Fi-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Wi-Fi-26.png')">
                                                     Internet
                                                 </li>
-                                                <li style="list-style-image:url('static/img/room-bookings/Air%20Conditioner-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Air%20Conditioner-26.png')">
                                                     Máy điều hòa nhiệt độ
                                                 </li>
-                                                <li style="list-style-image:url('static/img/room-bookings/Swimming%20Pool-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Swimming%20Pool-26.png')">
                                                     Hồ bơi
                                                 </li>
                                                 <li class="del"
-                                                    style="list-style-image:url('static/img/room-bookings/Conference-26.png')">
+                                                    style="list-style-image:url('/img/room-bookings/Conference-26.png')">
                                                     Phòng họp
                                                 </li>
-                                                <li style="list-style-image:url('static/img/room-bookings/Dining%20Room-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Dining%20Room-26.png')">
                                                     Khu vực ẩm thực
                                                 </li>
-                                                <li style="list-style-image:url('static/img/room-bookings/Widescreen%20TV-26.png')">
+                                                <li style="list-style-image:url('/img/room-bookings/Widescreen%20TV-26.png')">
                                                     TV màn hình phẳng
                                                 </li>
                                             </ul>
@@ -2979,9 +2979,9 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
-                            <img src="static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
                         <td>1.500.000</td>
@@ -2991,9 +2991,9 @@
                         <td> &nbsp; 2</td>
                         <td>
                             <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
-                            <img src="static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
@@ -3001,9 +3001,9 @@
                     <tr id="room-row3" style="background-color: white; display: none">
                         <td> &nbsp; 3</td>
                         <td>
-                            <img src="static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
@@ -3011,18 +3011,18 @@
                     <tr id="room-row4" style="background-color: white; display: none">
                         <td> &nbsp; 4</td>
                         <td>
-                            <img src="static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
+                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
                     </tr>
                     <tr id="room-row5" style="background-color: white; display: none">
                         <td> &nbsp; 5</td>
                         <td>
-                            <img src="static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
@@ -3030,9 +3030,9 @@
                     <tr id="room-row6" style="background-color: white; display: none">
                         <td> &nbsp; 6</td>
                         <td>
-                            <img src="static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
+                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
                         <!--<td>-->
                         <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
                         <!--</td>-->
@@ -3183,23 +3183,23 @@
                                         </thead>
                                         <!--<tbody>-->
                                         <tr>
-                                            <td><img src="static/img/room-bookings/pay_with/visa.gif"/></td>
+                                            <td><img src="/img/room-bookings/pay_with/visa.gif"/></td>
                                             <td>Visa</td>
                                         </tr>
                                         <tr>
-                                            <td><img src="static/img/room-bookings/pay_with/mastercard.png"/></td>
+                                            <td><img src="/img/room-bookings/pay_with/mastercard.png"/></td>
                                             <td>MasterCard</td>
                                         </tr>
                                         <tr>
-                                            <td><img src="static/img/room-bookings/pay_with/JCB.png"/></td>
+                                            <td><img src="/img/room-bookings/pay_with/JCB.png"/></td>
                                             <td>JCB</td>
                                         </tr>
                                         <tr>
-                                            <td><img src="static/img/room-bookings/pay_with/american-express.png"/></td>
+                                            <td><img src="/img/room-bookings/pay_with/american-express.png"/></td>
                                             <td>American Express</td>
                                         </tr>
                                         <tr>
-                                            <td><img src="static/img/room-bookings/pay_with/paypal.png"/></td>
+                                            <td><img src="/img/room-bookings/pay_with/paypal.png"/></td>
                                             <td>PayPal</td>
                                         </tr>
                                         <!--</tbody>-->
@@ -3262,7 +3262,7 @@
     </div>
 
     <!--JavaScript-->
-    <script src="static/js/room-bookings.js"></script>
+    <script src="/js/room-bookings.js"></script>
     <script src="Utilities/smoothscroll-for-websites-master/SmoothScroll.js"></script>
     <script src="Utilities/LiveChat.js"></script>
     <!--Form Feedback (position: fixed): https://webengage.com/ , phai dang ky', chua tach ra duoc file rieng do co' kem` id-->
