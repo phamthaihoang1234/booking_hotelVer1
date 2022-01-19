@@ -79,4 +79,11 @@ public class OwnHotelController {
 
     }
 
+    @GetMapping("/manageHotel")
+    public String manageHotel(){
+        return "/Pages/owner/manageHotel";
+    }
+
+
+
 }
