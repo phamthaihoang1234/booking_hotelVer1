@@ -53,7 +53,7 @@ public class OwnHotelController {
 
     }
 
-    @Value("D:/hotelbooking/bookingHotel/src/main/resources/static/images")
+    @Value("E:/ListRoom/file/")
     private String fileUpload;
 
     @PostMapping("/saveOwner")
