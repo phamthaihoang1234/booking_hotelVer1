@@ -1,0 +1,61 @@
+
+
+header {
+    /*height: 65px;*/
+    width: 100%;
+    /*border-bottom: solid thin black;*/
+    /*background-color: white;*/
+    /*color: black;*/
+}
+#myBtn:hover {
+
+    text-decoration: none;
+}
+
+#left-header {
+    float: left;
+    margin-left: 20px;
+    /*sau khi them jquery-1.11.3.min.js thi css moi co tac dung*/
+    line-height: 60px;
+}
+
+#left-header a:hover {
+    text-decoration: none;
+}
+
+#right-header {
+    float: right;
+    /*neu tach so' dt ra lam 2 thi co the bi anh huong*/
+    line-height: 60px;
+}
+
+#right-header a {
+    color: black;
+}
+
+#right-header a:hover {
+    /*loai bo dau gach. duoi'*/
+    text-decoration: none;
+}
+
+#language {
+    cursor: pointer;
+}
+
+button[type="button"].mybtn-style1 {
+    border: 0;
+}
+
+#welcome {
+    float: left;
+    margin-right: 10px;
+    /*display: inline-flex; bi xoa' khi load tu` home page*/
+    display: none;
+}
+
+.dropdown-menu a {
+    /*do ko su dung thuoc tinh href*/
+    cursor: pointer;
+}
+
+
