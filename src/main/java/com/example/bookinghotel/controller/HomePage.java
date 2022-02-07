@@ -38,6 +38,10 @@ public class HomePage {
         return "Pages/homepage";
 
     }
+    @GetMapping("/getLoginForm")
+    public String loginForm(){
+        return "/Pages/modal-user/user-login";
+    }
     private Model getTopReview(Model model){
         // get reviews for review table webpage
         List<WebReview> reviews1 = webReviewRepo.findTop4Comment((Pageable) PageRequest.of(0,2));
@@ -46,6 +50,7 @@ public class HomePage {
         model.addAttribute("reviews2",reviews2);// row 2 in review table
         return model;
     }
+
     private Model getHotelProperty(Model model,String location,String pattern){
         // get hotel type for nav bar
         String type1 = "Khách sạn quốc tế";
@@ -79,7 +84,14 @@ public class HomePage {
     }
 
 
-
+    @GetMapping("/download-apps")
+    public String getDownloadApp(){
+        return "Pages/download-apps";
+    }
+    @GetMapping("/user-24h")
+    public String getSupport(){
+        return "Pages/modal-user/user-24h";
+    }
     @GetMapping("/header")
     public String getHeader(){
         return "Pages/Common-pages/part-header";

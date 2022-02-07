@@ -26,9 +26,17 @@ public class UserInfo extends AbstractEntity implements Serializable {
     private String username;
     private String address;
     private String avatar;
-
+    private String passwordToken;//for password recovery
     public String getAddress() {
         return address;
+    }
+
+    public String getPasswordToken() {
+        return passwordToken;
+    }
+
+    public void setPasswordToken(String passwordToken) {
+        this.passwordToken = passwordToken;
     }
 
     public void setAddress(String address) {

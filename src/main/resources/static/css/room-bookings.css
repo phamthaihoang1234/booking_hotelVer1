@@ -126,7 +126,7 @@
 }
 
 input[type='date'] {
-    background: url(img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
+    background: url(../img/homepage/cal-icon.png) no-repeat scroll 5px 5px;
     /*glyphicon glyphicon-calendar*/
     padding-left: 35px;
     background-color: #ffffff;

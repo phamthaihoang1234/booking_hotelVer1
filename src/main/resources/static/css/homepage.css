@@ -254,13 +254,13 @@ neu dung` css thi` ko the kiem tra dc input dang empty hay la ko? */
 /*Put icon inside input element in a form: http://stackoverflow.com/questions/917610/put-icon-inside-input-element-in-a-form*/
 /*dag thieu' nut' clear cua type = search*/
 input[type='search'] {
-    background: url(img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
+    background: url(../img/homepage/MarkerFilled-1824.png) no-repeat scroll 5px 10px;
     padding-left: 30px;
     background-color: #ffffff;
 }
 
 input[type='date'] {
-    background: url(img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
+    background: url(../img/homepage/cal-icon.png) no-repeat scroll 5px 10px;
     padding-left: 35px;
     background-color: #ffffff;
 }

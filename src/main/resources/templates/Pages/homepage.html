@@ -52,6 +52,7 @@
 //      neu thoi gian load body nhieu hon delay thi co the xay ra loi
             var delay = 1000;
             timer = setTimeout(function () {
+                // kiểm tra đăng nhập để thay đổi thông tin ở header
                 if (localStorage.check_login === 'true') {
 //                    alert('DA DANG NHAP');
                     $('#welcome').fadeIn(10);
@@ -375,7 +376,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
 
                 <form action="/searchHotel" method="get" style="position: absolute; padding: 15px">
                     <div id="search-locations">
-                        <img src="img/homepage/Delete-25.png" width="16px"
+                        <img src="../img/homepage/Delete-25.png" width="16px"
                              style="position: absolute; margin-left: 405px; margin-top: 14px; display: none"/>
                         <!--<input class="form-control" id="focusedInput" type="search" value="" placeholder="Nhập tên thành phố, khu vực, khách sạn ..." size="100%" style="height:45px">-->
                         <!--http://designshack.net/articles/javascript/create-a-simple-autocomplete-with-html5-jquery/-->
@@ -442,7 +443,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
             </div>
         </div>
 
-        <img src="img/homepage/Center_1440x860.jpg" width="100%" height="100%"/>
+        <img src="../img/homepage/Center_1440x860.jpg" width="100%" height="100%"/>
         <!--</div>-->
     </div>
 
@@ -455,27 +456,27 @@ Tab (toi') nguoc lai thi` Shift + Tab
                 <div class="col-sm-2 col-md-2">
                     <p>Điều hòa nhiệt độ</p>
                     <!--do co' class="img-responsive" nen ko the? canh vao` center-->
-                    <img class="img-responsive" src="img/homepage/tiennghi-AC_Rooms.png"/>
+                    <img class="img-responsive" src="../img/homepage/tiennghi-AC_Rooms.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Truyền hình cáp</p>
-                    <img class="img-responsive" src="img/homepage/tiennghi-Cable_TV.png"/>
+                    <img class="img-responsive" src="../img/homepage/tiennghi-Cable_TV.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Ra trải giường sạch sẽ</p>
-                    <img class="img-responsive" src="img/homepage/tiennghi-Spotless_Linen.png"/>
+                    <img class="img-responsive" src="../img/homepage/tiennghi-Spotless_Linen.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Bữa sáng miễn phí</p>
-                    <img class="img-responsive" src="img/homepage/tiennghi-Complimentary_Breakfast.png"/>
+                    <img class="img-responsive" src="../img/homepage/tiennghi-Complimentary_Breakfast.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Miễn phí Wi-Fi</p>
-                    <img class="img-responsive" src="img/homepage/tiennghi-Free_Wi-Fi.png"/>
+                    <img class="img-responsive" src="../img/homepage/tiennghi-Free_Wi-Fi.png"/>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <p>Nhà vệ sinh đạt chuẩn</p>
-                    <img class="img-responsive" src="img/homepage/tiennghi-Hygienic_Washrooms.png"/>
+                    <img class="img-responsive" src="../img/homepage/tiennghi-Hygienic_Washrooms.png"/>
                 </div>
             </div>
         </div>
@@ -491,7 +492,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
             <div class="container" style="margin-top: 10px">
                 <div class="grid">
                     <figure class="effect-chico">
-                        <img src="img/homepage/promotion_1.jpg" width="550px" alt="img15"/>
+                        <img src="../img/homepage/promotion_1.jpg" width="550px" alt="img15"/>
                         <figcaption>
                             <!--<strong>YOY <span class="txt-name-location">ĐÀ NẴNG</span></strong>-->
                             <h3 style="margin-top: 20%">
@@ -503,7 +504,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                     </figure>
                     <!--mac dinh the figure dag cai` float: left-->
                     <figure class="effect-chico">
-                        <img src="img/homepage/promotion_2.jpg" width="550px" height="200px" alt="img04"/>
+                        <img src="../img/homepage/promotion_2.jpg" width="550px" height="200px" alt="img04"/>
                         <figcaption>
                             <h3>
                                 YOY <span class="txt-name-location">HÀ NỘI</span>
@@ -513,7 +514,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                         </figcaption>
                     </figure>
                     <figure class="effect-chico">
-                        <img src="img/homepage/promotion_3.jpg" width="550px" height="200px" alt="img04"/>
+                        <img src="../img/homepage/promotion_3.jpg" width="550px" height="200px" alt="img04"/>
                         <figcaption>
                             <h3>
                                 YOY <span class="txt-name-location">HỒ CHÍ MINH</span>
@@ -546,7 +547,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                         <img class="effect-shadow img-responsive" th:src="${review.user.getAvatar()}"
                              style="border-radius: 5px ; width: 100px"/>
                     </div>
-                    <img src="img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
+                    <img src="../img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
                     <p style="width: 70%">
                         <span th:text="${review.comment}"></span>
                         <br/>
@@ -572,7 +573,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                             <img class="effect-shadow img-responsive" th:src="${review.user.getAvatar()}"
                                  style="border-radius: 5px ; width: 100px"/>
                         </div>
-                        <img src="img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
+                        <img src="../img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>
                         <p style="width: 70%">
                             <span th:text="${review.comment}"></span>
                             <br/>
@@ -592,11 +593,11 @@ Tab (toi') nguoc lai thi` Shift + Tab
 
 <!--                <div class="col-xs-5 col-sm-5 col-md-5" style="display: inline-flex">-->
 <!--                    <div style="width: 22%">-->
-<!--                        <img class="effect-shadow img-responsive" src="img/homepage/comment1_mrbean.jpg"-->
+<!--                        <img class="effect-shadow img-responsive" src="../img/homepage/comment1_mrbean.jpg"-->
 <!--                             style="border-radius: 5px"/>-->
-<!--                        &lt;!&ndash;<img src="img/homepage/quote.png" style="margin-top: -85px; float: right"/>&ndash;&gt;-->
+<!--                        &lt;!&ndash;<img src="../img/homepage/quote.png" style="margin-top: -85px; float: right"/>&ndash;&gt;-->
 <!--                    </div>-->
-<!--                    <img src="img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>-->
+<!--                    <img src="../img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>-->
 <!--                    <p style="width: 70%">-->
 <!--                        Lần đầu tiên tôi đặt phòng ở YOY, đó là một trải nghiệm tuyệt vời về dịch vụ nghỉ-->
 <!--                        dưỡng của các khu nghỉ dưỡng cao cấp mà các bạn giới thiệu cho chúng tôi.-->
@@ -607,10 +608,10 @@ Tab (toi') nguoc lai thi` Shift + Tab
 
 <!--                <div class="col-xs-5 col-sm-5 col-md-5" style="display: inline-flex">-->
 <!--                    <div style="width: 22%">-->
-<!--                        <img class="effect-shadow img-responsive" src="img/homepage/comment1_binladen.jpg"-->
+<!--                        <img class="effect-shadow img-responsive" src="../img/homepage/comment1_binladen.jpg"-->
 <!--                             style="border-radius: 5px"/>-->
 <!--                    </div>-->
-<!--                    <img src="img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>-->
+<!--                    <img src="../img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>-->
 <!--                    <p style="width: 70%">-->
 <!--                        Thật tuyệt vời!!! Đó là lí do tôi không bao giờ khủng bố Việt Nam !!!<br/>-->
 <!--                        &lt;!&ndash;Lần đầu tiên tôi đặt phòng ở YOY, đó là một trải nghiệm tuyệt vời về dịch vụ nghỉ&ndash;&gt;-->
@@ -628,20 +629,20 @@ Tab (toi') nguoc lai thi` Shift + Tab
 <!--            <div class="container" style="margin: 0 auto; margin-top: 25px; width: 90%; clear: both">-->
 <!--                <div class="row">-->
 <!--                    <div class="col-xs-4 col-sm-4 col-md-4">-->
-<!--                        <img class="img-responsive" src="img/homepage/comment2_forbes.png"><br/>-->
+<!--                        <img class="img-responsive" src="../img/homepage/comment2_forbes.png"><br/>-->
 <!--                        <p>...YOY hotels provide standardization on 30 measures in each room including free wifi and-->
 <!--                            breakfast, flatscreen TVs, spotless white bed linen and so on...-->
 <!--                        </p>-->
 <!--                    </div>-->
 <!--                    <div class="col-xs-4 col-sm-4 col-md-4">-->
-<!--                        <img class="img-responsive" src="img/homepage/comment2_techcrucnch.png"><br/>-->
+<!--                        <img class="img-responsive" src="../img/homepage/comment2_techcrucnch.png"><br/>-->
 <!--                        <p>...On the YOY platform, guests can do on-demand booking without waiting for a reply from a-->
 <!--                            host, and they can check in and out instantaneously instead of waiting at a reservation-->
 <!--                            desk...-->
 <!--                        </p>-->
 <!--                    </div>-->
 <!--                    <div class="col-xs-4 col-sm-4 col-md-4">-->
-<!--                        <img class="img-responsive" src="img/homepage/comment2_thehindu.png"><br/>-->
+<!--                        <img class="img-responsive" src="../img/homepage/comment2_thehindu.png"><br/>-->
 <!--                        <p>...The YOY Rooms mobile app is the world’s first personal room service app that allows guests-->
 <!--                            staying-->
 <!--                            at an YOY to order room service directly from their smartphones...-->

@@ -40,14 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/","/register").permitAll()
+        http.authorizeRequests().antMatchers("/","/register","/sendEmail","/login").permitAll()
                 .antMatchers(HttpMethod.POST,"/**" ).permitAll()
-                .antMatchers("/carts").access("hasAnyRole('ROLE_USER','ROLE_SELLER')")
+                .antMatchers("/carts").access("hasAnyRole('ROLE_USER','ROLE_SELLER')");
 //                .antMatchers("/carts").access("hasRole('ROLE_SELLER')")
-                .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
-
-//                .and().formLogin().successHandler(customSuccessHandler)
-                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+//                .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
+//
+////                .and().formLogin().successHandler(customSuccessHandler)
+//                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
     }
 

@@ -49,8 +49,10 @@ public class UserController {
         roles.add(roleUser);
 
         user.setRoles(roles);
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setPassword(passwordEncoder.encode("12345678"));
+        System.out.println(user.getPassword());
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+//        user.setPassword(passwordEncoder.encode("12345678"));
         user.setToken("user");
         user.setActive(true);
         user.setName(user.getUsername());

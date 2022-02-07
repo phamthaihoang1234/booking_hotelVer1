@@ -11,14 +11,16 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
     <!-- Offline -->
-    <link rel="stylesheet" href="../../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-    <script src="../../Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
-    <script src="../../Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script src="Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <!--Google Action Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Font Awesome Web Application Icons-->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <style>
         header {
             /*height: 65px;*/
@@ -85,11 +87,11 @@ search-hotels.html & book-now -->
         <!--khi zoom trinh duyet den' gioi han. nho nhat' thi` se~ cho phep' trôi xuống dưới    -->
         <div id="left-header">
             <!--neu load tu` home page thi ghi day du thu* muc ngoai`-->
-            <!--<img src="img/header-footer/header_logo.png" width="150"/>-->
+            <!--<img src="../img/header-footer/header_logo.png" width="150"/>-->
             <!--<span style="color: white">Mạng đặt phòng khách sạn Online</span>-->
 
-            <a href="../Pages/homepage.html" target="_self" title="Về trang chủ">
-                <img src="img/header-footer/logo.png" width="110px" />
+            <a th:href="@{/}" target="_self" title="Về trang chủ">
+                <img src="../img/header-footer/logo.png" width="110px" />
             </a>
             <span>Mạng đặt phòng khách sạn Online</span>
 
@@ -97,10 +99,10 @@ search-hotels.html & book-now -->
 
         <div id="right-header">
             <div style="float: left; border-right: solid thin rgb(238,238,238)">
-                <a href="download-apps.html" target="_self" style="color: black" title="Tải ứng dụng YOY">
+                <a th:href="@{/download-apps}" target="_self" style="color: black" title="Tải ứng dụng YOY">
                     <!-- trang chu co rat nhieu the a => ko the cai thuoc tinh' color white cho tung` the -->
                     <!-- khi doi ten file, se~ tim` ra cac dong` lenh dang cai` co lien quan, chinh sua xong thi` ra ngoai folder doi ten -->
-                    <img src="img/header-footer/mobile-icon.png" height="40px" />
+                    <img src="../img/header-footer/mobile-icon.png" height="40px" />
                     <span style="margin-right: 10px">Download App </span>
                 </a>
             </div>
@@ -114,7 +116,7 @@ search-hotels.html & book-now -->
                     <button class="btn btn-default dropdown-toggle mybtn-style1" type="button"
                             data-toggle="dropdown">
                         <!--<span class="glyphicon glyphicon-search"></span>-->
-                        Xin chào Group 6
+                        Xin chào Group 5
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
@@ -159,27 +161,25 @@ search-hotels.html & book-now -->
 
                 <span>&nbsp;|&nbsp;</span>
 
-                <a href="modal-user/user-login.html" data-toggle="modal" data-target="#theModal"
+                <a th:href="@{/getLoginForm}" data-toggle="modal" data-target="#theModal"
                    style="margin-right: 10px" onclick="
-                        $('.modal').on('hidden.bs.modal', function(){
-                            $(this).find('form')[0].reset();
-                        });
+                        getCookie()
                         ">ĐĂNG NHẬP</a>
             </div>
 
             <div style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">
-                <img id="language" src="img/header-footer/flagvn_thumbnail.png" onclick="var $src = $(this).attr('src');
-                            if ($src == 'img/header-footer/flagvn_thumbnail.png'){
-                                $(this).attr('src','img/header-footer/flageng_thumbnail.png');
+                <img id="language" src="../img/header-footer/flagvn_thumbnail.png" onclick="var $src = $(this).attr('src');
+                            if ($src == '../img/header-footer/flagvn_thumbnail.png'){
+                                $(this).attr('src','../img/header-footer/flageng_thumbnail.png');
                                 } else {
-                                $(this).attr('src','img/header-footer/flagvn_thumbnail.png');
+                                $(this).attr('src','../img/header-footer/flagvn_thumbnail.png');
                             }" style="margin-right: 15px; " width="32px" height="24px" title="Chọn ngôn ngữ" />
             </div>
 
             <!--them style="float: left", doi luc xay ra loi khi refresh trang-->
-            <a href="modal-user/user-24h.html" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
+            <a th:href="@{/user-24h}" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
                style="color: white; float: left">
-                <img src="img/header-footer/24h_white.png" />
+                <img src="../img/header-footer/24h_white.png" />
             </a>
         </div>
     </div>
@@ -204,6 +204,24 @@ http://plnkr.co/edit/Y7jDj2hORWmJ95c96qoG?p=preview
         </div>
     </div>
 </div>
+<script>
+    function findCookie(cookieName) {
+        let cookie = {};
+        document.cookie.split(';').forEach(function(el) {
+            let [key,value] = el.split('=');
+            cookie[key.trim()] = value;
+        })
+        return cookie[cookieName];
+    }
+    function getCookie(){
+
+
+        $('.modal').on('hidden.bs.modal', function(){
+            $(this).find('form')[0].reset();
+        });
+
+    }
+</script>
 </body>
 
 </html>
