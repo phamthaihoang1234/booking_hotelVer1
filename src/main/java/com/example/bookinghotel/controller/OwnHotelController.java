@@ -99,71 +99,71 @@ public class OwnHotelController {
 
     }
 
-    @GetMapping("/manageHotel")
-    public String manageHotel(){
-        return "/Pages/owner/manageHotel";
-    }
-
-
-    @GetMapping("/hotel")
-    public String showform(Model model){
-        model.addAttribute("hotel", new Hotel());
-        return "/greeting";
-    }
-
-    @PostMapping("/createHotel")
-    public String showform(Model model, @ModelAttribute Hotel hotel){
-        hotelService.save(hotel);
-        model.addAttribute("listHotel", hotelService.findAll());
-
-
-
-        return "/result";
-    }
-
-    public Long idHotel ;
-
-    @GetMapping("/createRoom/{id}")
-    public String showFormCreateRoom(@PathVariable("id") Long id , Model model){
-        model.addAttribute("listProperty", typeService.getAll());
-        Room room = new Room();
-        room.setHotel(hotelService.findById(id).get());
-        idHotel = id;
-        model.addAttribute("room", room);
-        System.out.println("name of hote : "+hotelService.findById(id).get().getAddressOfHotel());
-        return "Room/create";
-    }
-
-    @PostMapping("/saveRoom")
-    public String saveRoom(Model model, @ModelAttribute("room") Room room, @RequestParam("p") Long id,RedirectAttributes redirect){
-        System.out.println(idHotel);
-        room.setHotel(hotelService.findById(idHotel).get());
-        System.out.println("name of hote : "+room.getHotel().getNameOfHotel());
-        System.out.println("Tên cua type la: "+typeService.getOne(id).get().getName());
-
-        room.setPropertyType(typeService.getOne(id).get());
-        MultipartFile multipartFile = room.getImage();
-        String fileName = multipartFile.getOriginalFilename();
-
-        try {
-            FileCopyUtils.copy(room.getImage().getBytes(), new File(fileUpload + fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        room.setImgSrc3(fileName);
-        room.setPricePerNight(2.5);
-        room.setTotalOfBathroom(11);
-        room.setTotalOfBedroom(11);
-        room.setBookings(null);
-        room.setDiscount(discountService.findById(1L).get());
-        room.setUser(userService.findById(1L).get());
-        homeService.save(room);
-        model.addAttribute("rooms",roomService.findAll());
-
-
-        return "Room/ListRoom";
-    }
-
+//    @GetMapping("/manageHotel")
+//    public String manageHotel(){
+//        return "/Pages/owner/manageHotel";
+//    }
+//
+//
+//    @GetMapping("/hotel")
+//    public String showform(Model model){
+//        model.addAttribute("hotel", new Hotel());
+//        return "/greeting";
+//    }
+//
+//    @PostMapping("/createHotel")
+//    public String showform(Model model, @ModelAttribute Hotel hotel){
+//        hotelService.save(hotel);
+//        model.addAttribute("listHotel", hotelService.findAll());
+//
+//
+//
+//        return "/result";
+//    }
+//
+//    public Long idHotel ;
+//
+//    @GetMapping("/createRoom/{id}")
+//    public String showFormCreateRoom(@PathVariable("id") Long id , Model model){
+//        model.addAttribute("listProperty", typeService.getAll());
+//        Room room = new Room();
+//        room.setHotel(hotelService.findById(id).get());
+//        idHotel = id;
+//        model.addAttribute("room", room);
+//        System.out.println("name of hote : "+hotelService.findById(id).get().getAddressOfHotel());
+//        return "Room/create";
+//    }
+//
+//    @PostMapping("/saveRoom")
+//    public String saveRoom(Model model, @ModelAttribute("room") Room room, @RequestParam("p") Long id,RedirectAttributes redirect){
+//        System.out.println(idHotel);
+//        room.setHotel(hotelService.findById(idHotel).get());
+//        System.out.println("name of hote : "+room.getHotel().getNameOfHotel());
+//        System.out.println("Tên cua type la: "+typeService.getOne(id).get().getName());
+//
+//        room.setPropertyType(typeService.getOne(id).get());
+//        MultipartFile multipartFile = room.getImage();
+//        String fileName = multipartFile.getOriginalFilename();
+//
+//        try {
+//            FileCopyUtils.copy(room.getImage().getBytes(), new File(fileUpload + fileName));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        room.setImgSrc3(fileName);
+//        room.setPricePerNight(2.5);
+//        room.setTotalOfBathroom(11);
+//        room.setTotalOfBedroom(11);
+//        room.setBookings(null);
+//        room.setDiscount(discountService.findById(1L).get());
+//        room.setUser(userService.findById(1L).get());
+//        homeService.save(room);
+//        model.addAttribute("rooms",roomService.findAll());
+//
+//
+//        return "Room/ListRoom";
+//    }
+//
 
 
 
