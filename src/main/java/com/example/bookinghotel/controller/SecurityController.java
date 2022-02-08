@@ -10,6 +10,7 @@ public class SecurityController {
 
     @GetMapping("/login")
     public String login(){
+        System.out.println("vaologin");
         return "/Pages/booker/login";
     }
 

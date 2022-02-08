@@ -2803,7 +2803,11 @@ search-hotels.html & book-now -->
                     style="margin-right: 10px"
                     >ĐĂNG NHẬP</a>
             </div>
-
+<!--            <div>-->
+<!--                <th:block th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                    <a class="btn btn-success nBtn"  th:href="@{/logout}">Logout</a>-->
+<!--                </th:block>-->
+<!--            </div>-->
             <div style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">
                 <img id="language" src="/img/header-footer/flagvn_thumbnail.png"
                      onclick="var $src = $(this).attr('src');

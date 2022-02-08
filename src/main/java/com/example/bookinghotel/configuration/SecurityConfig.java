@@ -3,6 +3,7 @@ package com.example.bookinghotel.configuration;
 
 
 import com.example.bookinghotel.services.UserService;
+import com.example.bookinghotel.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +23,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
+
+
+
 
     @Autowired
     private CustomSuccessHandler customSuccessHandler;
@@ -36,12 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    public BCryptPasswordEncoder bCryptPasswordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
-//
+
+
+    @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth
-                .userDetailsService(userService)
-                .passwordEncoder(passwordEncoder());
+                .userDetailsService(userService);
+               // .passwordEncoder(passwordEncoder());
     }
 
 
@@ -54,13 +60,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/","/register").permitAll()
+        http.authorizeRequests().antMatchers("/","login","/register").permitAll()
                 .antMatchers(HttpMethod.POST).permitAll()
-                .antMatchers("/login").access("hasAnyRole('ROLE_USER')")
+                //.antMatchers("/login").access("hasAnyRole('ROLE_USER')")
 //                .antMatchers("/carts").access("hasRole('ROLE_SELLER')")
-                //.and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
+                .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
 
-                .and().formLogin().successHandler(customSuccessHandler)
+            //  .and().formLogin().successHandler(customSuccessHandler)
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
     }
