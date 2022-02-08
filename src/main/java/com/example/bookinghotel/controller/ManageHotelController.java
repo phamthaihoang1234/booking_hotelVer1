@@ -47,6 +47,12 @@ public class ManageHotelController {
         return hotelService.findById(id).get();
     }
 
+    @GetMapping("/delete")
+    public String deleteById(long id){
+        hotelService.delete(id);
+        return "redirect:/manageHotels";
+    }
+
 
 
 }

@@ -5,6 +5,7 @@ import com.example.bookinghotel.entities.UserInfo;
 import com.example.bookinghotel.services.RoleService;
 import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +55,7 @@ public class UserController {
         roles.add(roleUser);
 
         user.setRoles(roles);
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         user.setToken("user");
         user.setActive(true);
@@ -74,7 +75,7 @@ public class UserController {
             return "/Pages/modal-user/user-signup";
         }
         else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            //user.setPassword(passwordEncoder.encode(user.getPassword()));
             redirect.addFlashAttribute("globalMessage", "Register successfully.");
                 userService.save(user);
                 return "redirect:/signup";

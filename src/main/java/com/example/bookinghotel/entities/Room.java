@@ -44,7 +44,7 @@ public class Room extends AbstractEntity implements Serializable {
     private Discount discount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "property_type", nullable = false, updatable = false)
+    @JoinColumn(name = "property_type",nullable = false, updatable = false)
     private PropertyType propertyType;
 
     @Transient

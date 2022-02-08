@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
@@ -2684,11 +2685,17 @@ search-hotels.html & book-now -->
                 <!--khi thoat form ma` ko dung` &time thi so lieu van con luu (luc nay form dag an? chu' chua thoat-->
                 <!--=> so lieu van~ con` luu lai)-->
                 <!--http://stackoverflow.com/questions/15827262/how-to-reset-form-body-in-bootstrap-modal-box-->
-
+                <h3 th:if="${#authorization.expression('isAuthenticated()')}">
+                    Wellcome! <span sec:authentication="name" class="categories" ></span>
+                </h3>
 
                 <!--                Modal register-->
 <!--                <a  th:href="@{/manageHotel}">MANAGE HOTEL</a>-->
-                <a  th:href="@{/manageHotels}">MANAGE HOTEL</a>
+                <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                    <li sec:authorize="hasRole('USER')"><a  th:href="@{/manageHotels}">MANAGE HOTEL</a></li>
+                </th:block>
+
+<!--                <a  th:href="@{/manageHotels}">MANAGE HOTEL</a>-->
                 <span>&nbsp;|&nbsp;</span>
                 <a id="myBtn" th:href="@{/signup}" >THAM GIA</a>
 <!--                <a href="#editEmployeeModal"  class="edit" data-toggle="modal" >THAM GIA</a>-->
@@ -2792,13 +2799,9 @@ search-hotels.html & book-now -->
 
                 <!--                Modal login-->
 
-                <a  data-toggle="modal" data-target="#theModal"
+                <a th:href="@{/login}"
                     style="margin-right: 10px"
-                    onclick="
-                        $('.modal').on('hidden.bs.modal', function(){
-                            $(this).find('form')[0].reset();
-                        });
-                        ">ĐĂNG NHẬP</a>
+                    >ĐĂNG NHẬP</a>
             </div>
 
             <div style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">

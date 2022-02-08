@@ -49,8 +49,8 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         }
 
         if (isSeller(roles)) {
-            url = "/";
-        } else if (isUser(roles)) {
+            url = "/greeting";
+        } else if (isBooker(roles)) {
             url = "/";
         } else {
             url = "/accessDenied";
@@ -59,7 +59,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         return url;
     }
 
-    private boolean isUser(List<String> roles) {
+    private boolean isBooker(List<String> roles) {
         if (roles.contains("ROLE_USER")) {
             return true;
         }
@@ -67,7 +67,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     }
 
     private boolean isSeller(List<String> roles) {
-        if (roles.contains("ROLE_SELLER")) {
+        if (roles.contains("ROLE_OWNER")) {
             return true;
         }
         return false;

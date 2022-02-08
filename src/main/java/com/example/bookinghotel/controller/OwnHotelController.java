@@ -90,7 +90,7 @@ public class OwnHotelController {
             return "/Pages/owner/formOwnRegister";
         }
         else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            //user.setPassword(passwordEncoder.encode(user.getPassword()));
             redirect.addFlashAttribute("globalMessage", "Register successfully.");
             userService.save(user);
             return "redirect:/signupOwn";
