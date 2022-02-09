@@ -13,7 +13,41 @@ public class Hotel {
     private String nameOfHotel ;
     private String hotel_address;
     private int hotel_standard;
+    private String phone;
+    private double location_lat;
+    private double location_lng;
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public double getLocation_lat() {
+        return location_lat;
+    }
+
+    public void setLocation_lat(double location_lat) {
+        this.location_lat = location_lat;
+    }
+
+    public double getLocation_lng() {
+        return location_lng;
+    }
+
+    public void setLocation_lng(double location_lng) {
+        this.location_lng = location_lng;
+    }
+
+    public List<Hotel_Preview_Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Hotel_Preview_Image> images) {
+        this.images = images;
+    }
 
     public Hotel() {
     }
