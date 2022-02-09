@@ -1,6 +1,7 @@
 package com.example.bookinghotel.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,15 +17,15 @@ public class Room extends AbstractEntity implements Serializable {
     @Column(name = "price_per_night")
     private Double pricePerNight;
     @Column(name = "total_of_bedroom")
-    private Byte totalOfBedroom;
+    private int totalOfBedroom;
     @Column(name = "total_of_bathroom")
-    private Byte totalOfBathroom;
+    private int totalOfBathroom;
     @Column(name = "cancelled", nullable = false)
     private Boolean cancelled = false;
     private Boolean status = true;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "room")
-    private List<RoomImage> roomImages;
+//    @OneToMany(orphanRemoval = true, mappedBy = "room")
+//    private List<RoomImage> roomImages;
 
     @OneToMany(mappedBy = "room")
     @JsonIgnore
@@ -43,11 +44,46 @@ public class Room extends AbstractEntity implements Serializable {
     private Discount discount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "property_type", nullable = false, updatable = false)
+    @JoinColumn(name = "property_type",nullable = false, updatable = false)
     private PropertyType propertyType;
 
     @Transient
     private  Object avgRatting;
+
+    @Transient
+    MultipartFile image;
+
+
+    @Column(nullable = false)
+    private String imgSrc3;
+
+    public Room(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public Room() {
+
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
+    }
+
+
+
+    public String getImgSrc3() {
+        return imgSrc3;
+    }
+
+    public void setImgSrc3(String imgSrc3) {
+        this.imgSrc3 = imgSrc3;
+    }
+
+
 
     public Object getAvgRatting() {
         return avgRatting;
@@ -89,19 +125,19 @@ public class Room extends AbstractEntity implements Serializable {
         this.pricePerNight = pricePerNight;
     }
 
-    public Byte getTotalOfBedroom() {
+    public int getTotalOfBedroom() {
         return totalOfBedroom;
     }
 
-    public void setTotalOfBedroom(Byte totalOfBedroom) {
+    public void setTotalOfBedroom(int totalOfBedroom) {
         this.totalOfBedroom = totalOfBedroom;
     }
 
-    public Byte getTotalOfBathroom() {
+    public int getTotalOfBathroom() {
         return totalOfBathroom;
     }
 
-    public void setTotalOfBathroom(Byte totalOfBathroom) {
+    public void setTotalOfBathroom(int totalOfBathroom) {
         this.totalOfBathroom = totalOfBathroom;
     }
 
@@ -141,13 +177,13 @@ public class Room extends AbstractEntity implements Serializable {
         this.propertyType = propertyType;
     }
 
-    public List<RoomImage> getRoomImages() {
-        return roomImages;
-    }
-
-    public void setRoomImages(List<RoomImage> roomImages) {
-        this.roomImages = roomImages;
-    }
+//    public List<RoomImage> getRoomImages() {
+//        return roomImages;
+//    }
+//
+//    public void setRoomImages(List<RoomImage> roomImages) {
+//        this.roomImages = roomImages;
+//    }
 
     public List<Booking> getBookings() {
         return bookings;
