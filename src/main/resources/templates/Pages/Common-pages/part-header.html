@@ -87,11 +87,11 @@ search-hotels.html & book-now -->
         <!--khi zoom trinh duyet den' gioi han. nho nhat' thi` se~ cho phep' trôi xuống dưới    -->
         <div id="left-header">
             <!--neu load tu` home page thi ghi day du thu* muc ngoai`-->
-            <!--<img src="../img/header-footer/header_logo.png" width="150"/>-->
+            <!--<img src="img/header-footer/header_logo.png" width="150"/>-->
             <!--<span style="color: white">Mạng đặt phòng khách sạn Online</span>-->
 
             <a th:href="@{/}" target="_self" title="Về trang chủ">
-                <img src="../img/header-footer/logo.png" width="110px" />
+                <img src="img/header-footer/logo.png" width="110px" />
             </a>
             <span>Mạng đặt phòng khách sạn Online</span>
 
@@ -102,7 +102,7 @@ search-hotels.html & book-now -->
                 <a th:href="@{/download-apps}" target="_self" style="color: black" title="Tải ứng dụng YOY">
                     <!-- trang chu co rat nhieu the a => ko the cai thuoc tinh' color white cho tung` the -->
                     <!-- khi doi ten file, se~ tim` ra cac dong` lenh dang cai` co lien quan, chinh sua xong thi` ra ngoai folder doi ten -->
-                    <img src="../img/header-footer/mobile-icon.png" height="40px" />
+                    <img src="img/header-footer/mobile-icon.png" height="40px" />
                     <span style="margin-right: 10px">Download App </span>
                 </a>
             </div>
@@ -168,18 +168,18 @@ search-hotels.html & book-now -->
             </div>
 
             <div style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">
-                <img id="language" src="../img/header-footer/flagvn_thumbnail.png" onclick="var $src = $(this).attr('src');
-                            if ($src == '../img/header-footer/flagvn_thumbnail.png'){
-                                $(this).attr('src','../img/header-footer/flageng_thumbnail.png');
+                <img id="language" src="img/header-footer/flagvn_thumbnail.png" onclick="var $src = $(this).attr('src');
+                            if ($src == 'img/header-footer/flagvn_thumbnail.png'){
+                                $(this).attr('src','img/header-footer/flageng_thumbnail.png');
                                 } else {
-                                $(this).attr('src','../img/header-footer/flagvn_thumbnail.png');
+                                $(this).attr('src','img/header-footer/flagvn_thumbnail.png');
                             }" style="margin-right: 15px; " width="32px" height="24px" title="Chọn ngôn ngữ" />
             </div>
 
             <!--them style="float: left", doi luc xay ra loi khi refresh trang-->
             <a th:href="@{/user-24h}" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
                style="color: white; float: left">
-                <img src="../img/header-footer/24h_white.png" />
+                <img src="img/header-footer/24h_white.png" />
             </a>
         </div>
     </div>

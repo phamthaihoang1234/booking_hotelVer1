@@ -67,26 +67,26 @@ body.disabled-onepage-scroll .onepage-wrapper section {
 }
 
 .main section.page1 {
-    background: url(../img/download-apps/pic-mobileapps1.jpg) no-repeat;
+    background: url(img/download-apps/pic-mobileapps1.jpg) no-repeat;
     /*http://stackoverflow.com/questions/9262861/css-background-image-to-fit-width-height-should-auto-scale-in-proportion */
     background-position: center center;
     background-size: cover;
 }
 
 .main section.page2 {
-    background: url(../img/download-apps/pic-mobileapps2.jpg) no-repeat;
+    background: url(img/download-apps/pic-mobileapps2.jpg) no-repeat;
     background-position: center center;
     background-size: cover;
 }
 
 .main section.page3 {
-    background: url(../img/download-apps/pic-mobileapps3.jpg) no-repeat;
+    background: url(img/download-apps/pic-mobileapps3.jpg) no-repeat;
     background-position: center center;
     background-size: cover;
 }
 
 .main section.page4 {
-    background: url(../img/download-apps/pic-mobileapps4.jpg) no-repeat;
+    background: url(img/download-apps/pic-mobileapps4.jpg) no-repeat;
     background-position: center center;
     background-size: cover;
 }

@@ -1,6 +1,4 @@
-/**
- * Created by Group6 on 03/01/2016.
- */
+
 var refreshPage = function () {
     $('#page-1').fadeOut();
     $('#page-1').fadeIn();
@@ -10,8 +8,6 @@ var refreshPage = function () {
 };
 // các input & button của nav
 $(document).ready(function () {
-    $('#header').load("/header");
-    $('#footer').load("/footer");
     //nhom' #search-locations
     $('#search-locations').hover(function () {
         //var inputval = $('#autocomplete').val();
@@ -438,8 +434,8 @@ $(document).ready(function () {
         } else {
             alert("Sorry, your browser does not support web storage...");
         }
-        //hoac window.open("/searchHotel","_self");
-        //window.location = '/room_booking';
+        //hoac window.open("search-hotels.html","_self");
+        //window.location = 'room-bookings.html';
         //return false;
     });
 
