@@ -2678,74 +2678,13 @@ search-hotels.html & book-now -->
             </div>
 
             <div id="signup-signin" style="float: left; margin-right: 5px; margin-left: 10px">
-                <!--khi thoat form ma` ko dung` &time thi so lieu van con luu (luc nay form dag an? chu' chua thoat-->
-                <!--=> so lieu van~ con` luu lai)-->
-                <!--http://stackoverflow.com/questions/15827262/how-to-reset-form-body-in-bootstrap-modal-box-->
 
-<!--                display name-->
-<!--                <h3 th:if="${#authorization.expression('isAuthenticated()')}">-->
-<!--                    <div id="loaiphong" class="inner-addon left-addon" style="float: left">-->
-<!--                        <i class="material-icons" style="font-size: 22px; color: rgb(220,30,40)">group_add</i>-->
-<!--                        <select class="form-control">-->
-<!--                            <option sec:authorize="hasRole('USER')"><a  th:href="@{/manageHotels}">MANAGE HOTEL</a></option>-->
-<!--                            <option selected><span sec:authentication="name" class="categories" ></span></option>-->
-<!--                            <option><a th:href="@{/logout}">ĐĂNG XUẤT</a></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-
-<!--                </h3>-->
-
-<!--                display name-->
-<!--                <h3 th:if="${#authorization.expression('isAuthenticated()')}">-->
-<!--                    <div class="header_search-select">-->
-<!--                    <span class="header_search-select-label" sec:authentication="name"></span>-->
-<!--                    <i class="header_search-select-icon fas fa-angle-down"></i>-->
-
-<!--                    <ul class="header_search-option">-->
-<!--                        <li class="header_search-option-item">-->
-<!--                            <span sec:authorize="hasRole('USER')"><a th:href="@{/manageHotels}">MANAGE HOTEL</a></span>-->
-<!--                        </li>-->
-
-<!--                        <li class="header_search-option-item">-->
-<!--                            <span><a th:href="@{/logout}">ĐĂNG XUẤT</a></span>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-
-<!--                    </div>-->
-
-<!--                </h3>-->
-
-
-<!--                    <div class="dropdown" style="float: left;" th:if="${#authorization.expression('isAuthenticated()')}">-->
-<!--                        <button class="btn btn-default dropdown-toggle mybtn-style1"  type="button" data-toggle="dropdown">-->
-<!--                            &lt;!&ndash;<span class="glyphicon glyphicon-search"></span>&ndash;&gt;-->
-
-<!--                            <span class="caret" sec:authentication="name"></span>-->
-<!--                        </button>-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li style="line-height: 30px">-->
-<!--                                <span sec:authorize="hasRole('USER')"><a th:href="@{/manageHotels}">MANAGE HOTEL</a></span>-->
-<!--                            </li>-->
-
-
-<!--                            <li>-->
-<!--                                <span><a th:href="@{/logout}">ĐĂNG XUẤT</a></span>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
             </div>
 
 
 
 
 
-                <!--                Modal register-->
-<!--                <a  th:href="@{/manageHotel}">MANAGE HOTEL</a>-->
-<!--                <th:block th:if="${#authorization.expression('isAuthenticated()')}">-->
-<!--                    <li sec:authorize="hasRole('USER')"><a  th:href="@{/manageHotels}">MANAGE HOTEL</a></li>-->
-<!--                </th:block>-->
-
-<!--                <a  th:href="@{/manageHotels}">MANAGE HOTEL</a>-->
 
                 <th:block th:if="${#authorization.expression('isAnonymous()')}">
                     <span>&nbsp;|&nbsp;</span>
