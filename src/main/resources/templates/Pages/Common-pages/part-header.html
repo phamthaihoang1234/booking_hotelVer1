@@ -26,7 +26,6 @@
     <script src="/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
     <script src="/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <style>
-
         header {
             /*height: 65px;*/
             width: 100%;
@@ -77,7 +76,7 @@
             float: left;
             margin-right: 10px;
             /*display: inline-flex; bi xoa' khi load tu` home page*/
-            display: none;
+            /*display: none;*/
         }
 
         .dropdown-menu a {
@@ -1744,6 +1743,7 @@
 
 
 
+
         //http://www.w3schools.com/jquery/css_scrolltop.asp
         // http://stackoverflow.com/questions/28452235/make-a-nav-bar-stick-to-the-top-when-scrolling-with-css
         // phai them 1 class de chinh? lai margin left (neu' div nam` ben phai')
@@ -2641,7 +2641,7 @@ search-hotels.html & book-now -->
                 </a>
             </div>
 
-            <div id="welcome" style="padding-left: 10px">
+            <div id="welcome" style="padding-left: 10px" th:if="${#authorization.expression('isAuthenticated()')}">
                 <i class="material-icons" style="float: left; margin-top: 15px; font-size: 30px">
                     supervisor_account
                 </i>
@@ -2649,29 +2649,25 @@ search-hotels.html & book-now -->
                 <div class="dropdown" style="float: left;">
                     <button class="btn btn-default dropdown-toggle mybtn-style1" type="button" data-toggle="dropdown">
                         <!--<span class="glyphicon glyphicon-search"></span>-->
-                        Xin chào Group 6
-                        <span class="caret"></span>
+
+                        <span class="caret" sec:authentication="name"></span>
                     </button>
                     <ul class="dropdown-menu">
                         <li style="line-height: 30px">
-                            <a onclick="alert('Đang cập nhật...')">
+                            <a >
                                 <i class="material-icons" style="color: rgb(166, 166, 166)">info</i>
                                 <span>Thông tin tài khoản</span>
                             </a>
                         </li>
                         <li>
-                            <a onclick="alert('Đang cập nhật...')">
+                            <a >
                                 <i class="material-icons" style="color: rgb(166, 166, 166)">card_travel</i>
-                                <span>Các chuyến đi đã lưu</span>
+                                <span sec:authorize="hasRole('USER')"><a th:href="@{/manageHotels}">manage hotel</a></span>
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a class="container-fluid"
-                               onclick="
-//                                  alert('ĐÃ ĐĂNG XUẤT');
-                                    localStorage.check_login = 'false';
-                                    history.go(0); ">
+                            <a class="container-fluid" th:href="@{/logout}">
                                 <span style="float: left">Đăng xuất</span>
                                 <i class="fa fa-sign-out"
                                    style="font-size: 20px; float: right; color: rgb(166, 166, 166)"></i>
@@ -2685,19 +2681,77 @@ search-hotels.html & book-now -->
                 <!--khi thoat form ma` ko dung` &time thi so lieu van con luu (luc nay form dag an? chu' chua thoat-->
                 <!--=> so lieu van~ con` luu lai)-->
                 <!--http://stackoverflow.com/questions/15827262/how-to-reset-form-body-in-bootstrap-modal-box-->
-                <h3 th:if="${#authorization.expression('isAuthenticated()')}">
-                    Wellcome! <span sec:authentication="name" class="categories" ></span>
-                </h3>
+
+<!--                display name-->
+<!--                <h3 th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                    <div id="loaiphong" class="inner-addon left-addon" style="float: left">-->
+<!--                        <i class="material-icons" style="font-size: 22px; color: rgb(220,30,40)">group_add</i>-->
+<!--                        <select class="form-control">-->
+<!--                            <option sec:authorize="hasRole('USER')"><a  th:href="@{/manageHotels}">MANAGE HOTEL</a></option>-->
+<!--                            <option selected><span sec:authentication="name" class="categories" ></span></option>-->
+<!--                            <option><a th:href="@{/logout}">ĐĂNG XUẤT</a></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+
+<!--                </h3>-->
+
+<!--                display name-->
+<!--                <h3 th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                    <div class="header_search-select">-->
+<!--                    <span class="header_search-select-label" sec:authentication="name"></span>-->
+<!--                    <i class="header_search-select-icon fas fa-angle-down"></i>-->
+
+<!--                    <ul class="header_search-option">-->
+<!--                        <li class="header_search-option-item">-->
+<!--                            <span sec:authorize="hasRole('USER')"><a th:href="@{/manageHotels}">MANAGE HOTEL</a></span>-->
+<!--                        </li>-->
+
+<!--                        <li class="header_search-option-item">-->
+<!--                            <span><a th:href="@{/logout}">ĐĂNG XUẤT</a></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+
+<!--                    </div>-->
+
+<!--                </h3>-->
+
+
+<!--                    <div class="dropdown" style="float: left;" th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                        <button class="btn btn-default dropdown-toggle mybtn-style1"  type="button" data-toggle="dropdown">-->
+<!--                            &lt;!&ndash;<span class="glyphicon glyphicon-search"></span>&ndash;&gt;-->
+
+<!--                            <span class="caret" sec:authentication="name"></span>-->
+<!--                        </button>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li style="line-height: 30px">-->
+<!--                                <span sec:authorize="hasRole('USER')"><a th:href="@{/manageHotels}">MANAGE HOTEL</a></span>-->
+<!--                            </li>-->
+
+
+<!--                            <li>-->
+<!--                                <span><a th:href="@{/logout}">ĐĂNG XUẤT</a></span>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+            </div>
+
+
+
+
 
                 <!--                Modal register-->
 <!--                <a  th:href="@{/manageHotel}">MANAGE HOTEL</a>-->
-                <th:block th:if="${#authorization.expression('isAuthenticated()')}">
-                    <li sec:authorize="hasRole('USER')"><a  th:href="@{/manageHotels}">MANAGE HOTEL</a></li>
-                </th:block>
+<!--                <th:block th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                    <li sec:authorize="hasRole('USER')"><a  th:href="@{/manageHotels}">MANAGE HOTEL</a></li>-->
+<!--                </th:block>-->
 
 <!--                <a  th:href="@{/manageHotels}">MANAGE HOTEL</a>-->
-                <span>&nbsp;|&nbsp;</span>
-                <a id="myBtn" th:href="@{/signup}" >THAM GIA</a>
+
+                <th:block th:if="${#authorization.expression('isAnonymous()')}">
+                    <span>&nbsp;|&nbsp;</span>
+                    <a id="myBtn" th:href="@{/signup}" >THAM GIA</a>
+                </th:block>
+
 <!--                <a href="#editEmployeeModal"  class="edit" data-toggle="modal" >THAM GIA</a>-->
 
                 <div id="myModal" class="modal">
@@ -2795,13 +2849,29 @@ search-hotels.html & book-now -->
 
 
 
-                <span>&nbsp;|&nbsp;</span>
+
+
+
 
                 <!--                Modal login-->
-
-                <a th:href="@{/login}"
-                    style="margin-right: 10px"
+                <th:block th:if="${#authorization.expression('isAnonymous()')}">
+                    <span>&nbsp;|&nbsp;</span>
+                    <a th:href="@{/login}"
+                       style="margin-right: 10px"
                     >ĐĂNG NHẬP</a>
+                </th:block>
+
+<!--                <th:block th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                    <a class="btn btn-success nBtn"  th:href="@{/logout}">Logout</a>-->
+<!--                </th:block>-->
+
+<!--                <th:block th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                    <a th:href="@{/logout}"-->
+<!--                       style="margin-right: 10px"-->
+<!--                    >ĐĂNG XUẤT</a>-->
+<!--                </th:block>-->
+
+
             </div>
 <!--            <div>-->
 <!--                <th:block th:if="${#authorization.expression('isAuthenticated()')}">-->

@@ -29,7 +29,7 @@ public class HomePage {
     @GetMapping("/header")
     public String getHeader(){
 
-        return "Pages/Common-pages/part-header";
+        return "Pages/Common-pages/part-headers";
 
     }
 
