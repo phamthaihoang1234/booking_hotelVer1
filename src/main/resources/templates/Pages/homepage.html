@@ -354,88 +354,14 @@ Tab (toi') nguoc lai thi` Shift + Tab
         </div>
     </nav>
 
-    <div id="center">
+    <div id="center" style="position: relative">
         <!--<div class="container-fluid">-->
-        <div id="booking">
-            <!-- neu dung` Span => ko the xac dinh height theo % -->
-            <div id="booking_slogan">
-                Kỳ nghỉ thú vị tại 43 tỉnh, thành phố</br>
-                với trên 1000 khách sạn
-            </div> <!--  style="font-size: 30px" -->
-            <div id="search_form">
-                <!-- height nay` = height cua booking (400) - booking_slogan (75) + le? do co cai` padding, margin
-                zoom to len de thay' ro~
-                -->
-                <div style="background-color: black; opacity: 0.3; width: 100%; height: 328px; position: absolute; border-radius: 5px"></div>
-
-                <form action="/searchHotel" method="get" style="position: absolute; padding: 15px">
-                    <div id="search-locations">
-                        <img src="img/homepage/Delete-25.png" width="16px"
-                             style="position: absolute; margin-left: 405px; margin-top: 14px; display: none"/>
-                        <!--<input class="form-control" id="focusedInput" type="search" value="" placeholder="Nhập tên thành phố, khu vực, khách sạn ..." size="100%" style="height:45px">-->
-                        <!--http://designshack.net/articles/javascript/create-a-simple-autocomplete-with-html5-jquery/-->
-                        <input class="form-control biginput" name="locations" id="autocomplete" type="search"
-                               required="true" placeholder="Nhập tên thành phố, khu vực, khách sạn ..."
-                               style="height:45px">
-                    </div>
-                    <!-- dung' ra phai cho input ben tren cho vao Table ngay tu` dau (dat ve` sau bi. nhay) -->
-                    <div style="height: 160px">
-                        <!-- cai` height cho table thi` div TIM KIEM ben duoi' van~ bi. float -->
-                        <table class="table borderless">
-                            <!-- them 1 class thu'2 borderless, border="1" de xem su* chinh' xac khi chia khung -->
-                            <tr style="color: white">
-                                <td>
-                                    <h5>Nhận phòng: </h5> <!-- khi cai label trong bootstrap => tu* dong bold -->
-                                    <input type="date" class="form-control" id="datepicker1" style="width: 100%">
-                                </td>
-                                <!-- chi lam 2 table rat' kho chinh? phan padding cua? icon_cal, ben trong input -->
-                                <td>
-                                    <h5>Trả phòng: </h5><!-- khi cai label trong bootstrap => tu* dong bold -->
-                                    <input type="date" class="form-control" id="datepicker2" style="width: 100%">
-                                </td>
-                            </tr>
-                            <tr> <!-- dang bi. 1 border trang' ben duoi' -->
-                                <td colspan="2" style="color: white">
-                                    <div id="loaiphong" style="margin-top: 4px; ">
-                                        <span style="width: 30%; float: left; text-align: right"> Loại phòng: &nbsp </span>
-                                        <select style="width: 70%; float: left; width: 200px" class="form-control">
-                                            <option>1 phòng (1 người lớn)</option>
-                                            <option selected>1 phòng (2 người lớn)</option>
-                                            <option>lựa chọn khác ...</option>
-                                        </select>
-                                    </div>
-                                    <div id="loaiphong-khac" style="margin-top: 4px; display: none">
-                                        <!--toi da 6 phong` & 18 khach'-->
-                                        <h5>Khách:</h5>
-                                        <!--nut button van kiem tra required duoc nhu*ng ko show tooltip (mac du` dang hide)-->
-                                        <input class="form-control" type="number" name="guest" min="1" max="18"
-                                               style="width: 70px"/>
-                                        <h5>Phòng:</h5>
-                                        <input class="form-control" type="number" name="room" min="1" max="6"
-                                               style="width: 70px"/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <!--http://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=icons
-                        http://www.tutorialspoint.com/bootstrap/bootstrap_glyphicons.htm -->
-                    <!--chua biet cach' add icon <input type="submit" class="btn mybtn-style1" value="TÌM KIẾM" />-->
-                    <div style="margin: auto; text-align: center">
-                        <button type="submit" class="btn mybtn-style1" id="booking_form_search">
-                            <!--dang bi anh huong khi show select lua chon khac-->
-                            <!--<span class="glyphicon glyphicon-search"></span>-->
-                            TÌM KIẾM
-                        </button>
-                    </div>
-                    <!-- dung` span: ko ho~ tro* width: 100% hoac margin: 0 auto -->
-                    <div style="color: white; text-align: center; width: 100%; height: 35px; line-height: 35px">Đặt bây
-                        giờ. Thanh toán sau tại khách sạn.
-                    </div>
-                </form>
-            </div>
+        <div id="booking_slogan" style="position:absolute;left: 35%">
+            Kỳ nghỉ thú vị tại 43 tỉnh, thành phố</br>
+            với trên 1000 khách sạn
+            <div style="text-align: center;"><a class="btn btn-danger">Tìm Khách Sạn ngay</a></div>
         </div>
+
 
         <img src="img/homepage/Center_1440x860.jpg" width="100%" height="100%"/>
         <!--</div>-->

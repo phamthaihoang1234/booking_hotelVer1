@@ -108,7 +108,7 @@ search-hotels.html & book-now -->
 
         <div id="right-header">
             <div style="float: left; border-right: solid thin rgb(238,238,238)">
-                <a href="download-apps.html" target="_self" style="color: black" title="Tải ứng dụng YOY">
+                <a th:href="@{download-apps}" target="_self" style="color: black" title="Tải ứng dụng YOY">
                     <!-- trang chu co rat nhieu the a => ko the cai thuoc tinh' color white cho tung` the -->
                     <!-- khi doi ten file, se~ tim` ra cac dong` lenh dang cai` co lien quan, chinh sua xong thi` ra ngoai folder doi ten -->
                     <img src="/img/header-footer/mobile-icon.png" height="40px"/>
@@ -190,7 +190,7 @@ search-hotels.html & book-now -->
             </div>
 
             <!--them style="float: left", doi luc xay ra loi khi refresh trang-->
-            <a href="modal-user/user-24h.html" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
+            <a th:href="@{/user-24h}" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
                style="color: white; float: left">
                 <img src="/img/header-footer/24h_white.png"/>
             </a>

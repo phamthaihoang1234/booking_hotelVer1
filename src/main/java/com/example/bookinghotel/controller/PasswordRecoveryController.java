@@ -103,7 +103,7 @@ public class PasswordRecoveryController {
         user.setPasswordToken(createPwsToken());
 
         userService.save(user);
-        emailService.sendAHTMLMessage(email,"Hỗ trợ lấy lại mật khẩu","http://localhost:8090/resetPasswordF/"+user.getPasswordToken(),user.getName());
+        emailService.sendAHTMLMessage(email,"Hỗ trợ lấy lại mật khẩu","http://localhost:8080/resetPasswordF/"+user.getPasswordToken(),user.getName());
         try(PrintWriter out = response.getWriter()){
 
             out.write("success");

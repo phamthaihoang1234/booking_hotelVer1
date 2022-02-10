@@ -38,10 +38,7 @@ public class HomePage {
         return "Pages/homepage";
 
     }
-    @GetMapping("/getLoginForm")
-    public String loginForm(){
-        return "/Pages/modal-user/user-login";
-    }
+
     private Model getTopReview(Model model){
         // get reviews for review table webpage
         List<WebReview> reviews1 = webReviewRepo.findTop4Comment((Pageable) PageRequest.of(0,2));
