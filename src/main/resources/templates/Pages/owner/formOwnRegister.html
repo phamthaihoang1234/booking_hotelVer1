@@ -79,7 +79,7 @@
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-input" name="password" id="password" th:field="*{password}"
+                                <input type="password" class="form-input" name="password" id="password" th:field="*{password}"
                                        placeholder="Password" required/>
                                 <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
                             </div>

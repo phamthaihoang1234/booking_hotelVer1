@@ -48,7 +48,7 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Password</label>
-                                <input class="input--style-4" type="text" th:field="*{password}" required>
+                                <input class="input--style-4" type="password" th:field="*{password}" required>
                                 <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
                             </div>
                         </div>
