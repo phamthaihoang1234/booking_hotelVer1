@@ -62,7 +62,12 @@ public class UserController {
         user.setName(user.getUsername());
 
         if (result.hasErrors()) {
-            System.out.println("vao loi nhe");
+            if(userService.findByUserName(user.getUsername()) != null){
+                model.addAttribute("errolUsername", "Username was existed");
+            }
+            if(userService.findByEmail(user.getEmail()) != null) {
+                model.addAttribute("errolEmail", "Email was existed");
+            }
             return "/Pages/modal-user/user-signup";
         }
         else if(userService.findByUserName(user.getUsername()) != null){
