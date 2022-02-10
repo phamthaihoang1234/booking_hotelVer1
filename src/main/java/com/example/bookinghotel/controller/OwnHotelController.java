@@ -95,7 +95,7 @@ public class OwnHotelController {
             //user.setPassword(passwordEncoder.encode(user.getPassword()));
             redirect.addFlashAttribute("globalMessage", "Register successfully.");
             userService.save(user);
-            return "redirect:/signup";
+            return "redirect:/signupOwn";
 
         }
 
