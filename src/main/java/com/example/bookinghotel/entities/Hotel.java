@@ -9,6 +9,16 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Boolean status = true;
+    private String nameOfHotel ;
+    private String addressOfHotel;
+
+    public String getAddressOfHotel() {
+        return addressOfHotel;
+    }
+
+    public void setAddressOfHotel(String addressOfHotel) {
+        this.addressOfHotel = addressOfHotel;
+    }
 
     public Hotel() {
     }
@@ -16,6 +26,14 @@ public class Hotel {
     public Hotel(Long id, Boolean status) {
         this.id = id;
         this.status = status;
+    }
+
+    public String getNameOfHotel() {
+        return nameOfHotel;
+    }
+
+    public void setNameOfHotel(String nameOfHotel) {
+        this.nameOfHotel = nameOfHotel;
     }
 
     public Long getId() {

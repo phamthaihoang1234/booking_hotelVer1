@@ -12,13 +12,13 @@ public interface UserService extends UserDetailsService {
 
     Optional<UserInfo> findById(Long id);
 
-    Optional<UserInfo> findByNameAndPassword(String name, String password);
-
-    Optional<UserInfo> findByEmail(String email);
+//    Optional<UserInfo> findByNameAndPassword(String name, String password);
+//
+    UserInfo findByEmail(String email);
 
     UserInfo save(UserInfo user) throws Exception;
 
-    Optional<UserInfo> findByUserName(String username);
+    UserInfo findByUserName(String username);
 
     boolean existsByUsername(String username);
 }
