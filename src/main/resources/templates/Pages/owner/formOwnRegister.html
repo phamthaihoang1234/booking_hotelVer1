@@ -73,16 +73,17 @@
                     <tr>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-input" name="password" id="password" th:field="*{password}"
-                                       placeholder="Password" required/>
-                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
+                                <input type="text" class="form-input" placeholder="Address" th:field="*{address}" required/>
+                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" />
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-input" placeholder="Address" th:field="*{address}" required/>
-                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" />
+                                <input type="text" class="form-input" name="password" id="password" th:field="*{password}"
+                                       placeholder="Password" required/>
+                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
                             </div>
+
                         </td>
                     </tr>
                 </table>
