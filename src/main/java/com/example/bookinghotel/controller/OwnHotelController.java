@@ -57,7 +57,7 @@ public class OwnHotelController {
     private String fileUpload;
 
     @PostMapping("/saveOwner")
-    public String saveInforOfOwner(@Validated @ModelAttribute("owner") UserInfo user , BindingResult result , RedirectAttributes redirect) throws Exception {
+    public String saveInforOfOwner(@Validated @ModelAttribute("owner") UserInfo user , BindingResult result , RedirectAttributes redirect, Model model) throws Exception {
 
         Role roleOwner = new Role();
         roleOwner.setName("ROLE_OWNER");
@@ -76,24 +76,26 @@ public class OwnHotelController {
         user.setActive(true);
         user.setName(user.getUsername());
 
-        System.out.println(user.getUsername());
-        System.out.println(user.getActive());
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
-        System.out.println(user.getRoles());
-        System.out.println(user.getPhoneNumber());
-        System.out.println(user.getGender());
-
-
         if (result.hasErrors()) {
             System.out.println("vao loi nhe");
+            return "/Pages/owner/formOwnRegister";
+        }
+        else if(userService.findByUserName(user.getUsername()) != null){
+            model.addAttribute("errolUsername", "Username was existed");
+            if(userService.findByEmail(user.getEmail()) != null) {
+                model.addAttribute("errolEmail", "Email was existed");
+            }
+            return "/Pages/owner/formOwnRegister";
+        }
+        else if(userService.findByEmail(user.getEmail()) != null){
+            model.addAttribute("errolEmail", "Email was existed");
             return "/Pages/owner/formOwnRegister";
         }
         else {
             //user.setPassword(passwordEncoder.encode(user.getPassword()));
             redirect.addFlashAttribute("globalMessage", "Register successfully.");
             userService.save(user);
-            return "redirect:/signupOwn";
+            return "redirect:/signup";
 
         }
 

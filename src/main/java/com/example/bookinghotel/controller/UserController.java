@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@Validated @ModelAttribute("user") UserInfo user , BindingResult result , RedirectAttributes redirect) throws Exception {
+    public String registerUser(@Validated @ModelAttribute("user") UserInfo user , BindingResult result , RedirectAttributes redirect, Model model) throws Exception {
 
 
 
@@ -61,17 +61,19 @@ public class UserController {
         user.setActive(true);
         user.setName(user.getUsername());
 
-        System.out.println(user.getUsername());
-        System.out.println(user.getActive());
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
-        System.out.println(user.getRoles());
-        System.out.println(user.getPhoneNumber());
-        System.out.println(user.getGender());
-
-
         if (result.hasErrors()) {
             System.out.println("vao loi nhe");
+            return "/Pages/modal-user/user-signup";
+        }
+        else if(userService.findByUserName(user.getUsername()) != null){
+            model.addAttribute("errolUsername", "Username was existed");
+            if(userService.findByEmail(user.getEmail()) != null) {
+                model.addAttribute("errolEmail", "Email was existed");
+            }
+            return "/Pages/modal-user/user-signup";
+        }
+        else if(userService.findByEmail(user.getEmail()) != null){
+            model.addAttribute("errolEmail", "Email was existed");
             return "/Pages/modal-user/user-signup";
         }
         else {
@@ -85,11 +87,7 @@ public class UserController {
 
     }
 
-//    @GetMapping("/register2")
-//    public String registerUser()  {
-//
-//        return "/Pages/Common-pages/part-header";
-//    }
+
 
 
 
