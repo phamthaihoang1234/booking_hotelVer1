@@ -4,57 +4,57 @@
     <meta charset="UTF-8">
     <title>YOY | search-hotels</title>
 
-    <link rel="stylesheet" href="../css/search-hotels.css">
+    <link rel="stylesheet" href="css/search-hotels.css">
     <!-- bootstrap: de y' 2 file ajax phai dat truoc maxcdn thi moi dung` duoc modal (Form)-->
     <!-- Online -->
     <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
     <!-- Offline -->
-    <link rel="stylesheet" href="../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-    <script src="../Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
-    <script src="../Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script src="Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
     <!-- Start WOWSlider.com section -->
     <!--slide-1-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine0/style.css"/>
-    <script type="text/javascript" src="../Utilities/slideshow/slideshow1/engine0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine0/style.css"/>
+    <script type="text/javascript" src="Utilities/slideshow/slideshow1/engine0/jquery.js"></script>
     <!--slide-2: tu` slide nay` tro di thi file engine cua jquery dug chung voi slide 1-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine1/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine1/style.css"/>
     <!--script type="text/javascript" src="engine1/jquery.js"></script-->
     <!--slide-3-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine2/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine2/style.css"/>
     <!--slide-4-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine3/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine3/style.css"/>
     <!--slide-5-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine4/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine4/style.css"/>
     <!--slide-6-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine5/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine5/style.css"/>
     <!--slide-7-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine6/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine6/style.css"/>
     <!--slide-8-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine7/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine7/style.css"/>
     <!--slide-9-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine8/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine8/style.css"/>
     <!--slide-10-->
-    <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow1/engine9/style.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine9/style.css"/>
     <!-- End WOWSlider.com HEAD section -->
 
     <!--nhóm js nay` phai dat phia' sau cac slide thi moi' chay duoc (co le code tren chua cai ready...)-->
     <!--autocomplete-suggestions-->
-    <link rel="stylesheet" type="text/css" media="all" href="../Utilities/autocomplete-suggestions/style.css">
+    <link rel="stylesheet" type="text/css" media="all" href="Utilities/autocomplete-suggestions/style.css">
     <!--<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>-->
-    <script type="text/javascript" src="../Utilities/autocomplete-suggestions/jquery.autocomplete.min.js"></script>
-    <script type="text/javascript" src="../Utilities/autocomplete-suggestions/locations-autocomplete.js"></script>
+    <script type="text/javascript" src="Utilities/autocomplete-suggestions/jquery.autocomplete.min.js"></script>
+    <script type="text/javascript" src="Utilities/autocomplete-suggestions/locations-autocomplete.js"></script>
 
     <!-- Put icons inside of input fields -->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!--Slider-->
-    <link rel="stylesheet" href="../Utilities/RangeSlider/jquery-ui.css">
-    <script src="../Utilities/RangeSlider/jquery-1.10.2.js"></script>
-    <script src="../Utilities/RangeSlider/jquery-ui.js"></script>
+    <link rel="stylesheet" href="Utilities/RangeSlider/jquery-ui.css">
+    <script src="Utilities/RangeSlider/jquery-1.10.2.js"></script>
+    <script src="Utilities/RangeSlider/jquery-ui.js"></script>
 
     <style>
         .ws_images img {
@@ -77,8 +77,8 @@
 
     <script>
         $(document).ready(function () {
-            $("#header").load("header-footer/part-header.html");
-            $("#footer").load("header-footer/part-footer.html");
+            $("#header").load("header");
+            $("#footer").load("footer");
             //lay' ten locations da~ search o? trang homepage (neu co)
             $('#autocomplete').val(localStorage.index_tmp_name);
             $('.name-of-location').text(localStorage.index_tmp_name);
@@ -127,7 +127,7 @@
                 <div class="inner-addon left-addon" style="float: left">
                     <div id="search-locations">
                         <i class="fa fa-map-marker" style="font-size: 22px; color: rgb(220,30,40)"></i>
-                        <img src="../img/homepage/Delete-25.png" width="16px"
+                        <img src="img/homepage/Delete-25.png" width="16px"
                              style="position: absolute; margin-left: 327px; margin-top: 15px; display: none"/>
                         <input class="form-control biginput" name="locations" id="autocomplete" type="search"
                                value="Đà Nẵng"
@@ -385,7 +385,7 @@
                     <!-- dung` Bootstrap table: xuat hien ko chuan? = Bootstrap Grid -->
                     <div class="row" style="color: white">
                         <div class="col-sm-6">
-                            <!--<img class="size-of-img" src="../img/search-hotels/vanda1.png" />-->
+                            <!--<img class="size-of-img" src="img/search-hotels/vanda1.png" />-->
                             <!--khi click thang? vao buc anh thi` xem trinh` chieu' + dat phong`-->
                             <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
 
@@ -427,23 +427,23 @@
                                         <li>
                                             <!-- dung jQuery add toan bo href='room-bookings.html' vao` .ws_images a -->
                                             <a>
-                                                <img src="../Utilities/slideshow/slideshow1/data0/images/room01.jpg"
+                                                <img src="Utilities/slideshow/slideshow1/data0/images/room01.jpg"
                                                      alt="room01" title="room01" id="wows0_0"/>
                                             </a>
                                         </li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data0/images/room02.jpg"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data0/images/room02.jpg"
                                                     alt="room02" title="room02" id="wows0_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data0/images/room03.jpg"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data0/images/room03.jpg"
                                                     alt="room03" title="room03" id="wows0_2"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data0/images/room04.jpg"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data0/images/room04.jpg"
                                                     alt="room04" title="room04" id="wows0_3"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data0/images/hanhlang01.jpg"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data0/images/hanhlang01.jpg"
                                                     alt="hanhlang01" title="hanhlang01" id="wows0_4"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data0/images/hanhlang02.jpg"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data0/images/hanhlang02.jpg"
                                                     alt="hanhlang02" title="hanhlang02" id="wows0_5"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data0/images/nhahang01.jpg"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data0/images/nhahang01.jpg"
                                                     alt="nhahang01" title="nhahang01" id="wows0_6"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data0/images/nhahang02.jpg"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data0/images/nhahang02.jpg"
                                                     alt="nhahang02" title="nhahang02" id="wows0_7"/></a></li>
                                     </ul>
                                 </div>
@@ -456,18 +456,18 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine0/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine0/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine0/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine0/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
                         </div>
 
                         <div class="col-sm-6">
-                            <!--<img src="../img/search-hotels/room.png" />-->
+                            <!--<img src="img/search-hotels/room.png" />-->
                             <div id="wowslider-container1">
                                 <div>
                                     <div>
-                                        <img src="../img/search-hotels/Bookmark-100.png" width="70"
+                                        <img src="img/search-hotels/Bookmark-100.png" width="70"
                                              class="badge-outer-2"/>
                                         <div class="badge-inner-2">50% Off</div>
                                     </div>
@@ -496,11 +496,11 @@
                                 <!--<div id="wowslider-container1">-->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data1/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data1/images/1.jpg" alt="1"
                                                     title="1" id="wows1_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data1/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data1/images/2.jpg" alt="2"
                                                     title="2" id="wows1_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data1/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data1/images/3.jpg" alt="3"
                                                     title="3" id="wows1_2"/></a></li>
                                     </ul>
                                 </div>
@@ -510,16 +510,16 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine1/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine1/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine1/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine1/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
                         </div>
                     </div>
 
                     <div class="row" style="color: white">
                         <div class="col-sm-6">
-                            <!--<img src="../img/search-hotels/room.png" />-->
+                            <!--<img src="img/search-hotels/room.png" />-->
                             <div id="wowslider-container2">
                                 <div>
                                     <div>
@@ -548,11 +548,11 @@
                                 <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data2/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data2/images/1.jpg" alt="1"
                                                     title="1" id="wows2_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data2/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data2/images/2.jpg" alt="2"
                                                     title="2" id="wows2_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data2/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data2/images/3.jpg" alt="3"
                                                     title="3" id="wows2_2"/></a></li>
                                     </ul>
                                 </div>
@@ -562,14 +562,14 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine2/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine2/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine2/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine2/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
 
                         </div>
                         <div class="col-sm-6">
-                            <!--<img src="../img/search-hotels/room.png" />-->
+                            <!--<img src="img/search-hotels/room.png" />-->
                             <div id="wowslider-container3">
                                 <div>
                                     <div>
@@ -598,11 +598,11 @@
                                 <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data3/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data3/images/1.jpg" alt="1"
                                                     title="1" id="wows3_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data3/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data3/images/2.jpg" alt="2"
                                                     title="2" id="wows3_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data3/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data3/images/3.jpg" alt="3"
                                                     title="3" id="wows3_2"/></a></li>
                                     </ul>
                                 </div>
@@ -612,16 +612,16 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine3/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine3/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine3/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine3/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
                         </div>
                     </div>
 
                     <div class="row" style="color: white">
                         <div class="col-sm-6">
-                            <!--<img src="../img/search-hotels/room.png" />-->
+                            <!--<img src="img/search-hotels/room.png" />-->
                             <div id="wowslider-container4">
                                 <div>
                                     <div>
@@ -652,11 +652,11 @@
                                 <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data4/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data4/images/1.jpg" alt="1"
                                                     title="1" id="wows4_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data4/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data4/images/2.jpg" alt="2"
                                                     title="2" id="wows4_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data4/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data4/images/3.jpg" alt="3"
                                                     title="3" id="wows4_2"/></a></li>
                                     </ul>
                                 </div>
@@ -666,13 +666,13 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine4/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine4/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine4/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine4/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
                         </div>
                         <div class="col-sm-6">
-                            <!--<img src="../img/search-hotels/room.png" />-->
+                            <!--<img src="img/search-hotels/room.png" />-->
                             <div id="wowslider-container5">
                                 <div>
                                     <!--<div>-->
@@ -702,11 +702,11 @@
                                 <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data5/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data5/images/1.jpg" alt="1"
                                                     title="1" id="wows5_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data5/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data5/images/2.jpg" alt="2"
                                                     title="2" id="wows5_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data5/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data5/images/3.jpg" alt="3"
                                                     title="3" id="wows5_2"/></a></li>
                                     </ul>
                                 </div>
@@ -716,16 +716,16 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine5/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine5/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine5/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine5/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
                         </div>
                     </div>
 
                     <div class="row" style="color: white">
                         <div class="col-sm-6">
-                            <!--<img src="../img/search-hotels/room.png" />-->
+                            <!--<img src="img/search-hotels/room.png" />-->
                             <div id="wowslider-container6">
                                 <div>
                                     <!--<div>-->
@@ -755,11 +755,11 @@
                                 <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data6/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data6/images/1.jpg" alt="1"
                                                     title="1" id="wows6_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data6/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data6/images/2.jpg" alt="2"
                                                     title="2" id="wows6_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data6/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data6/images/3.jpg" alt="3"
                                                     title="3" id="wows6_2"/></a></li>
                                     </ul>
                                 </div>
@@ -769,17 +769,17 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine6/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine6/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine6/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine6/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
                         </div>
                         <div class="col-sm-6">
-                            <!--<img src="../img/search-hotels/room.png" />-->
+                            <!--<img src="img/search-hotels/room.png" />-->
                             <div id="wowslider-container7">
                                 <div>
                                     <div>
-                                        <img src="../img/search-hotels/Bookmark-100.png" width="70"
+                                        <img src="img/search-hotels/Bookmark-100.png" width="70"
                                              class="badge-outer-2"/>
                                         <div class="badge-inner-2">35% Off</div>
                                     </div>
@@ -806,11 +806,11 @@
                                 <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data7/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data7/images/1.jpg" alt="1"
                                                     title="1" id="wows7_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data7/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data7/images/2.jpg" alt="2"
                                                     title="2" id="wows7_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data7/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data7/images/3.jpg" alt="3"
                                                     title="3" id="wows7_2"/></a></li>
                                     </ul>
                                 </div>
@@ -820,9 +820,9 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine7/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine7/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine7/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine7/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
                         </div>
                     </div>
@@ -832,7 +832,7 @@
                 <div id="page-2" style="display: none">
                     <div class="row" style="color: white">
                         <div class="col-sm-6">
-                            <!--<img class="size-of-img" src="../img/search-hotels/vanda1.png" />-->
+                            <!--<img class="size-of-img" src="img/search-hotels/vanda1.png" />-->
                             <div id="wowslider-container8">
                                 <div>
                                     <div>
@@ -865,11 +865,11 @@
                                 <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data8/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data8/images/1.jpg" alt="1"
                                                     title="1" id="wows8_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data8/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data8/images/2.jpg" alt="2"
                                                     title="2" id="wows8_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data8/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data8/images/3.jpg" alt="3"
                                                     title="3" id="wows8_2"/></a></li>
                                     </ul>
                                 </div>
@@ -879,15 +879,15 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine8/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine8/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine8/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine8/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
 
                         </div>
 
                         <div class="col-sm-6">
-                            <!--<img src="../img/search-hotels/room.png" />-->
+                            <!--<img src="img/search-hotels/room.png" />-->
                             <div id="wowslider-container9">
                                 <div>
                                     <div>
@@ -917,11 +917,11 @@
                                 <!-- Start WOWSlider.com BODY section --> <!-- add to the <body> of your page -->
                                 <div class="ws_images">
                                     <ul>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data9/images/1.jpg" alt="1"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data9/images/1.jpg" alt="1"
                                                     title="1" id="wows9_0"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data9/images/2.jpg" alt="2"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data9/images/2.jpg" alt="2"
                                                     title="2" id="wows9_1"/></a></li>
-                                        <li><a><img src="../Utilities/slideshow/slideshow1/data9/images/3.jpg" alt="3"
+                                        <li><a><img src="Utilities/slideshow/slideshow1/data9/images/3.jpg" alt="3"
                                                     title="3" id="wows9_2"/></a></li>
                                     </ul>
                                 </div>
@@ -931,9 +931,9 @@
                                 <div class="ws_shadow"></div>
                             </div>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine9/wowslider.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine9/wowslider.js"></script>
                             <script type="text/javascript"
-                                    src="../Utilities/slideshow/slideshow1/engine9/script.js"></script>
+                                    src="Utilities/slideshow/slideshow1/engine9/script.js"></script>
                             <!-- End WOWSlider.com BODY section -->
                         </div>
                     </div>
@@ -1004,7 +1004,7 @@
                 </div>
 
                 <div style="text-align: right; margin-top: -140px">
-                    <img src="modal-user/img_audio/stay-awesome.png"/>
+                    <img src="img/img_audio/stay-awesome.png"/>
                 </div>
             </div>
         </div>
@@ -1067,7 +1067,7 @@
                 </div>
 
                 <div style="text-align: right; margin-top: -120px">
-                    <img src="modal-user/img_audio/stay-awesome.png"/>
+                    <img src="img/img_audio/stay-awesome.png"/>
                 </div>
             </div>
 
@@ -1088,11 +1088,11 @@
 
     <!-- JavaScript -->
     <!--js nay` phai dat phia' sau cac slide thi moi' chay duoc (co le code tren chua cai ready...)-->
-    <script type="text/javascript" src="../js/search-hotels.js"></script>
+    <script type="text/javascript" src="js/search-hotels.js"></script>
 
-    <script src="../Utilities/smoothscroll-for-websites-master/SmoothScroll.js"></script>
+    <script src="Utilities/smoothscroll-for-websites-master/SmoothScroll.js"></script>
 
-    <script src="../Utilities/LiveChat.js"></script>
+    <script src="Utilities/LiveChat.js"></script>
 
     <!--Form Feedback (position: fixed): https://webengage.com/ , phai dang ky', chua tach ra duoc file rieng do co' kem` id-->
     <script id="_webengage_script_tag" type="text/javascript">

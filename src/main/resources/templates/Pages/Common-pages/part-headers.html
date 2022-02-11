@@ -96,10 +96,11 @@ search-hotels.html & book-now -->
         <!--khi zoom trinh duyet den' gioi han. nho nhat' thi` se~ cho phep' trôi xuống dưới    -->
         <div id="left-header">
             <!--neu load tu` home page thi ghi day du thu* muc ngoai`-->
-            <!--<img src="header-footer/img/header_logo.png" width="150"/>-->
+            <!--<img src="img/header-footer/header_logo.png" width="150"/>-->
             <!--<span style="color: white">Mạng đặt phòng khách sạn Online</span>-->
-
-            <a href="/Pages/homepage.html" target="_self" title="Về trang chủ">
+<!--             dung code -->
+            <a th:href="@{/}" target="_self" title="Về trang chủ">
+<!--            dung code-end-->
                 <img src="/img/header-footer/logo.png" width="110px"/>
             </a>
             <span>Mạng đặt phòng khách sạn Online</span>
@@ -118,9 +119,11 @@ search-hotels.html & book-now -->
 
             <div  style="padding-left: 10px ; float: left;
             margin-right: 10px;" th:if="${#authorization.expression('isAuthenticated()')}" >
-                <i class="material-icons" style="float: left; margin-top: 15px; font-size: 30px">
-                    supervisor_account
-                </i>
+<!--                dung code-->
+<!--                <i class="material-icons" style="float: left; margin-top: 15px; font-size: 30px">-->
+<!--                    supervisor_account-->
+<!--                </i>-->
+<!--                dung code end-->
                 <!--Dropdown Divider: http://www.w3schools.com/bootstrap/bootstrap_dropdowns.asp-->
                 <div class="dropdown" style="float: left;">
                     <button class="btn btn-default dropdown-toggle mybtn-style1" type="button" data-toggle="dropdown">
@@ -181,10 +184,10 @@ search-hotels.html & book-now -->
             <div style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">
                 <img id="language" src="/img/header-footer/flagvn_thumbnail.png"
                      onclick="var $src = $(this).attr('src');
-                            if ($src == 'header-footer/img/flagvn_thumbnail.png'){
-                                $(this).attr('src','header-footer/img/flageng_thumbnail.png');
+                            if ($src == 'img/header-footer/flagvn_thumbnail.png'){
+                                $(this).attr('src','img/header-footer/flageng_thumbnail.png');
                                 } else {
-                                $(this).attr('src','header-footer/img/flagvn_thumbnail.png');
+                                $(this).attr('src','img/header-footer/flagvn_thumbnail.png');
                             }"
                      style="margin-right: 15px; " width="32px" height="24px" title="Chọn ngôn ngữ"/>
             </div>
