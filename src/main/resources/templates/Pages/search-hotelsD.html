@@ -81,18 +81,19 @@
             $("#footer").load("footer");
             //lay' ten locations da~ search o? trang homepage (neu co)
             $('#autocomplete').val(localStorage.index_tmp_name);
+
             $('.name-of-location').text(localStorage.index_tmp_name);
             $('#s-datePicker1').val(localStorage.index_tmp_checkin);
             $('#s-datePicker2').val(localStorage.index_tmp_checkout);
             $('#loaiphong select').val(localStorage.index_tmp_typeofroom);
-            $('.3-dd-noibat').fadeOut(10);
+            // $('.3-dd-noibat').fadeOut(10);
 //        neu viet theo css: $('.3-dd-noibat'+':nth-child('+ localStorage.ddnoibat + ')').fadeIn(10);
 //        http://stackoverflow.com/questions/27519457/jquery-get-nth-child-having-a-particular-class
 //        https://api.jquery.com/eq-selector/
 //        http://www.w3schools.com/jquery/jquery_ref_selectors.asp
             $('.3-dd-noibat' + ':eq(' + localStorage.ddnoibat + ')').fadeIn(10);
             //
-            $('.ws_images a').attr('href', 'room-bookings.html');
+            $('.ws_images a').attr('href', 'room-bookings');
             // sau khi load xong thi check user da~ login hay chua
             // phai them delay thi moi' kich hoat duoc localStorage + id tu` file header1
 //      se~ check + load sau khi load xong part-header1.html
