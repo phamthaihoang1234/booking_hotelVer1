@@ -359,7 +359,16 @@ Tab (toi') nguoc lai thi` Shift + Tab
         <div id="booking_slogan" style="position:absolute;left: 35%">
             Kỳ nghỉ thú vị tại 43 tỉnh, thành phố</br>
             với trên 1000 khách sạn
-            <div style="text-align: center;"><a class="btn btn-danger">Tìm Khách Sạn ngay</a></div>
+            <div style="text-align: center;">
+                <a class="btn btn-danger" th:href="@{/search_hotel_by_name}" data-toggle="modal" data-target="#theModal" onclick="
+                        $('.modal').on('hidden.bs.modal', function(){
+                            $(this).find('form')[0].reset();
+                        });
+                        ">Tìm Khách Sạn ngay</a>
+
+
+
+            </div>
         </div>
 
 
@@ -578,6 +587,12 @@ Tab (toi') nguoc lai thi` Shift + Tab
         <!--them width de noi' rong the? a khi hover vao`-->
         <span style="color: rgb(197,196,196); width: 50px" class="glyphicon glyphicon-menu-up"></span>
         <!--</a>-->
+    </div>
+    <div class="modal fade" id="theModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
     </div>
 
     <div id="footer"></div> <!-- dung` Script - load() method trang html -->

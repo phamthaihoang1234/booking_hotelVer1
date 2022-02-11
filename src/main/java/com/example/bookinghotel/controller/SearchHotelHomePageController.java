@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 // chi viet code cho homepage vao day
 @Controller
 public class SearchHotelHomePageController {
-    @GetMapping("room_booking")
+    @GetMapping("/search_hotel_by_name")
     String getRoomBooking() {
-        return "Pages/room-bookings";
+        return "Pages/search-hotelbynameD";
     }
 }
