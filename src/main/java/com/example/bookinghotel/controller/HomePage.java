@@ -50,12 +50,12 @@ public class HomePage {
 
     private Model getHotelProperty(Model model,String location,String pattern){
         // get hotel type for nav bar
-        String type1 = "Khách sạn quốc tế";
-        String type2 = "Hạng Thương Gia";
-        String type3 = "Dành Cho Cặp Đôi";
-        String type4 = "Gần Sân Bay";
-        String type5 = "Gần Ga Xe Lửa";
-        String type6 = "Cuộc Sống Về Đêm";
+        String type1 = "International hotel";
+        String type2 = "Business hotel";
+        String type3 = "Hotel for lovers";
+        String type4 = "Hotels near the airport";
+        String type5 = "Hotel near train station";
+        String type6 = "Nightlife hotel";
 
         model.addAttribute(pattern+"Type1",type1);
         model.addAttribute(pattern+"Type2",type2);
