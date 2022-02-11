@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/","login","/register").permitAll()
                 .antMatchers(HttpMethod.POST).permitAll()
                 //.antMatchers("/login").access("hasAnyRole('ROLE_USER')")
-//                .antMatchers("/carts").access("hasRole('ROLE_SELLER')")
+                .antMatchers("/manageHotels").access("hasRole('ROLE_OWNER')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
 
             //  .and().formLogin().successHandler(customSuccessHandler)

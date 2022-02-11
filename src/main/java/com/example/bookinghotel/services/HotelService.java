@@ -12,6 +12,8 @@ public interface HotelService {
 
     Hotel save(Hotel province);
 
+
+
     void delete(Long id);
 
     Optional<Hotel> findById(Long id);
