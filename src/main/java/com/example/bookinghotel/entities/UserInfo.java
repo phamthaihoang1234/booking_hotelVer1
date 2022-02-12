@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -175,4 +176,35 @@ public class UserInfo extends AbstractEntity implements Serializable {
                 ", email='" + email + '\'' +
                 '}';
     }
+    //phan dung code
+    private String passwordToken;//for password recovery
+    private String avatar;
+
+    public String getPasswordToken() {
+        return passwordToken;
+    }
+
+    public void setPasswordToken(String passwordToken) {
+        this.passwordToken = passwordToken;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<WebReview> comments;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public List<WebReview> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<WebReview> comments) {
+        this.comments = comments;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+    //phan dung code-end
 }

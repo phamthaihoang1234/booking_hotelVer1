@@ -9,7 +9,7 @@ public interface HomeService {
 
     Iterable<Room> findAll();
 
-    Iterable<Room> findAllByProvinceId(int id);
+    Iterable<Room> findAllByHotelId(long id);
 
     Iterable<Room> findAllByAddress(String add);
 

@@ -2,8 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head >
-    <meta charset="UTF-8">
-    <title></title>
+    <title>Subscribe</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap -->
+
+    <title>YOY | homepage</title>
+    <!-- stylesheets -->
+    <link type="text/css" rel="stylesheet" href="css/homepage.css"/>
+    <link rel="stylesheet" type="text/css" href="Utilities/Chico-effect.css"/>
+
     <!-- bootstrap: de y' 2 file: ajax phai dat truoc maxcdn thi moi dung` duoc modal (Form)-->
     <!-- Online -->
     <!--neu dung`: bootstrap.css (chua nen') de co the xem dc code, khi chay chinh thuc thi dung` ban min-->
@@ -11,13 +21,22 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
     <!-- Offline -->
-    <link rel="stylesheet" href="/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-    <script src="/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
-    <script src="/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script src="Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+    <!--autocomplete-suggestions-->
+    <link rel="stylesheet" type="text/css" media="all" href="Utilities/autocomplete-suggestions/style.css">
+    <!--<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>-->
+    <script type="text/javascript" src="Utilities/autocomplete-suggestions/jquery.autocomplete.min.js"></script>
+    <script type="text/javascript" src="Utilities/autocomplete-suggestions/locations-autocomplete.js"></script>
+
     <!--Google Action Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Font Awesome Web Application Icons-->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
 
     <style>
         header {
@@ -84,10 +103,11 @@ search-hotels.html & book-now -->
         <!--khi zoom trinh duyet den' gioi han. nho nhat' thi` se~ cho phep' trôi xuống dưới    -->
         <div id="left-header">
             <!--neu load tu` home page thi ghi day du thu* muc ngoai`-->
-            <!--<img src="header-footer/img/header_logo.png" width="150"/>-->
+            <!--<img src="img/header-footer/header_logo.png" width="150"/>-->
             <!--<span style="color: white">Mạng đặt phòng khách sạn Online</span>-->
-
-            <a href="/Pages/homepage.html" target="_self" title="Về trang chủ">
+<!--             dung code -->
+            <a th:href="@{/}" target="_self" title="Về trang chủ">
+<!--            dung code-end-->
                 <img src="/img/header-footer/logo.png" width="110px"/>
             </a>
             <span>Mạng đặt phòng khách sạn Online</span>
@@ -96,7 +116,7 @@ search-hotels.html & book-now -->
 
         <div id="right-header">
             <div style="float: left; border-right: solid thin rgb(238,238,238)">
-                <a href="download-apps.html" target="_self" style="color: black" title="Tải ứng dụng YOY">
+                <a th:href="@{download-apps}" target="_self" style="color: black" title="Tải ứng dụng YOY">
                     <!-- trang chu co rat nhieu the a => ko the cai thuoc tinh' color white cho tung` the -->
                     <!-- khi doi ten file, se~ tim` ra cac dong` lenh dang cai` co lien quan, chinh sua xong thi` ra ngoai folder doi ten -->
                     <img src="/img/header-footer/mobile-icon.png" height="40px"/>
@@ -106,9 +126,11 @@ search-hotels.html & book-now -->
 
             <div  style="padding-left: 10px ; float: left;
             margin-right: 10px;" th:if="${#authorization.expression('isAuthenticated()')}" >
-                <i class="material-icons" style="float: left; margin-top: 15px; font-size: 30px">
-                    supervisor_account
-                </i>
+<!--                dung code-->
+<!--                <i class="material-icons" style="float: left; margin-top: 15px; font-size: 30px">-->
+<!--                    supervisor_account-->
+<!--                </i>-->
+<!--                dung code end-->
                 <!--Dropdown Divider: http://www.w3schools.com/bootstrap/bootstrap_dropdowns.asp-->
                 <div class="dropdown" style="float: left;">
                     <button class="btn btn-default dropdown-toggle mybtn-style1" type="button" data-toggle="dropdown">
@@ -169,16 +191,16 @@ search-hotels.html & book-now -->
             <div style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">
                 <img id="language" src="/img/header-footer/flagvn_thumbnail.png"
                      onclick="var $src = $(this).attr('src');
-                            if ($src == 'header-footer/img/flagvn_thumbnail.png'){
-                                $(this).attr('src','header-footer/img/flageng_thumbnail.png');
+                            if ($src == 'img/header-footer/flagvn_thumbnail.png'){
+                                $(this).attr('src','img/header-footer/flageng_thumbnail.png');
                                 } else {
-                                $(this).attr('src','header-footer/img/flagvn_thumbnail.png');
+                                $(this).attr('src','img/header-footer/flagvn_thumbnail.png');
                             }"
                      style="margin-right: 15px; " width="32px" height="24px" title="Chọn ngôn ngữ"/>
             </div>
 
             <!--them style="float: left", doi luc xay ra loi khi refresh trang-->
-            <a href="modal-user/user-24h.html" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
+            <a th:href="@{/user-24h}" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến"
                style="color: white; float: left">
                 <img src="/img/header-footer/24h_white.png"/>
             </a>
