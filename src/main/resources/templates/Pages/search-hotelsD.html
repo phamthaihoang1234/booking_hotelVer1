@@ -56,7 +56,9 @@
     <link rel="stylesheet" href="Utilities/RangeSlider/jquery-ui.css">
     <script src="Utilities/RangeSlider/jquery-1.10.2.js"></script>
     <script src="Utilities/RangeSlider/jquery-ui.js"></script>
-
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <style>
         .ws_images img {
             border-radius: 4px;
@@ -340,6 +342,7 @@
         </div>
 
         <div id="right-center">
+<!--            dang test chen model and view-->
             <div id="right-center-1" style="height: 70px; border-width: thin">
                 <!--chinh lai height de add tu* dong-->
                 <div id="options" style="width: 55%; height: auto; float: left">
@@ -958,7 +961,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
 
     <div id="footer"></div>
@@ -1163,13 +1166,44 @@
 
 
                 let hotel_type_list = hotel_type_check();
+                if(standard==undefined){
+                    standard = 0;
+                }
                 console.log('standard:'+ standard);
                 console.log('\nhotel types:'+ hotel_type_list);
                 let price_order;
                 let standard_order;
                 let price;// chua xac dinh trong db
             },1);
+            // call ajax when change
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
 
+
+            let content = document.getElementById("right-center");
+            $.ajax({
+
+                url : '/testModelAndView',
+                type : 'post',
+                data : {
+                },
+
+
+                success : function(data) {
+                    if(data!=='error'){
+                        console.log("done");
+
+                        $("#right-center").html(data)
+                    }
+                },
+                error : function(request,error)
+                {
+                    alert("Request: "+JSON.stringify(request));
+                }
+            });
 
             // alert("some changes");
         }

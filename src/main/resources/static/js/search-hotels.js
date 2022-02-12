@@ -457,6 +457,7 @@ $(document).ready(function () {
         $('#page-2').fadeOut();
     });
     $("#pagi-2").click(function () {
+        console.log("co convert");
         $(this).parents("ul").find("li").removeClass('active');
         $(this).parent().addClass('active');
         $('#page-1').fadeOut();
