@@ -43,10 +43,10 @@ public class UserServiceImpl implements UserService {
 //        return userRepository.findByNameAndPassword(name, password);
 //    }
 //
-//    @Override
-//    public Optional<UserInfo> findByEmail(String email) {
-//        return userRepository.findByEmail(email);
-//    }
+    @Override
+    public UserInfo findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
     @Override
     public UserInfo findByUserName(String username) {

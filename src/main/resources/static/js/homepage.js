@@ -158,7 +158,7 @@ $(document).ready(function () {
                 localStorage.ddnoibat = '2';
                 bcheck = 'true';
             } else if ($txt === 'TẤT CẢ') {
-                window.location = 'all-locations.html';
+                window.location = 'all-locations';
                 return false;
             }
         } else {
@@ -187,17 +187,17 @@ $(document).ready(function () {
         if (bcheck === 'true') {
             //alert('bcheck = true');
             //hoac window.open("search-hotels.html","_self");
-            window.location = 'search-hotels.html';
+            window.location = 'search-hotels';
             return false;
         } else {
             if (local === 'Địa điểm nổi tiếng' || $(this).text() === 'Tất cả ...') {
-                window.location = 'search-hotels.html';
+                window.location = 'search-hotels';
                 return false;
             } else {
                 //luu tru ten bien' khach san, nhu*ng ko co' dia chi => viec xac dinh Google se~ co the bi. co' dinh
                 //alert('bcheck = false 2');
                 localStorage.searchhotels_tmp_nameofhotel = $(this).text();
-                window.location = 'room-bookings.html';
+                window.location = 'room-bookings';
                 return false;
             }
         }
@@ -223,7 +223,7 @@ $(document).ready(function () {
             alert("Sorry, your browser does not support web storage...");
         }
         //hoac window.open("search-hotels.html","_self");
-        window.location = 'search-hotels.html';
+        window.location = 'search-hotels';
     });
 
 });
