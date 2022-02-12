@@ -19,7 +19,7 @@ public class HotelFilterControllerD {
     }
     @PostMapping("/filterData")
     void FilterData(@RequestParam("location") String location,@RequestParam("price") String price
-            ,@RequestParam("hotel_standard") int standard,@RequestParam("hotel_property") String property
+            ,@RequestParam("hotel_standard") int standard,@RequestParam("hotel_property") String[] property
             ,@RequestParam("orderByPrice") String orderByPrice,@RequestParam("orderByStandard") String orderByStandard){
         String location_processed = "";
         // xu ly cac thong tin dau vao
