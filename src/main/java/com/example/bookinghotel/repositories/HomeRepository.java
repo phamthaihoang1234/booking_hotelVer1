@@ -13,8 +13,10 @@ public interface HomeRepository extends CrudRepository<Room, Long> {
     Iterable<Room> findAllCustomQuery();
 
 
-    @Query(value = "SELECT * FROM rooms where province_id = ?1", nativeQuery = true)
-    Iterable<Room> findAllRoomByProvinceId(int id);
+    @Query(value = "SELECT * FROM rooms where hotel_id = ?1", nativeQuery = true)
+    Iterable<Room> findAllRoomByHotelId(long id);
+
+
     @Query(value = "SELECT * FROM rooms where address like ?1", nativeQuery = true)
     Iterable<Room> findAllRoomByAddress(String add);
 

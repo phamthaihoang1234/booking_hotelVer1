@@ -283,7 +283,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a class="dropdown-item" th:href="@{findOne/{id}(id=${h.id})}"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item delBtn" th:href="@{delete/(id=${h.id})}"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
-                                                    <a class="dropdown-item" href="edit-customer.html"><i class="fas fa-pencil-alt m-r-5"></i> Create room</a>
+                                                    <a class="dropdown-item" th:href="@{/manageRoom/__${h.getId()}__ }"><i class="fas fa-pencil-alt m-r-5"></i> Manage room</a>
                                                 </div>
                                             </div>
                                         </td>
