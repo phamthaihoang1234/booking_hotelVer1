@@ -10,7 +10,9 @@ public interface UserRepository extends CrudRepository<UserInfo, Long> {
 
     Optional<UserInfo> findByNameAndPassword(String name, String password);
 
-    Optional<UserInfo> findByEmail(String email);
+    UserInfo findByEmail(String email);
+
+
 
     UserInfo findByUsername(String username);
 

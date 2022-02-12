@@ -30,6 +30,7 @@
                             <div class="form-group">
                                 <input type="text" class="form-input" name="name" id="name" th:field="*{username}" placeholder="Your Name" required/>
                                 <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" />
+                                <p class="invalid-feedback" style="color: red;" th:if="${errolUsername}" th:text="${errolUsername}"></p>
                             </div>
                         </td>
                         <td>
@@ -65,22 +66,24 @@
                 <div class="form-group">
                     <input type="email" class="form-input" name="email" id="email" placeholder="Email" th:field="*{email}" required/>
                     <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />
+                    <p class="invalid-feedback" style="color: red;" th:if="${errolEmail}" th:text="${errolEmail}"></p>
                 </div>
 
                 <table>
                     <tr>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-input" name="password" id="password" th:field="*{password}"
-                                       placeholder="Password" required/>
-                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
+                                <input type="text" class="form-input" placeholder="Address" th:field="*{address}" required/>
+                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" />
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-input" placeholder="Address" th:field="*{address}" required/>
-                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" />
+                                <input type="password" class="form-input" name="password" id="password" th:field="*{password}"
+                                       placeholder="Password" required/>
+                                <p class="invalid-feedback" style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
                             </div>
+
                         </td>
                     </tr>
                 </table>

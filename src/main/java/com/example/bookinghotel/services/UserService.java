@@ -14,7 +14,7 @@ public interface UserService extends UserDetailsService {
 
 //    Optional<UserInfo> findByNameAndPassword(String name, String password);
 //
-//    Optional<UserInfo> findByEmail(String email);
+    UserInfo findByEmail(String email);
 
     UserInfo save(UserInfo user) throws Exception;
 
