@@ -261,7 +261,7 @@
                 </div>
             </div>
 
-            <form th:action="@{/hotelOwnerProfile/save}" th:object="${hotelOwnerProfile}" method="post">
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="profile-header">
@@ -270,9 +270,9 @@
                                 <a href="#"> <img class="rounded-circle" alt="User Image" src="assets/img/profiles/avatar-02.jpg"> </a>
                             </div>
                             <div class="col ml-md-n2 profile-user-info">
-                                <h4 class="user-name mb-3"><span th:text="${hotelOwnerProfile.getName()}"></span></h4>
+                                <h4 class="user-name mb-3"><span th:text="${hotelOwnerProfile.name}"></span></h4>
                                 <h6 class="text-muted mt-1">HotelOwner</h6>
-                                <div class="user-Location mt-1"><i class="fas fa-map-marker-alt"></i><span th:text="${hotelOwnerProfile.getAddress()}"></span></div>
+                                <div class="user-Location mt-1"><i class="fas fa-map-marker-alt"></i><span th:text="${hotelOwnerProfile.address}"></span></div>
                             </div>
                             <div class="col-auto profile-btn"> <a href="" class="btn btn-primary">
                                 Thông Báo
@@ -300,9 +300,10 @@
                                                 <span>Thông Tin Tài Khoản</span>
                                                 <a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Edit</a>
                                             </h5>
+
                                             <div class="row mt-5">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Họ Và Tên</p>
-                                                <p class="col-sm-9"><span th:text="${hotelOwnerProfile.getName()}"></span> </p>
+                                                <p class="col-sm-9"><span th:text="${hotelOwnerProfile.name}"></span> </p>
                                             </div>
 <!--                                            <div class="row">-->
 <!--                                                <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Date of Birth</p>-->
@@ -310,20 +311,20 @@
 <!--                                            </div>-->
                                             <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Giới Tính</p>
-                                                <p class="col-sm-9"><span th:text="${hotelOwnerProfile.getGender()}"></span></p>
+                                                <p class="col-sm-9"><span th:text="${hotelOwnerProfile.gender}"></span></p>
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Địa Chỉ Email</p>
-                                                <p class="col-sm-9"><span th:text="${hotelOwnerProfile.getEmail()}"></span></p>
+                                                <p class="col-sm-9"><span th:text="${hotelOwnerProfile.email}"></span></p>
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Số Điện Thoại</p>
-                                                <p class="col-sm-9"><span th:text="${hotelOwnerProfile.getPhoneNumber()}"></span></p>
+                                                <p class="col-sm-9"><span th:text="${hotelOwnerProfile.phoneNumber}"></span></p>
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0">Địa Chỉ</p>
                                                 <p class="col-sm-9 mb-0">
-                                                    <span th:text="${hotelOwnerProfile.getAddress()}"></span>
+                                                    <span th:text="${hotelOwnerProfile.address}"></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -335,13 +336,16 @@
                                                     <h5 class="modal-title">Thông Tin Tài Khoản</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
                                                 </div>
+                                                <form th:action="@{/hotelOwnerProfile/save}"  method="post">
                                                 <div class="modal-body">
-
                                                         <div class="row form-row">
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label>Họ Và Tên</label>
-                                                                    <input type="text" class="form-control" th:field="*{name}"> </div>
+                                                                    <input type="text"
+                                                                           th:field="*{hotelOwnerProfile.name}"
+                                                                           th:value="${hotelOwnerProfile.name}"
+                                                                           class="form-control"> </div>
                                                             </div>
 <!--                                                            <div class="col-12">-->
 <!--                                                                <div class="form-group">-->
@@ -353,19 +357,31 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label>Địa Chỉ Email</label>
-                                                                    <input type="text" class="form-control" th:field="*{email}"> </div>
+                                                                    <input type="text"
+                                                                           class="form-control"
+                                                                           th:field="*{hotelOwnerProfile.email}"
+                                                                           th:value="${hotelOwnerProfile.email}"
+                                                                    > </div>
                                                             </div>
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label>Số Điện Thoại</label>
-                                                                    <input type="text" class="form-control" th:field="*{phoneNumber}"> </div>
+                                                                    <input type="text"
+                                                                           class="form-control"
+                                                                           th:field="*{hotelOwnerProfile.phoneNumber}"
+                                                                           th:value="${hotelOwnerProfile.phoneNumber}"
+                                                                    > </div>
                                                             </div>
                                                             <div class="col-12">
                                                                 <h5 class="form-title"><span>Address</span></h5> </div>
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label>Address</label>
-                                                                    <input type="text" class="form-control" th:field="*{address}"> </div>
+                                                                    <input type="text"
+                                                                           class="form-control"
+                                                                           th:field="*{hotelOwnerProfile.address}"
+                                                                           th:value="${hotelOwnerProfile.address}"
+                                                                    > </div>
                                                             </div>
 <!--                                                            <div class="col-12 col-sm-6">-->
 <!--                                                                <div class="form-group">-->
@@ -387,12 +403,14 @@
 <!--                                                                    <label>Country</label>-->
 <!--                                                                    <input type="text" class="form-control" value="United States"> </div>-->
 <!--                                                            </div>-->
-
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-                                                    <div class="alert alert-success" style="color: #4dae3c ; font-size: 20px; margin-top: 10px" th:if="${success}" th:text="${success}"></div>
+<!--                                                        </div>-->
+                                                    <button type="submit" class="btn btn-primary btn-block">Xác Nhận Chỉnh Sửa</button>
+<!--                                                    <div class="alert alert-success" style="color: #4dae3c ; font-size: 20px; margin-top: 10px" th:if="${success}" th:text="${success}"></div>-->
                                                 </div>
                                             </div>
+                                            </form>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -401,7 +419,6 @@
                     </div>
                 </div>
             </div>
-            </form>
         </div>
 
 
@@ -412,7 +429,7 @@
                                     <h5 class="card-title">Change Password</h5>
                                     <div class="row">
                                         <div class="col-md-10 col-lg-6">
-                                            <form>
+                                            <form th:action="/saveHotelOwnerPass" method="post">
                                                 <div class="form-group">
                                                     <label>Old Password</label>
                                                     <input type="password" class="form-control"> </div>
@@ -428,8 +445,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
+                      </div>
+        
 
 
                     </div>
