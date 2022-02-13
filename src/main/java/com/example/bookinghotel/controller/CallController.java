@@ -1,0 +1,81 @@
+package com.example.bookinghotel.controller;
+
+import com.example.bookinghotel.entities.UserInfo;
+import com.example.bookinghotel.services.UserService;
+import com.twilio.Twilio;
+import com.twilio.http.TwilioRestClient;
+import com.twilio.rest.api.v2010.account.Call;
+import com.twilio.twiml.VoiceResponse;
+import com.twilio.twiml.voice.Say;
+import com.twilio.type.PhoneNumber;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.net.URI;
+
+@Controller
+public class CallController {
+    @Autowired
+    UserService userService;
+
+    private final static String Account_Sid = "ACd0868f372cd82561aa813505a4c71892";
+    private final static String Auth_id = "29f232367f" +
+            "51168a57ee" +
+            "c7102e677983";
+
+//    @RequestMapping(value = "/voice-note", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+//    public ResponseEntity<Object> getVoiceNote() {
+//        String newPws = "1";
+//        Say say = new Say.Builder("Your password changed to :" + newPws).voice(Say.Voice.WOMAN)
+//                .language(Say.Language.EN_US).build();
+//        VoiceResponse response = new VoiceResponse.Builder().say(say).build();
+//        return new ResponseEntity<>(response.toXml(), HttpStatus.OK);
+//    }
+
+    // thuc hien cuoc goi va thong bao mat khau moi voi nguoi dung
+    @RequestMapping(value = "/call", method = RequestMethod.POST)
+    public ResponseEntity<Object> makeCall(@RequestParam("phone") String phone,@RequestParam("username") String username) {
+
+        String newPassword = "1";
+        try {
+            changePassword(username,newPassword);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        TwilioRestClient client = new TwilioRestClient.Builder(Account_Sid, Auth_id).build();
+        PhoneNumber to = new PhoneNumber(phone);
+        PhoneNumber from = new PhoneNumber("+18456825828");
+
+//        https://drive.google.com/uc?export=view&id=1e5k9uUey0OuJ4VOAzZMePxKipyZVbR9g
+//        http://demo.twilio.com/docs/voice.xml
+//            URI uri = URI.create("http://demo.twilio.com/docs/voice.xml");
+//            com.twilio.rest.api.v2010.account.Call call = com.twilio.rest.api.v2010.account.Call
+//                    .creator(to,from,uri).create(client);
+        Twilio.init(Account_Sid, Auth_id);
+        com.twilio.rest.api.v2010.account.Call call2 = Call.creator(
+                        to,
+                        from,
+                        new com.twilio.type.Twiml("<Response><Say>Your password changed to "+newPassword+"" +
+                                ".Please change your password soon</Say></Response>"))
+                .create();
+
+        return new ResponseEntity<Object>("Cuoc goi da duoc thuc hien", HttpStatus.OK);
+
+    }
+    // thuc hien doi mat khau
+    public void changePassword(String username,String password) throws Exception {
+        UserInfo user = userService.findByUserName(username);
+        user.setPassword(password);
+        userService.save(user);
+    }
+
+}
+
+
