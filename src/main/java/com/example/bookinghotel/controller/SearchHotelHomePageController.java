@@ -38,7 +38,9 @@ public class SearchHotelHomePageController {
             // loai bo dau "," cuoi cung
             ans = ans.substring(0,ans.length()-2);
         }
-
+        // xu ly van de dau trong data
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.write(ans);
         } catch (IOException e) {
