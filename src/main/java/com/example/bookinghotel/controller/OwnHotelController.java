@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -201,7 +202,25 @@ public class OwnHotelController {
     }
 
 
+    @GetMapping("/hotelOwnerProfile")
+    public String editHotelOwnerProfile(Model model){
+        model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
+        return "Pages/owner/hotelOwnerProfile";
+    }
 
+    @PostMapping("/hotelOwnerProfile/save")
+    public String saveEditHotelOwnerProfile(@ModelAttribute UserInfo hotelOwnerProfile, RedirectAttributes redirect) throws Exception {
+
+        Optional<UserInfo> oldHotelOwnerProfile = Optional.ofNullable(userService.findByUserName(this.getPrincipal()));
+        oldHotelOwnerProfile.get().setName(hotelOwnerProfile.getName());
+        oldHotelOwnerProfile.get().setEmail(hotelOwnerProfile.getEmail());
+        oldHotelOwnerProfile.get().setPhoneNumber(hotelOwnerProfile.getPhoneNumber());
+        oldHotelOwnerProfile.get().setAddress(hotelOwnerProfile.getAddress());
+
+        userService.save(hotelOwnerProfile);
+//        redirect.addFlashAttribute("success", "Saved HotelOwner Profile successfully!");
+        return "redirect:/hotelOwnerProfile";
+    }
 
 
 
