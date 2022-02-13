@@ -1145,12 +1145,13 @@
         function hotel_type_check(){
             let loaiHotel = document.getElementsByClassName('loai');
             let __hotel_types = [];
+            let m = 0;
             for(let i = 0 ; i < loaiHotel.length;i++){
                 let __checkboxes = loaiHotel[i].getElementsByTagName('input');
                 let __length = __checkboxes.length;
                 for(let j = 0 ; j < __length ; j++){
                     if(__checkboxes[j].checked){
-                        __hotel_types.push(__checkboxes[j].value);
+                        __hotel_types[m++] = __checkboxes[j].value;
                     }
                 }
             }
@@ -1173,7 +1174,7 @@
                     hotel_type_list = [""];
                 }
                 console.log('standard:'+ standard);
-                console.log('\nhotel types:'+ hotel_type_list);
+                console.log(hotel_type_list);
                 let price_order;
                 let standard_order;
                 let price;// chua xac dinh trong db
@@ -1186,18 +1187,22 @@
 
 
                 let content = document.getElementById("right-center");
+                // let str = JSON.stringify(hotel_type_list);
+                // console.log(str);
                 $.ajax({
 
                     url : '/filterProcess',
                     type : 'post',
                     data : {
                         'location':localStorage.index_tmp_name,
-                        // 'hotel_property':hotel_type_list,
+                        'hotel_type':hotel_type_list,
                         // 'hotel_standard': '',
                         // 'price':'',
                         // 'orderByPrice':'',
                         // 'orderByStandard':''
+
                     },
+                    dataType:'text',
 
 
                     success : function(data) {
