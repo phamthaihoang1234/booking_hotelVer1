@@ -10,7 +10,7 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
     <!-- Offline -->
-    <link rel="stylesheet" href="../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">-->
     <script src="../Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
     <script src="../Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <meta name="_csrf" th:content="${_csrf.token}"/>
@@ -46,11 +46,12 @@
                         console.log("thong tin cua locations:" + regionNames)
                         let locations = regionNames;
                         printRegionInfo(locations);
-                        var cssLink = document.createElement('link');
-                        cssLink.rel = 'stylesheet';
-                        cssLink.href = '../css/all-locations.css';
-                        var head = document.getElementsByTagName('head')[0];
-                        head.parentNode.insertBefore(cssLink, head);
+                        loadMultipleCss();
+                        checkLink();
+                        // $(document).ready(function(){{
+                        //     window.stop();
+                        // }})
+
                     }
                 },
                 error: function (request, error) {
@@ -61,6 +62,25 @@
 
 
         })
+        var loadMultipleCss = function(){
+            //load local stylesheet
+            loadCss('../css/all-locations.css');
+
+            //load Bootstrap from CDN
+            loadCss('../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css');
+
+            //load Bootstrap theme from CDN
+            loadCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css');
+        }
+
+        var loadCss = function(cssPath){
+            var cssLink = document.createElement('link');
+            cssLink.rel = 'stylesheet';
+            cssLink.href = cssPath;
+            var head = document.getElementsByTagName('head')[0];
+            head.parentNode.insertBefore(cssLink, head);
+        };
+
         function printRegionInfo(locations){
             document.write("<div id='close'>");
             document.write("<a href='homepage.html' target='_self' style='color: black' title='Về trang chủ'>" + "&times;" + "</a>");
@@ -74,7 +94,7 @@
             document.write("</div>");
             // in hinh nuoc viet nam
             // http://www.conceptdraw.com/How-To-Guide/geo-map-asia-vietnam
-            document.write("<div id='img-background'>" + "<img src='../img/all-locations/Vietnam-map.png'/>" + "</div>");
+            document.write("<div  id='img-background'>" + "<img src='../img/all-locations/Vietnam-map.png'/>" + "</div>");
 
             document.write("<div style='width: 90%; color: rgb(70,68,68); margin: auto'>");
             document.write("<div id='content' class='row' style='line-height: 32px'>");
@@ -129,6 +149,32 @@
 
             return arr;
 
+        }
+        function checkLink(){
+            $('#content a').click(function () {
+                var $txt = $(this).text();
+                if (typeof (Storage) !== "undefined") {
+                    //cac bien' nay` se~ duoc chuyen sang trang search-hotels
+//                if (localStorage.index_tmp_name) {
+
+//                    localStorage.index_tmp_name = $txt;
+//                } else {
+//                    alert('else');
+//                    localStorage.index_tmp_name = "Đà Nẵng";
+//                }
+                    //luc duoc luc ko khi co' dk if + tu` trang homepage link toi'
+                    localStorage.index_tmp_name = $txt;
+                    //3 bien sau: co' dinh
+                    localStorage.index_tmp_checkin = "";
+                    localStorage.index_tmp_checkout = "";
+                    localStorage.index_tmp_typeofroom = "1 phòng (2 người lớn)";
+                } else {
+                    alert("Sorry, your browser does not support web storage...");
+                }
+                //hoac window.open("search-hotels.html","_self");
+                //loai bo 2 thuoc tinh href='search-hotels.html' target='_blank' o? the? a
+                window.location = 'search-hotels';
+            });
         }
 
 
@@ -223,33 +269,7 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('#content a').click(function () {
-            var $txt = $(this).text();
-            if (typeof (Storage) !== "undefined") {
-                //cac bien' nay` se~ duoc chuyen sang trang search-hotels
-//                if (localStorage.index_tmp_name) {
 
-//                    localStorage.index_tmp_name = $txt;
-//                } else {
-//                    alert('else');
-//                    localStorage.index_tmp_name = "Đà Nẵng";
-//                }
-                //luc duoc luc ko khi co' dk if + tu` trang homepage link toi'
-                localStorage.index_tmp_name = $txt;
-                //3 bien sau: co' dinh
-                localStorage.index_tmp_checkin = "";
-                localStorage.index_tmp_checkout = "";
-                localStorage.index_tmp_typeofroom = "1 phòng (2 người lớn)";
-            } else {
-                alert("Sorry, your browser does not support web storage...");
-            }
-            //hoac window.open("search-hotels.html","_self");
-            //loai bo 2 thuoc tinh href='search-hotels.html' target='_blank' o? the? a
-            window.location = 'search-hotels';
-        });
-
-    });
 </script>
 
 </body>
