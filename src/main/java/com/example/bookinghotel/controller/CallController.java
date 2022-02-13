@@ -29,7 +29,7 @@ public class CallController {
     private final static String Auth_id = "29f232367f" +
             "51168a57ee" +
             "c7102e677983";
-
+      // dung khi trang web da duoc deploy tren 1 ten mien cu the
 //    @RequestMapping(value = "/voice-note", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
 //    public ResponseEntity<Object> getVoiceNote() {
 //        String newPws = "1";
@@ -53,26 +53,28 @@ public class CallController {
         TwilioRestClient client = new TwilioRestClient.Builder(Account_Sid, Auth_id).build();
         PhoneNumber to = new PhoneNumber(phone);
         PhoneNumber from = new PhoneNumber("+18456825828");
-        Twilio.init(Account_Sid, Auth_id);
+//        Twilio.init(Account_Sid, Auth_id);
 //        https://drive.google.com/uc?export=view&id=1e5k9uUey0OuJ4VOAzZMePxKipyZVbR9g
 //        http://demo.twilio.com/docs/voice.xml
-//            URI uri = URI.create("http://demo.twilio.com/docs/voice.xml");
-//            com.twilio.rest.api.v2010.account.Call call = com.twilio.rest.api.v2010.account.Call
-//                    .creator(to,from,uri).create(client);
-        //validate number
 
-        ValidationRequest validationRequest = ValidationRequest.creator(
-                        new com.twilio.type.PhoneNumber(phone))
-                .setFriendlyName(phone)
-                .create();
-
-        // tao client noi chuyen voi khach hang
-        com.twilio.rest.api.v2010.account.Call call2 = Call.creator(
-                        to,
-                        from,
-                        new com.twilio.type.Twiml("<Response><Say>Your password changed to "+newPassword+"" +
-                                ".Please change your password soon</Say></Response>"))
-                .create();
+        //validate number - khong ho tro tai khoan trial
+//
+//        ValidationRequest validationRequest = ValidationRequest.creator(
+//                        new com.twilio.type.PhoneNumber(phone))
+//                .setFriendlyName(phone)
+//                .create();
+        // tao client noi chuyen voi khach hang cach 1
+        //duong dan file xml chua giong noi
+        URI uri = URI.create("https://drive.google.com/uc?export=open&id=1e5k9uUey0OuJ4VOAzZMePxKipyZVbR9g");
+        com.twilio.rest.api.v2010.account.Call call = com.twilio.rest.api.v2010.account.Call
+                .creator(to,from,uri).create(client);
+        // tao client noi chuyen voi khach hang - cach 2
+//        com.twilio.rest.api.v2010.account.Call call2 = Call.creator(
+//                        to,
+//                        from,
+//                        new com.twilio.type.Twiml("<Response><Say>Your password changed to "+newPassword+"" +
+//                                ".Please change your password soon</Say></Response>"))
+//                .create();
 
         return new ResponseEntity<Object>("Cuoc goi da duoc thuc hien", HttpStatus.OK);
 
