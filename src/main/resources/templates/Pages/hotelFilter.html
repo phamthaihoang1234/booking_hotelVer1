@@ -1169,6 +1169,9 @@
                 if(standard==undefined){
                     standard = 0;
                 }
+                if(hotel_type_list==undefined){
+                    hotel_type_list = [""];
+                }
                 console.log('standard:'+ standard);
                 console.log('\nhotel types:'+ hotel_type_list);
                 let price_order;
@@ -1185,11 +1188,15 @@
                 let content = document.getElementById("right-center");
                 $.ajax({
 
-                    url : '/testModelAndView2',
+                    url : '/filterProcess',
                     type : 'post',
                     data : {
                         'location':localStorage.index_tmp_name,
-                        'hotel_property':hotel_type_list
+                        // 'hotel_property':hotel_type_list,
+                        // 'hotel_standard': '',
+                        // 'price':'',
+                        // 'orderByPrice':'',
+                        // 'orderByStandard':''
                     },
 
 
