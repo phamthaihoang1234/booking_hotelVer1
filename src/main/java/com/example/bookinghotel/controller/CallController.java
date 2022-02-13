@@ -5,6 +5,7 @@ import com.example.bookinghotel.services.UserService;
 import com.twilio.Twilio;
 import com.twilio.http.TwilioRestClient;
 import com.twilio.rest.api.v2010.account.Call;
+import com.twilio.rest.api.v2010.account.ValidationRequest;
 import com.twilio.twiml.VoiceResponse;
 import com.twilio.twiml.voice.Say;
 import com.twilio.type.PhoneNumber;
@@ -52,13 +53,20 @@ public class CallController {
         TwilioRestClient client = new TwilioRestClient.Builder(Account_Sid, Auth_id).build();
         PhoneNumber to = new PhoneNumber(phone);
         PhoneNumber from = new PhoneNumber("+18456825828");
-
+        Twilio.init(Account_Sid, Auth_id);
 //        https://drive.google.com/uc?export=view&id=1e5k9uUey0OuJ4VOAzZMePxKipyZVbR9g
 //        http://demo.twilio.com/docs/voice.xml
 //            URI uri = URI.create("http://demo.twilio.com/docs/voice.xml");
 //            com.twilio.rest.api.v2010.account.Call call = com.twilio.rest.api.v2010.account.Call
 //                    .creator(to,from,uri).create(client);
-        Twilio.init(Account_Sid, Auth_id);
+        //validate number
+
+        ValidationRequest validationRequest = ValidationRequest.creator(
+                        new com.twilio.type.PhoneNumber(phone))
+                .setFriendlyName(phone)
+                .create();
+
+        // tao client noi chuyen voi khach hang
         com.twilio.rest.api.v2010.account.Call call2 = Call.creator(
                         to,
                         from,
