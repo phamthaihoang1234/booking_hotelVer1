@@ -20,7 +20,7 @@ public class HotelFilterControllerD {
     }
 
     @PostMapping("/testModelAndView")
-    public void XuLy(){
+    public void filterProcess(){
 //        String location_processed = "";
 //        // xu ly cac thong tin dau vao
 //        if(location!=null){
