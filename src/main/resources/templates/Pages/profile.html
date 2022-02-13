@@ -59,8 +59,8 @@
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
                                                                                          width="150px"
                                                                                          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
-                    class="font-weight-bold">Edogaru</span><span
-                    class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                    class="font-weight-bold" th:text="${userInfo.username}"></span><span
+                    class="text-black-50" th:text="${userInfo.email}"></span><span> </span></div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -71,23 +71,20 @@
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Họ và tên</label><input type="text"
                                                                                          class="form-control"
-                                                                                         placeholder="Nhập họ và tên"
-                                                                                         value="" ></div>
+                                                                                         th:value="${userInfo.name}"
+                                                                                         id="txtName"></div>
                     <div class="col-md-12"><label class="labels">Số điện thoại</label><input type="text"
                                                                                              class="form-control"
-                                                                                             placeholder="Nhập số điện thoại"
-                                                                                             value=""></div>
+                                                                                             th:value="${userInfo.phoneNumber}"
+                                                                                             id="txtPhoneNumber"></div>
                     <div class="col-md-12"><label class="labels">Email</label><input type="text"
-                                                                                             class="form-control"
-                                                                                             placeholder="Nhập email"
-                                                                                             value=""></div>
+                                                                                     class="form-control"
+                                                                                     th:value="${userInfo.email}"
+                                                                                     id="txtEmail"></div>
                     <div class="col-md-12"><label class="labels">Địa chỉ</label><input type="text" class="form-control"
-                                                                                       placeholder="Nhập địa chỉ"
-                                                                                       value=""></div>
-                    <div class="col-md-12"><label class="labels">Giới tính</label><input type="text"
-                                                                                         class="form-control"
-                                                                                         placeholder="Nhập Giới tính"
-                                                                                         value=""></div>
+                                                                                       th:value="${userInfo.address}"
+                                                                                       id="txtAddress"></div>
+
                     <div class="mt-5 text-center">
                         <button class="btn btn-primary profile-button" type="button">Thay đổi mật khẩu</button>
                     </div>
