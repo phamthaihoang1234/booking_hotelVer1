@@ -26,8 +26,6 @@ public class UserInfo extends AbstractEntity implements Serializable {
 
     private String address;
 
-
-
     @NotEmpty
     @Column(unique = true)
     @Email
