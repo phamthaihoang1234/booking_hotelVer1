@@ -8,11 +8,11 @@
     <!-- bootstrap: de y' 2 file ajax phai dat truoc maxcdn thi moi dung` duoc modal (Form)-->
     <!-- Online -->
     <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
     <!-- Offline -->
     <link rel="stylesheet" href="Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-        <script src="Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <script src="Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
 
     <script src="Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="Utilities/slideshow/slideshow1/engine0/jquery.js"></script>
     <!--slide-2: tu` slide nay` tro di thi file engine cua jquery dug chung voi slide 1-->
     <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine1/style.css"/>
-<!--    script type="text/javascript" src="engine1/jquery.js"></script-->
+    <!--    script type="text/javascript" src="engine1/jquery.js"></script-->
     <!--slide-3-->
     <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine2/style.css"/>
     <!--slide-4-->
@@ -283,14 +283,14 @@
                 <div>
                     <ul style="list-style-type: none; color: rgb(255,192,0)" th:if="${standards}">
                         <th:block th:each="standard:${standards}">
-                        <li th:if="${standard}">
-                            <input type="radio" name="hang-khachsang" th:value="${#lists.size(standard)}"/>
-<!--                          dung class lists de tinh size (class org.thymeleaf.expression.Lists) link doc: https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#lists-->
-                            <th:block th:each="star:${standard}">
+                            <li th:if="${standard}">
+                                <input type="radio" name="hang-khachsang" th:value="${#lists.size(standard)}"/>
+                                <!--                          dung class lists de tinh size (class org.thymeleaf.expression.Lists) link doc: https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#lists-->
+                                <th:block th:each="star:${standard}">
 
-                            <span th:if="${star}" class="glyphicon glyphicon-star"></span>
-                            </th:block>
-                        </li>
+                                    <span th:if="${star}" class="glyphicon glyphicon-star"></span>
+                                </th:block>
+                            </li>
                         </th:block>
 
                         <li style="color: rgb(70,68,73)"><input type="radio" name="hang-khachsang" value=""> Bất kỳ</li>
@@ -300,15 +300,20 @@
             </div>
             <div style="height: auto; border-top: 1px solid rgb(223,221,221)">
                 <div class="left-title">LOẠI</div>
-                <div class ="loai">
+                <div class="loai">
+
                     <ul style="list-style-type: none">
                         <th:block th:each="hotelProperty:${hotel_types1}">
-                        <li><input type="checkbox" th:value="${hotelProperty.getType()}" th:text="${hotelProperty.getType()}" /> </li>
+
+                            <li><input type="radio" name="hotel_types1" th:value="${hotelProperty.getType()}"
+                                       th:text="${hotelProperty.getType()}"/></li>
 
                         </th:block>
                         <li><a id="loai-them" data-toggle="modal" href="#myModal"
                                style="color: black; font-size: small"> Thêm ...</a></li>
+
                     </ul>
+
                 </div>
             </div>
             <!--            <div style="height: auto; border-top: 1px solid rgb(223,221,221)"> &lt;!&ndash; shorthand: top right bottom left &ndash;&gt;-->
@@ -327,25 +332,25 @@
         </div>
 
         <div id="right-center">
-<!--            dang test chen model and view-->
+            <!--            dang test chen model and view-->
             <div id="right-center-1" style="height: 70px; border-width: thin">
                 <!--chinh lai height de add tu* dong-->
                 <div id="options" style="width: 55%; height: auto; float: left">
                     <div style="margin-bottom: 5px; font-weight: bold; color: rgb(156,153,153)">Lựa chọn của bạn:</div>
                     <!--=============-->
-<!--                    <div id="opts-ddnoitieng" class="options" style="display: none">-->
-<!--                        &lt;!&ndash;da~ bo bot muc check vi` co' den 3 locations&ndash;&gt;-->
-<!--                        &lt;!&ndash;<a href="#"><div class="options-x">&times;</div> Gần cầu rồng </a>&ndash;&gt;-->
-<!--                    </div>-->
+                    <!--                    <div id="opts-ddnoitieng" class="options" style="display: none">-->
+                    <!--                        &lt;!&ndash;da~ bo bot muc check vi` co' den 3 locations&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;<a href="#"><div class="options-x">&times;</div> Gần cầu rồng </a>&ndash;&gt;-->
+                    <!--                    </div>-->
                     <div id="opts-price" class="options" style="display: none">
                         <!--da~ dieu chinh thanh 2 nut-->
                         <!--<a href="#"><div class="options-x">&times;</div> 2.000.000 <sup>đ</sup></a>-->
                     </div>
-<!--                    <div id="opts-km" class="options">-->
-<!--                        <a href="#">-->
-<!--                            <div class="options-x">&times;</div>-->
-<!--                            2 Km</a>-->
-<!--                    </div>-->
+                    <!--                    <div id="opts-km" class="options">-->
+                    <!--                        <a href="#">-->
+                    <!--                            <div class="options-x">&times;</div>-->
+                    <!--                            2 Km</a>-->
+                    <!--                    </div>-->
                     <!--them display: none vi` co' kem` class="options" co' ke? border (du` chua co' noi dung)
                     add margin-top vao` class options xay ra loi~
                     -->
@@ -370,7 +375,7 @@
 
             </div>
 
-            </div>
+        </div>
     </div>
 
     <div id="footer"></div>
@@ -389,11 +394,12 @@
                         <form role="form">
                             <table class="table borderless">
                                 <th:block th:each="hotelProperty,state:${hotel_types2}">
-                                    <th:block th:if="${state.index}%3==0" th:utext="'&lt;tr&gt;'" />
+                                    <th:block th:if="${state.index}%3==0" th:utext="'&lt;tr&gt;'"/>
 
-                                    <td><input type="checkbox" th:value="${hotelProperty.getType()}" th:text="${hotelProperty.getType()}" /></td>
+                                    <td><input type="radio" name="hotel_types2" th:value="${hotelProperty.getType()}"
+                                               th:text="${hotelProperty.getType()}"/></td>
 
-                                    <th:block th:if="${state.index}%3==2" th:utext="'&lt;/tr&gt;'" />
+                                    <th:block th:if="${state.index}%3==2" th:utext="'&lt;/tr&gt;'"/>
                                 </th:block>
 
                             </table>
@@ -408,69 +414,69 @@
         </div>
     </div>
 
-<!--    <div class="modal fade" id="myModal-2" role="dialog">-->
-<!--        <div class="modal-dialog" style="width: 60%">-->
-<!--            &lt;!&ndash; Modal content&ndash;&gt;-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    &lt;!&ndash; style="padding:35px 50px;" &ndash;&gt;-->
-<!--                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                    <h4>Tiện nghi</h4>-->
-<!--                </div>-->
-<!--                <div class="modal-body" style="padding:30px 30px"> &lt;!&ndash;  style="padding:40px 50px;" &ndash;&gt;-->
-<!--                    <div class="row">-->
-<!--                        <form role="form">-->
-<!--                            <table class="table borderless">-->
-<!--                                <tr>-->
-<!--                                    <td><input type="checkbox"> Bãi biển</td>-->
-<!--                                    <td><input type="checkbox"> Phòng họp</td>-->
-<!--                                    <td><input type="checkbox"> Dịch vụ phòng</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td><input type="checkbox"> Bể bơi</td>-->
-<!--                                    <td><input type="checkbox"> Đỗ xe miễn phí</td>-->
-<!--                                    <td><input type="checkbox"> Quầy bar/Phòng khách</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td><input type="checkbox"> Bếp nhỏ</td>-->
-<!--                                    <td><input type="checkbox"> Internet</td>-->
-<!--                                    <td><input type="checkbox"> Sân gôn</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td><input type="checkbox"> Khách sạn không hút thuốc</td>-->
-<!--                                    <td><input type="checkbox"> Sòng bạc</td>-->
-<!--                                    <td><input type="checkbox"> Xe đưa đón đén sân bay</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td><input type="checkbox"> Cho phép mang theo vật nuôi</td>-->
-<!--                                    <td><input type="checkbox"> Lối ra cho xe lăn</td>-->
-<!--                                    <td><input type="checkbox"> Spa</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td><input type="checkbox"> Dãy buồng</td>-->
-<!--                                    <td><input type="checkbox"> Người giữ cửa</td>-->
-<!--                                    <td><input type="checkbox"> Trung tâm thể dục thẩm mỹ</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
-<!--                                    <td><input type="checkbox"> Dịch vụ kinh doanh</td>-->
-<!--                                    <td><input type="checkbox"> Nhà hàng</td>-->
-<!--                                    <td><input type="checkbox" > Phòng cho người khuyết tật</td>-->
-<!--                                </tr>-->
-<!--                                <tr>-->
+    <!--    <div class="modal fade" id="myModal-2" role="dialog">-->
+    <!--        <div class="modal-dialog" style="width: 60%">-->
+    <!--            &lt;!&ndash; Modal content&ndash;&gt;-->
+    <!--            <div class="modal-content">-->
+    <!--                <div class="modal-header">-->
+    <!--                    &lt;!&ndash; style="padding:35px 50px;" &ndash;&gt;-->
+    <!--                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+    <!--                    <h4>Tiện nghi</h4>-->
+    <!--                </div>-->
+    <!--                <div class="modal-body" style="padding:30px 30px"> &lt;!&ndash;  style="padding:40px 50px;" &ndash;&gt;-->
+    <!--                    <div class="row">-->
+    <!--                        <form role="form">-->
+    <!--                            <table class="table borderless">-->
+    <!--                                <tr>-->
+    <!--                                    <td><input type="checkbox"> Bãi biển</td>-->
+    <!--                                    <td><input type="checkbox"> Phòng họp</td>-->
+    <!--                                    <td><input type="checkbox"> Dịch vụ phòng</td>-->
+    <!--                                </tr>-->
+    <!--                                <tr>-->
+    <!--                                    <td><input type="checkbox"> Bể bơi</td>-->
+    <!--                                    <td><input type="checkbox"> Đỗ xe miễn phí</td>-->
+    <!--                                    <td><input type="checkbox"> Quầy bar/Phòng khách</td>-->
+    <!--                                </tr>-->
+    <!--                                <tr>-->
+    <!--                                    <td><input type="checkbox"> Bếp nhỏ</td>-->
+    <!--                                    <td><input type="checkbox"> Internet</td>-->
+    <!--                                    <td><input type="checkbox"> Sân gôn</td>-->
+    <!--                                </tr>-->
+    <!--                                <tr>-->
+    <!--                                    <td><input type="checkbox"> Khách sạn không hút thuốc</td>-->
+    <!--                                    <td><input type="checkbox"> Sòng bạc</td>-->
+    <!--                                    <td><input type="checkbox"> Xe đưa đón đén sân bay</td>-->
+    <!--                                </tr>-->
+    <!--                                <tr>-->
+    <!--                                    <td><input type="checkbox"> Cho phép mang theo vật nuôi</td>-->
+    <!--                                    <td><input type="checkbox"> Lối ra cho xe lăn</td>-->
+    <!--                                    <td><input type="checkbox"> Spa</td>-->
+    <!--                                </tr>-->
+    <!--                                <tr>-->
+    <!--                                    <td><input type="checkbox"> Dãy buồng</td>-->
+    <!--                                    <td><input type="checkbox"> Người giữ cửa</td>-->
+    <!--                                    <td><input type="checkbox"> Trung tâm thể dục thẩm mỹ</td>-->
+    <!--                                </tr>-->
+    <!--                                <tr>-->
+    <!--                                    <td><input type="checkbox"> Dịch vụ kinh doanh</td>-->
+    <!--                                    <td><input type="checkbox"> Nhà hàng</td>-->
+    <!--                                    <td><input type="checkbox" > Phòng cho người khuyết tật</td>-->
+    <!--                                </tr>-->
+    <!--                                <tr>-->
 
-<!--                                </tr>-->
-<!--                            </table>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
+    <!--                                </tr>-->
+    <!--                            </table>-->
+    <!--                        </form>-->
+    <!--                    </div>-->
+    <!--                </div>-->
 
-<!--                <div style="text-align: right; margin-top: -120px">-->
-<!--                    <img src="img/img_audio/stay-awesome.png"/>-->
-<!--                </div>-->
-<!--            </div>-->
+    <!--                <div style="text-align: right; margin-top: -120px">-->
+    <!--                    <img src="img/img_audio/stay-awesome.png"/>-->
+    <!--                </div>-->
+    <!--            </div>-->
 
-<!--        </div>-->
-<!--    </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <script>
         //        da~ them thuoc tinh' data-toggle="modal" => ko can` cai` script
@@ -523,7 +529,7 @@
 
         // phan dung code
 
-        function standard_check(){
+        function standard_check() {
             let standard = 0; // mac dinh la khong chon gi se set = 0
             let standard_list = document.getElementsByName('hang-khachsang');
             for (let i = 0; i < standard_list.length; i++) {
@@ -536,35 +542,92 @@
             }
             return standard;
         }
-        function hotel_type_check(){
+
+        function hotel_type_check() {
             let loaiHotel = document.getElementsByClassName('loai');
             let __hotel_types = [];
             let m = 0;
-            for(let i = 0 ; i < loaiHotel.length;i++){
+            for (let i = 0; i < loaiHotel.length; i++) {
                 let __checkboxes = loaiHotel[i].getElementsByTagName('input');
                 let __length = __checkboxes.length;
-                for(let j = 0 ; j < __length ; j++){
-                    if(__checkboxes[j].checked){
+                for (let j = 0; j < __length; j++) {
+                    if (__checkboxes[j].checked) {
                         __hotel_types[m++] = __checkboxes[j].value;
                     }
                 }
             }
             return __hotel_types;
         }
+
+        let radioState1 =false ;
+        let radioState2 = false;
+        let hotel_types1 = document.getElementsByName('hotel_types1');
+        let hotel_types2 = document.getElementsByName('hotel_types2');
+        console.log(hotel_types1);
+        console.log(hotel_types2);
+        function checkStateRadio() {
+
+            for (let i = 0; i < hotel_types1.length; i++) {
+                if (hotel_types1[i].checked) {
+
+                    if (radioState1 == false&&radioState2==true) {
+                        radioState1 = true;
+                        radioState2 = false;
+                    }else if(radioState1== false&&radioState2==false){
+                        radioState1 = true;
+                    }
+                    break;
+                }
+            }
+            console.log(radioState1+","+radioState2);
+            seperateRadioInput();
+            for (let i = 0; i < hotel_types2.length; i++) {
+                if (hotel_types2[i].checked) {
+                     if(radioState2==false&&radioState1==true){
+                        radioState1 = false;
+                        radioState2 = true;
+                    }else if(radioState2== false&&radioState1==false){
+                        radioState2 = true;
+                    }
+                    break;
+                }
+            }
+            seperateRadioInput();
+            console.log(radioState1+","+radioState2);
+
+        }
+
+        function seperateRadioInput() {
+            if (radioState1 == false) {
+                for (let i = 0; i < hotel_types1.length; i++) {
+                    if (hotel_types1[i].checked) {
+                        hotel_types1[i].checked = false;
+                    }
+                }
+            }
+            if (radioState2 == false) {
+                for (let i = 0; i < hotel_types2.length; i++) {
+                    if (hotel_types2[i].checked) {
+                        hotel_types2[i].checked = false;
+                    }
+                }
+            }
+        }
+
         function changed() {
+            setTimeout(function(){checkStateRadio();},1);
 
             // doi thay doi xong(trong 1s) moi cap nhat tinh trang filter
-            setTimeout(function(){
+            setTimeout(function () {
                 let location = document.getElementById('autocomplete').value;
-                let standard=standard_check();
-
+                let standard = standard_check();
 
 
                 let hotel_type_list = hotel_type_check();
-                if(standard==undefined){
+                if (standard == undefined) {
                     standard = 0;
                 }
-                if(hotel_type_list.length==0){
+                if (hotel_type_list.length == 0) {
                     hotel_type_list = [];
                 }
                 // console.log('standard:'+ standard);
@@ -575,7 +638,7 @@
 
                 let token = $("meta[name='_csrf']").attr("content");
                 let header = $("meta[name='_csrf_header']").attr("content");
-                $(document).ajaxSend(function(e, xhr, options) {
+                $(document).ajaxSend(function (e, xhr, options) {
                     xhr.setRequestHeader(header, token);
                 });
 
@@ -585,62 +648,62 @@
                 // console.log(str);
                 $.ajax({
 
-                    url : '/filterProcess',
-                    type : 'post',
-                    data : {
-                        'location':localStorage.index_tmp_name,
-                        'hotel_type':hotel_type_list,
+                    url: '/filterProcess',
+                    type: 'post',
+                    data: {
+                        'location': localStorage.index_tmp_name,
+                        'hotel_type': hotel_type_list,
                         // 'hotel_standard': '',
                         // 'price':'',
                         // 'orderByPrice':'',
                         // 'orderByStandard':''
 
                     },
-                    dataType:'text',
+                    dataType: 'text',
 
 
-                    success : function(data) {
-                        if(data!=='error'){
+                    success: function (data) {
+                        if (data !== 'error') {
                             console.log("done");
-                            setTimeout(function(){$("#right-center-2").html(data)},100)
+                            setTimeout(function () {
+                                $("#right-center-2").html(data)
+                            }, 100)
 
                         }
                     },
-                    error : function(request,error)
-                    {
-                        alert("Request: "+JSON.stringify(request));
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
                     }
                 });
 
 
+                // them sao tren thanh lua chon cua ban
+                $('#opts-hangks').fadeIn();
+                var toAdd = $("input[name=hang-khachsang]:checked").val();
+                var star = '<span class="glyphicon glyphicon-star" style="color: rgb(255,192,0); font-size: 10px">' + '</span>';
 
-                    // them sao tren thanh lua chon cua ban
-                        $('#opts-hangks').fadeIn();
-                        var toAdd = $("input[name=hang-khachsang]:checked").val();
-                        var star = '<span class="glyphicon glyphicon-star" style="color: rgb(255,192,0); font-size: 10px">' + '</span>';
-
-                        if (toAdd == 5) {
-                            toAdd = star + star + star + star + star;
-                        } else if (toAdd == 4) {
-                            toAdd = star + star + star + star;
-                        } else if (toAdd == 3) {
-                            toAdd = star + star + star;
-                        } else if (toAdd == 2) {
-                            toAdd = star + star;
-                        }else if (toAdd == 1) {
-                            toAdd = star;
-                        }else{
-                            toAdd = "Mọi tiêu chuẩn"
-                        }
-                        // else {
+                if (toAdd == 5) {
+                    toAdd = star + star + star + star + star;
+                } else if (toAdd == 4) {
+                    toAdd = star + star + star + star;
+                } else if (toAdd == 3) {
+                    toAdd = star + star + star;
+                } else if (toAdd == 2) {
+                    toAdd = star + star;
+                } else if (toAdd == 1) {
+                    toAdd = star;
+                } else {
+                    toAdd = "Mọi tiêu chuẩn"
+                }
+                // else {
 //                      neu ko an? thi dung` su* kien check click lan` 2 de? bo? input radio + ko can input bat ky` nay`
 //                 $('#opts-hangks').fadeOut();
-                        // }
+                // }
 
-                        $('#opts-hangks').html(
-                            '<a href="#">' +
-                            '<div class="options-x">' + '&times;' + '</div>' + toAdd +
-                            '</a>');
+                $('#opts-hangks').html(
+                    '<a href="#">' +
+                    '<div class="options-x">' + '&times;' + '</div>' + toAdd +
+                    '</a>');
 
 //      $('#opts-hangks').css('backgroundColor','#ffc000');
                 add_HoverClickUpdate();
@@ -648,12 +711,13 @@
 
 
                 // phan dung code-end
-                },1);
+            }, 1);
             // call ajax when change
 
 
             // alert("some changes");
         }
+
         // cap nhat kha nang doc thay doi cua cac nut quan trong
         $(document).ready(function () {
 
@@ -676,7 +740,9 @@
             });
             $(".checkChange").each(function () {
                 let target = this;
-                target.addEventListener("click",function(){changed();})
+                target.addEventListener("click", function () {
+                    changed();
+                })
             });
             changed();
         })
@@ -685,11 +751,11 @@
             $('.options a').hover(
                 function () {
                     $(this).find('div').fadeIn();
-                    $(this).find('span').css("opacity","0.5");
+                    $(this).find('span').css("opacity", "0.5");
                 },
                 function () {
                     $(this).find('div').fadeOut();
-                    $(this).find('span').css("opacity","1");
+                    $(this).find('span').css("opacity", "1");
                 }
             );
             $('.options').click(function () {

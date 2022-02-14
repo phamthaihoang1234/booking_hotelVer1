@@ -99,6 +99,11 @@ public class HotelFilterControllerD {
                 System.out.println(hotel_type[i]);
             }
         }
+        String hotel_Prop_end ;
+        if(hotel_type==null){
+            hotel_Prop_end = "";
+        };
+
         ModelAndView mv = new ModelAndView("Pages/Hotel_ListDForFilter");
 
         response.setContentType("text/html; charset=UTF-8");
