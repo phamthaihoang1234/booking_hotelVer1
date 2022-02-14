@@ -76,13 +76,13 @@ public class OwnHotelController {
 
         Role roleOwner = new Role();
         roleOwner.setName("ROLE_OWNER");
-        Role roleUser = new Role();
-        roleUser.setName("ROLE_USER");
+//        Role roleUser = new Role();
+//        roleUser.setName("ROLE_USER");
         roleService.save(roleOwner);
-        roleService.save(roleUser);
+//        roleService.save(roleUser);
         Set<Role> roles = new HashSet<>();
         roles.add(roleOwner);
-        roles.add(roleUser);
+//        roles.add(roleUser);
 
         user.setRoles(roles);
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -201,7 +201,33 @@ public class OwnHotelController {
     }
 
 
+    @GetMapping("/hotelOwnerProfile")
+    public String editHotelOwnerProfile(Model model){
+        model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
+        if(userService.findByUserName(this.getPrincipal()).getRoles().equals("ROLE_USER")){
+            return "Pages/modal-user/profile2";
+        }
+        return "Pages/owner/hotelOwnerProfile";
+    }
 
+    @PostMapping("/hotelOwnerProfile/save")
+    public String saveEditHotelOwnerProfile(@ModelAttribute UserInfo hotelOwnerProfile) {
+
+        UserInfo oldHotelOwnerProfile = userService.findByUserName(this.getPrincipal());
+        oldHotelOwnerProfile.setName(hotelOwnerProfile.getName());
+        oldHotelOwnerProfile.setEmail(hotelOwnerProfile.getEmail());
+        oldHotelOwnerProfile.setPhoneNumber(hotelOwnerProfile.getPhoneNumber());
+        oldHotelOwnerProfile.setAddress(hotelOwnerProfile.getAddress());
+        try{
+            userService.save(oldHotelOwnerProfile);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+//        redirect.addFlashAttribute("success", "Saved HotelOwner Profile successfully!");
+        return "redirect:/hotelOwnerProfile";
+    }
 
 
 

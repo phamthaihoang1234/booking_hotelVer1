@@ -30,7 +30,7 @@ public class ProfileController {
     public String goToProfile(HttpServletRequest request, Model model) {
         // id=5
         model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
-        return "Pages/profile2";
+        return "Pages/modal-user/profile2";
 
     }
 
@@ -47,7 +47,7 @@ public class ProfileController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Pages/profile2";
+        return "Pages/modal-user/profile2";
     }
 
     @PostMapping("/saveChangePasword")

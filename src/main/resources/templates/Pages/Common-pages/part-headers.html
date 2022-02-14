@@ -140,10 +140,16 @@ search-hotels.html & book-now -->
                     </button>
                     <ul class="dropdown-menu">
                         <li style="line-height: 30px">
-                            <a th:href="@{/GetDetailsProfile}">
                                 <i class="material-icons" style="color: rgb(166, 166, 166)">info</i>
-                                <span>Thông tin tài khoản</span>
-                            </a>
+
+                                <span sec:authorize="hasRole('USER')">
+                                <a th:href="@{/GetDetailsProfile}">Thông tin tài khoản</a>
+                                </span>
+
+                                <span sec:authorize="hasRole('OWNER')">
+                                <a th:href="@{/hotelOwnerProfile}">Thông tin tài khoản</a>
+                                </span>
+
                         </li>
 
                         <span sec:authorize="hasRole('OWNER')">
