@@ -333,19 +333,19 @@
                 <div id="options" style="width: 55%; height: auto; float: left">
                     <div style="margin-bottom: 5px; font-weight: bold; color: rgb(156,153,153)">Lựa chọn của bạn:</div>
                     <!--=============-->
-                    <div id="opts-ddnoitieng" class="options" style="display: none">
-                        <!--da~ bo bot muc check vi` co' den 3 locations-->
-                        <!--<a href="#"><div class="options-x">&times;</div> Gần cầu rồng </a>-->
-                    </div>
+<!--                    <div id="opts-ddnoitieng" class="options" style="display: none">-->
+<!--                        &lt;!&ndash;da~ bo bot muc check vi` co' den 3 locations&ndash;&gt;-->
+<!--                        &lt;!&ndash;<a href="#"><div class="options-x">&times;</div> Gần cầu rồng </a>&ndash;&gt;-->
+<!--                    </div>-->
                     <div id="opts-price" class="options" style="display: none">
                         <!--da~ dieu chinh thanh 2 nut-->
                         <!--<a href="#"><div class="options-x">&times;</div> 2.000.000 <sup>đ</sup></a>-->
                     </div>
-                    <div id="opts-km" class="options">
-                        <a href="#">
-                            <div class="options-x">&times;</div>
-                            2 Km</a>
-                    </div>
+<!--                    <div id="opts-km" class="options">-->
+<!--                        <a href="#">-->
+<!--                            <div class="options-x">&times;</div>-->
+<!--                            2 Km</a>-->
+<!--                    </div>-->
                     <!--them display: none vi` co' kem` class="options" co' ke? border (du` chua co' noi dung)
                     add margin-top vao` class options xay ra loi~
                     -->
@@ -366,7 +366,9 @@
                             class="glyphicon glyphicon-menu-up"></span></a>
                 </div>
             </div>
+            <div id="right-center-2" style="margin-top: -25px">
 
+            </div>
 
             </div>
     </div>
@@ -507,30 +509,30 @@
 
     <!--Form Feedback (position: fixed): https://webengage.com/ , phai dang ky', chua tach ra duoc file rieng do co' kem` id-->
     <script id="_webengage_script_tag" type="text/javascript">
-        var webengage;
-        !function (e, t, n) {
-            function o(e, t) {
-                e[t[t.length - 1]] = function () {
-                    r.__queue.push([t.join("."), arguments])
-                }
-            }
-
-            var i, s, r = e[n], g = " ", l = "init options track onReady".split(g),
-                a = "feedback survey notification".split(g), c = "options render clear abort".split(g),
-                p = "Open Close Submit Complete View Click".split(g), u = "identify login logout setAttribute".split(g);
-            if (!r || !r.__v) {
-                for (e[n] = r = {__queue: [], __v: "5.0", user: {}}, i = 0; i < l.length; i++) o(r, [l[i]]);
-                for (i = 0; i < a.length; i++) {
-                    for (r[a[i]] = {}, s = 0; s < c.length; s++) o(r[a[i]], [a[i], c[s]]);
-                    for (s = 0; s < p.length; s++) o(r[a[i]], [a[i], "on" + p[s]])
-                }
-                for (i = 0; i < u.length; i++) o(r.user, ["user", u[i]]);
-                var f = t.createElement("script"), d = t.getElementById("_webengage_script_tag");
-                f.type = "text/javascript", f.async = !0, f.src = ("https:" == t.location.protocol ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-5.0.js", d.parentNode.insertBefore(f, d)
-            }
-        }(window, document, "webengage");
-        webengage.init('~15ba209b4');
-        webengage.options('isDemoMode', true);
+        // var webengage;
+        // !function (e, t, n) {
+        //     function o(e, t) {
+        //         e[t[t.length - 1]] = function () {
+        //             r.__queue.push([t.join("."), arguments])
+        //         }
+        //     }
+        //
+        //     var i, s, r = e[n], g = " ", l = "init options track onReady".split(g),
+        //         a = "feedback survey notification".split(g), c = "options render clear abort".split(g),
+        //         p = "Open Close Submit Complete View Click".split(g), u = "identify login logout setAttribute".split(g);
+        //     if (!r || !r.__v) {
+        //         for (e[n] = r = {__queue: [], __v: "5.0", user: {}}, i = 0; i < l.length; i++) o(r, [l[i]]);
+        //         for (i = 0; i < a.length; i++) {
+        //             for (r[a[i]] = {}, s = 0; s < c.length; s++) o(r[a[i]], [a[i], c[s]]);
+        //             for (s = 0; s < p.length; s++) o(r[a[i]], [a[i], "on" + p[s]])
+        //         }
+        //         for (i = 0; i < u.length; i++) o(r.user, ["user", u[i]]);
+        //         var f = t.createElement("script"), d = t.getElementById("_webengage_script_tag");
+        //         f.type = "text/javascript", f.async = !0, f.src = ("https:" == t.location.protocol ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-5.0.js", d.parentNode.insertBefore(f, d)
+        //     }
+        // }(window, document, "webengage");
+        // webengage.init('~15ba209b4');
+        // webengage.options('isDemoMode', true);
     </script>
     <script>
 
@@ -615,8 +617,8 @@
                     success : function(data) {
                         if(data!=='error'){
                             console.log("done");
+                            setTimeout(function(){$("#right-center-2").html(data)},100)
 
-                            $("#right-center").html(data)
                         }
                     },
                     error : function(request,error)
@@ -624,7 +626,44 @@
                         alert("Request: "+JSON.stringify(request));
                     }
                 });
-            },1);
+
+
+
+                    // them sao tren thanh lua chon cua ban
+                        $('#opts-hangks').fadeIn();
+                        var toAdd = $("input[name=hang-khachsang]:checked").val();
+                        var star = '<span class="glyphicon glyphicon-star" style="color: rgb(255,192,0); font-size: 10px">' + '</span>';
+
+                        if (toAdd == 5) {
+                            toAdd = star + star + star + star + star;
+                        } else if (toAdd == 4) {
+                            toAdd = star + star + star + star;
+                        } else if (toAdd == 3) {
+                            toAdd = star + star + star;
+                        } else if (toAdd == 2) {
+                            toAdd = star + star;
+                        }else if (toAdd == 1) {
+                            toAdd = star;
+                        }else{
+                            toAdd = "Mọi tiêu chuẩn"
+                        }
+                        // else {
+//                      neu ko an? thi dung` su* kien check click lan` 2 de? bo? input radio + ko can input bat ky` nay`
+//                 $('#opts-hangks').fadeOut();
+                        // }
+
+                        $('#opts-hangks').html(
+                            '<a href="#">' +
+                            '<div class="options-x">' + '&times;' + '</div>' + toAdd +
+                            '</a>');
+
+//      $('#opts-hangks').css('backgroundColor','#ffc000');
+                add_HoverClickUpdate();
+//             refreshPage();
+
+
+                // phan dung code-end
+                },1);
             // call ajax when change
 
 
@@ -655,6 +694,24 @@
                 target.addEventListener("click",function(){changed();})
             });
         })
+        var add_HoverClickUpdate = function () {
+//                    su* kien hover & click duoc ap dung cho tat ca cac tuy` chon (co' cai` lan dau tien khi load page)
+            $('.options a').hover(
+                function () {
+                    $(this).find('div').fadeIn();
+                    $(this).find('span').css("opacity","0.5");
+                },
+                function () {
+                    $(this).find('div').fadeOut();
+                    $(this).find('span').css("opacity","1");
+                }
+            );
+            $('.options').click(function () {
+//                        se~ fadeIn lai, khi add html
+                $(this).fadeOut();
+
+            });
+        };
 
         //phan dung code-end
 

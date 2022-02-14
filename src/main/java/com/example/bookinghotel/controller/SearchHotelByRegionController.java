@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 @Controller
 public class SearchHotelByRegionController {
+    // phan dung code
     @GetMapping("/all-locations")
     String searchHotelByRegion(){
         return "Pages/all-locations";
@@ -33,6 +34,6 @@ public class SearchHotelByRegionController {
         }
 
     }
-
+    // phan dung code-end
 
 }

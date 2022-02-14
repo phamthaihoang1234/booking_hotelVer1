@@ -18,7 +18,7 @@ import java.util.Random;
 
 @Controller
 public class PasswordRecoveryController {
-
+    // phan dung code
     @Autowired
     private EmailService emailService;
     @Autowired
@@ -128,5 +128,5 @@ public class PasswordRecoveryController {
     String getCallMessage(){
         return "Pages/modal-user/callMessage";
     }
-
+    // phan dung code-end
 }

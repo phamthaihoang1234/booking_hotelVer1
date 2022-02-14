@@ -1,12 +1,10 @@
-/**
- * Created by Group6 on 03/01/2016.
- */
-var refreshPage = function () {
-    $('#page-1').fadeOut();
-    $('#page-1').fadeIn();
 
-    $('#left-center-result').fadeOut();
-    $('#left-center-result').fadeIn();
+var refreshPage = function () {
+    // $('#page-1').fadeOut();
+    // $('#page-1').fadeIn();
+    //
+    // $('#left-center-result').fadeOut();
+    // $('#left-center-result').fadeIn();
 };
 // các input & button của nav
 $(document).ready(function () {
@@ -146,13 +144,14 @@ var main = function () {
     //    add_HoverClick();
     //});
 
+    // phan dung code
     // 2 nut http://jqueryui.com/slider/#range
     $(function () {
         $("#slider-range").slider({
             range: true,
-            min: 168600,
-            max: 25952800,
-            values: [168600, 25952800],
+            min: 1500000,
+            max: 25000000,
+            values: [1500000, 25000000],
             slide: function (event, ui) {
                 //stop: function( event, ui ) {
                 // ko co' parseInt
@@ -204,6 +203,7 @@ var main = function () {
             currency: 'VND'
         }));
     });
+    // phan dung code-end
 
     $('input[name=status]').change(function () {
         refreshPage();
@@ -227,35 +227,7 @@ var main = function () {
         }
     });
 
-    $('input[name=hang-khachsang]').change(function () {
-        if (boolean === 'true') {
-            $('#opts-hangks').fadeIn();
-            var toAdd = $("input[name=hang-khachsang]:checked").val();
-            var star = '<span class="glyphicon glyphicon-star" style="color: rgb(255,192,0); font-size: 10px">' + '</span>';
 
-            if (toAdd == "*****") {
-                toAdd = star + star + star + star + star;
-            } else if (toAdd == "****") {
-                toAdd = star + star + star + star;
-            } else if (toAdd == "***") {
-                toAdd = star + star + star;
-            } else if (toAdd == "**") {
-                toAdd = star + star;
-            } else {
-//                      neu ko an? thi dung` su* kien check click lan` 2 de? bo? input radio + ko can input bat ky` nay`
-                $('#opts-hangks').fadeOut();
-            }
-
-            $('#opts-hangks').html(
-                '<a href="#">' +
-                '<div class="options-x">' + '&times;' + '</div>' + toAdd +
-                '</a>');
-
-//      $('#opts-hangks').css('backgroundColor','#ffc000');
-            add_HoverClick();
-            refreshPage();
-        }
-    });
 
     $('#loai input[type=checkbox]').change(function () {
         if (boolean === 'true') {

@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 // chi viet code cho homepage vao day
 @Controller
 public class SearchHotelHomePageController {
+    // phan dung code
     @Autowired
     HotelService hotelService;
 
@@ -47,4 +48,5 @@ public class SearchHotelHomePageController {
             e.printStackTrace();
         }
     }
+    // phan dung code-end
 }

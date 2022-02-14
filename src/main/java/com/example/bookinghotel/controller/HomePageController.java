@@ -16,6 +16,7 @@ import java.util.List;
 
 @Controller
 public class HomePageController {
+    // phan dung code
     @Autowired
     private Web_ReviewRepository webReviewRepo;
     @Autowired
@@ -144,6 +145,7 @@ public class HomePageController {
 
         return "Pages/homepage";
     }
+    // phan dung code-end
 
 
 

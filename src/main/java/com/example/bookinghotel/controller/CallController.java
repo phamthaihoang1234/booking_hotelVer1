@@ -22,6 +22,7 @@ import java.net.URI;
 
 @Controller
 public class CallController {
+    //phan dung code
     @Autowired
     UserService userService;
 
@@ -75,7 +76,7 @@ public class CallController {
 //                        new com.twilio.type.Twiml("<Response><Say>Your password changed to "+newPassword+"" +
 //                                ".Please change your password soon</Say></Response>"))
 //                .create();
-
+        System.out.println("Cuoc goi da duoc thuc hien");
         return new ResponseEntity<Object>("Cuoc goi da duoc thuc hien", HttpStatus.OK);
 
     }
@@ -85,6 +86,7 @@ public class CallController {
         user.setPassword(password);
         userService.save(user);
     }
+    //phan dung code-end
 
 }
 
