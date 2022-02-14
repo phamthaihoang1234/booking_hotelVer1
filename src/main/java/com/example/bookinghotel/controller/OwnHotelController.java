@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -77,13 +76,13 @@ public class OwnHotelController {
 
         Role roleOwner = new Role();
         roleOwner.setName("ROLE_OWNER");
-        Role roleUser = new Role();
-        roleUser.setName("ROLE_USER");
+//        Role roleUser = new Role();
+//        roleUser.setName("ROLE_USER");
         roleService.save(roleOwner);
-        roleService.save(roleUser);
+//        roleService.save(roleUser);
         Set<Role> roles = new HashSet<>();
         roles.add(roleOwner);
-        roles.add(roleUser);
+//        roles.add(roleUser);
 
         user.setRoles(roles);
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -205,9 +204,9 @@ public class OwnHotelController {
     @GetMapping("/hotelOwnerProfile")
     public String editHotelOwnerProfile(Model model){
         model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
-//        if(userService.findByUserName(this.getPrincipal()).getRoles().equals("ROLE_USER")){
-//            return ""
-//        }
+        if(userService.findByUserName(this.getPrincipal()).getRoles().equals("ROLE_USER")){
+            return "Pages/modal-user/profile2";
+        }
         return "Pages/owner/hotelOwnerProfile";
     }
 
