@@ -1,6 +1,7 @@
 package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.*;
+import com.example.bookinghotel.repositories.UserRepository;
 import com.example.bookinghotel.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -46,6 +50,8 @@ public class OwnHotelController {
 
     @Autowired
     private HomeService roomService;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/signupOwn")
@@ -229,6 +235,24 @@ public class OwnHotelController {
         return "redirect:/hotelOwnerProfile";
     }
 
+    @PostMapping("/saveHotelOwnerNewPasword")
+    public void saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo) {
+        try (PrintWriter out = response.getWriter()) {
+            Optional<UserInfo> hotelOwner = userRepository.existsByUsernameAndPassword(this.getPrincipal(), oldPassword);
+            UserInfo oldHotelOwnerInfo = userService.findByUserName(this.getPrincipal());
+            if (hotelOwner.isPresent()) {
+                oldHotelOwnerInfo.setPassword(newPassword);
+                userService.save(oldHotelOwnerInfo);
+                out.write("Đổi mật khẩu thành công");
+            } else
+                out.write("Sai mật khẩu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        return "redirect:/hotelOwnerProfile";
+    }
 
 
 }
