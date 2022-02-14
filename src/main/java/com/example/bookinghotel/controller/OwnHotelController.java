@@ -1,6 +1,7 @@
 package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.*;
+import com.example.bookinghotel.repositories.UserRepository;
 import com.example.bookinghotel.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +47,10 @@ public class OwnHotelController {
 
     @Autowired
     private HomeService roomService;
+
+    @Autowired
+    private UserRepository userRepository;
+
 
 
     @GetMapping("/signupOwn")
