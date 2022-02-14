@@ -1,30 +1,21 @@
 package com.example.bookinghotel.controller;
 
 
-import com.example.bookinghotel.entities.Hotel_Property;
-import com.example.bookinghotel.entities.Role;
-import com.example.bookinghotel.entities.UserInfo;
-import com.example.bookinghotel.entities.WebReview;
+import com.example.bookinghotel.entities.*;
 import com.example.bookinghotel.repositories.Web_ReviewRepository;
 import com.example.bookinghotel.repositories.HotelRepository;
-import com.example.bookinghotel.services.RoleService;
-import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
-public class HomePage {
+public class HomePageController {
     @Autowired
     private Web_ReviewRepository webReviewRepo;
     @Autowired
@@ -105,6 +96,53 @@ public class HomePage {
 
         return "Pages/Common-pages/part-footer";
 
+    }
+    // method khong tham gia vao hien thi chi de thong bao cac attr ton tai
+    @GetMapping("/deleteErrorReport")
+    public String deleteErrReport(Model model){
+        model.addAttribute("hanoiType1","");
+        model.addAttribute("hanoiType2","");
+        model.addAttribute("hanoiType3","");
+        model.addAttribute("hanoiType4","");
+        model.addAttribute("hanoiType5","");
+        model.addAttribute("hanoiType6","");
+
+        model.addAttribute("danangType1","");
+        model.addAttribute("danangType2","");
+        model.addAttribute("danangType3","");
+        model.addAttribute("danangType4","");
+        model.addAttribute("danangType5","");
+        model.addAttribute("danangType6","");
+
+        model.addAttribute("hochiminhType1","");
+        model.addAttribute("hochiminhType2","");
+        model.addAttribute("hochiminhType3","");
+        model.addAttribute("hochiminhType4","");
+        model.addAttribute("hochiminhType5","");
+        model.addAttribute("hochiminhType6","");
+
+        Iterable<Hotel> hotels = hotelRepository.findAll();
+
+        model.addAttribute("hanoihotelType1",hotels);
+        model.addAttribute("hanoihotelType2",hotels);
+        model.addAttribute("hanoihotelType3",hotels);
+        model.addAttribute("hanoihotelType4",hotels);
+        model.addAttribute("hanoihotelType5",hotels);
+        model.addAttribute("hanoihotelType6",hotels);
+        model.addAttribute("dananghotelType1",hotels);
+        model.addAttribute("dananghotelType2",hotels);
+        model.addAttribute("dananghotelType3",hotels);
+        model.addAttribute("dananghotelType4",hotels);
+        model.addAttribute("dananghotelType5",hotels);
+        model.addAttribute("dananghotelType6",hotels);
+        model.addAttribute("hochiminhhotelType1",hotels);
+        model.addAttribute("hochiminhhotelType2",hotels);
+        model.addAttribute("hochiminhhotelType3",hotels);
+        model.addAttribute("hochiminhhotelType4",hotels);
+        model.addAttribute("hochiminhhotelType5",hotels);
+        model.addAttribute("hochiminhhotelType6",hotels);
+
+        return "Pages/homepage";
     }
 
 

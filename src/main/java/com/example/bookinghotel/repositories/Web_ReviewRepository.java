@@ -20,6 +20,6 @@ public interface Web_ReviewRepository extends CrudRepository<WebReview, Long> {
     @Query(value = "select wr from WebReview wr order by wr.rate desc ")
     //limit 4
     List<WebReview> findTop4Comment(Pageable pageable);
-    //findTop4Comment(PageRequest.of(0,4));
+    //findTop4Comment(PageRequest.of(0,4));// them tham so trong phan goi method
     //phan dung code-end
 }
