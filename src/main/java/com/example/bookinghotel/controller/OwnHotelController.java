@@ -209,15 +209,20 @@ public class OwnHotelController {
     }
 
     @PostMapping("/hotelOwnerProfile/save")
-    public String saveEditHotelOwnerProfile(@ModelAttribute UserInfo hotelOwnerProfile, RedirectAttributes redirect) throws Exception {
+    public String saveEditHotelOwnerProfile(@ModelAttribute UserInfo hotelOwnerProfile) {
 
-        Optional<UserInfo> oldHotelOwnerProfile = Optional.ofNullable(userService.findByUserName(this.getPrincipal()));
-        oldHotelOwnerProfile.get().setName(hotelOwnerProfile.getName());
-        oldHotelOwnerProfile.get().setEmail(hotelOwnerProfile.getEmail());
-        oldHotelOwnerProfile.get().setPhoneNumber(hotelOwnerProfile.getPhoneNumber());
-        oldHotelOwnerProfile.get().setAddress(hotelOwnerProfile.getAddress());
+        UserInfo oldHotelOwnerProfile = userService.findByUserName(this.getPrincipal());
+        oldHotelOwnerProfile.setName(hotelOwnerProfile.getName());
+        oldHotelOwnerProfile.setEmail(hotelOwnerProfile.getEmail());
+        oldHotelOwnerProfile.setPhoneNumber(hotelOwnerProfile.getPhoneNumber());
+        oldHotelOwnerProfile.setAddress(hotelOwnerProfile.getAddress());
+        try{
+            userService.save(oldHotelOwnerProfile);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        userService.save(hotelOwnerProfile);
+
 //        redirect.addFlashAttribute("success", "Saved HotelOwner Profile successfully!");
         return "redirect:/hotelOwnerProfile";
     }
