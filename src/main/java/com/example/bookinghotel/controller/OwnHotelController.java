@@ -4,6 +4,8 @@ import com.example.bookinghotel.entities.*;
 import com.example.bookinghotel.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,21 +55,34 @@ public class OwnHotelController {
 
     }
 
+    private String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
     @Value("E:/ListRoom/file/")
     private String fileUpload;
 
     @PostMapping("/saveOwner")
-    public String saveInforOfOwner(@Validated @ModelAttribute("owner") UserInfo user , BindingResult result , RedirectAttributes redirect) throws Exception {
+    public String saveInforOfOwner(@Validated @ModelAttribute("owner") UserInfo user , BindingResult result , RedirectAttributes redirect, Model model) throws Exception {
 
         Role roleOwner = new Role();
         roleOwner.setName("ROLE_OWNER");
-        Role roleUser = new Role();
-        roleUser.setName("ROLE_USER");
+//        Role roleUser = new Role();
+//        roleUser.setName("ROLE_USER");
         roleService.save(roleOwner);
-        roleService.save(roleUser);
+//        roleService.save(roleUser);
         Set<Role> roles = new HashSet<>();
         roles.add(roleOwner);
-        roles.add(roleUser);
+//        roles.add(roleUser);
 
         user.setRoles(roles);
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -76,17 +91,24 @@ public class OwnHotelController {
         user.setActive(true);
         user.setName(user.getUsername());
 
-        System.out.println(user.getUsername());
-        System.out.println(user.getActive());
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
-        System.out.println(user.getRoles());
-        System.out.println(user.getPhoneNumber());
-        System.out.println(user.getGender());
-
-
         if (result.hasErrors()) {
-            System.out.println("vao loi nhe");
+            if(userService.findByUserName(user.getUsername()) != null){
+                model.addAttribute("errolUsername", "Username was existed");
+            }
+            if(userService.findByEmail(user.getEmail()) != null) {
+                model.addAttribute("errolEmail", "Email was existed");
+            }
+            return "/Pages/owner/formOwnRegister";
+        }
+        else if(userService.findByUserName(user.getUsername()) != null){
+            model.addAttribute("errolUsername", "Username was existed");
+            if(userService.findByEmail(user.getEmail()) != null) {
+                model.addAttribute("errolEmail", "Email was existed");
+            }
+            return "/Pages/owner/formOwnRegister";
+        }
+        else if(userService.findByEmail(user.getEmail()) != null){
+            model.addAttribute("errolEmail", "Email was existed");
             return "/Pages/owner/formOwnRegister";
         }
         else {
@@ -121,51 +143,91 @@ public class OwnHotelController {
 //        return "/result";
 //    }
 //
-//    public Long idHotel ;
-//
-//    @GetMapping("/createRoom/{id}")
-//    public String showFormCreateRoom(@PathVariable("id") Long id , Model model){
-//        model.addAttribute("listProperty", typeService.getAll());
-//        Room room = new Room();
-//        room.setHotel(hotelService.findById(id).get());
-//        idHotel = id;
-//        model.addAttribute("room", room);
-//        System.out.println("name of hote : "+hotelService.findById(id).get().getAddressOfHotel());
-//        return "Room/create";
-//    }
-//
-//    @PostMapping("/saveRoom")
-//    public String saveRoom(Model model, @ModelAttribute("room") Room room, @RequestParam("p") Long id,RedirectAttributes redirect){
-//        System.out.println(idHotel);
-//        room.setHotel(hotelService.findById(idHotel).get());
-//        System.out.println("name of hote : "+room.getHotel().getNameOfHotel());
-//        System.out.println("Tên cua type la: "+typeService.getOne(id).get().getName());
-//
-//        room.setPropertyType(typeService.getOne(id).get());
-//        MultipartFile multipartFile = room.getImage();
-//        String fileName = multipartFile.getOriginalFilename();
-//
-//        try {
-//            FileCopyUtils.copy(room.getImage().getBytes(), new File(fileUpload + fileName));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        room.setImgSrc3(fileName);
-//        room.setPricePerNight(2.5);
-//        room.setTotalOfBathroom(11);
-//        room.setTotalOfBedroom(11);
-//        room.setBookings(null);
-//        room.setDiscount(discountService.findById(1L).get());
-//        room.setUser(userService.findById(1L).get());
-//        homeService.save(room);
-//        model.addAttribute("rooms",roomService.findAll());
-//
-//
-//        return "Room/ListRoom";
-//    }
-//
+    public Long idHotel;
 
 
+    @GetMapping("/manageRoom/{id}")
+    public String homepageRoom(@PathVariable("id") Long id , Model model){
+        idHotel = id;
+//        model.addAttribute("rooms",roomService.findAllByHotelId(id));
+        return "redirect:/roomHomepage";
+    }
+
+    @GetMapping("/roomHomepage")
+    public String homepageRoom(Model model){
+        model.addAttribute("rooms",roomService.findAllByHotelId(idHotel));
+        return "Pages/roomManage/all-room";
+    }
+
+    @GetMapping("/createRoom")
+    public String showFormCreateRoom( Model model){
+        model.addAttribute("listProperty", typeService.getAll());
+        Room room = new Room();
+        room.setHotel(hotelService.findById(idHotel).get());
+        model.addAttribute("room", room);
+        System.out.println("name of hote : "+hotelService.findById(idHotel).get().getAddressOfHotel());
+        return "Pages/roomManage/add-room";
+    }
+
+    @PostMapping("/saveRoom")
+    public String saveRoom(Model model, @ModelAttribute("room") Room room,@RequestParam("pr") Long id,RedirectAttributes redirect){
+        System.out.println("vao save room");
+        System.out.println("id property"+id);
+        System.out.println("id saveroom hotel la: " +idHotel);
+        room.setHotel(hotelService.findById(idHotel).get());
+        System.out.println("name of hote : "+room.getHotel().getNameOfHotel());
+       System.out.println("Tên cua type la: "+ typeService.getOne(id).get().getName());
+        System.out.println("Tên cua type la: "+ room.getStatus());
+
+        room.setPropertyType(typeService.getOne(id).get());
+        MultipartFile multipartFile = room.getImage();
+        String fileName = multipartFile.getOriginalFilename();
+
+        try {
+            FileCopyUtils.copy(room.getImage().getBytes(), new File(fileUpload + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        room.setImgSrc3(fileName);
+
+        room.setBookings(null);
+        room.setDiscount(discountService.findById(1L).get());
+        room.setUser(userService.findByUserName(getPrincipal()));
+        homeService.save(room);
+        model.addAttribute("rooms",roomService.findAllByHotelId(idHotel));
+
+
+        return "Pages/roomManage/all-room";
+    }
+
+
+    @GetMapping("/hotelOwnerProfile")
+    public String editHotelOwnerProfile(Model model){
+        model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
+        if(userService.findByUserName(this.getPrincipal()).getRoles().equals("ROLE_USER")){
+            return "Pages/modal-user/profile2";
+        }
+        return "Pages/owner/hotelOwnerProfile";
+    }
+
+    @PostMapping("/hotelOwnerProfile/save")
+    public String saveEditHotelOwnerProfile(@ModelAttribute UserInfo hotelOwnerProfile) {
+
+        UserInfo oldHotelOwnerProfile = userService.findByUserName(this.getPrincipal());
+        oldHotelOwnerProfile.setName(hotelOwnerProfile.getName());
+        oldHotelOwnerProfile.setEmail(hotelOwnerProfile.getEmail());
+        oldHotelOwnerProfile.setPhoneNumber(hotelOwnerProfile.getPhoneNumber());
+        oldHotelOwnerProfile.setAddress(hotelOwnerProfile.getAddress());
+        try{
+            userService.save(oldHotelOwnerProfile);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+//        redirect.addFlashAttribute("success", "Saved HotelOwner Profile successfully!");
+        return "redirect:/hotelOwnerProfile";
+    }
 
 
 

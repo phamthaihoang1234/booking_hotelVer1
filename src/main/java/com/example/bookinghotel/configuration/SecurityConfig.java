@@ -77,13 +77,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/","login","/register","/sendEmail").permitAll()
                 .antMatchers(HttpMethod.POST).permitAll()
                 //.antMatchers("/login").access("hasAnyRole('ROLE_USER')")
-//                .antMatchers("/carts").access("hasRole('ROLE_SELLER')")
+                .antMatchers("/manageHotels").access("hasRole('ROLE_OWNER')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
 
             //  .and().formLogin().successHandler(customSuccessHandler)
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
-        http.authorizeRequests().and() //
+                http.authorizeRequests().and() //
                 .rememberMe().tokenRepository(this.persistentTokenRepository()) //
                 .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
 
