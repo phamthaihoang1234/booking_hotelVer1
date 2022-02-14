@@ -2,10 +2,13 @@ package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.Hotel;
 import com.example.bookinghotel.entities.Hotel_Property;
+import com.example.bookinghotel.repositories.HotelFilterRepository;
+import com.example.bookinghotel.repositories.HotelRepository;
 import com.example.bookinghotel.repositories.Hotel_PropertyRepositoryD;
 import com.example.bookinghotel.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +20,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 @Controller
@@ -29,9 +33,26 @@ public class HotelFilterControllerD {
     HotelService hotelService;
     @Autowired
     Hotel_PropertyRepositoryD hotel_propertyRepositoryD;
+    @Autowired
+    HotelFilterRepository hotelFilterRepository;
+    @Autowired
+    HotelRepository hotelRepository;
+
     @GetMapping("/search-hotels")
-    String HotelFiler() {
+    String HotelFiler(Model model) {
         Iterable<Hotel_Property> hotel_types = hotel_propertyRepositoryD.findAll();
+        ArrayList<Integer> hotel_standards = hotelService.findAllHotel_Standard();
+        ArrayList<Object> stars_per_standard = new ArrayList<>();
+        ArrayList<ArrayList<Object>> standards = new ArrayList<>();
+
+        for(int i = 0 ; i < hotel_standards.size();i++){
+            for(int j = 0 ; j< hotel_standards.get(i) ; j++)
+                stars_per_standard.add(new Object());
+            standards.add(stars_per_standard);
+            stars_per_standard = new ArrayList<>();
+        }
+        model.addAttribute("hotel_types",hotel_types);
+        model.addAttribute("standards",standards);
         return "Pages/hotelFilter";
     }
 

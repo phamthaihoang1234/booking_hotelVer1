@@ -11,5 +11,6 @@ public interface HotelRepository extends CrudRepository<Hotel, Long> {
             "on Hotel_Property_id = Hotel_property.id " +
             "where hotel.address_of_hotel LIKE CONCAT('%',?1,'%') and Hotel_Property.type LIKE CONCAT('%',?2,'%') ")
     Iterable<Hotel> findByHotel_addressContainingAndHotel_property(String contains,String hotelProperty);
-// phan dung code-end
+
+    // phan dung code-end
 }
