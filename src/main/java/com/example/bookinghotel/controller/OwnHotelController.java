@@ -205,6 +205,9 @@ public class OwnHotelController {
     @GetMapping("/hotelOwnerProfile")
     public String editHotelOwnerProfile(Model model){
         model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
+//        if(userService.findByUserName(this.getPrincipal()).getRoles().equals("ROLE_USER")){
+//            return ""
+//        }
         return "Pages/owner/hotelOwnerProfile";
     }
 

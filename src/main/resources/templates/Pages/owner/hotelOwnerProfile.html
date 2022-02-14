@@ -97,7 +97,7 @@
                             <h6>Soeng Souy</h6>
                             <p class="text-muted mb-0">Administrator</p>
                         </div>
-                    </div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="login.html">Logout</a> </div>
+                    </div> <a class="dropdown-item" th:href="@{/hotelOwnerProfile}">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="login.html">Logout</a> </div>
             </li>
         </ul>
     </div>
@@ -114,11 +114,11 @@
                             <li><a href="add-booking.html"> Add Booking </a></li>
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Hotel Manage </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a href="all-customer.html"> All customers </a></li>
-                            <li><a href="edit-customer.html"> Edit Customer </a></li>
-                            <li><a href="add-customer.html"> Add Customer </a></li>
+                            <li><a th:href="@{/homepageHotel}"> All hotel </a></li>
+<!--                            <li><a href="edit-customer.html"> Edit Hotel </a></li>-->
+<!--                            <li><a href="add-customer.html"> Add Customer </a></li>-->
                         </ul>
                     </li>
                     <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
@@ -429,16 +429,19 @@
                                     <h5 class="card-title">Thay Đổi Mật Khẩu</h5>
                                     <div class="row">
                                         <div class="col-md-10 col-lg-6">
-                                            <form th:action="@{/saveHotelOwnerNewPassword}" method="post">
+                                            <form th:action="@{/saveHotelOwnerNewPassword}" th:object="${OwnerPassword}" method="post">
                                                 <div class="form-group">
                                                     <label>Mật Khẩu Cũ</label>
-                                                    <input type="password" class="form-control"> </div>
+                                                    <input type="password" class="form-control">
+                                                </div>
                                                 <div class="form-group">
                                                     <label>Mật Khẩu Mới</label>
-                                                    <input type="password" class="form-control"> </div>
+                                                    <input type="password" class="form-control">
+                                                </div>
                                                 <div class="form-group">
                                                     <label>Xác Nhận Thay Đổi Mật Khẩu</label>
-                                                    <input type="password" class="form-control"> </div>
+                                                    <input type="password" class="form-control">
+                                                </div>
                                                 <button class="btn btn-primary" type="submit">Lưu Thay Đổi</button>
                                             </form>
                                         </div>
