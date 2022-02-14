@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 // chi viet code cho homepage vao day
 @Controller
 public class SearchHotelHomePageController {
+    // phan dung code
     @Autowired
     HotelService hotelService;
 
@@ -38,11 +39,14 @@ public class SearchHotelHomePageController {
             // loai bo dau "," cuoi cung
             ans = ans.substring(0,ans.length()-2);
         }
-
+        // xu ly van de dau trong data
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.write(ans);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    // phan dung code-end
 }
