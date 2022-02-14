@@ -302,10 +302,10 @@
                 <div class="left-title">LOẠI</div>
                 <div class ="loai">
                     <ul style="list-style-type: none">
-                        <li><input type="checkbox" value="Bình dân" /> Bình dân</li>
-                        <li><input type="checkbox" value="Hạng trung"/> Hạng trung</li>
-                        <li><input type="checkbox" value="Sang trọng"/> Sang trọng</li>
-                        <li><input type="checkbox" value="Lãng mạn"/> Lãng mạn</li>
+                        <th:block th:each="hotelProperty:${hotel_types1}">
+                        <li><input type="checkbox" th:value="${hotelProperty.getType()}" th:text="${hotelProperty.getType()}" /> </li>
+
+                        </th:block>
                         <li><a id="loai-them" data-toggle="modal" href="#myModal"
                                style="color: black; font-size: small"> Thêm ...</a></li>
                     </ul>
@@ -388,29 +388,14 @@
                     <div class="row">
                         <form role="form">
                             <table class="table borderless">
-                                <tr>
-<!--                                    <td><input type="checkbox"> Bình dân</td>-->
-                                    <td><input type="checkbox"> Khách sạn nghĩ dưỡng</td>
-                                    <td><input type="checkbox"> Yên tĩnh</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"> Cổ điển</td>
-                                    <td><input type="checkbox"> Nhỏ và sang trọng</td>
-                                    <td><input type="checkbox"> Thương gia</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"> Dành cho gia đình</td>
-                                    <td><input type="checkbox"> Quyến rũ</td>
-                                    <td><input type="checkbox"> Thời thượng</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"> Gía tốt nhất</td>
-                                    <td><input type="checkbox"> Hạng trung</td>
-                                </tr>
-                                <tr>
-                                </tr>
-                                <tr>
-                                </tr>
+                                <th:block th:each="hotelProperty,state:${hotel_types2}">
+                                    <th:block th:if="${state.index}%3==0" th:utext="'&lt;tr&gt;'" />
+
+                                    <td><input type="checkbox" th:value="${hotelProperty.getType()}" th:text="${hotelProperty.getType()}" /></td>
+
+                                    <th:block th:if="${state.index}%3==2" th:utext="'&lt;/tr&gt;'" />
+                                </th:block>
+
                             </table>
                         </form>
                     </div>
@@ -539,13 +524,13 @@
         // phan dung code
 
         function standard_check(){
-            let standard;
+            let standard = 0; // mac dinh la khong chon gi se set = 0
             let standard_list = document.getElementsByName('hang-khachsang');
             for (let i = 0; i < standard_list.length; i++) {
 
                 let star = standard_list[i].checked;
                 if (star == true) {
-                    standard = standard_list[i].value.length;
+                    standard = standard_list[i].value;
                     break;
                 }
             }
@@ -579,11 +564,11 @@
                 if(standard==undefined){
                     standard = 0;
                 }
-                if(hotel_type_list==undefined){
-                    hotel_type_list = [""];
+                if(hotel_type_list.length==0){
+                    hotel_type_list = [];
                 }
-                console.log('standard:'+ standard);
-                console.log(hotel_type_list);
+                // console.log('standard:'+ standard);
+                // console.log(hotel_type_list);
                 let price_order;
                 let standard_order;
                 let price;// chua xac dinh trong db
@@ -693,6 +678,7 @@
                 let target = this;
                 target.addEventListener("click",function(){changed();})
             });
+            changed();
         })
         var add_HoverClickUpdate = function () {
 //                    su* kien hover & click duoc ap dung cho tat ca cac tuy` chon (co' cai` lan dau tien khi load page)

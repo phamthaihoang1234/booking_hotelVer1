@@ -40,18 +40,34 @@ public class HotelFilterControllerD {
 
     @GetMapping("/search-hotels")
     String HotelFiler(Model model) {
-        Iterable<Hotel_Property> hotel_types = hotel_propertyRepositoryD.findAll();
+        ArrayList<Hotel_Property> hotel_properties = hotel_propertyRepositoryD.findAll();
         ArrayList<Integer> hotel_standards = hotelService.findAllHotel_Standard();
+        // so sao cua 1 standard - stars_per_standard
+        // 1 obj = 1 sao
         ArrayList<Object> stars_per_standard = new ArrayList<>();
         ArrayList<ArrayList<Object>> standards = new ArrayList<>();
 
+        // them cac standard vao model
         for(int i = 0 ; i < hotel_standards.size();i++){
             for(int j = 0 ; j< hotel_standards.get(i) ; j++)
                 stars_per_standard.add(new Object());
             standards.add(stars_per_standard);
             stars_per_standard = new ArrayList<>();
         }
-        model.addAttribute("hotel_types",hotel_types);
+
+        // chia cac  hotel property vao tung attr theo form cua hotelFilter.html
+        ArrayList<Hotel_Property> hotel_properties1 = new ArrayList<>();
+        ArrayList<Hotel_Property> hotel_properties2 = new ArrayList<>();
+        for(int i = 0 ;i<4; i++){
+            hotel_properties1.add(hotel_properties.get(i));
+
+        }
+        for(int i = 4 ; i< hotel_properties.size();i++){
+            hotel_properties2.add(hotel_properties.get(i));
+        }
+
+        model.addAttribute("hotel_types1",hotel_properties1);
+        model.addAttribute("hotel_types2",hotel_properties2);
         model.addAttribute("standards",standards);
         return "Pages/hotelFilter";
     }
