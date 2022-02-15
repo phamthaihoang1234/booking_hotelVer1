@@ -37,7 +37,7 @@ public class HotelFilterControllerD {
     HotelFilterRepository hotelFilterRepository;
     @Autowired
     HotelRepository hotelRepository;
-
+    ////
     @GetMapping("/search-hotels")
     String HotelFiler(Model model) {
         ArrayList<Hotel_Property> hotel_properties = hotel_propertyRepositoryD.findAll();
