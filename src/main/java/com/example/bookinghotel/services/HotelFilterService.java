@@ -18,4 +18,6 @@ public interface HotelFilterService extends CrudRepository<Hotel,Long> {
     public ArrayList<Hotel> listHotelByLocationAndNoPageable(String location);
     public ArrayList<Hotel> listHotelByProperyAndNoPageable(String location,String Property);
     public ArrayList<Hotel> listHotelByStandardAndNoPageable(String location,int standard);
+
+
 }

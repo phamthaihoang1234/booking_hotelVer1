@@ -36,7 +36,7 @@ public class HotelServiceImpl implements HotelService {
         hotelRepository.deleteById(id);
     }
     //phan dung code
-    public ArrayList<Integer> findAllHotel_Standard(){
+    public ArrayList<Integer> findAllHotel_StandardByLocation(String location){
         Iterable<Hotel> hotels = hotelRepository.findAll();
         ArrayList<Integer> standards = new ArrayList<>();
         hotels.forEach(hotel -> {
@@ -49,6 +49,21 @@ public class HotelServiceImpl implements HotelService {
         Collections.reverse(standards);
 
         return standards;
+    }
+
+    @Override
+    public ArrayList<Integer> findAllHotel_StandardByAllInputType(String location, String start_date, String end_date, int number_of_people) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Integer> findAllHotel_PropertyByLocation(String location) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Integer> findAllHotel_PropertyByAllInputType(String location, String start_date, String end_date, int number_of_people) {
+        return null;
     }
     // phan dung code -end
 }

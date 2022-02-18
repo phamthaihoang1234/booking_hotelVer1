@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +22,7 @@ import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Controller
@@ -44,10 +42,30 @@ public class HotelFilterControllerD {
     @Autowired
     HotelFilterService hotelFilterService;
 
-    @GetMapping("/search-hotels")
-    String HotelFiler(Model model) {
-        ArrayList<Hotel_Property> hotel_properties = hotel_propertyRepositoryD.findAll();
-        ArrayList<Integer> hotel_standards = hotelService.findAllHotel_Standard();
+    @RequestMapping(value={"search-hotels","search-hotels/{location}"},method = { RequestMethod.GET, RequestMethod.POST })
+
+    String HotelFiler(Model model,
+                      @RequestParam(value = "location",required = false) String location,
+                      @RequestParam(value = "start_date",required = false) String start_date,
+                      @RequestParam(value = "end_date",required = false) String end_date,
+                      @RequestParam(value = "number_of_people",required = false) Integer number_of_people,
+                      @PathVariable Optional<String> location2) {
+
+        String unique_location = "";
+        ArrayList<Hotel_Property> hotel_properties ;
+        ArrayList<Integer> hotel_standards ;
+
+        if(location2.isPresent()){
+            hotel_properties = hotel_propertyRepositoryD.findAll();
+            hotel_standards = hotelService.findAllHotel_StandardByLocation(location2.get());
+        }
+        else {
+            hotel_properties = hotel_propertyRepositoryD.findAll();
+            hotel_standards = hotelService.findAllHotel_StandardByLocation(unique_location);
+        }
+
+
+
         // so sao cua 1 standard - stars_per_standard
         // 1 obj = 1 sao
         ArrayList<Object> stars_per_standard = new ArrayList<>();
