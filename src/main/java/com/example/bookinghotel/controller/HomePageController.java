@@ -24,7 +24,6 @@ public class HomePageController {
     @GetMapping("/")
     public String homepage(Model model) {
         model = getTopReview(model);
-        //
         model = getHotelProperty(model,"Hà Nội","hanoi");// hanoi hotel - all property
         model = getHotelProperty(model,"Đà Nẵng","danang");// danang hotel - all property
         model = getHotelProperty(model,"Hồ Chí Minh","hochiminh");// tphochiminh hotel - all property
