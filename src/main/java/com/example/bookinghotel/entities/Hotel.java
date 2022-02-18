@@ -1,6 +1,7 @@
 package com.example.bookinghotel.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -93,5 +94,16 @@ public class Hotel {
     public void setHotel_property(Hotel_Property hotel_property) {
         this.hotel_property = hotel_property;
     }
-// phan dung them vao-end
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "hotel")
+    private ArrayList<Room> rooms;
+
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+    }
+    // phan dung them vao-end
 }

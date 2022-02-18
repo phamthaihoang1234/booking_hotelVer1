@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>YOY | search-hotels</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/search-hotels.css">
     <!-- bootstrap: de y' 2 file ajax phai dat truoc maxcdn thi moi dung` duoc modal (Form)-->
     <!-- Online -->
@@ -17,29 +17,12 @@
     <script src="Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
     <!-- Start WOWSlider.com section -->
-    <!--slide-1-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine0/style.css"/>
-    <script type="text/javascript" src="Utilities/slideshow/slideshow1/engine0/jquery.js"></script>
-    <!--slide-2: tu` slide nay` tro di thi file engine cua jquery dug chung voi slide 1-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine1/style.css"/>
-    <!--    script type="text/javascript" src="engine1/jquery.js"></script-->
-    <!--slide-3-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine2/style.css"/>
-    <!--slide-4-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine3/style.css"/>
-    <!--slide-5-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine4/style.css"/>
-    <!--slide-6-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine5/style.css"/>
-    <!--slide-7-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine6/style.css"/>
-    <!--slide-8-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine7/style.css"/>
-    <!--slide-9-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine8/style.css"/>
-    <!--slide-10-->
-    <link rel="stylesheet" type="text/css" href="Utilities/slideshow/slideshow1/engine9/style.css"/>
-    <!-- End WOWSlider.com HEAD section -->
+    <script src="Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
+    <!--<script type="text/javascript" src="js/search-hotels.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <!--nhóm js nay` phai dat phia' sau cac slide thi moi' chay duoc (co le code tren chua cai ready...)-->
     <!--autocomplete-suggestions-->
@@ -293,7 +276,7 @@
                             </li>
                         </th:block>
 
-                        <li style="color: rgb(70,68,73)"><input type="radio" name="hang-khachsang" value=""> Bất kỳ</li>
+                        <li style="color: rgb(70,68,73)"><input type="radio" name="hang-khachsang" value="0"> Bất kỳ</li>
 
                     </ul>
                 </div>
@@ -309,6 +292,7 @@
                                        th:text="${hotelProperty.getType()}"/></li>
 
                         </th:block>
+                        <li><input type="radio" name="hotel_types1" value="all"/>Bất kì</li>
                         <li><a id="loai-them" data-toggle="modal" href="#myModal"
                                style="color: black; font-size: small"> Thêm ...</a></li>
 
@@ -387,7 +371,7 @@
                 <div class="modal-header"> <!-- style="padding:35px 50px;" -->
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <!--khi dat chung file thi ko can` cai` su* kien  id="refreshDIV" onClick="history.go(0)" cho nut'-->
-                    <h4>Loại</h4>
+
                 </div>
                 <div class="modal-body" style="padding:30px 30px"> <!--  style="padding:40px 50px;" -->
                     <div class="row">
@@ -401,6 +385,8 @@
 
                                     <th:block th:if="${state.index}%3==2" th:utext="'&lt;/tr&gt;'"/>
                                 </th:block>
+
+
 
                             </table>
                         </form>
@@ -558,65 +544,80 @@
             }
             return __hotel_types;
         }
-
-        let radioState1 =false ;
-        let radioState2 = false;
+        // xu ly 1 group radio nhung bi chia thanh 2 phan
+        let radioState1_old =false ;
+        let radioState2_old = false;
+        let radioState1_new = false;
+        let radioState2_new = false;
         let hotel_types1 = document.getElementsByName('hotel_types1');
         let hotel_types2 = document.getElementsByName('hotel_types2');
-        console.log(hotel_types1);
-        console.log(hotel_types2);
-        function checkStateRadio() {
 
+        function checkStateRadio() {
+            // lay trang thai moi
             for (let i = 0; i < hotel_types1.length; i++) {
                 if (hotel_types1[i].checked) {
-
-                    if (radioState1 == false&&radioState2==true) {
-                        radioState1 = true;
-                        radioState2 = false;
-                    }else if(radioState1== false&&radioState2==false){
-                        radioState1 = true;
-                    }
+                    radioState1_new = true;
                     break;
                 }
             }
-            console.log(radioState1+","+radioState2);
-            seperateRadioInput();
+
             for (let i = 0; i < hotel_types2.length; i++) {
                 if (hotel_types2[i].checked) {
-                     if(radioState2==false&&radioState1==true){
-                        radioState1 = false;
-                        radioState2 = true;
-                    }else if(radioState2== false&&radioState1==false){
-                        radioState2 = true;
-                    }
+                    radioState2_new = true;
                     break;
                 }
             }
-            seperateRadioInput();
-            console.log(radioState1+","+radioState2);
-
-        }
-
-        function seperateRadioInput() {
-            if (radioState1 == false) {
-                for (let i = 0; i < hotel_types1.length; i++) {
-                    if (hotel_types1[i].checked) {
-                        hotel_types1[i].checked = false;
-                    }
-                }
-            }
-            if (radioState2 == false) {
+            if(radioState1_new==true&&radioState1_old==false){
+                // chinh lai trang thai the sai
                 for (let i = 0; i < hotel_types2.length; i++) {
                     if (hotel_types2[i].checked) {
                         hotel_types2[i].checked = false;
                     }
                 }
+                radioState2_new = false;
+
+            }
+            if(radioState2_new==true&&radioState2_old==false){
+                for (let i = 0; i < hotel_types1.length; i++) {
+                    if (hotel_types1[i].checked) {
+                        hotel_types1[i].checked = false;
+                    }
+                }
+                radioState1_new = false;
+            }
+            radioState1_old = radioState1_new;
+            radioState2_old = radioState2_new;
+        }
+        let page = 0;
+        function changePage(e){
+            page = e.getElementsByTagName('a')[0].innerText - 1;
+            console.log(page);
+            changed(page);
+        }
+        function prevPage(){
+            let pagination = document.getElementsByClassName("pagination")[0];
+            let activePage = pagination.getElementsByClassName('active')[0].innerText-1;
+            if(activePage!=0){
+            page = activePage - 1;
+            changed(page);
+            }
+        }
+        function nextPage(){
+            let pagination = document.getElementsByClassName("pagination")[0];
+            let activePage = pagination.getElementsByClassName('active')[0].innerText-1;
+            let number_of_page = pagination.getElementsByTagName('li').length-2;
+            if(activePage != number_of_page-1){
+                page = activePage + 1;
+            changed(page);
             }
         }
 
-        function changed() {
-            setTimeout(function(){checkStateRadio();},1);
 
+        function changed(page_number) {
+            setTimeout(function(){checkStateRadio();},1);
+            if(page_number==undefined){
+                page_number = 0;
+            }
             // doi thay doi xong(trong 1s) moi cap nhat tinh trang filter
             setTimeout(function () {
                 let location = document.getElementById('autocomplete').value;
@@ -646,6 +647,7 @@
                 let content = document.getElementById("right-center");
                 // let str = JSON.stringify(hotel_type_list);
                 // console.log(str);
+                console.log(hotel_type_list[0]+","+standard+","+localStorage.index_tmp_name);
                 $.ajax({
 
                     url: '/filterProcess',
@@ -653,10 +655,11 @@
                     data: {
                         'location': localStorage.index_tmp_name,
                         'hotel_type': hotel_type_list,
-                        // 'hotel_standard': '',
+                        'hotel_standard': standard,
                         // 'price':'',
                         // 'orderByPrice':'',
                         // 'orderByStandard':''
+                        'page_number':page_number,
 
                     },
                     dataType: 'text',
@@ -664,10 +667,15 @@
 
                     success: function (data) {
                         if (data !== 'error') {
-                            console.log("done");
+                            // console.log("done");
                             setTimeout(function () {
                                 $("#right-center-2").html(data)
+                                // $(".carousel").each(function(i,c){
+                                //     c.carousel("pause");
+                                // });
                             }, 100)
+
+                            // console.log(data);
 
                         }
                     },
@@ -709,19 +717,43 @@
                 add_HoverClickUpdate();
 //             refreshPage();
 
+                opt_hang_display();
 
-                // phan dung code-end
             }, 1);
-            // call ajax when change
 
+        }
+        function opt_hang_display(){
+            var toAdd = $('.loai input[type=radio]:checked').val()
+            // map(function () {
+            //     return " " + this.value;
+            // }).get();
+            let display = toAdd;
+            if(toAdd=='all'){
+                display = "Tất cả kiểu khách sạn";
+            }
+            console.log("toAdd:"+toAdd);
+            $('#opts-loaiks').html(
+                '<a href="#">' +
+                '<div class="options-x">' + '&times;' + '</div>' + display +
+                '</a>');
 
-            // alert("some changes");
+            add_HoverClickUpdate();
+            if(toAdd!=undefined)
+            $('#opts-loaiks').fadeIn();
+            // refreshPage();
+
+            // if (toAdd.length == 0) {
+            //alert('if' + toAdd.length);
+            // ko co delay thi ko the an? (bi choi~ voi' 1 thanh phan nao do' dag chay fia sau)
+            //  setTimeout(function () {
+            //     $('#opts-loaiks').fadeOut();
+            // }, 20);
+            //return false;
+            // }
         }
 
         // cap nhat kha nang doc thay doi cua cac nut quan trong
         $(document).ready(function () {
-
-
             $('input[type=checkbox]').each(function () {
                 let target = this;
                 this.classList.add("checkChange");
@@ -746,6 +778,7 @@
             });
             changed();
         })
+
         var add_HoverClickUpdate = function () {
 //                    su* kien hover & click duoc ap dung cho tat ca cac tuy` chon (co' cai` lan dau tien khi load page)
             $('.options a').hover(

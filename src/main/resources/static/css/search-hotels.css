@@ -354,8 +354,8 @@ neu dung` glyphicon thi ko tuy chon duoc size
     margin-top: 15px;
     /*margin-left: 300px; xay ra loi~ khi zoom browser*/
     right: 20px;
-    width: 80px;
-    height: 28px;
+    width: 150px;
+    height: 40px;
     line-height: 28px;
     border: 0px solid;
     color: rgb(238, 166, 16);
@@ -363,6 +363,9 @@ neu dung` glyphicon thi ko tuy chon duoc size
     border-radius: 15px;
     background-color: black;
     font-size: 12px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .info-hotel {
@@ -372,8 +375,9 @@ neu dung` glyphicon thi ko tuy chon duoc size
     /*dam bao khi zoom thi van thay' dc price'*/
     bottom: 5px;
     width: 280px;
-    height: 75px;
-    margin-left: 5px;
+    /*height: 100px;*/
+    margin-left: 7px;
+    margin-bottom: 5px;
     text-shadow: 1px 0px black;
 }
 

@@ -22,7 +22,7 @@ public class SearchHotelByRegionController {
                "H,Hà Giang,Hà Nam,Hà Nội,Hà Tĩnh,Hải Dương,Hải Phòng,Hậu Giang,Hòa Bình,Hưng Yên,K,Kiên Giang,Kon Tum,Khánh Hòa," +
                "L,Lai Châu,Lạng Sơn,Lào Cai,Lâm Đồng,Long An,N,Nam Định,Ninh Bình,Ninh Thuận,Nghệ An,P,Phú Thọ,Phú Yên," +
                "Q,Quảng Bình,Quảng Nam,Quảng Ninh,Quảng Ngãi,Quảng Trị,S,Sóc Trăng,Sơn La," +
-               "T,Tây Ninh,Tiền Giang,TP Hồ Chí Minh,Tuyên Quang,Thái Bình,Thái Nguyên,Thanh Hóa,Thừa Thiên Huế,Trà Vinh,V," +
+               "T,Thành phố Hồ Chí Minh,Tây Ninh,Tiền Giang,Tuyên Quang,Thái Bình,Thái Nguyên,Thanh Hóa,Thừa Thiên Huế,Trà Vinh,V," +
                "Vĩnh Long,Vĩnh Phúc,Y,Yên Bái" ;
         // tra ve cac vung mien
         response.setContentType("text/html; charset=UTF-8");
