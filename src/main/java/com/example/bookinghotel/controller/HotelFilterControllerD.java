@@ -42,26 +42,27 @@ public class HotelFilterControllerD {
     @Autowired
     HotelFilterService hotelFilterService;
 
-    @RequestMapping(value={"search-hotels","search-hotels/{location}"},method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value={"search-hotels","search-hotels/{location2}"},method = { RequestMethod.GET, RequestMethod.POST })
 
     String HotelFiler(Model model,
-                      @RequestParam(value = "location",required = false) String location,
-                      @RequestParam(value = "start_date",required = false) String start_date,
-                      @RequestParam(value = "end_date",required = false) String end_date,
-                      @RequestParam(value = "number_of_people",required = false) Integer number_of_people,
+                      @RequestParam(value = "location",required = false) Optional<String> locationVar,
+                      @RequestParam(value = "start_date",required = false) Optional<String> start_dateVar,
+                      @RequestParam(value = "end_date",required = false) Optional<String> end_dateVar,
+                      @RequestParam(value = "number_of_people",required = false) Optional<Integer> number_of_peopleVar,
                       @PathVariable Optional<String> location2) {
 
-        String unique_location = "";
+
         ArrayList<Hotel_Property> hotel_properties ;
         ArrayList<Integer> hotel_standards ;
 
         if(location2.isPresent()){
-            hotel_properties = hotel_propertyRepositoryD.findAll();
+            hotel_properties = hotelService.findAllHotel_PropertyByLocation(location2.get());
             hotel_standards = hotelService.findAllHotel_StandardByLocation(location2.get());
         }
         else {
-            hotel_properties = hotel_propertyRepositoryD.findAll();
-            hotel_standards = hotelService.findAllHotel_StandardByLocation(unique_location);
+
+            hotel_properties = hotelService.findAllHotel_PropertyByAllInputType(locationVar.get(),start_dateVar.get(),end_dateVar.get(), number_of_peopleVar.get());
+            hotel_standards = hotelService.findAllHotel_StandardByAllInputType(locationVar.get(),start_dateVar.get(),end_dateVar.get(), number_of_peopleVar.get());
         }
 
 
@@ -80,18 +81,19 @@ public class HotelFilterControllerD {
         }
 
         // chia cac  hotel property vao tung attr theo form cua hotelFilter.html
-        ArrayList<Hotel_Property> hotel_properties1 = new ArrayList<>();
-        ArrayList<Hotel_Property> hotel_properties2 = new ArrayList<>();
-        for(int i = 0 ;i<4; i++){
-            hotel_properties1.add(hotel_properties.get(i));
+        if(hotel_properties.size()!=0) {
+            ArrayList<Hotel_Property> hotel_properties1 = new ArrayList<>();
+            ArrayList<Hotel_Property> hotel_properties2 = new ArrayList<>();
+            for (int i = 0; i < 4; i++) {
+                hotel_properties1.add(hotel_properties.get(i));
+            }
+            for (int i = 4; i < hotel_properties.size(); i++) {
+                hotel_properties2.add(hotel_properties.get(i));
+            }
 
+            model.addAttribute("hotel_types1", hotel_properties1);
+            model.addAttribute("hotel_types2", hotel_properties2);
         }
-        for(int i = 4 ; i< hotel_properties.size();i++){
-            hotel_properties2.add(hotel_properties.get(i));
-        }
-
-        model.addAttribute("hotel_types1",hotel_properties1);
-        model.addAttribute("hotel_types2",hotel_properties2);
         model.addAttribute("standards",standards);
         return "Pages/hotelFilter";
     }

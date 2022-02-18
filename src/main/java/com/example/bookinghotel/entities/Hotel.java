@@ -1,5 +1,8 @@
 package com.example.bookinghotel.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,10 +98,11 @@ public class Hotel {
         this.hotel_property = hotel_property;
     }
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "hotel")
-    private ArrayList<Room> rooms;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "hotel")
+    private List<Room> rooms;
 
-    public ArrayList<Room> getRooms() {
+    public List<Room> getRooms() {
         return rooms;
     }
 

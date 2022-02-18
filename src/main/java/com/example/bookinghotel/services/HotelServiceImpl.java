@@ -2,6 +2,8 @@ package com.example.bookinghotel.services;
 
 
 import com.example.bookinghotel.entities.Hotel;
+import com.example.bookinghotel.entities.Hotel_Property;
+import com.example.bookinghotel.repositories.HotelFilterRepository;
 import com.example.bookinghotel.repositories.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +38,12 @@ public class HotelServiceImpl implements HotelService {
         hotelRepository.deleteById(id);
     }
     //phan dung code
+    ArrayList<Integer> standards = new ArrayList<>();
+    @Autowired
+    HotelFilterRepository hotelFilterRepository;
     public ArrayList<Integer> findAllHotel_StandardByLocation(String location){
-        Iterable<Hotel> hotels = hotelRepository.findAll();
-        ArrayList<Integer> standards = new ArrayList<>();
+        Iterable<Hotel> hotels = hotelFilterRepository.listHotelByLocationAndNoPageable(location);
+
         hotels.forEach(hotel -> {
             if(!standards.contains(hotel.getHotel_standard())){
                 standards.add(hotel.getHotel_standard());
@@ -53,17 +58,49 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public ArrayList<Integer> findAllHotel_StandardByAllInputType(String location, String start_date, String end_date, int number_of_people) {
-        return null;
+        ArrayList<Hotel> hotels = hotelFilterRepository.getHotelsByNameAndNumberOfPeopleBookedList(location,start_date,end_date,number_of_people);
+        hotels.addAll(hotelFilterRepository.getHotelsByNameAndNumberOfPeopleNoBookedList(location,number_of_people));
+        ArrayList<Integer> standards = new ArrayList<>();
+        hotels.forEach(hotel -> {
+            if(!standards.contains(hotel.getHotel_standard())){
+                standards.add(hotel.getHotel_standard());
+            }
+        });
+        // sort vi tri cac standard => tu cao xuong thap
+        Collections.sort(standards);
+        Collections.reverse(standards);
+
+        return standards;
+    }
+
+    ArrayList<Hotel_Property> hotel_Property = new ArrayList<>();
+    @Override
+    public ArrayList<Hotel_Property> findAllHotel_PropertyByLocation(String location) {
+        ArrayList<Hotel> hotels = hotelFilterRepository.listHotelByLocationAndNoPageable(location);
+        hotels.forEach(hotel -> {
+            if(!hotel_Property.contains(hotel.getHotel_standard())){
+                hotel_Property.add(hotel.getHotel_property());
+            }
+        });
+
+        return hotel_Property;
+
     }
 
     @Override
-    public ArrayList<Integer> findAllHotel_PropertyByLocation(String location) {
-        return null;
-    }
+    public ArrayList<Hotel_Property> findAllHotel_PropertyByAllInputType(String location, String start_date, String end_date, int number_of_people) {
+        ArrayList<Hotel> hotels = hotelFilterRepository.getHotelsByNameAndNumberOfPeopleBookedList(location,start_date,end_date,number_of_people);
+        hotels.addAll(hotelFilterRepository.getHotelsByNameAndNumberOfPeopleNoBookedList(location,number_of_people));
 
-    @Override
-    public ArrayList<Integer> findAllHotel_PropertyByAllInputType(String location, String start_date, String end_date, int number_of_people) {
-        return null;
+        hotels.forEach(hotel -> {
+            if(!hotel_Property.contains(hotel.getHotel_property())){
+                hotel_Property.add(hotel.getHotel_property());
+            }
+        });
+
+
+
+        return hotel_Property;
     }
     // phan dung code -end
 }
