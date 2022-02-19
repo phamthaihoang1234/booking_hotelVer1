@@ -55,7 +55,6 @@ public class HomePageController {
         model.addAttribute(pattern+"Type4",type4);
         model.addAttribute(pattern+"Type5",type5);
         model.addAttribute(pattern+"Type6",type6);
-//
 
         model.addAttribute(pattern+"hotelType1",
                 hotelRepository.findByHotel_addressContainingAndHotel_property(location,type1));
