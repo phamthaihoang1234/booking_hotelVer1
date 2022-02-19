@@ -96,6 +96,7 @@ public class HomePageController {
         return "Pages/Common-pages/part-footer";
 
     }
+    //
     // method khong tham gia vao hien thi chi de thong bao cac attr ton tai
     @GetMapping("/deleteErrorReport")
     public String deleteErrReport(Model model){
