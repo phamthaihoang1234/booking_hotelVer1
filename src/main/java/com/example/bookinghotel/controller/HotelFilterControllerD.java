@@ -306,10 +306,10 @@ public class HotelFilterControllerD {
     }
     private ArrayList<Hotel> BookingDateFilter(ArrayList<Hotel> hotels,String start_date,String end_date){
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dtf = dtf.withLocale(Locale.getDefault());
-        LocalDate start_dateD;
-        LocalDate  end_dateD;
+        LocalDate  start_dateD = LocalDate.now();
+        LocalDate  end_dateD = LocalDate.now();
         try {
             start_dateD = LocalDate.parse(start_date);
             end_dateD = LocalDate.parse(end_date);
@@ -317,22 +317,28 @@ public class HotelFilterControllerD {
 //            System.out.println(newDateString);
             for(int i = hotels.size() - 1  ; i >=0 ;i--){
                 boolean findEmptyRoom = false;// coi nhu chua tim duoc phong trong khi chua quet
-                ArrayList<Room> rooms = (ArrayList<Room>) hotels.get(i).getRooms();
+//                if(hotels.get(i).getRooms()!=null)
+                List<Room> rooms =  hotels.get(i).getRooms();
+                if(rooms!=null){
+                    for(int j = 0 ; j<rooms.size();j++){
+                        boolean isValid = true;// coi nhu phong dang trong , neu quet booking thay trung ngay se set ve false
 
-                for(int j = 0 ; j<rooms.size();j++){
-                    boolean isValid = true;// coi nhu phong dang trong , neu quet booking thay trung ngay se set ve false
-
-                    ArrayList<Booking> bookings = (ArrayList<Booking>) rooms.get(j).getBookings();
-                    for (int k = 0 ; k < bookings.size(); k++){
-                        if(bookings.get(k).getStartDate().isAfter(end_dateD)||bookings.get(k).getEndDate().isBefore(start_dateD)){
-                            // booking hien tai dap ung yeu cau khong thay doi gia tri valid
+                        List<Booking> bookings =  rooms.get(j).getBookings();
+                        if(bookings!=null) {
+                            for (int k = 0; k < bookings.size(); k++) {
+                                if (bookings.get(k).getStartDate().isAfter(end_dateD) || bookings.get(k).getEndDate().isBefore(start_dateD)) {
+                                    // booking hien tai dap ung yeu cau khong thay doi gia tri valid
+                                } else {
+                                    isValid = false;//khong dap ung yeu cau
+                                }
+                            }
                         }else{
-                            isValid = false;//khong dap ung yeu cau
+                            isValid = false;
                         }
-                    }
-                    if(isValid==true){
-                        findEmptyRoom = true;// tim duoc phong trong trong khac san.
-                        break;
+                        if(isValid==true){
+                            findEmptyRoom = true;// tim duoc phong trong trong khac san.
+                            break;
+                        }
                     }
                 }
                 if(findEmptyRoom==false){
@@ -340,6 +346,10 @@ public class HotelFilterControllerD {
                 }
             }
         } catch (Exception e) {
+            for(int i = 0 ; i< 10 ; i++)
+                System.out.println("NGAY NHAP VAO BI LOI");
+            System.out.println(start_dateD);
+            e.printStackTrace();
             for(int i = 0 ; i< 10 ; i++)
                 System.out.println("NGAY NHAP VAO BI LOI");
         }

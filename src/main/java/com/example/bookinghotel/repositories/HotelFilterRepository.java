@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 public interface HotelFilterRepository extends JpaRepository<Hotel,Long> {
@@ -55,7 +57,7 @@ public interface HotelFilterRepository extends JpaRepository<Hotel,Long> {
 
     @Query(nativeQuery = true,value = "select DISTINCT  hotel from hotel join rooms on hotel.id = rooms.hotel_id " +
             "where hotel.name_of_hotel like concat('%',?1,'%') and rooms.total_of_bedroom = ?2")
-    public ArrayList<Hotel> getHotelByLocationAndNumberOfPeople(String location, int number_of_people);
+    public List<Hotel> getHotelByLocationAndNumberOfPeople(String location, int number_of_people);
 
     //get name of hotel where room is not booked
     @Query(nativeQuery = true,value = "select DISTINCT  hotel.* from hotel inner join rooms on hotel.id = rooms.hotel_id " +
@@ -64,7 +66,7 @@ public interface HotelFilterRepository extends JpaRepository<Hotel,Long> {
             "select hotel.address_of_hotel from hotel " +
             " join rooms" +
             " on hotel.id = rooms.hotel_id  join bookings on rooms.id = bookings.room_id)")
-    public ArrayList<Hotel> getHotelsByNameAndNumberOfPeopleNoBookedList(String location, int number_of_people);
+    public Optional<ArrayList<Hotel>> getHotelsByNameAndNumberOfPeopleNoBookedList(String location, int number_of_people);
 
     // get name of hotel where room is booked
     @Query(nativeQuery = true,value =
@@ -73,7 +75,7 @@ public interface HotelFilterRepository extends JpaRepository<Hotel,Long> {
             " on hotel.id = rooms.hotel_id  join bookings on rooms.id = bookings.room_id " +
             "        where hotel.address_of_hotel like concat('%',?1,'%') and " +
             " rooms.total_of_bedroom >= ?2")
-    public ArrayList<Hotel> getHotelsByNameAndNumberOfPeopleBookedList(String location,int number_of_people);
+    public Optional<ArrayList<Hotel>> getHotelsByNameAndNumberOfPeopleBookedList(String location,int number_of_people);
 
     // phan dung code-end
 
