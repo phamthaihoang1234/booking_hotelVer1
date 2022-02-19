@@ -328,15 +328,40 @@ $(document).ready(function () {
 // nhóm SẮP XẾP THEO
 $(document).ready(function () {
     $('#sort a').click(function () {
-        $('#sort a').css('border-bottom', 'none');
+        // $('#sort a').css('border-bottom', 'none');
         $(this).css('textDecoration', 'none');
 //                        http://stackoverflow.com/questions/447197/how-to-define-multiple-css-attributes-in-jquery
-        $(this).css({
-            'border-bottom': '2px solid rgb(220,30,40)'
+//         $(this).css({
+//             'border-bottom': '2px solid rgb(220,30,40)'
+//         });
+//         console.log($(this))
+        let existed = false;
+        var classList = $(this).attr('class')
+        if(classList!=undefined){
+            classList = classList.split(/\s+/);
+
+        $.each(classList, function(index, item) {
+            if (item === 'ranked') {
+                existed = true;
+            }
         });
+        }
+        if(existed == false){
+            $(this).css({
+                'border-bottom': '2px solid rgb(220,30,40)'
+            });
+            $(this).addClass('ranked');
+        }else{
+            $(this).css(
+                'border-bottom',"0px"
+            );
+            $(this).removeClass('ranked');
+        }
+        setTimeout(function(){changed();},20);
+
 //                        refreshPage();, chi refresh page (ko phai ket qua)
-        $('#page-1').fadeOut();
-        $('#page-1').fadeIn();
+//         $('#page-1').fadeOut();
+//         $('#page-1').fadeIn();
     });
 
     $('#sort-price').click(function () {

@@ -37,8 +37,8 @@
 
     <!--Slider-->
     <link rel="stylesheet" href="/Utilities/RangeSlider/jquery-ui.css">
-<!--    <script src="/Utilities/RangeSlider/jquery-1.10.2.js"></script>-->
-    <script src="/Utilities/RangeSlider/jquery-ui.js"></script>
+    <script src="/Utilities/RangeSlider/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
@@ -68,9 +68,11 @@
             //lay' ten locations da~ search o? trang homepage (neu co)
             $('#autocomplete').val(localStorage.index_tmp_name);
             $('.name-of-location').text(localStorage.index_tmp_name);
-            $('#s-datePicker1').val(localStorage.index_tmp_checkin);
-            $('#s-datePicker2').val(localStorage.index_tmp_checkout);
-            $('#loaiphong select').val(localStorage.index_tmp_typeofroom);
+            $('#s-datePicker1').val(localStorage.searchhotels_tmp_checkin);
+            $('#s-datePicker2').val(localStorage.searchhotels_tmp_checkout);
+
+            if(localStorage.searchhotels_tmp_numberofpeople!=undefined)
+            $('#loaiphong select').val(localStorage.searchhotels_tmp_numberofpeople);
             // $('.3-dd-noibat').fadeOut(10);
 //        neu viet theo css: $('.3-dd-noibat'+':nth-child('+ localStorage.ddnoibat + ')').fadeIn(10);
 //        http://stackoverflow.com/questions/27519457/jquery-get-nth-child-having-a-particular-class
@@ -106,7 +108,7 @@
     <div id="header"></div>
 
     <nav>
-        <form>
+        <form style="background-color: rgb(220,30,30)  " id="formSm" th:action="@{/search-hotels}"  method="post">
             <div id="nav-timkiem" class="container-fluid">
                 <!-- da~ dung Bootstrap table, grid => viec chia theo size cac input, button kem` theo margin (se~ ko deu`) -->
                 <!--ban dau dien` background img giong voi trang homepage-->
@@ -116,7 +118,7 @@
                         <img src="/img/homepage/Delete-25.png" width="16px"
                              style="position: absolute; margin-left: 327px; margin-top: 15px; display: none"/>
                         <input class="form-control biginput" name="locations" id="autocomplete" type="search"
-                               value="Đà Nẵng"
+                               value="Hà Nội"
                                placeholder="Nhập tên thành phố, khu vực, khách sạn ..." required
                                style="width: 350px">
                         <!--da~ thu width theo %-->
@@ -125,19 +127,19 @@
 
                 <div class="inner-addon left-addon my-tooltip" data-tooltip="Ngày nhận phòng" style="float: left">
                     <i class="fa fa-calendar-o" style="font-size: 19px; color: rgb(220,30,40)"></i>
-                    <input id="s-datePicker1" type="date" class="form-control">
+                    <input id="s-datePicker1" type="date" name="start_date" class="form-control">
                 </div>
                 <div class="inner-addon left-addon my-tooltip" data-tooltip="Ngày trả phòng" style="float: left">
                     <i class="fa fa-calendar-o" style="font-size: 19px; color: rgb(220,30,40)"></i>
-                    <input id="s-datePicker2" type="date" class="form-control">
+                    <input id="s-datePicker2" type="date" name="end_date" class="form-control">
                 </div>
 
                 <div id="loaiphong" class="inner-addon left-addon" style="float: left">
                     <i class="material-icons" style="font-size: 22px; color: rgb(220,30,40)">group_add</i>
-                    <select class="form-control">
-                        <option>1 phòng (1 người lớn)</option>
-                        <option selected>1 phòng (2 người lớn)</option>
-                        <option>lựa chọn khác ...</option>
+                    <select class="form-control" name="number_of_people" id="dropList">
+                        <option   value="1" >1 phòng (1 người lớn)</option>
+                        <option value="2" selected >1 phòng (2 người lớn)</option>
+<!--                        <option value="3">lựa chọn khác ...</option>-->
                     </select>
                 </div>
 
@@ -152,7 +154,7 @@
                 <!--http://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=icons
                 http://www.tutorialspoint.com/bootstrap/bootstrap_glyphicons.htm -->
                 <!--button lien quan den' modal nen khi click thi` co' dau hieu. refresh page-->
-                <button type="submit" class="btn mybtn-style1">
+                <button type="submit" id="btnForm" class="btn mybtn-style1" >
                     <span class="glyphicon glyphicon-search"></span>&nbsp;TÌM KIẾM
                 </button>
 
@@ -163,7 +165,7 @@
     <div id="center">
         <div id="left-center" style="margin-bottom: 50%;">
             <div id="left-center-result" style="margin-top: 15px; width: 100%; height: 40px; background-color: #ffffff">
-                Tìm thấy <span class="badge">10</span> khách sạn tại
+                <span id="leftText">Tìm thấy</span> <span class="badge"></span> <span id="rightText">khách sạn tương ứng tại</span>
                 <!--class="name-of-location" duoc cai vao tat ca? ca'c tu` khoa' Da Nang-->
                 <span class="name-of-location" style="font-weight: bold">Đà Nẵng</span>
             </div> <!-- span ko the cai margin-top -->
@@ -349,10 +351,10 @@
                 <div id="sort"
                      style="width: 45%; float: right; text-align: right; border-left: 1px solid rgb(156,153,153)">
                     <span style="font-weight: bold; color: rgb(156,153,153)">SẮP XẾP THEO: </span>
-                    <a href="#" style="color: rgb(156,153,153)">Xếp hạng</a><span> -</span>
-                    <a href="#" style="color: rgb(156,153,153)">Khoảng cách</a><span> -</span>
-                    <a id="sort-price" href="#" style="color: rgb(156,153,153)">Giá <span
-                            class="glyphicon glyphicon-menu-up"></span></a>
+                    <a href="#" id="rank" style="color: rgb(156,153,153)">Xếp hạng</a><span> -</span>
+<!--                    <a href="#" style="color: rgb(156,153,153)">Khoảng cách</a><span> -</span>-->
+<!--                    <a id="sort-price" href="#" style="color: rgb(156,153,153)">Giá <span-->
+<!--                            class="glyphicon glyphicon-menu-up"></span></a>-->
                 </div>
             </div>
             <div id="right-center-2" style="margin-top: -25px">
@@ -618,6 +620,8 @@
             if(page_number==undefined){
                 page_number = 0;
             }
+            ranked();
+
             // doi thay doi xong(trong 1s) moi cap nhat tinh trang filter
             setTimeout(function () {
                 let location = document.getElementById('autocomplete').value;
@@ -658,7 +662,7 @@
                         'hotel_standard': standard,
                         // 'price':'',
                         // 'orderByPrice':'',
-                        // 'orderByStandard':''
+                        'orderByStandard': orderByStandard,
                         'page_number':page_number,
 
                     },
@@ -670,6 +674,12 @@
                             // console.log("done");
                             setTimeout(function () {
                                 $("#right-center-2").html(data)
+                                CountNumberOfHotel(hotel_type_list,standard,page_number)
+                                console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout+","+
+                                    localStorage.searchhotels_tmp_numberofpeople+","+localStorage.index_tmp_name);
+
+
+                                console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout);
                                 // $(".carousel").each(function(i,c){
                                 //     c.carousel("pause");
                                 // });
@@ -720,6 +730,63 @@
                 opt_hang_display();
 
             }, 1);
+
+        }
+        var orderByStandard = 'DESC';
+        function CountNumberOfHotel(hotel_type_list,standard,page_number){
+            $.ajax({
+
+                url: '/filterProcessCount',
+                type: 'post',
+                data: {
+                    'location': localStorage.index_tmp_name,
+                    'hotel_type': hotel_type_list,
+                    'hotel_standard': standard,
+                    // 'price':'',
+                    // 'orderByPrice':'',
+                    'orderByStandard': orderByStandard,
+                    'page_number':page_number,
+
+                },
+                dataType: 'text',
+
+
+                success: function (data) {
+                    if (data !== 'error') {
+                        // console.log("done");
+                        setTimeout(function () {
+
+                            // $(".carousel").each(function(i,c){
+                            //     c.carousel("pause");
+                            // });
+                            let leftText = document.getElementById('leftText');
+                            console.log(data);
+                            if(data == '0'){
+                                leftText.innerText  = "Không tìm thấy ";
+                                document.getElementsByClassName("badge")[0].innerText = '';
+
+                            }
+                            else {
+                                leftText.innerText = "Tìm thấy "
+                                document.getElementsByClassName("badge")[0].innerText = data;
+                            }
+                        }, 10)
+
+                        // console.log(data);
+
+                    }
+                },
+                error: function (request, error) {
+                    alert("Request: " + JSON.stringify(request));
+                }
+            });
+        }
+        function ranked(){
+
+            var list = document.getElementsByClassName("ranked");
+            if(list.length!=0){
+                orderByStandard = 'ASC';
+            }else orderByStandard = 'DESC'
 
         }
         function opt_hang_display(){
@@ -779,6 +846,42 @@
             changed();
         })
 
+        $('#btnForm').on('click',function ValidateTime(e){
+            e.preventDefault();
+            var today = new Date().getTime() ;
+            var check_in = new Date(document.getElementById("s-datePicker1").value);
+            var check_out = new Date(document.getElementById("s-datePicker2").value);
+            if(check_in=='Invalid Date'||check_out=='Invalid Date'){
+                alert("Vui lòng nhập đúng ngày tháng");
+            }else if(new Date().getTime() >= check_in||new Date().getTime() >= check_in){
+                alert("Vui lòng chọn ngày đặt phòng hơn ngày hiện tại ít nhất 1 ngày");
+                // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            }else{
+
+                //check_in
+                var month_check_in = check_in.getMonth() + 1;
+                var day_check_in = check_in.getDate();
+                if (check_in.getMonth() < 10) month_check_in = "0" + month_check_in;
+                if (day_check_in < 10) day_check_in = "0" + day_check_in;
+                //check_out
+                var month_check_out = check_out.getMonth() + 1;
+                var day_check_out = check_out.getDate();
+                if (check_out.getMonth() < 10) month_check_out = "0" + month_check_out;
+                if (day_check_out < 10) day_check_out = "0" + day_check_out;
+                //convert
+                var check_in_convert = check_in.getFullYear() + "-" + month_check_in + "-" + day_check_in;
+                var check_out_convert = check_out.getFullYear() + "-" + month_check_out + "-" + day_check_out;
+                //save
+                localStorage.searchhotels_tmp_checkin = check_in_convert;
+                localStorage.searchhotels_tmp_checkout = check_out_convert;
+                localStorage.searchhotels_tmp_numberofpeople = $('#dropList').val();
+                console.log(check_in_convert+","+check_out_convert);
+                $('#formSm').submit();
+
+            }
+
+        });
+
         var add_HoverClickUpdate = function () {
 //                    su* kien hover & click duoc ap dung cho tat ca cac tuy` chon (co' cai` lan dau tien khi load page)
             $('.options a').hover(
@@ -794,6 +897,7 @@
             $('.options').click(function () {
 //                        se~ fadeIn lai, khi add html
                 $(this).fadeOut();
+
 
             });
         };

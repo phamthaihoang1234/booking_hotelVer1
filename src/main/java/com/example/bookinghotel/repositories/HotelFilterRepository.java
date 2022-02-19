@@ -53,30 +53,27 @@ public interface HotelFilterRepository extends JpaRepository<Hotel,Long> {
 
     //phan lay thong tin property and standard
 
-    @Query(nativeQuery = true,value = "select  hotel from hotel join rooms on hotel.id = rooms.hotel_id " +
+    @Query(nativeQuery = true,value = "select DISTINCT  hotel from hotel join rooms on hotel.id = rooms.hotel_id " +
             "where hotel.name_of_hotel like concat('%',?1,'%') and rooms.total_of_bedroom = ?2")
     public ArrayList<Hotel> getHotelByLocationAndNumberOfPeople(String location, int number_of_people);
 
     //get name of hotel where room is not booked
-    @Query(nativeQuery = true,value = "select hotel.* from hotel inner join rooms on hotel.id = rooms.hotel_id " +
+    @Query(nativeQuery = true,value = "select DISTINCT  hotel.* from hotel inner join rooms on hotel.id = rooms.hotel_id " +
             " where  hotel.address_of_hotel like concat('%',?1,'%') and rooms.total_of_bedroom >= ?2 and " +
             "hotel.address_of_hotel not in( " +
             "select hotel.address_of_hotel from hotel " +
             " join rooms" +
-            " on hotel.id = rooms.id  join bookings on rooms.id = bookings.room_id")
+            " on hotel.id = rooms.hotel_id  join bookings on rooms.id = bookings.room_id)")
     public ArrayList<Hotel> getHotelsByNameAndNumberOfPeopleNoBookedList(String location, int number_of_people);
 
     // get name of hotel where room is booked
     @Query(nativeQuery = true,value =
-            "select hotel.* from hotel " +
+            "select DISTINCT hotel.* from hotel " +
             " join rooms " +
-            " on hotel.id = rooms.id  join bookings on rooms.id = bookings.room_id " +
+            " on hotel.id = rooms.hotel_id  join bookings on rooms.id = bookings.room_id " +
             "        where hotel.address_of_hotel like concat('%',?1,'%') and " +
-            "        (" +
-            "        (bookings.start_date > ?2 ) " +
-            "        or (bookings.end_date < ?2 ) " +
-            "        ) and rooms.total_of_bedroom >= 2")
-    public ArrayList<Hotel> getHotelsByNameAndNumberOfPeopleBookedList(String location,String endDate,String startDate,int number_of_people);
+            " rooms.total_of_bedroom >= ?2")
+    public ArrayList<Hotel> getHotelsByNameAndNumberOfPeopleBookedList(String location,int number_of_people);
 
     // phan dung code-end
 
