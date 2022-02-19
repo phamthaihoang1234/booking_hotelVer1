@@ -613,6 +613,10 @@
             changed(page);
             }
         }
+        function checkValueSearchBarInLocal(start_date,end_date,number_of_people){
+
+
+        }
 
 
         function changed(page_number) {
@@ -626,8 +630,27 @@
             setTimeout(function () {
                 let location = document.getElementById('autocomplete').value;
                 let standard = standard_check();
-
-
+                let start_date = "";
+                let end_date = "";
+                let number_of_people = 0;
+                // check start date,end_date , number_of_people in localStorage
+                if(localStorage.searchhotels_tmp_checkin==undefined){
+                    start_date = "no-date";
+                }else{
+                    start_date = localStorage.searchhotels_tmp_checkin
+                } ;
+                if(localStorage.searchhotels_tmp_checkout==undefined){
+                    end_date = "no-date";
+                }else{
+                    end_date  = localStorage.searchhotels_tmp_checkout;
+                } ;
+                if(localStorage.searchhotels_tmp_numberofpeople==undefined){
+                    number_of_people = 0;
+                }else{
+                    number_of_people =localStorage.searchhotels_tmp_numberofpeople;
+                };
+                //
+                console.log("start_date:"+start_date);
                 let hotel_type_list = hotel_type_check();
                 if (standard == undefined) {
                     standard = 0;
@@ -651,19 +674,26 @@
                 let content = document.getElementById("right-center");
                 // let str = JSON.stringify(hotel_type_list);
                 // console.log(str);
+
+                if(localStorage.index_tmp_name==undefined){
+                    location = ""
+                }
                 console.log(hotel_type_list[0]+","+standard+","+localStorage.index_tmp_name);
                 $.ajax({
 
                     url: '/filterProcess',
                     type: 'post',
                     data: {
-                        'location': localStorage.index_tmp_name,
+                        'location': location,
                         'hotel_type': hotel_type_list,
                         'hotel_standard': standard,
                         // 'price':'',
                         // 'orderByPrice':'',
                         'orderByStandard': orderByStandard,
                         'page_number':page_number,
+                        'start_date':start_date,
+                        'end_date': end_date,
+                        'number_of_people':number_of_people,
 
                     },
                     dataType: 'text',
@@ -674,7 +704,13 @@
                             // console.log("done");
                             setTimeout(function () {
                                 $("#right-center-2").html(data)
-                                CountNumberOfHotel(hotel_type_list,standard,page_number)
+                                CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people);
+
+                                localStorage.removeItem('searchhotels_tmp_checkin')
+
+                                localStorage.removeItem('searchhotels_tmp_checkout')
+
+                                localStorage.removeItem('searchhotels_tmp_numberofpeople')
                                 console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout+","+
                                     localStorage.searchhotels_tmp_numberofpeople+","+localStorage.index_tmp_name);
 
@@ -733,7 +769,7 @@
 
         }
         var orderByStandard = 'DESC';
-        function CountNumberOfHotel(hotel_type_list,standard,page_number){
+        function CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people){
             $.ajax({
 
                 url: '/filterProcessCount',
@@ -746,6 +782,9 @@
                     // 'orderByPrice':'',
                     'orderByStandard': orderByStandard,
                     'page_number':page_number,
+                    'start_date':start_date,
+                    'end_date':end_date,
+                    'number_of_people':number_of_people
 
                 },
                 dataType: 'text',
@@ -874,13 +913,14 @@
                 //save
                 localStorage.searchhotels_tmp_checkin = check_in_convert;
                 localStorage.searchhotels_tmp_checkout = check_out_convert;
-                localStorage.searchhotels_tmp_numberofpeople = $('#dropList').val();
+                localStorage.searchhotels_tmp_numberofpeople = parseInt($('#dropList').val());
                 console.log(check_in_convert+","+check_out_convert);
                 $('#formSm').submit();
 
             }
 
         });
+
 
         var add_HoverClickUpdate = function () {
 //                    su* kien hover & click duoc ap dung cho tat ca cac tuy` chon (co' cai` lan dau tien khi load page)
