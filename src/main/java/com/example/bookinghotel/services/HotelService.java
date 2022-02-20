@@ -26,5 +26,6 @@ public interface HotelService {
     ArrayList<Integer> findAllHotel_StandardByAllInputType(String location,String start_date, String end_date,int number_of_people);
     ArrayList<Hotel_Property> findAllHotel_PropertyByLocation(String location);
     ArrayList<Hotel_Property> findAllHotel_PropertyByAllInputType(String location,String start_date, String end_date,int number_of_people);
+    Optional<Hotel> findHotelByName(String hotel_name);
     // phan dung code-end
 }

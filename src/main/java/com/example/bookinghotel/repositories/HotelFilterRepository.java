@@ -77,6 +77,8 @@ public interface HotelFilterRepository extends JpaRepository<Hotel,Long> {
             " rooms.total_of_bedroom >= ?2")
     public Optional<ArrayList<Hotel>> getHotelsByNameAndNumberOfPeopleBookedList(String location,int number_of_people);
 
+
+
     // phan dung code-end
 
 }

@@ -122,6 +122,11 @@ public class HotelServiceImpl implements HotelService {
         return hotel_Property;
     }
 
+    @Override
+    public Optional<Hotel> findHotelByName(String hotel_name) {
+        return hotelRepository.findByNameOfHotel(hotel_name);
+    }
+
     private ArrayList<Hotel> BookingDateFilter(ArrayList<Hotel> hotels,String start_date,String end_date){
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");

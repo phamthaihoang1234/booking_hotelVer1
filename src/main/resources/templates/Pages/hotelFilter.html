@@ -247,9 +247,9 @@
                     </div>
 
                     <!--co the co' them 1 checkbox dk: chỉ hiện các khách sạn còn phòng-->
-                    <div style="margin: auto; margin-bottom: 10px">
-                        <input type="checkbox" name="status"/> Chỉ hiện khách sạn còn phòng
-                    </div>
+<!--                    <div style="margin: auto; margin-bottom: 10px">-->
+<!--                        <input type="checkbox" name="status"/> Chỉ hiện khách sạn còn phòng-->
+<!--                    </div>-->
                 </div>
             </div>
 
@@ -706,16 +706,12 @@
                                 $("#right-center-2").html(data)
                                 CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people);
 
-                                localStorage.removeItem('searchhotels_tmp_checkin')
 
-                                localStorage.removeItem('searchhotels_tmp_checkout')
-
-                                localStorage.removeItem('searchhotels_tmp_numberofpeople')
-                                console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout+","+
-                                    localStorage.searchhotels_tmp_numberofpeople+","+localStorage.index_tmp_name);
-
-
-                                console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout);
+                                // console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout+","+
+                                //     localStorage.searchhotels_tmp_numberofpeople+","+localStorage.index_tmp_name);
+                                //
+                                //
+                                // console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout);
                                 // $(".carousel").each(function(i,c){
                                 //     c.carousel("pause");
                                 // });
