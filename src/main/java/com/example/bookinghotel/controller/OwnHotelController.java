@@ -228,8 +228,6 @@ public class OwnHotelController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
 //        redirect.addFlashAttribute("success", "Saved HotelOwner Profile successfully!");
         return "redirect:/hotelOwnerProfile";
     }

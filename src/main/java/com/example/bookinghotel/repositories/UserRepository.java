@@ -19,6 +19,6 @@ public interface UserRepository extends CrudRepository<UserInfo, Long> {
 
     boolean existsByUsername(String username);
 
-    @Query(value = "SELECT * FROM booking_hotelver10.users where username=?1 and password=?2;", nativeQuery = true)
-    Optional<UserInfo> existsByUsernameAndPassword(String email,String password);
+    @Query(value = "SELECT * FROM booking_hotelver10.users where username=?1", nativeQuery = true)// and password=?2;
+    UserInfo existsByUsernameAndPassword(String email,String password);
 }
