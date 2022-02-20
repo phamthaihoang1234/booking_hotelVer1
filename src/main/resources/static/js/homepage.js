@@ -173,6 +173,7 @@ $(document).ready(function () {
             //cac bien' nay` se~ duoc chuyen sang trang search-hotels
             if (localStorage.index_tmp_name) {
                 localStorage.index_tmp_name = $txt;
+                window.location = 'search-hotels/'+localStorage.index_tmp_name;
             } else {
                 localStorage.index_tmp_name = "Hà Nội";
             }
@@ -192,13 +193,15 @@ $(document).ready(function () {
         } else {
             if ($(this).text() === 'Tất cả ...') {
                 window.location = 'search-hotels/'+localStorage.index_tmp_name;
-                return false;
+
             } else {
                 //luu tru ten bien' khach san, nhu*ng ko co' dia chi => viec xac dinh Google se~ co the bi. co' dinh
                 //alert('bcheck = false 2');
                 localStorage.searchhotels_tmp_nameofhotel = $(this).text();
-                // window.location = 'search-hotels/'+localStorage.index_tmp_name;
-                console.log($(this).find('a'));
+
+                // if(!$(this).find('a'))
+                //     window.location = 'search-hotels/'+localStorage.index_tmp_name;
+                // console.log();
                 $(this).find('a').trigger("click");
 
             }
