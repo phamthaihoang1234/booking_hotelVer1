@@ -104,7 +104,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hanoiType1}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hanoihotelType1}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -115,7 +115,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hanoiType2}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hanoihotelType2}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -126,7 +126,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hanoiType3}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hanoihotelType3}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -140,7 +140,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hanoiType4}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hanoihotelType4}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -151,7 +151,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hanoiType5}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hanoihotelType5}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -162,7 +162,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hanoiType6}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hanoihotelType6}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -202,7 +202,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${danangType1}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${dananghotelType1}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -213,7 +213,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${danangType2}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${dananghotelType2}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -224,7 +224,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${danangType3}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${dananghotelType3}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -238,7 +238,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${danangType4}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${dananghotelType4}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -249,7 +249,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${danangType5}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${dananghotelType5}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -260,7 +260,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${danangType6}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${dananghotelType6}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -300,7 +300,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hochiminhType1}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hochiminhhotelType1}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -311,7 +311,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hochiminhType2}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hochiminhhotelType2}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -322,7 +322,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hochiminhType3}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hochiminhhotelType3}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -336,7 +336,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hochiminhType4}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hochiminhhotelType4}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -347,7 +347,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hochiminhType5}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hochiminhhotelType5}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -358,7 +358,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                                         <span class="nav-title-loaiphong" th:text="${hochiminhType6}"></span>
                                         <ul style="list-style-type: none">
                                             <th:block th:each="hotel:${hochiminhhotelType6}">
-                                                <li th:text="${hotel.getNameOfHotel()}"></li>
+                                                <li ><a th:href="'hotel_detail'+${hotel.getId()}" th:text="${hotel.getNameOfHotel()}" ></a></li>
                                             </th:block>
 
 
@@ -394,7 +394,7 @@ Tab (toi') nguoc lai thi` Shift + Tab
                         $('.modal').on('hidden.bs.modal', function(){
                             $(this).find('form')[0].reset();
                         });
-                        ">Tìm Khách Sạn ngay</a>
+                        ">Tìm Khách Sạn Bạn Muốn</a>
 
 
 

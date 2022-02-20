@@ -174,7 +174,7 @@ $(document).ready(function () {
             if (localStorage.index_tmp_name) {
                 localStorage.index_tmp_name = $txt;
             } else {
-                localStorage.index_tmp_name = "Đà Nẵng";
+                localStorage.index_tmp_name = "Hà Nội";
             }
             //3 bien sau: co' dinh
             localStorage.index_tmp_checkin = "";
@@ -190,15 +190,17 @@ $(document).ready(function () {
             window.location = 'search-hotels';
             return false;
         } else {
-            if (local === 'Địa điểm nổi tiếng' || $(this).text() === 'Tất cả ...') {
-                window.location = 'search-hotels';
+            if ($(this).text() === 'Tất cả ...') {
+                window.location = 'search-hotels/'+localStorage.index_tmp_name;
                 return false;
             } else {
                 //luu tru ten bien' khach san, nhu*ng ko co' dia chi => viec xac dinh Google se~ co the bi. co' dinh
                 //alert('bcheck = false 2');
                 localStorage.searchhotels_tmp_nameofhotel = $(this).text();
-                window.location = 'room-bookings';
-                return false;
+                // window.location = 'search-hotels/'+localStorage.index_tmp_name;
+                console.log($(this).find('a'));
+                $(this).find('a').trigger("click");
+
             }
         }
     });
@@ -213,7 +215,7 @@ $(document).ready(function () {
                 //C2: http://www.w3schools.com/jsref/prop_style_texttransform.asp
                 localStorage.index_tmp_name = $txt;
             } else {
-                localStorage.index_tmp_name = "Đà Nẵng";
+                localStorage.index_tmp_name = "Hà Nội";
             }
             //3 bien sau: co' dinh
             localStorage.index_tmp_checkin = "";
@@ -223,7 +225,8 @@ $(document).ready(function () {
             alert("Sorry, your browser does not support web storage...");
         }
         //hoac window.open("search-hotels.html","_self");
-        window.location = 'search-hotels';
+        console.log(localStorage.index_tmp_name);
+        // window.location = 'search-hotels/'+localStorage.index_tmp_name;
     });
 
 });

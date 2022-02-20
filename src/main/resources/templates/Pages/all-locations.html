@@ -87,8 +87,8 @@
         };
 
         function printRegionInfo(locations) {
-            document.write("<div id='close'>");
-            document.write("<a href='/' target='_self' style='color: black' title='Về trang chủ'>" + "&times;" + "</a>");
+            document.write("<div id='header'></div><div id='close'>");
+            // document.write("<a href='/' target='_self' style='color: black' title='Về trang chủ'>" + "&times;" + "</a>");
             document.write("</div>");
 
             document.write("<div id='title'>");
@@ -139,7 +139,9 @@
             document.write("<div class='col-sm-1'>");
             document.write("</div>");
             document.write("</div>");
-            document.write("</div>");
+            document.write("</div><div id='footer'></div>");
+            $("#header").load("/header");
+            $("#footer").load("/footer");
         }
 
 

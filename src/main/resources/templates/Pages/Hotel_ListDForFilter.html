@@ -21,8 +21,10 @@
 <div id="page-1" >
     <th:block th:each="row,RowState:${list_of_row}">
     <div class="row" style="color: white" th:if="${row}">
+
         <th:block th:each="hotel,count:${row}">
-        <div class="col-sm-6 carousel slide" style="display: flex;justify-content: center; " th:id="'demo'+${RowState.index}+${count.index}" data-interval="false">
+        <div class="col-sm-6 carousel slide" style="display: flex;justify-content: center; " th:id="'demo'+${RowState.index}+${count.index}" data-interval="false" onclick="callLink(this)">
+            <a th:href="'/hotel_detail'+${hotel.getId()}" class="link"></a>
 
             <div class="carousel-inner" style=" border-radius: 20px;position: relative ;">
                 <div class="loaiphong" style="font-size: 13px" th:text="${hotel.getHotel_property().getType()}"> </div>
@@ -99,9 +101,14 @@
         </li>
     </ul>
     </th:block>
-    <th:block th:unless="${number_of_page!=0}"><div style="display:flex; justify-content: center"><span>Không có khách sạn tương ứng</span></div></th:block>
+    <th:block th:unless="${number_of_page!=0}"><div style="float:left;display:flex;justify-content: center;">Không có khách sạn tương ứng</div></th:block>
 </div>
 <!--  </div>-->
 <!--</div>-->
+<script>
+    function callLink(e){
+        e.getElementsByClassName('link')[0].click();
+    }
+</script>
 </body>
 </html>
