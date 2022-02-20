@@ -23,7 +23,6 @@ public class HomePageController {
     private HotelRepository hotelRepository;
     @GetMapping("/")
     public String homepage(Model model) {
-
         model = getTopReview(model);
         model = getHotelProperty(model,"Hà Nội","hanoi");// hanoi hotel - all property
         model = getHotelProperty(model,"Đà Nẵng","danang");// danang hotel - all property
@@ -56,7 +55,6 @@ public class HomePageController {
         model.addAttribute(pattern+"Type4",type4);
         model.addAttribute(pattern+"Type5",type5);
         model.addAttribute(pattern+"Type6",type6);
-
 
         model.addAttribute(pattern+"hotelType1",
                 hotelRepository.findByHotel_addressContainingAndHotel_property(location,type1));
@@ -98,6 +96,7 @@ public class HomePageController {
         return "Pages/Common-pages/part-footer";
 
     }
+    //
     // method khong tham gia vao hien thi chi de thong bao cac attr ton tai
     @GetMapping("/deleteErrorReport")
     public String deleteErrReport(Model model){
