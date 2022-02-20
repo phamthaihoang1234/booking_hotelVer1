@@ -55,6 +55,7 @@ public class HotelFilterControllerD {
             standards.add(stars_per_standard);
             stars_per_standard = new ArrayList<>();
         }
+
         // chia cac  hotel property vao tung attr theo form cua hotelFilter.html
         ArrayList<Hotel_Property> hotel_properties1 = new ArrayList<>();
         ArrayList<Hotel_Property> hotel_properties2 = new ArrayList<>();
