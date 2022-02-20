@@ -49,4 +49,6 @@ public class SearchHotelHomePageController {
         }
     }
     // phan dung code-end
+
+    //lay toan bo ten cua hotel de ho tro tim kiem bang js
 }
