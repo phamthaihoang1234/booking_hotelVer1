@@ -251,7 +251,7 @@ public class OwnHotelController {
             e.printStackTrace();
             model.addAttribute("statusChangePassWord", "e.printStackTrace()");
         }
-
+        model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
         return "Pages/owner/hotelOwnerProfile";
     }
 
