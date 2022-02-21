@@ -53,8 +53,7 @@ public class OwnHotelController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+
 
 
 
@@ -240,7 +239,7 @@ public class OwnHotelController {
     @PostMapping("/saveHotelOwnerNewPasword")
     public void saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo) {
         try (PrintWriter out = response.getWriter()) {
-            Optional<UserInfo> hotelOwner = userRepository.existsByUsernameAndPassword(this.getPrincipal(), oldPassword);
+            Optional<UserInfo> hotelOwner = Optional.ofNullable(userRepository.existsByUsernameAndPassword(this.getPrincipal(), oldPassword));
             UserInfo oldHotelOwnerInfo = userService.findByUserName(this.getPrincipal());
             if (hotelOwner.isPresent()) {
                 oldHotelOwnerInfo.setPassword(newPassword);
