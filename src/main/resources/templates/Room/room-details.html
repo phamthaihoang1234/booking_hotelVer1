@@ -1370,8 +1370,8 @@
             $('#date1').val(localStorage.searchhotels_tmp_checkin);
             $('#date2').val(localStorage.searchhotels_tmp_checkout);
 //            $('#loaiphong select').val(localStorage.index_tmp_typeofroom);
-            $('.name-of-hotel').text(localStorage.searchhotels_tmp_nameofhotel);
-            $('.address-of-hotel').text(localStorage.searchhotels_tmp_addofhotel);
+//             $('.name-of-hotel').text(localStorage.searchhotels_tmp_nameofhotel);
+//             $('.address-of-hotel').text(localStorage.searchhotels_tmp_addofhotel);
             // xac dinh vi tri tren Google map, chi thay doi dia chi & cố định tại Đà Nẵng
             $('#right-infoTabs iframe').attr('src', 'https://maps.google.com/maps?hl=en&q=' + localStorage.searchhotels_tmp_addofhotel_2 + '&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed');
             // sau khi load xong thi check user da~ login hay chua
@@ -2467,9 +2467,9 @@
                     if (localStorage.index_tmp_name) {
                         //1 so' localStorage giong trang homepage: de? ho tro ghi de`
                         localStorage.index_tmp_name = $('#autocomplete').val();
-                        localStorage.searchhotels_tmp_nameofhotel = $(this).parent().find('.name-of-hotel').text();
-                        localStorage.searchhotels_tmp_addofhotel = $(this).parent().find('.address-of-hotel').text();
-                        localStorage.searchhotels_tmp_addofhotel_2 = $(this).parent().find('.address-of-hotel-sub').text() + ' Đà Nẵng';
+                        // localStorage.searchhotels_tmp_nameofhotel = $(this).parent().find('.name-of-hotel').text();
+                        // localStorage.searchhotels_tmp_addofhotel = $(this).parent().find('.address-of-hotel').text();
+                        // localStorage.searchhotels_tmp_addofhotel_2 = $(this).parent().find('.address-of-hotel-sub').text() + ' Đà Nẵng';
                         //save Date (checkin, checkout)
                         //viec khai bao' trung id o? cac file co' bi. anh huong? cai` trung id thi` ko chay. duoc ham` nay`
                         var check_in = new Date(document.getElementById("s-datePicker1").value);
@@ -2555,7 +2555,7 @@
             <div id="wowslider-container1">
                 <!--neu dung margin-top: 380px => khi zoom browser thi chu~ bi. day? xuog' -->
                 <div style="position: absolute; z-index: 1000; color: white; text-shadow: 1px 0px black; margin-left: 50px;bottom: 45px">
-                    <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel">Vanda Hotel</span><br/>
+                    <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span><br/>
                     <div style="font-size: 15px">
                         <span class="glyphicon glyphicon-star"></span>
                         <span class="glyphicon glyphicon-star"></span>
@@ -2566,7 +2566,8 @@
                     <div style="font-size: 15px">
                         <span class="glyphicon glyphicon-map-marker"></span>
                         <span class="address-of-hotel">
-                            3 Nguyễn Văn Linh, Q Hải Châu, Đà Nẵng
+<!--                            3 Nguyễn Văn Linh, Q Hải Châu, Đà Nẵng-->
+                            <span th:text="${hotelInfo.get().getAddressOfHotel()}"></span>
                         </span>
                     </div>
                 </div>
@@ -2893,19 +2894,20 @@
                 <p style="text-align: justify">
                     Nếu bạn đang muốn tìm một khách sạn có vị trí thuận lợi thuộc <span
                         class="name-of-location">Đà Nẵng</span>,
-                    không lựa chọn nào tốt hơn <span class="name-of-hotel">Vanda Hotel</span>. Từ đây, khách có thể dễ
+                    không lựa chọn nào tốt hơn <span class="name-of-hotel">
+                    <span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span>. Từ đây, khách có thể dễ
                     dàng tiếp
                     cận được nét đẹp sống động của thành phố ở mọi góc cạnh. Với vị trí thuận lợi, khách sạn dễ dàng
                     tiếp
                     cận những điểm tham quan du lịch nổi tiếng của thành phố.<br/><br/>
-                    <span class="name-of-hotel">Vanda Hotel</span> mang lại dịch vụ hoàn hảo, làm hài lòng cả những vị
+                    <span class="name-of-hotel"><span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span> mang lại dịch vụ hoàn hảo, làm hài lòng cả những vị
                     khách khó tính nhất với những tiện nghi sang trọng tuyệt vời. Khi nghỉ ngơi trong khách sạn tuyệt
                     vời
                     này, khách có thể tận hưởng Miễn phí Wi-fi tất cả các phòng, quầy lễ tân 24 giờ, tiện nghi cho người
                     khuyết tật, Wi-Fi ở khu vực công cộng, phục vụ phòng.<br/><br/>
                     Khách có thể chọn 114 phòng có không khí yên bình và tuyệt vời. phòng thể dục, phòng xông hơi, hồ
                     bơi trong nhà, spa, massage của khách sạn là nơi lý tưởng để thư giãn và đổi gió sau một ngày bận
-                    rộn. <span class="name-of-hotel">Vanda Hotel</span> là một sự lựa chọn thông minh cho du khách khi
+                    rộn. <span class="name-of-hotel"><span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span> là một sự lựa chọn thông minh cho du khách khi
                     đến <span class="name-of-location">Đà Nẵng</span>, nơi mang lại cho họ một kì nghỉ thư giãn và thoải
                     mái.
                 </p>
@@ -2919,7 +2921,7 @@
                     <span class="name-of-location">Đà Nẵng</span>
                 </a>
                 <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>
-                <b>YOY <span class="name-of-hotel">Vanda Hotel</span></b>
+                <b>YOY <span class="name-of-hotel"><span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span></b>
             </div>
         </div>
         <!--tam dat. height de ho tro fill color (vi ko xac dinh dc height cua right-aboutHotel)-->

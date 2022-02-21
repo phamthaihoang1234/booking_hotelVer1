@@ -3,6 +3,7 @@ package com.example.bookinghotel.controller;
 
 
 import com.example.bookinghotel.repositories.RoomRepository;
+import com.example.bookinghotel.services.HotelService;
 import com.example.bookinghotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +17,16 @@ public class RoomDetailsController {
     private RoomRepository roomRepository;
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private HotelService hotelService;
 
     @GetMapping("/roomDetails/{id}")
     public String roomDetails(@PathVariable Long id, Model model){
 
-        model.addAttribute("roomDetails",roomService.findById(id));
-        return "Pages/room-bookings";
+        model.addAttribute("hotelInfo",hotelService.findById(id));
+        model.addAttribute("roomDetail",roomService.findByHotelId(id));
+
+        return "Room/room-details";
     }
 
 }

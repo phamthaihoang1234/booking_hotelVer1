@@ -19,4 +19,11 @@ public class RoomServicelmpl implements RoomService{
         return roomRepository.findById(id);
     }
 
+    @Override
+    public Optional<Room> findByHotelId(Long hotel_id) {
+        return roomRepository.findById(hotel_id);
+    }
+
+
+
 }
