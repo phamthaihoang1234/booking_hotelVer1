@@ -239,9 +239,8 @@ public class OwnHotelController {
     @PostMapping("/saveHotelOwnerNewPasword")
     public String saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo) {
         UserInfo hotelOwner = null;
-        try (PrintWriter out = response.getWriter()) {
-            Optional<UserInfo> hotelOwner = Optional.ofNullable(userRepository.existsByUsernameAndPassword(this.getPrincipal(), oldPassword));
-            UserInfo oldHotelOwnerInfo = userService.findByUserName(this.getPrincipal());
+        try {
+            hotelOwner = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword);
             if (hotelOwner.isPresent()) {
                 oldHotelOwnerInfo.setPassword(newPassword);
                 userService.save(oldHotelOwnerInfo);
