@@ -12,5 +12,4 @@ import java.util.Optional;
 public interface RoomRepository extends CrudRepository<Room, Long> {
 
     Optional<Room> findById(Long id);
-
 }
