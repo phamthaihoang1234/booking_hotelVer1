@@ -237,14 +237,14 @@ public class OwnHotelController {
     }
 
     @PostMapping("/saveHotelOwnerNewPasword")
-    public String saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo) {
+    public String saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo, Model model) {
         UserInfo hotelOwner = null;
         try {
             hotelOwner = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword);
-            if (hotelOwner.isPresent()) {
-                oldHotelOwnerInfo.setPassword(newPassword);
-                userService.save(oldHotelOwnerInfo);
-                out.write("Đổi mật khẩu thành công");
+            if (hotelOwner !=  null) {
+                hotelOwner.setPassword(newPassword);
+                userService.save(hotelOwner);
+                model.addAttribute("statusChangePassWord", "Thay đổi mật khẩu thành công !!!");
             } else
                 out.write("Sai mật khẩu");
         } catch (IOException e) {
