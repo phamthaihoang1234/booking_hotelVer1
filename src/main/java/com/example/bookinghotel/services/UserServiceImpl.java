@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
 //    public Optional<UserInfo> findByNameAndPassword(String name, String password) {
 //        return userRepository.findByNameAndPassword(name, password);
 //    }
-
+//
+    //
     @Override
     public UserInfo findByEmail(String email) {
         return userRepository.findByEmail(email);
