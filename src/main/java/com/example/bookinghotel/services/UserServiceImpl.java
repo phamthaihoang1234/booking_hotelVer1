@@ -1,6 +1,7 @@
 package com.example.bookinghotel.services;
 
 
+import com.example.bookinghotel.entities.Role;
 import com.example.bookinghotel.entities.UserInfo;
 import com.example.bookinghotel.entities.UserPrinciple;
 import com.example.bookinghotel.repositories.UserRepository;
@@ -36,6 +37,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
 
+//    @Override
+//    public Optional<UserInfo> findByNameAndPassword(String name, String password) {
+//        return userRepository.findByNameAndPassword(name, password);
+//    }
+//
     @Override
     public UserInfo findByEmail(String email) {
         return userRepository.findByEmail(email);
