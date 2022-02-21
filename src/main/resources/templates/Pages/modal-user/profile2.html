@@ -389,13 +389,28 @@
                                                             </div>
                                                             <div class="col-12 col-sm-6">
                                                                 <div class="form-group">
-                                                                    <label>Mobile</label>
+                                                                    <label>Số điện thoại</label>
                                                                     <input type="text"
                                                                            th:value="${userInfo.phoneNumber}"
                                                                            th:field="*{userInfo.phoneNumber}"
                                                                            id="txtPhoneNumber"
                                                                            class="form-control"></div>
                                                             </div>
+                                                            <div class="col-12 col-sm-6">
+                                                                <label>Giới tính</label>
+                                                                <br>
+                                                                <label class="radio-container m-r-45">Name
+                                                                    <input type="radio" checked="checked" id="male"
+                                                                           value="Male" th:value="${userInfo.gender}"
+                                                                           th:field="*{userInfo.gender}" required>
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                                <label class="radio-container">Nữ
+                                                                    <input type="radio" name="gender" id="female"
+                                                                           value="Female" th:value="${userInfo.gender}"
+                                                                           th:field="*{userInfo.gender}" required>
+
+                                                                </label></div>
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label>Địa chỉ </label>
@@ -404,8 +419,10 @@
                                                                            th:field="*{userInfo.address}"
                                                                            id="txtAddress"></div>
                                                             </div>
+                                                            <div id="messageUpdateProfile" style="color:red;"></div>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary btn-block"
+                                                                id="btEditProfile"
                                                         >Xác nhận
                                                             chỉnh sửa
                                                         </button>
@@ -424,10 +441,12 @@
                                     <h5 class="card-title">Thay đổi mật khẩu</h5>
                                     <div class="row">
                                         <div class="col-md-10 col-lg-6">
-                                            <form th:action="@{/saveChangePasword}" method="post" id="FormChangePassWord">
+                                            <form th:action="@{/saveChangePasword}" method="post"
+                                                  id="FormChangePassWord">
                                                 <div class="form-group">
                                                     <label>Mật khẩu cũ: </label>
-                                                    <input type="password" class="form-control" name="oldPassword" required>
+                                                    <input type="password" class="form-control" name="oldPassword"
+                                                           required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Mật khẩu mới: </label>
@@ -443,7 +462,8 @@
                                                     khẩu
                                                 </button>
                                                 <!--/*@thymesVar id="statusChangePassWord" type=""*/-->
-                                                <p style="color: red;" th:if="${statusChangePassWord}" th:text="${statusChangePassWord}"></p>
+                                                <p style="color: red;" th:if="${statusChangePassWord}"
+                                                   th:text="${statusChangePassWord}"></p>
                                             </form>
                                         </div>
                                     </div>
@@ -481,6 +501,26 @@
             $("#FormChangePassWord").submit()
         }
     });
+
+    document.getElementById("btEditProfile").addEventListener("click", function (event) {
+        event.preventDefault()
+        let txtName = document.getElementsByName("txtName")[0]
+        let txtEmail = document.getElementsByName("txtEmail")[0]
+        let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
+        let txtAddress = document.getElementsByName("txtAddress")[0]
+        let regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b$/
+        let regexEmail = /^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$/
+        if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0 ||) {
+            document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
+        } else if (numericReg.test(txtPhoneNumber)) {
+            document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
+        } else if (regexEmail.test(txtEmail)) {
+            document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
+        } else {
+            $("#FormChangePassWord").submit()
+        }
+    })
+    ;
 </script>
 </body>
 
