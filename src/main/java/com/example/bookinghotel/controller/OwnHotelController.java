@@ -236,6 +236,7 @@ public class OwnHotelController {
         return "redirect:/hotelOwnerProfile";
     }
 
+
     @PostMapping("/saveHotelOwnerNewPasword")
     public String saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo, Model model) {
         UserInfo hotelOwner = null;
