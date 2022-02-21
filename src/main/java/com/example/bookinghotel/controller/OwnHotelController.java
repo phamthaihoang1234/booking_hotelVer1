@@ -1,6 +1,7 @@
 package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.*;
+import com.example.bookinghotel.repositories.UserRepository;
 import com.example.bookinghotel.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -46,6 +50,11 @@ public class OwnHotelController {
 
     @Autowired
     private HomeService roomService;
+    @Autowired
+    private UserRepository userRepository;
+
+
+
 
 
     @GetMapping("/signupOwn")
@@ -223,10 +232,27 @@ public class OwnHotelController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-//        redirect.addFlashAttribute("success", "Saved HotelOwner Profile successfully!");
         return "redirect:/hotelOwnerProfile";
+    }
+
+
+    @PostMapping("/saveHotelOwnerNewPasword")
+    public String saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo, Model model) {
+        UserInfo hotelOwner = null;
+        try {
+            hotelOwner = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword);
+            if (hotelOwner !=  null) {
+                hotelOwner.setPassword(newPassword);
+                userService.save(hotelOwner);
+                model.addAttribute("statusChangePassWord", "Thay đổi mật khẩu thành công !!!");
+            } else
+                model.addAttribute("statusChangePassWord", "Mật khẩu cũ không đúng !!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("statusChangePassWord", "e.printStackTrace()");
+        }
+        model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
+        return "Pages/owner/hotelOwnerProfile";
     }
 
 

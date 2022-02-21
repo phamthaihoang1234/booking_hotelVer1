@@ -59,6 +59,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserInfo existsByUsernameAndPassword(String email, String password) throws Exception {
+        return userRepository.existsByUsernameAndPassword(email,password);
+    }
+
+    @Override
     public UserInfo save(UserInfo user) throws Exception {
 //        if (this.existsByUsername(user.getUsername())) {
 //            throw new RuntimeException(messageSource.getMessage("validators.username.exists", new Object[] {user.getUsername()}, Locale.getDefault()));

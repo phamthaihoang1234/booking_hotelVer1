@@ -71,6 +71,7 @@ public class HotelFilterControllerD {
 
 
         // so sao cua 1 standard - stars_per_standard
+        //
         // 1 obj = 1 sao
         ArrayList<Object> stars_per_standard = new ArrayList<>();
         ArrayList<ArrayList<Object>> standards = new ArrayList<>();

@@ -142,4 +142,6 @@ public class SearchHotelHomePageController {
         return ans==true&&ans2==true;
     }
     // phan dung code-end
+
+    //lay toan bo ten cua hotel de ho tro tim kiem bang js
 }
