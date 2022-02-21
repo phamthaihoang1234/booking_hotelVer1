@@ -246,12 +246,12 @@ public class OwnHotelController {
                 userService.save(hotelOwner);
                 model.addAttribute("statusChangePassWord", "Thay đổi mật khẩu thành công !!!");
             } else
-                out.write("Sai mật khẩu");
-        } catch (IOException e) {
-            e.printStackTrace();
+                model.addAttribute("statusChangePassWord", "Mật khẩu cũ không đúng !!!");
         } catch (Exception e) {
             e.printStackTrace();
+            model.addAttribute("statusChangePassWord", "e.printStackTrace()");
         }
+
         return "Pages/owner/hotelOwnerProfile";
     }
 
