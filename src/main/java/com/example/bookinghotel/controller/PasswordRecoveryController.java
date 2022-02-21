@@ -18,7 +18,7 @@ import java.util.Random;
 
 @Controller
 public class PasswordRecoveryController {
-
+    // phan dung code
     @Autowired
     private EmailService emailService;
     @Autowired
@@ -53,7 +53,7 @@ public class PasswordRecoveryController {
             userInfo = user.get();
             model.addAttribute("username",userInfo.getUsername());
             model.addAttribute("mail",userInfo.getEmail());
-            model.addAttribute("phone", "1900 5454 40");
+            model.addAttribute("phone", "+84"+userInfo.getPhoneNumber().substring(1,10));
             return "Pages/modal-user/user-resetpassword-methods";
         }
         else{
@@ -76,7 +76,7 @@ public class PasswordRecoveryController {
                 if(user.getPasswordToken().equals(passwordToken)){
                     recoveredUser = user;
                     model.addAttribute("name", user.getName());// name gọi sau khi đăng nhập
-                    model.addAttribute("username", user.getName());
+                    model.addAttribute("username", user.getUsername());
                     break;
                 }
         }
@@ -124,6 +124,9 @@ public class PasswordRecoveryController {
         }
         return buffer.toString();
     }
-
-
+    @GetMapping("/callMessage")
+    String getCallMessage(){
+        return "Pages/modal-user/callMessage";
+    }
+    // phan dung code-end
 }

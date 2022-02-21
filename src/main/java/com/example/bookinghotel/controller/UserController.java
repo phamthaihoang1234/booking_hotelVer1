@@ -45,9 +45,6 @@ public class UserController {
     @PostMapping("/register")
     public String registerUser(@Validated @ModelAttribute("user") UserInfo user , BindingResult result , RedirectAttributes redirect, Model model) throws Exception {
 
-
-
-
         Role roleUser = new Role();
         roleUser.setName("ROLE_USER");
         roleService.save(roleUser);

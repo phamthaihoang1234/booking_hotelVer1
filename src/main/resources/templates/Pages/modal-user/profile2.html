@@ -19,9 +19,11 @@
 <div class="main-wrapper">
     <div class="header">
         <div class="header-left">
-            <a href="../index.html" class="logo"> <img src="../assets/img/hotel_logo.png" width="50" height="70" alt="logo">
+            <a href="../index.html" class="logo"> <img src="../assets/img/hotel_logo.png" width="50" height="70"
+                                                       alt="logo">
                 <span class="logoclass">HOTEL</span> </a>
-            <a href="../index.html" class="logo logo-small"> <img src="../assets/img/hotel_logo.png" alt="Logo" width="30"
+            <a href="../index.html" class="logo logo-small"> <img src="../assets/img/hotel_logo.png" alt="Logo"
+                                                                  width="30"
                                                                   height="30"> </a>
         </div>
         <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
@@ -341,7 +343,7 @@
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Địa chỉ Email: </p>
                                                 <p class="col-sm-9" th:text="${userInfo.email}"></p>
                                             </div>
-                                           <div class="row">
+                                            <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Giới tính: </p>
                                                 <p class="col-sm-9" th:text="${userInfo.gender}"></p>
                                             </div>
@@ -366,7 +368,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                 <form th:action="@{/saveEditProfile}" method="post" id="editProfile">
+                                                    <form th:action="@{/saveEditProfile}" method="post"
+                                                          id="editProfile">
                                                         <div class="row form-row">
                                                             <div class="col-12 col-sm-6">
                                                                 <div class="form-group">
@@ -403,7 +406,7 @@
                                                             </div>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary btn-block"
-                                                                >Xác nhận
+                                                        >Xác nhận
                                                             chỉnh sửa
                                                         </button>
                                                     </form>
@@ -421,17 +424,26 @@
                                     <h5 class="card-title">Thay đổi mật khẩu</h5>
                                     <div class="row">
                                         <div class="col-md-10 col-lg-6">
-                                            <form th:action="@{/saveChangePasword}" method="post" id="changePassWord">
+                                            <form th:action="@{/saveChangePasword}" method="post" id="FormChangePassWord">
                                                 <div class="form-group">
                                                     <label>Mật khẩu cũ: </label>
-                                                    <input type="password" class="form-control" name="oldPassword"></div>
+                                                    <input type="password" class="form-control" name="oldPassword" required>
+                                                </div>
                                                 <div class="form-group">
                                                     <label>Mật khẩu mới: </label>
-                                                    <input type="password" class="form-control" name="newPassword"></div>
+                                                    <input type="password" class="form-control" name="newPassword">
+                                                </div>
                                                 <div class="form-group">
-                                                    <label>Nhập lại mật khẩu mới: </label>
-                                                    <input type="password" class="form-control" name="newPassword2"></div>
-                                                <button class="btn btn-primary" type="submit">Lưu mật khẩu</button>
+                                                    <label>Xác nhận mật khẩu mới: </label>
+                                                    <input type="password" class="form-control" name="newPassword2">
+                                                    <div id="message" style="color:red;"></div>
+                                                </div>
+                                                <button class="btn btn-primary" type="submit" id="buttonChangePass">Lưu
+                                                    mật
+                                                    khẩu
+                                                </button>
+                                                <!--/*@thymesVar id="statusChangePassWord" type=""*/-->
+                                                <p style="color: red;" th:if="${statusChangePassWord}" th:text="${statusChangePassWord}"></p>
                                             </form>
                                         </div>
                                     </div>
@@ -453,6 +465,23 @@
 <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
 <script src="../assets/js/script.js"></script>
+<script>
+    document.getElementById("buttonChangePass").addEventListener("click", function (event) {
+        event.preventDefault()
+        let newPass = document.getElementsByName("newPassword")[0]
+        let newPass2 = document.getElementsByName("newPassword2")[0]
+        if (newPass.value.length <= 8) {
+            console.log("NewPass: " + newPass.value)
+            document.getElementById("message").innerText = "Mật khẩu chưa đủ 8 kí tự"
+        } else if (newPass.value.length != newPass2.value.length) {
+            console.log("NewPass: " + newPass.value)
+            console.log("NewPass2: " + newPass2.value)
+            document.getElementById("message").innerText = "Mật khẩu mới và xác nhận mật khẩu mới chưa trùng khớp"
+        } else {
+            $("#FormChangePassWord").submit()
+        }
+    });
+</script>
 </body>
 
 </html>

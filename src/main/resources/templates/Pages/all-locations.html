@@ -10,233 +10,158 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
     <!-- Offline -->
-    <link rel="stylesheet" href="../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">-->
     <script src="../Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
     <script src="../Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <style>
-        #title {
-            width: 90%;
-            margin: 0 auto;
-            text-align: center;
-            margin-top: 30px;
-            margin-bottom: 35px;
-        }
 
-        #redline {
-            width: 50px;
-            height: 2px;
-            background-color: rgb(220, 30, 40);
-            margin: auto;
-            margin-top: 20px;
-        }
-
-        #close {
-            position: absolute;
-            font-size: 40px;
-            /*float: right;*/
-            /*margin-right: 100px;*/
-            right: 15%;
-            color: rgb(117, 117, 120);
-            margin-top: -20px;
-        }
-
-        #img-background {
-            opacity: 0.4;
-            position: absolute;
-            width: 100%;
-            /*anh? trong div ko cai` duoc margin hoac position (center)*/
-            text-align: center;
-        }
-
-        .alphabet {
-            color: rgb(220, 30, 40);
-            font-size: larger;
-        }
-
-        #close a {
-            /*bo underline*/
-            text-decoration: none;
-        }
-
-        #content a:hover {
-            /*do the a ko co' href*/
-            cursor: pointer;
-        }
-
-        /*hien tai the? a ko co' dia chi href */
-        #content a:link {
-            color: green;
-            background-color: transparent;
-            text-decoration: none
-        }
-
-        #content a:visited {
-            color: pink;
-            background-color: transparent;
-            text-decoration: none
-        }
-
-        #content a:hover {
-            color: red;
-            background-color: transparent;
-            text-decoration: underline
-        }
-
-        #content a:active {
-            color: yellow;
-            background-color: transparent;
-            text-decoration: underline
-        }
     </style>
 
-    <script language="javascript">
-        //====================
-        document.write("<div id='close'>");
-        document.write("<a href='homepage.html' target='_self' style='color: black' title='Về trang chủ'>" + "&times;" + "</a>");
-        document.write("</div>");
+    <script>
+        // phan dung code
+        $(document).ready(function () {
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function (e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+            console.log("ready to get data");
+            let regionNames = [];
 
-        document.write("<div id='title'>");
-        document.write("<h3>");
-        document.write("Mạng đặt phòng Online" + "<br>" + "trải rộng khắp 43 tỉnh, thành phố" + "<br>" + "với trên 1000 khách sạn");
-        document.write("</h3>");
-        document.write("<div id='redline'>" + "</div>");
-        document.write("</div>");
-        //====================
-        var locations = [
-            {value: 'A'},
-            {value: 'An Giang'},
-            {value: 'B'},
-            {value: 'Bà Rịa - Vũng Tàu'},
-            {value: 'Bạc Liêu'},
-            {value: 'Bắc Giang'},
-            {value: 'Bắc Kạn'},
-            {value: 'Bắc Ninh'},
-            {value: 'Bến Tre'},
-//        { value: 'Bình Dương' },
-//        { value: 'Bình Định' },
-//        { value: 'Bình Phước' },
-//        { value: 'Bình Thuận' },
-            {value: 'C'},
-            {value: 'Cà Mau'},
-            {value: 'Cao Bằng'},
-            {value: 'Cần Thơ'},
-            {value: 'Đ'},
-            {value: 'Đà Nẵng', data: 'DAD'},
-            {value: 'Đắk Lắk'},
-            {value: 'Đắk Nông'},
-            {value: 'Điện Biên'},
-//        { value: 'Đồng Nai' },
-//        { value: 'Đồng Tháp' },
-            {value: 'G'},
-            {value: 'Gia Lai'},
-            {value: 'H'},
-            {value: 'Hà Giang'},
-            {value: 'Hà Nam'},
-            {value: 'Hà Nội'},
-//        { value: 'Hà Tĩnh' },
-//        { value: 'Hải Dương' },
-//        { value: 'Hải Phòng' },
-//        { value: 'Hậu Giang' },
-//        { value: 'Hòa Bình' },
-//        { value: 'Hưng Yên' },
-            {value: 'K'},
-            {value: 'Kiên Giang'},
-            {value: 'Kon Tum'},
-            {value: 'Khánh Hòa'},
-            {value: 'L'},
-            {value: 'Lai Châu'},
-            {value: 'Lạng Sơn'},
-//        { value: 'Lào Cai' },
-//        { value: 'Lâm Đồng' },
-//        { value: 'Long An' },
-            {value: 'N'},
-            {value: 'Nam Định'},
-            {value: 'Ninh Bình'},
-            {value: 'Ninh Thuận'},
-            {value: 'Nghệ An'},
-            {value: 'P'},
-            {value: 'Phú Thọ'},
-            {value: 'Phú Yên'},
-            {value: 'Q'},
-            {value: 'Quảng Bình'},
-            {value: 'Quảng Nam'},
-            {value: 'Quảng Ninh'},
-            {value: 'Quảng Ngãi'},
-//        { value: 'Quảng Trị' },
-            {value: 'S'},
-            {value: 'Sóc Trăng'},
-            {value: 'Sơn La'},
-            {value: 'T'},
-            {value: 'Tây Ninh'},
-            {value: 'Tiền Giang'},
-            {value: 'TP Hồ Chí Minh'},
-            {value: 'Tuyên Quang'},
-            {value: 'Thái Bình'},
-//        { value: 'Thái Nguyên' },
-//        { value: 'Thanh Hóa' },
-//        { value: 'Thừa Thiên Huế' },
-//        { value: 'Trà Vinh' },
-            {value: 'V'},
-            {value: 'Vĩnh Long'},
-            {value: 'Vĩnh Phúc'},
-            {value: 'Y'},
-            {value: 'Yên Bái'},
-        ];
+            $.ajax({
 
-        // http://www.conceptdraw.com/How-To-Guide/geo-map-asia-vietnam
-        document.write("<div id='img-background'>" + "<img src='../img/all-locations/Vietnam-map.png'/>" + "</div>");
+                url: '/getAllRegions',
+                type: 'get',
+                data: {},
 
-        document.write("<div style='width: 90%; color: rgb(70,68,68); margin: auto'>");
-        document.write("<div id='content' class='row' style='line-height: 32px'>");
-        // the hien tren Bootstrap Grid (12 cot)
-        document.write("<div class='col-sm-1'>");
-        document.write("</div>");
-
-        for (var i = 0; i < locations.length; i++) {
-            var name1 = locations[i].value;
-//            cach 2 la dug them 1 bien' dem cac name1 co' length = 1, neu' % 4 == 0 ...
-            if (name1 == 'A' || name1 == 'Đ' || name1 == 'K' || name1 == 'P' || name1 == 'T') {
-                document.write("<div class='col-sm-2' style='text-align: center'>");
-                document.write("<span class='alphabet'>" + locations[i].value + "</span>");
-
-                for (i = i + 1; i < locations.length; i++) {
-                    var name2 = locations[i].value;
-                    if (name2 == 'Đ' || name2 == 'K' || name2 == 'P' || name2 == 'T') {
-                        i = i - 1;
-                        break;
-                    }
-                    document.write("<br>");
-                    if (locations[i].value.length == 1) {
-                        document.write("<span class='alphabet'>" + locations[i].value + "</span>");
+                success: function (data) {
+                    if (data === "cant get location names") {
+                        console.log("gap su co khi lay thong tin ve cac location")
+                        alert("some error happen");
                     } else {
-//                        document.write(locations[i].value);
-                        document.write("<a href='#' style='color: black'>" + locations[i].value + "</a>");
+                        regionNames = seperateStrToArr(data);
+                        console.log("thong tin cua locations:" + regionNames)
+                        let locations = regionNames;
+                        printRegionInfo(locations);
+                        loadMultipleCss();
+                        checkLink();
+                        // $(document).ready(function(){{
+                        //     window.stop();
+                        // }})
+
+                        // tu tat loading neu page loading qua' 1s
+                        setTimeout(function () {
+                            window.stop();
+                        }, 1000);
+
+
                     }
+                },
+                error: function (request, error) {
+                    alert("Request: " + JSON.stringify(request));
+                }
+            });
+
+
+        })
+        var loadMultipleCss = function () {
+            //load local stylesheet
+            loadCss('../css/all-locations.css');
+
+            //load Bootstrap from CDN
+            loadCss('../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css');
+
+            //load Bootstrap theme from CDN
+            loadCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css');
+        }
+
+        var loadCss = function (cssPath) {
+            var cssLink = document.createElement('link');
+            cssLink.rel = 'stylesheet';
+            cssLink.href = cssPath;
+            var head = document.getElementsByTagName('head')[0];
+            head.parentNode.insertBefore(cssLink, head);
+        };
+
+        function printRegionInfo(locations) {
+            document.write("<div id='close'>");
+            document.write("<a href='/' target='_self' style='color: black' title='Về trang chủ'>" + "&times;" + "</a>");
+            document.write("</div>");
+
+            document.write("<div id='title'>");
+            document.write("<h3>");
+            document.write("Mạng đặt phòng Online" + "<br>" + "trải rộng khắp 63 tỉnh, thành phố" + "<br>" + "với trên 1000 khách sạn");
+            document.write("</h3>");
+            document.write("<div id='redline'>" + "</div>");
+            document.write("</div>");
+            // in hinh nuoc viet nam
+            // http://www.conceptdraw.com/How-To-Guide/geo-map-asia-vietnam
+            document.write("<div  id='img-background'>" + "<img src='../img/all-locations/Vietnam-map.png'/>" + "</div>");
+
+            document.write("<div style='width: 90%; color: rgb(70,68,68); margin: auto'>");
+            document.write("<div id='content' class='row' style='line-height: 32px'>");
+            // the hien tren Bootstrap Grid (12 cot)
+            document.write("<div class='col-sm-1'>");
+            document.write("</div>");
+
+            // can chinh vi tri cac hang
+            for (var i = 0; i < locations.length; i++) {
+                let name1 = locations[i].value;
+//            cach 2 la dug them 1 bien' dem cac name1 co' length = 1, neu' % 4 == 0 ...
+                if (name1 == 'A' || name1 == 'Đ' || name1 == 'K' || name1 == 'P' || name1 == 'T') {
+                    document.write("<div class='col-sm-2' style='text-align: center'>");
+                    document.write("<span class='alphabet'>" + locations[i].value + "</span>");
+
+                    for (i = i + 1; i < locations.length; i++) {
+                        let name2 = locations[i].value;
+                        if (name2 == 'Đ' || name2 == 'K' || name2 == 'P' || name2 == 'T') {
+                            i = i - 1;
+                            break;
+                        }
+                        document.write("<br>");
+                        if (locations[i].value.length == 1) {
+                            document.write("<span class='alphabet'>" + locations[i].value + "</span>");
+                        } else {
+//                        document.write(locations[i].value);
+                            document.write("<a href='#' style='color: black'>" + locations[i].value + "</a>");
+                        }
+                    }
+                }
+
+                if (name1 == 'A' || name1 == 'Đ' || name1 == 'K' || name1 == 'P' || name1 == 'T') {
+                    document.write("</div>");
                 }
             }
 
-            if (name1 == 'A' || name1 == 'Đ' || name1 == 'K' || name1 == 'P' || name1 == 'T') {
-                document.write("</div>");
-            }
+            document.write("<div class='col-sm-1'>");
+            document.write("</div>");
+            document.write("</div>");
+            document.write("</div>");
         }
 
-        document.write("<div class='col-sm-1'>");
-        document.write("</div>");
-        document.write("</div>");
-        document.write("</div>");
-    </script>
 
-</head>
-<body>
+        function seperateStrToArr(str) {
+            let obj = {};
+            let arr = [];
+            let names = str.split(',');
+            for (let i = 0; i < names.length; i++) {
+                obj = {value: names[i]}
+                arr.push(obj);
+                console.log(obj);
+            }
 
+            return arr;
 
-<script>
-    $(document).ready(function () {
-        $('#content a').click(function () {
-            var $txt = $(this).text();
-            if (typeof (Storage) !== "undefined") {
-                //cac bien' nay` se~ duoc chuyen sang trang search-hotels
+        }
+
+        function checkLink() {
+            $('#content a').click(function () {
+                var $txt = $(this).text();
+                if (typeof (Storage) !== "undefined") {
+                    //cac bien' nay` se~ duoc chuyen sang trang search-hotels
 //                if (localStorage.index_tmp_name) {
 
 //                    localStorage.index_tmp_name = $txt;
@@ -244,22 +169,26 @@
 //                    alert('else');
 //                    localStorage.index_tmp_name = "Đà Nẵng";
 //                }
-                //luc duoc luc ko khi co' dk if + tu` trang homepage link toi'
-                localStorage.index_tmp_name = $txt;
-                //3 bien sau: co' dinh
-                localStorage.index_tmp_checkin = "";
-                localStorage.index_tmp_checkout = "";
-                localStorage.index_tmp_typeofroom = "1 phòng (2 người lớn)";
-            } else {
-                alert("Sorry, your browser does not support web storage...");
-            }
-            //hoac window.open("search-hotels.html","_self");
-            //loai bo 2 thuoc tinh href='search-hotels.html' target='_blank' o? the? a
-            window.location = 'search-hotels';
-        });
+                    //luc duoc luc ko khi co' dk if + tu` trang homepage link toi'
+                    localStorage.index_tmp_name = $txt;
+                    //3 bien sau: co' dinh
+                    localStorage.index_tmp_checkin = "";
+                    localStorage.index_tmp_checkout = "";
+                    localStorage.index_tmp_typeofroom = "1 phòng (2 người lớn)";
+                } else {
+                    alert("Sorry, your browser does not support web storage...");
+                }
+                //hoac window.open("search-hotels.html","_self");
+                //loai bo 2 thuoc tinh href='search-hotels.html' target='_blank' o? the? a
+                window.location = 'search-hotels';
+            });
+        }
 
-    });
-</script>
+        // phan dung code-end
+    </script>
+
+</head>
+<body>
 
 </body>
 </html>

@@ -53,6 +53,10 @@ public class OwnHotelController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+
 
     @GetMapping("/signupOwn")
     public String showFormRegisOfOwner(Model model) {
@@ -229,8 +233,6 @@ public class OwnHotelController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
 //        redirect.addFlashAttribute("success", "Saved HotelOwner Profile successfully!");
         return "redirect:/hotelOwnerProfile";
     }
