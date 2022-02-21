@@ -20,5 +20,5 @@ public interface UserService extends UserDetailsService {
 
     boolean existsByUsername(String username);
 
-    UserInfo existsByUsernameAndPassword(String email,String password) throws Exception;
+    Optional<UserInfo> existsByUsernameAndPassword(String email, String password) throws Exception;
 }
