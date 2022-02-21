@@ -6,5 +6,6 @@ import com.example.bookinghotel.repositories.RoomRepository;
 import java.util.Optional;
 
 public interface RoomService{
+
     Optional<Room> findById(Long id);
 }
