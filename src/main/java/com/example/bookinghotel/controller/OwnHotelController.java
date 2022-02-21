@@ -237,7 +237,8 @@ public class OwnHotelController {
     }
 
     @PostMapping("/saveHotelOwnerNewPasword")
-    public void saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo) {
+    public String saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo) {
+
         try (PrintWriter out = response.getWriter()) {
             Optional<UserInfo> hotelOwner = Optional.ofNullable(userRepository.existsByUsernameAndPassword(this.getPrincipal(), oldPassword));
             UserInfo oldHotelOwnerInfo = userService.findByUserName(this.getPrincipal());
@@ -252,7 +253,7 @@ public class OwnHotelController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        return "redirect:/hotelOwnerProfile";
+        return "Pages/owner/hotelOwnerProfile";
     }
 
 
