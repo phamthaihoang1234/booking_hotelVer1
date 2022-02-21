@@ -232,7 +232,6 @@ public class OwnHotelController {
         }catch (Exception e){
             e.printStackTrace();
         }
-//        redirect.addFlashAttribute("success", "Saved HotelOwner Profile successfully!");
         return "redirect:/hotelOwnerProfile";
     }
 
@@ -255,6 +254,7 @@ public class OwnHotelController {
         model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
         return "Pages/owner/hotelOwnerProfile";
     }
+
 
 
 }
