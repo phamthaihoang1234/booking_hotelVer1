@@ -31,7 +31,7 @@ public class UserInfo extends AbstractEntity implements Serializable {
     @Email
     private String email;
 
-    //    @JsonIgnore
+
     @NotEmpty
     @Size(min = 6, message = "Password should be more than 5 letters" )
     private String password;
