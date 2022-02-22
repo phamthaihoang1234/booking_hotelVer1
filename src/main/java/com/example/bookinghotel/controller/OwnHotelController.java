@@ -244,7 +244,7 @@ public class OwnHotelController {
         UserInfo hotelOwner = null;
 
         try {
-            hotelOwner = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword);
+            hotelOwner = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword).get();
 
             if (hotelOwner !=  null) {
                 hotelOwner.setPassword(newPassword);
