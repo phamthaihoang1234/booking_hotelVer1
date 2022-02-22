@@ -43,7 +43,7 @@ public class UserInfo extends AbstractEntity implements Serializable {
 
 
     @Size(max = 10, min = 10, message = "Mobile number should be of 10 digits")
-//    @Pattern(regexp = "[09][7-9][0-9]{10}" ,message = "Phone number is invalid!!" )
+    @Pattern(regexp = "[0-9]{10}" ,message = "Phone number is invalid" )
     @NotNull
     @NotEmpty
     private String phoneNumber;
