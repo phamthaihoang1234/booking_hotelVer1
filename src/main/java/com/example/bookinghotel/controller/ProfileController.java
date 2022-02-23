@@ -40,9 +40,10 @@ public class ProfileController {
         oldUserInfo.setEmail(userInfo.getEmail());
         oldUserInfo.setPhoneNumber(userInfo.getPhoneNumber());
         oldUserInfo.setAddress(userInfo.getAddress());
+        oldUserInfo.setGender(userInfo.getGender());
         System.out.println("Class: ProfileControler | Method: updateProfile |  " + oldUserInfo.getName());
         try {
-            userService.save(oldUserInfo);
+            userService.updateInfor(oldUserInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
