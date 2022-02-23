@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -368,8 +368,10 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form th:action="@{/saveEditProfile}" method="post"
-                                                          id="editProfile">
+                                                    <form>
+<!--                                                            th:action="@{/saveEditProfile}" method="post"-->
+<!--                                                          id="editProfile"-->
+<!--                                                    >-->
                                                         <div class="row form-row">
                                                             <div class="col-12 col-sm-6">
                                                                 <div class="form-group">
@@ -400,14 +402,16 @@
                                                                 <label>Giới tính</label>
                                                                 <br>
                                                                 <label class="radio-container m-r-45">Name
-                                                                    <input type="radio" checked="checked" id="male"
+                                                                    <input type="radio" id="male" name="gender"
                                                                            value="Male" th:value="${userInfo.gender}"
+                                                                           class="form-control"
                                                                            th:field="*{userInfo.gender}" required>
                                                                     <span class="checkmark"></span>
                                                                 </label>
                                                                 <label class="radio-container">Nữ
                                                                     <input type="radio" name="gender" id="female"
                                                                            value="Female" th:value="${userInfo.gender}"
+                                                                           class="form-control"
                                                                            th:field="*{userInfo.gender}" required>
 
                                                                 </label></div>
@@ -422,7 +426,7 @@
                                                             <div id="messageUpdateProfile" style="color:red;"></div>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary btn-block"
-                                                                id="btEditProfile"
+                                                                id="btEditProfile" onclick="saveInforUpdate()"
                                                         >Xác nhận
                                                             chỉnh sửa
                                                         </button>
@@ -485,6 +489,7 @@
 <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
 <script src="../assets/js/script.js"></script>
+<script type="text/javascript" src="../assets/js/profile.js"></script>
 <script>
     document.getElementById("buttonChangePass").addEventListener("click", function (event) {
         event.preventDefault()
@@ -507,6 +512,9 @@
         let txtEmail = document.getElementsByName("txtEmail")[0]
         let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
         let txtAddress = document.getElementsByName("txtAddress")[0]
+        $("input[name='gender']").each( function () {
+            alert( $(this).val() );
+        });
         let regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b$/
         let regexEmail = /^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$/
         if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0 ||) {
