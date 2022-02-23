@@ -115,7 +115,9 @@ public class HotelFilterControllerD {
                                       @RequestParam(value = "orderByStandard", required = false) String orderByStandard,
                                       @RequestParam(value = "start_date", required = false) String start_date,
                                       @RequestParam(value = "end_date", required = false) String end_date,
-                                      @RequestParam(value = "number_of_people", required = false) int number_of_people
+                                      @RequestParam(value = "number_of_people", required = false) int number_of_people,
+                                      @RequestParam(value = "price_down",required = false) int price_down,
+                                      @RequestParam(value = "price_up") int price_up
 
 
     ) throws UnsupportedEncodingException {
@@ -123,19 +125,19 @@ public class HotelFilterControllerD {
             System.out.println("number OF People:" + number_of_people);
         String location_processed = "";
         // xu ly cac thong tin dau vao
-        if (location != null) {
-
-            System.out.println("location truoc process:" + location);
-            // loai bo dau tieng viet
-            String nfdNormalizedString = Normalizer.normalize(location, Normalizer.Form.NFD);
-            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-            location_processed = pattern.matcher(nfdNormalizedString).replaceAll("");
-            location_processed = UnExpectedVietnameseChar(location_processed);
-            System.out.println("location sau process:" + location_processed);
-        } else {
-//             check thong tin co duoc gui toan ven khong
-            System.out.println("Thieu thong tin");
-        }
+//        if (location != null) {
+//
+//            System.out.println("location truoc process:" + location);
+//            // loai bo dau tieng viet
+//            String nfdNormalizedString = Normalizer.normalize(location, Normalizer.Form.NFD);
+//            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+//            location_processed = pattern.matcher(nfdNormalizedString).replaceAll("");
+//            location_processed = UnExpectedVietnameseChar(location_processed);
+//            System.out.println("location sau process:" + location_processed);
+//        } else {
+////             check thong tin co duoc gui toan ven khong
+//            System.out.println("Thieu thong tin");
+//        }
         int page_number = 0;// for check page number use want
         if (location == null) location = "";
         if (page != 0) page_number = page;
@@ -167,11 +169,12 @@ public class HotelFilterControllerD {
         hotels = sortByStandard(orderByStandard, hotels);
         System.out.println("size sau khi loc theo standard" + hotels.size());
         if (!start_date.equals("") && !start_date.equals("no-date")) {
-            hotels = sortByBookingDateAndNumberOfPeople(hotels, start_date, end_date, number_of_people);
+//            hotels = sortByBookingDateAndNumberOfPeople(hotels, start_date, end_date, number_of_people);
+              hotels = sortByBookingDateAndNumberOfPeopleAndPrice(hotels, start_date, end_date, number_of_people,price_up,price_down);
         }
-        System.out.println("size sau khi loc theo booking" + hotels.size());
-        System.out.println("startDate" + start_date);
-        System.out.println("EndDate" + end_date);
+        else hotels = sortByPrice(hotels,price_down,price_up);
+        System.out.println("price-down:"+price_down);
+        System.out.println("price-up:"+price_up);
         int number_of_hotel = hotels.size();
         int number_of_page = (int) number_of_hotel / 6;
         if (number_of_hotel % 6 != 0) {
@@ -216,6 +219,8 @@ public class HotelFilterControllerD {
                                    @RequestParam(value = "start_date", required = false) String start_date,
                                    @RequestParam(value = "end_date", required = false) String end_date,
                                    @RequestParam(value = "number_of_people", required = false) int number_of_people,
+                                   @RequestParam(value = "price_down") int price_down,
+                                   @RequestParam(value = "price_up") int price_up,
                                    HttpServletResponse response) throws UnsupportedEncodingException {
 //        , @RequestParam("price") String price
 //            , @RequestParam("hotel_standard") String standard, @RequestParam("hotel_property") String[] property
@@ -261,7 +266,8 @@ public class HotelFilterControllerD {
                     location, null);
         }
             if(!start_date.equals("no-date"))
-            hotels = sortByBookingDateAndNumberOfPeople(hotels,start_date,end_date,number_of_people);
+            hotels = sortByBookingDateAndNumberOfPeopleAndPrice(hotels,start_date,end_date,number_of_people,price_up,price_down);
+            else hotels = sortByPrice(hotels,price_down,price_up);
         try (PrintWriter out = response.getWriter()) {
 
             out.write(hotels.size() + "");
@@ -285,36 +291,57 @@ public class HotelFilterControllerD {
         return newHotels;
     }
 
-//    private ArrayList<Hotel> sortByPrice(ArrayList<Hotel> hotels, int price_down, int price_up, String order) {
-//        final int orderN ;
+    private ArrayList<Hotel> sortByPrice(ArrayList<Hotel> hotels, int price_down, int price_up) {
+//        final int orderN;
+//        String order = "DESC";
 //        if (order.equals("DESC")) {
 //            orderN = 1;
 //        }
 //        else orderN = -1;
-//            for (int i = hotels.size() - 1; i >= 0; i--) {
-//                ArrayList<Room> rooms = (ArrayList<Room>) hotels.get(i).getRooms();
-//
-//
-//                if (rooms.get(rooms.size() - 1).getPricePerNight() <= price_up && rooms.get(rooms.size() - 1).getPricePerNight() > price_down) {
-//                    // khong lam gi
-//                } else {
-//                    hotels.remove(i);
-//                }
-//
-//
-//            }
-////        Collections.sort(hotels, new Comparator<Hotel>() {
-////
-////            @Override
-////            public int compare(Hotel h1, Hotel h2) {
-////                return h1.getPricePerNight() > h2.getPricePerNight() ? orderN : -orderN;
-////            }
-////        });
-//
-//        return hotels;
-//    }
+            for (int i = hotels.size() - 1; i >= 0; i--) {
+                List<Room> rooms =  hotels.get(i).getRooms();
+                if(rooms!=null){
+                    boolean findEmptyRoom = false;// coi nhu chua tim dc phong
+                    for(int j = 0 ; j < rooms.size(); j++) {
+                        if (price_down == price_up) {
+                            if(rooms.get(j).getPricePerNight()>=price_down){
+                                findEmptyRoom = true;
+                                for(int k = 0 ; k <10 ; k++)
+                                System.out.println("find room");
+                                break;
+                            }
+                        } else if (rooms.get(j).getPricePerNight() <= price_up && rooms.get(j).getPricePerNight() >= price_down) {
+                            findEmptyRoom = true;
+                            for(int k = 0 ; k <10 ; k++)
+                                System.out.println("find room");
+                            break;
+                        }
+                    }
+                    if(findEmptyRoom==false){
+                        hotels.remove(i);
+                    }
+                }else{
+                    hotels.remove(i);
+                }
 
-    private ArrayList<Hotel> sortByBookingDateAndNumberOfPeople(ArrayList<Hotel> hotels, String start_date, String end_date, int number_of_people) {
+
+            }
+//        Collections.sort(hotels, new Comparator<Hotel>() {
+//
+//            @Override
+//            public int compare(Hotel h1, Hotel h2) {
+//                return h1.getPricePerNight() > h2.getPricePerNight() ? orderN : -orderN;
+//            }
+//        });
+        return hotels;
+    }
+
+    private ArrayList<Hotel> sortByBookingDateAndNumberOfPeopleAndPrice(ArrayList<Hotel> hotels,
+                                                                        String start_date,
+                                                                        String end_date,
+                                                                        int number_of_people,
+                                                                        int up_price,
+                                                                        int down_price) {
         // loc loai phong cac khach san co
         for (int i = hotels.size() - 1; i >= 0; i--) {
             List<Room> rooms = hotels.get(i).getRooms();
@@ -330,7 +357,7 @@ public class HotelFilterControllerD {
             }
         }
         // loc theo start_date va end_date
-        hotels = BookingDateFilter(hotels, start_date, end_date);
+        hotels = BookingDateFilterAndPrice(hotels, start_date, end_date,down_price,up_price);
         return hotels;
 
     }
@@ -405,10 +432,16 @@ public class HotelFilterControllerD {
                 if (rooms != null) {
                     for (int j = 0; j < rooms.size(); j++) {
                         boolean isValid = true;// coi nhu phong dang trong , neu quet booking thay trung ngay se set ve false
+                        if(min_price==max_price){
                         if(rooms.get(j).getPricePerNight()<=max_price&&rooms.get(j).getPricePerNight()>=min_price){
                             // gia tri thoa man
                         }else{
                             isValid = false;
+                        }
+                        }else{
+                            if(rooms.get(i).getPricePerNight()<min_price){
+                                isValid = false;
+                            }
                         }
                         if(isValid!=false) {
                             List<Booking> bookings = rooms.get(j).getBookings();

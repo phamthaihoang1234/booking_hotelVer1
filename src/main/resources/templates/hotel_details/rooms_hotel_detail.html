@@ -60,6 +60,9 @@
                 </div>
             </div>
         </th:block>
+        <th:block th:unless="${rooms}">
+            <div>Hiện tại không còn phòng để phục vụ quý khách</div>
+        </th:block>
     </div>
 </section>
 </body>

@@ -663,7 +663,11 @@
                 let price_order;
                 let standard_order;
                 let price;// chua xac dinh trong db
-
+                let price_up = 0
+                let price_down = 0
+                price_up = $('#slider-range').slider("values")[1];
+                price_down = $('#slider-range').slider("values")[0];
+                console.log(price_up+","+price_down);
                 let token = $("meta[name='_csrf']").attr("content");
                 let header = $("meta[name='_csrf_header']").attr("content");
                 $(document).ajaxSend(function (e, xhr, options) {
@@ -687,8 +691,8 @@
                         'location': location,
                         'hotel_type': hotel_type_list,
                         'hotel_standard': standard,
-                        // 'price':'',
-                        // 'orderByPrice':'',
+                        'price_up':price_up,
+                        'price_down':price_down,
                         'orderByStandard': orderByStandard,
                         'page_number':page_number,
                         'start_date':start_date,
@@ -704,7 +708,7 @@
                             // console.log("done");
                             setTimeout(function () {
                                 $("#right-center-2").html(data)
-                                CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people);
+                                CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people,price_down,price_up);
 
 
                                 // console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout+","+
@@ -765,7 +769,7 @@
 
         }
         var orderByStandard = 'DESC';
-        function CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people){
+        function CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people,price_down, price_up){
             $.ajax({
 
                 url: '/filterProcessCount',
@@ -774,8 +778,8 @@
                     'location': localStorage.index_tmp_name,
                     'hotel_type': hotel_type_list,
                     'hotel_standard': standard,
-                    // 'price':'',
-                    // 'orderByPrice':'',
+                    'price_up':price_up,
+                    'price_down':price_down,
                     'orderByStandard': orderByStandard,
                     'page_number':page_number,
                     'start_date':start_date,

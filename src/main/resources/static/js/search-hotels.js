@@ -178,6 +178,7 @@ var main = function () {
                 //http://www.tutorialspoint.com/jqueryui/jqueryui_slider.htm
                 //thay the' thuoc tinh slide thanh stop & tach' rieng
                 //refreshPage();
+                changed(0);
             }
         });
         //ket hop 2 su* kien cung luc thi moi hop ly'
