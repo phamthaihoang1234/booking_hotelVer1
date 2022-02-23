@@ -82,6 +82,33 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public boolean changePassword(UserInfo user) throws Exception{
+        return true;
+
+    }
+
+    @Override
+    public UserInfo updateInfor(UserInfo user) throws Exception{
+        user.setName(user.getName());
+        user.setEmail(user.getEmail());
+        user.setPhoneNumber(user.getPhoneNumber());
+        user.setGender(user.getGender());
+//        Set<Role> roles = new HashSet<>();
+//        user.getRoles().forEach(role -> {
+//            if (role.getName().equals("admin")) {
+//                Optional<Role> adminRole = roleService.findByName("ROLE_ADMIN");
+//                adminRole.ifPresent(roles::add);
+//            } else {
+//                Optional<Role> userRole = roleService.findByName("ROLE_USER");
+//                userRole.ifPresent(roles::add);
+//            }
+//        });
+//        user.setRoles(roles);
+        user.setAddress(user.getAddress());
+        return userRepository.save(user);
+    }
+
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        UserInfo user = userRepository.findByUsername(username);
