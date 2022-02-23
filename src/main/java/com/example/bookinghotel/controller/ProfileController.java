@@ -71,10 +71,5 @@ public class ProfileController {
         oldUserInfo.setAddress(userInfo.getAddress());
         System.out.println("Class: ProfileControler | Method: updateProfile |  " + oldUserInfo.getName());
         try {
-            userService.save(oldUserInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Pages/modal-user/profile2";
-    }*/
+*/
 }
