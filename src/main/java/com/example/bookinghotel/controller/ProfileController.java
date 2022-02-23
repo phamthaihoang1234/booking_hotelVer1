@@ -62,11 +62,5 @@ public class ProfileController {
         }
         return userName;
     }
-   /* @PostMapping("/saveEditProfile")
-    public String updateProfile(@ModelAttribute UserInfo userInfo) {
-       nfo.getPhoneNumber());
-        oldUserInfo.setAddress(userInfo.getAddress());
-        System.out.println("Class: ProfileControler | Method: updateProfile |  " + oldUserInfo.getName());
-        try {
-*/
+   s
 }
