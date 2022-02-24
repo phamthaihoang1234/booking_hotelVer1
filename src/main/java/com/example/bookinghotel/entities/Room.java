@@ -208,7 +208,4 @@ public class Room extends AbstractEntity implements Serializable {
     public void setCancelled(Boolean cancelled) {
         this.cancelled = cancelled;
     }
-    //phan dung code
-
-
 }
