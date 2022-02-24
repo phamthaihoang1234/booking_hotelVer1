@@ -90,7 +90,37 @@ public class UserController {
     }
 
 
-
+//  user.setToken("user");
+//        user.setActive(true);
+//        user.setName(user.getUsername());
+//
+//        if (result.hasErrors()) {
+//        if(userService.findByUserName(user.getUsername()) != null){
+//            model.addAttribute("errolUsername", "Username was existed");
+//        }
+//        if(userService.findByEmail(user.getEmail()) != null) {
+//            model.addAttribute("errolEmail", "Email was existed");
+//        }
+//        return "/Pages/modal-user/user-signup";
+//    }
+//        else if(userService.findByUserName(user.getUsername()) != null){
+//        model.addAttribute("errolUsername", "Username was existed");
+//        if(userService.findByEmail(user.getEmail()) != null) {
+//            model.addAttribute("errolEmail", "Email was existed");
+//        }
+//        return "/Pages/modal-user/user-signup";
+//    }
+//        else if(userService.findByEmail(user.getEmail()) != null){
+//        model.addAttribute("errolEmail", "Email was existed");
+//        return "/Pages/modal-user/user-signup";
+//    }
+//        else {
+//        //user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        redirect.addFlashAttribute("globalMessage", "Register successfully.");
+//        userService.save(user);
+//        return "redirect:/signup";
+//
+//    }
 
 
 
