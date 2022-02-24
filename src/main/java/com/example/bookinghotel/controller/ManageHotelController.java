@@ -56,24 +56,12 @@ public class ManageHotelController {
         return "redirect:/homepageHotel";
     }
 
-//    @GetMapping("/findOne")
-//    @ResponseBody
-//    public Hotel findHotelById(long id){
-//        System.out.println("id la :"+id);
-//        return hotelService.findById(id).get();
-//    }
+
 
     @GetMapping("/findOne/{id}")
     public String findHotelById(@PathVariable("id") long id, Model model){
-        System.out.println("vao find one");
+
         model.addAttribute("hotel",hotelService.findById(id).get());
-        System.out.println("vao findone: "+ hotelService.findById(id).get().getId());
-        System.out.println(hotelService.findById(id).get().getAddressOfHotel());
-        System.out.println(hotelService.findById(id).get().getNameOfHotel());
-        System.out.println(hotelService.findById(id).get().getStatus());
-
-
-
         return "Pages/hotelManage/form-edit-hotel";
     }
 
