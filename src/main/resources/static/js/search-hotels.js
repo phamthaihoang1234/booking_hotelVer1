@@ -150,8 +150,8 @@ var main = function () {
         $("#slider-range").slider({
             range: true,
             min: 1500000,
-            max: 25000000,
-            values: [1500000, 25000000],
+            max: 9000000,
+            values: [1500000, 9000000],
             slide: function (event, ui) {
                 //stop: function( event, ui ) {
                 // ko co' parseInt
