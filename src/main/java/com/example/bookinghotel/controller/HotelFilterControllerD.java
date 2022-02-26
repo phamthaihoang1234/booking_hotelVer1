@@ -45,7 +45,7 @@ public class HotelFilterControllerD {
     @Autowired
     HotelFilterService hotelFilterService;
 
-    @RequestMapping(value = {"search-hotels", "search-hotels/{location2}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = {"search-hotels/", "search-hotels/{location2}"}, method = {RequestMethod.GET, RequestMethod.POST})
     String HotelFiler(Model model,
                       @RequestParam(value = "locations", required = false) Optional<String> locationVar,
                       @RequestParam(value = "start_date", required = false) Optional<String> start_dateVar,
@@ -357,7 +357,7 @@ public class HotelFilterControllerD {
             }
         }
         // loc theo start_date va end_date
-        hotels = BookingDateFilterAndPrice(hotels, start_date, end_date,down_price,up_price);
+        hotels = BookingDateFilterAndPrice(hotels, start_date, end_date,down_price,up_price,number_of_people);
         return hotels;
 
     }
@@ -404,9 +404,7 @@ public class HotelFilterControllerD {
                 }
             }
         } catch (Exception e) {
-            for (int i = 0; i < 10; i++)
-                System.out.println("NGAY NHAP VAO BI LOI");
-            System.out.println(start_dateD);
+
             e.printStackTrace();
             for (int i = 0; i < 10; i++)
                 System.out.println("NGAY NHAP VAO BI LOI");
@@ -414,7 +412,7 @@ public class HotelFilterControllerD {
         return hotels;
     }
 
-    private ArrayList<Hotel> BookingDateFilterAndPrice(ArrayList<Hotel> hotels, String start_date, String end_date,int min_price,int max_price) {
+    private ArrayList<Hotel> BookingDateFilterAndPrice(ArrayList<Hotel> hotels, String start_date, String end_date,int min_price,int max_price,int number_of_people) {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dtf = dtf.withLocale(Locale.getDefault());
@@ -431,35 +429,39 @@ public class HotelFilterControllerD {
                 List<Room> rooms = hotels.get(i).getRooms();
                 if (rooms != null) {
                     for (int j = 0; j < rooms.size(); j++) {
-                        boolean isValid = true;// coi nhu phong dang trong , neu quet booking thay trung ngay se set ve false
-                        if(min_price==max_price){
-                        if(rooms.get(j).getPricePerNight()<=max_price&&rooms.get(j).getPricePerNight()>=min_price){
-                            // gia tri thoa man
+                        boolean isValid = false;// coi nhu chua tim duoc phong
+                        if(rooms.get(j).getTotalOfBedroom()>=number_of_people){
+                            isValid = true;
                         }else{
                             isValid = false;
                         }
-                        }else{
-                            if(rooms.get(i).getPricePerNight()<min_price){
-                                isValid = false;
-                            }
+                        if(isValid) {
+
+                                if (rooms.get(j).getPricePerNight() <= max_price && rooms.get(j).getPricePerNight() >= min_price) {
+                                    isValid = true;
+                                } else {
+                                    isValid = false;
+                                }
+
                         }
-                        if(isValid!=false) {
+                        if(isValid) {
                             List<Booking> bookings = rooms.get(j).getBookings();
                             if (bookings != null) {
                                 for (int k = 0; k < bookings.size(); k++) {
                                     if (bookings.get(k).getStartDate().isAfter(end_dateD) || bookings.get(k).getEndDate().isBefore(start_dateD)) {
-                                        // booking hien tai dap ung yeu cau khong thay doi gia tri valid
+                                        isValid = true;
                                     } else {
                                         isValid = false;//khong dap ung yeu cau
+                                        break;
                                     }
                                 }
 
-                            } else {
-                                isValid = false;
                             }
                         }
-                        if (isValid == true) {
+                        if (isValid) {
                             findEmptyRoom = true;// tim duoc phong trong trong khac san.
+                            for(int m = 0 ; m <10 ; m++)
+                            System.out.println(rooms.get(j).getId());
                             break;
                         }
                     }
