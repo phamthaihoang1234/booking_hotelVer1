@@ -463,9 +463,7 @@ public class HotelFilterControllerD {
                 }
             }
         } catch (Exception e) {
-            for (int i = 0; i < 10; i++)
-                System.out.println("NGAY NHAP VAO BI LOI");
-            System.out.println(start_dateD);
+
             e.printStackTrace();
             for (int i = 0; i < 10; i++)
                 System.out.println("NGAY NHAP VAO BI LOI");
