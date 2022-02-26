@@ -222,11 +222,6 @@ public class HotelFilterControllerD {
                                    @RequestParam(value = "price_down") int price_down,
                                    @RequestParam(value = "price_up") int price_up,
                                    HttpServletResponse response) throws UnsupportedEncodingException {
-//        , @RequestParam("price") String price
-//            , @RequestParam("hotel_standard") String standard, @RequestParam("hotel_property") String[] property
-//            , @RequestParam("orderByPrice") String orderByPrice, @RequestParam("orderByStandard") String orderByStandard
-//        ,@RequestParam("hotel_type[]", required=false) String[] hotel_type
-//        @RequestParam(value = "hotel_type[]",required = false) String[] hotel_type
         String location_processed = "";
         // xu ly cac thong tin dau vao
         if (location != null) {
