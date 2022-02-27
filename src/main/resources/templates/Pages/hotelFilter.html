@@ -101,7 +101,7 @@
     <div id="header"></div>
 
     <nav>
-        <form style="background-color: rgb(220,30,30)  " id="formSm" th:action="@{/search-hotels}"  method="post">
+        <form style="background-color: rgb(220,30,30)  " id="formSm" th:action="@{/search-hotels/}"  method="post">
             <div id="nav-timkiem" class="container-fluid">
                 <!-- da~ dung Bootstrap table, grid => viec chia theo size cac input, button kem` theo margin (se~ ko deu`) -->
                 <!--ban dau dien` background img giong voi trang homepage-->
@@ -111,8 +111,8 @@
                         <img src="/img/homepage/Delete-25.png" width="16px"
                              style="position: absolute; margin-left: 327px; margin-top: 15px; display: none"/>
                         <input class="form-control biginput" name="locations" id="autocomplete" type="search"
-                               value="Hà Nội"
-                               placeholder="Nhập tên thành phố, khu vực, khách sạn ..." required
+                               value=""
+                               placeholder="Nhập tên thành phố, khu vực" required
                                style="width: 350px">
 
                     </div>
@@ -132,6 +132,8 @@
                     <select class="form-control" name="number_of_people" id="dropList">
                         <option   value="1" >1 phòng (1 người lớn)</option>
                         <option value="2" selected >1 phòng (2 người lớn)</option>
+                        <option value="3"  >1 phòng (3 người lớn)</option>
+                        <option value="4"  >1 phòng (4 người lớn)</option>
 <!--                        <option value="3">lựa chọn khác ...</option>-->
                     </select>
                 </div>
@@ -160,7 +162,7 @@
             <div id="left-center-result" style="margin-top: 15px; width: 100%; height: 40px; background-color: #ffffff">
                 <span id="leftText">Tìm thấy</span> <span class="badge"></span> <span id="rightText">khách sạn tương ứng tại</span>
                 <!--class="name-of-location" duoc cai vao tat ca? ca'c tu` khoa' Da Nang-->
-                <span class="name-of-location" style="font-weight: bold">Đà Nẵng</span>
+                <span class="name-of-location" style="font-weight: bold">?</span>
             </div> <!-- span ko the cai margin-top -->
             <div style="height: auto">
                 <!--                <div class="left-title">ĐỊA ĐIỂM NỔI BẬT</div>-->
@@ -477,32 +479,7 @@
     <script src="/Utilities/LiveChat.js"></script>
 
     <!--Form Feedback (position: fixed): https://webengage.com/ , phai dang ky', chua tach ra duoc file rieng do co' kem` id-->
-    <script id="_webengage_script_tag" type="text/javascript">
-        // var webengage;
-        // !function (e, t, n) {
-        //     function o(e, t) {
-        //         e[t[t.length - 1]] = function () {
-        //             r.__queue.push([t.join("."), arguments])
-        //         }
-        //     }
-        //
-        //     var i, s, r = e[n], g = " ", l = "init options track onReady".split(g),
-        //         a = "feedback survey notification".split(g), c = "options render clear abort".split(g),
-        //         p = "Open Close Submit Complete View Click".split(g), u = "identify login logout setAttribute".split(g);
-        //     if (!r || !r.__v) {
-        //         for (e[n] = r = {__queue: [], __v: "5.0", user: {}}, i = 0; i < l.length; i++) o(r, [l[i]]);
-        //         for (i = 0; i < a.length; i++) {
-        //             for (r[a[i]] = {}, s = 0; s < c.length; s++) o(r[a[i]], [a[i], c[s]]);
-        //             for (s = 0; s < p.length; s++) o(r[a[i]], [a[i], "on" + p[s]])
-        //         }
-        //         for (i = 0; i < u.length; i++) o(r.user, ["user", u[i]]);
-        //         var f = t.createElement("script"), d = t.getElementById("_webengage_script_tag");
-        //         f.type = "text/javascript", f.async = !0, f.src = ("https:" == t.location.protocol ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-5.0.js", d.parentNode.insertBefore(f, d)
-        //     }
-        // }(window, document, "webengage");
-        // webengage.init('~15ba209b4');
-        // webengage.options('isDemoMode', true);
-    </script>
+
     <script>
 
         // phan dung code
@@ -653,7 +630,11 @@
                 let price_order;
                 let standard_order;
                 let price;// chua xac dinh trong db
-
+                let price_up = 0
+                let price_down = 0
+                price_up = $('#slider-range').slider("values")[1];
+                price_down = $('#slider-range').slider("values")[0];
+                console.log(price_up+","+price_down);
                 let token = $("meta[name='_csrf']").attr("content");
                 let header = $("meta[name='_csrf_header']").attr("content");
                 $(document).ajaxSend(function (e, xhr, options) {
@@ -677,8 +658,8 @@
                         'location': location,
                         'hotel_type': hotel_type_list,
                         'hotel_standard': standard,
-                        // 'price':'',
-                        // 'orderByPrice':'',
+                        'price_up':price_up,
+                        'price_down':price_down,
                         'orderByStandard': orderByStandard,
                         'page_number':page_number,
                         'start_date':start_date,
@@ -694,7 +675,7 @@
                             // console.log("done");
                             setTimeout(function () {
                                 $("#right-center-2").html(data)
-                                CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people);
+                                CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people,price_down,price_up);
 
 
                                 // console.log(localStorage.searchhotels_tmp_checkin+","+localStorage.searchhotels_tmp_checkout+","+
@@ -755,7 +736,7 @@
 
         }
         var orderByStandard = 'DESC';
-        function CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people){
+        function CountNumberOfHotel(hotel_type_list,standard,page_number,start_date,end_date,number_of_people,price_down, price_up){
             $.ajax({
 
                 url: '/filterProcessCount',
@@ -764,8 +745,8 @@
                     'location': localStorage.index_tmp_name,
                     'hotel_type': hotel_type_list,
                     'hotel_standard': standard,
-                    // 'price':'',
-                    // 'orderByPrice':'',
+                    'price_up':price_up,
+                    'price_down':price_down,
                     'orderByStandard': orderByStandard,
                     'page_number':page_number,
                     'start_date':start_date,
@@ -897,11 +878,14 @@
                 var check_in_convert = check_in.getFullYear() + "-" + month_check_in + "-" + day_check_in;
                 var check_out_convert = check_out.getFullYear() + "-" + month_check_out + "-" + day_check_out;
                 //save
+                if($('#autocomplete').val() == ""){alert('Vui lòng điền thông tin địa điểm')}else{
+                localStorage.index_tmp_name = $('#autocomplete').val();
                 localStorage.searchhotels_tmp_checkin = check_in_convert;
                 localStorage.searchhotels_tmp_checkout = check_out_convert;
                 localStorage.searchhotels_tmp_numberofpeople = parseInt($('#dropList').val());
                 console.log(check_in_convert+","+check_out_convert);
                 $('#formSm').submit();
+                }
 
             }
 

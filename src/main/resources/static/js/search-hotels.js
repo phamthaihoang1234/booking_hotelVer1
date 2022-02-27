@@ -42,7 +42,7 @@ $(document).ready(function () {
     <!--button lien quan den' cac' code modal da~ khai bao' nen khi click thi` co' dau hieu. refresh page => them return false-->
     $("button[type=submit]").click(function () {
         var get_location = function () {
-            $('.name-of-location').text($('#autocomplete').val());
+            // $('.name-of-location').text($('#autocomplete').val());
         };
         var check_in = new Date(document.getElementById("s-datePicker1").value);
         var check_out = new Date(document.getElementById("s-datePicker2").value);
@@ -150,8 +150,8 @@ var main = function () {
         $("#slider-range").slider({
             range: true,
             min: 1500000,
-            max: 25000000,
-            values: [1500000, 25000000],
+            max: 9000000,
+            values: [1500000, 9000000],
             slide: function (event, ui) {
                 //stop: function( event, ui ) {
                 // ko co' parseInt
@@ -178,6 +178,7 @@ var main = function () {
                 //http://www.tutorialspoint.com/jqueryui/jqueryui_slider.htm
                 //thay the' thuoc tinh slide thanh stop & tach' rieng
                 //refreshPage();
+                changed(0);
             }
         });
         //ket hop 2 su* kien cung luc thi moi hop ly'
