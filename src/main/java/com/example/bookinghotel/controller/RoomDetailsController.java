@@ -24,7 +24,7 @@ public class RoomDetailsController {
     public String roomDetails(@PathVariable Long id, Model model){
 
         model.addAttribute("hotelInfo",hotelService.findById(id));
-        model.addAttribute("roomDetail",roomService.findByHotelId(id));
+//        model.addAttribute("roomDetail",roomService.findByHotelId(id));
 
         return "Room/room-details";
     }

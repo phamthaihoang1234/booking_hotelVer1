@@ -32,7 +32,8 @@ public class ChangePasswordController {
     public String saveChangePasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPassword2, Model model, @ModelAttribute UserInfo userInfo) {
         UserInfo user = null;
         try{
-            user = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword);
+            user = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword).get();
+          //  UserInfo.getPasswordEncoder().matches(oldPassword,user.getPassword());
             if (user != null) {
                 user.setPassword(newPassword);
                 userService.save(user);

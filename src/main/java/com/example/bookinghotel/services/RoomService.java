@@ -9,5 +9,5 @@ public interface RoomService{
 
     Optional<Room> findById(Long id);
 
-    Optional<Room> findByHotelId(Long hotel_id);
+//    Optional<Room> findByHotelId(Long hotel_id);
 }
