@@ -321,6 +321,8 @@
                                 tin</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#password_tab">Đổi mật
                                 khẩu</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#termOfService_tab">Điều
+                                khoản</a></li>
                         </ul>
                     </div>
                     <div class="tab-content profile-tab-cont">
@@ -369,9 +371,6 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form>
-<!--                                                            th:action="@{/saveEditProfile}" method="post"-->
-<!--                                                          id="editProfile"-->
-<!--                                                    >-->
                                                         <div class="row form-row">
                                                             <div class="col-12 col-sm-6">
                                                                 <div class="form-group">
@@ -438,7 +437,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div id="password_tab" class="tab-pane fade">
                             <div class="card">
                                 <div class="card-body">
@@ -474,6 +472,59 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-content profile-tab-cont">
+                            <div class="tab-pane fade show active" id="termOfService_tab">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title d-flex justify-content-between">
+                                                    <span>Thông tin điều khoản dịch vụ</span>
+                                                    <a class="edit-link" data-toggle="modal"
+                                                       href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Chỉnh
+                                                        sửa thông tin điều khoản</a>
+                                                </h5>
+                                                <div class="row mt-5">
+                                                    <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Nội dung điều khoản: </p>
+                                                    <p class="col-sm-9" th:text="${userInfo.name}"></p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="edit_termOfService" aria-hidden="true" role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Chỉnh sửa thông tin điều khoản</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="row form-row">
+                                                                <div class="col-12 col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Họ và tên</label>
+                                                                        <input type="text" class="form-control"
+                                                                               th:value="${userInfo.name}"
+                                                                               th:field="*{userInfo.name}" id="txtTermOfService">
+                                                                    </div>
+                                                                </div>
+
+                                                            <button type="submit" class="btn btn-primary btn-block"
+                                                                    id="btEditProfile" onclick="saveInforUpdate()"
+                                                            >Xác nhận
+                                                                chỉnh sửa
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -512,8 +563,8 @@
         let txtEmail = document.getElementsByName("txtEmail")[0]
         let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
         let txtAddress = document.getElementsByName("txtAddress")[0]
-        $("input[name='gender']").each( function () {
-            alert( $(this).val() );
+        $("input[name='gender']").each(function () {
+            alert($(this).val());
         });
         let regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b$/
         let regexEmail = /^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$/
