@@ -3,6 +3,7 @@ package com.example.bookinghotel.controller;
 import com.example.bookinghotel.entities.Booking;
 import com.example.bookinghotel.entities.Hotel;
 import com.example.bookinghotel.entities.Room;
+import com.example.bookinghotel.entities.RoomGroup;
 import com.example.bookinghotel.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +64,11 @@ public class HotelDetailDController {
 
 
         return mv;
+
+    }
+    public RoomGroup getFilteredRoomGroup(int hotel_id, String start_date, String end_date, int number_of_people){
+        RoomGroup rg = new RoomGroup();
+        return rg;
 
     }
     public List<Room> filterByDateBookingAndNumberOfPeople(List<Room> roomList, String start_date, String end_date,int number_of_people){

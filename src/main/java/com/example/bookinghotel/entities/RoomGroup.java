@@ -15,6 +15,10 @@ public class RoomGroup {
         this.price = price;
     }
 
+    public RoomGroup() {
+
+    }
+
     public String getType() {
         return type;
     }
