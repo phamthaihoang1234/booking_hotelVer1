@@ -95,10 +95,10 @@ public class HotelDetailDController {
 
         if (hotel.isPresent()) {
             List<Room> rooms = hotel.get().getRooms();
-            if (!rooms.isEmpty()) {
+            if (rooms!=null&&!rooms.isEmpty()) {
                 rooms = filterByDateBookingAndNumberOfPeople(rooms, start_date, end_date, number_of_people);
                 rooms = filterByRoomType(rooms, type);
-                if (!rooms.isEmpty()) {
+                if (rooms!=null&&!rooms.isEmpty()) {
                     rg = new RoomGroup(rooms, rooms.get(0));
                 }
             }
@@ -139,7 +139,7 @@ public class HotelDetailDController {
                 for (int i = roomList.size() - 1; i >= 0; i--) {
                     List<Booking> bookings = roomList.get(i).getBookings();
                     boolean isValid = true;
-                    if (!bookings.isEmpty()) {
+                    if (bookings!=null&&!bookings.isEmpty()) {
                         for (int j = 0; j < bookings.size(); j++) {
                             if (bookings.get(j).getStartDate().isAfter(end_dateD) || bookings.get(j).getEndDate().isBefore(start_dateD)) {
                                 // thoa man khong lam gi
