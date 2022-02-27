@@ -42,7 +42,7 @@ $(document).ready(function () {
     <!--button lien quan den' cac' code modal da~ khai bao' nen khi click thi` co' dau hieu. refresh page => them return false-->
     $("button[type=submit]").click(function () {
         var get_location = function () {
-            $('.name-of-location').text($('#autocomplete').val());
+            // $('.name-of-location').text($('#autocomplete').val());
         };
         var check_in = new Date(document.getElementById("s-datePicker1").value);
         var check_out = new Date(document.getElementById("s-datePicker2").value);
