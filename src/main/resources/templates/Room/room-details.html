@@ -2564,12 +2564,14 @@
                 <!--neu dung margin-top: 380px => khi zoom browser thi chu~ bi. day? xuog' -->
                 <div style="position: absolute; z-index: 1000; color: white; text-shadow: 1px 0px black; margin-left: 50px;bottom: 45px">
                     <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span><br/>
+
+
                     <div style="font-size: 15px">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
+                        <span th:text="${roomDetail.getPropertyType()}"></span>
                         <span class="glyphicon glyphicon-star"></span>
                     </div>
+
+
                     <!--<span class="glyphicon glyphicon-map-marker" style="font-size: 10px"> 3 Nguyễn Văn Linh, Q Hải Châu, Đà Nẵng</span>-->
                     <div style="font-size: 15px">
                         <span class="glyphicon glyphicon-map-marker"></span>
