@@ -34,6 +34,7 @@ public class RoomDetailsController {
         model.addAttribute("roomDetail",roomService.findById(id).get());
         model.addAttribute("roomImage",roomImageRepository.listRoomImage(id));
 //        model.addAttribute("hotel", hotelRepository.findByRoomId(id));
+        model.addAttribute("iframe", "https://www.google.com/maps/embed?pb="+roomService.findById(id).get().getHotel().getIframe());
 
 
 
