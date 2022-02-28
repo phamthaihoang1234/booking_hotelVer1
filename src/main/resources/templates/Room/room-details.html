@@ -2971,10 +2971,10 @@
 
             <div style="margin-left: 50px; color: rgb(70,68,79); line-height: 75px">
                 <!--dung div thi bi. <br/>-->
-                <a href="homepage.html" style="color: grey">Trang chủ</a>
+                <a th:href="@{/}" style="color: grey">Trang chủ</a>
                 <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>
-                <a href="search-hotels.html" style="color: grey">
-                    <span class="name-of-location">Đà Nẵng</span>
+                <a th:href="@{search-hotels/}" style="color: grey">
+                    <span class="name-of-location"></span>
                 </a>
                 <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>
                 <b>YOY <span class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span></b>
