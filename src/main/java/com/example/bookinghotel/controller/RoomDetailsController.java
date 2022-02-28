@@ -20,12 +20,11 @@ public class RoomDetailsController {
     @Autowired
     private HotelService hotelService;
 
-    @GetMapping("/roomDetails/{id}")
+    @GetMapping("/roomDetails{id}")
     public String roomDetails(@PathVariable Long id, Model model){
 
-        model.addAttribute("hotelInfo",hotelService.findById(id));
-//        model.addAttribute("roomDetail",roomService.findByHotelId(id));
-
+//        model.addAttribute("hotelInfo",hotelService.findById(roomService.findById(id).get().getHotel().));
+        model.addAttribute("roomDetail",roomService.findById(id).get());
         return "Room/room-details";
     }
 
