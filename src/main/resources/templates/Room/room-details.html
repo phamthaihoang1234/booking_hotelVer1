@@ -1373,7 +1373,8 @@
 //             $('.name-of-hotel').text(localStorage.searchhotels_tmp_nameofhotel);
 //             $('.address-of-hotel').text(localStorage.searchhotels_tmp_addofhotel);
             // xac dinh vi tri tren Google map, chi thay doi dia chi & cố định tại Đà Nẵng
-            $('#right-infoTabs iframe').attr('src', 'https://maps.google.com/maps?hl=en&q=' + localStorage.searchhotels_tmp_addofhotel_2 + '&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed');
+            // $('#right-infoTabs iframe').attr('src', 'https://maps.google.com/maps?hl=en&q=' + localStorage.searchhotels_tmp_addofhotel_2 + '&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed');
+
             // sau khi load xong thi check user da~ login hay chua
             // phai them delay thi moi' kich hoat duoc localStorage + id tu` file header1
 //      se~ check + load sau khi load xong part-header1.html
@@ -2566,10 +2567,10 @@
                     <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span><br/>
 
 
-                    <div style="font-size: 15px">
-                        <span th:text="${roomDetail.getPropertyType()}"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </div>
+<!--                    <div style="font-size: 15px">-->
+<!--                        <span th:text="${roomDetail.getPropertyType()}"></span>-->
+<!--                        <span class="glyphicon glyphicon-star"></span>-->
+<!--                    </div>-->
 
 
                     <!--<span class="glyphicon glyphicon-map-marker" style="font-size: 10px"> 3 Nguyễn Văn Linh, Q Hải Châu, Đà Nẵng</span>-->
@@ -2805,16 +2806,21 @@
 
 
 
-                        //Thẻ iframe gg map
-<!--                        <div class="embed-responsive embed-responsive-4by3">-->
-<!--                            &lt;!&ndash;left: 0 => ho tro noi rong pic (khi co' Grid, se tu* dong tao margin, padding)&ndash;&gt;-->
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <!--left: 0 => ho tro noi rong pic (khi co' Grid, se tu* dong tao margin, padding)-->
 <!--                            <iframe style="left: 0px; " class="embed-responsive-item" frameborder="0" scrolling="no"-->
 <!--                                    marginheight="0" marginwidth="0" width="auto" height="auto" allowfullscreen-->
-<!--                                    src="https://maps.google.com/maps?hl=en&q=3 Nguyễn Văn Linh, Q Hải Châu, Đà Nẵng&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed">-->
-<!--                                &lt;!&ndash;<div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div>&ndash;&gt;-->
-<!--                                &lt;!&ndash;<div><small><a href="https://ww.premiumlinkgenerator.com/">premium link generator</a></small></div>&ndash;&gt;-->
+<!--                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.1228058870056!2d105.8193348147315!3d21.0277716859989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab743b6ab88d%3A0xfb848cbe2def5dd6!2sHanoi%20Hotel!5e0!3m2!1svi!2s!4v1646062976576!5m2!1svi!2s">-->
+<!--&lt;!&ndash;                                <div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div><small><a href="https://ww.premiumlinkgenerator.com/">premium link generator</a></small></div>&ndash;&gt;-->
 <!--                            </iframe>-->
-<!--                        </div>-->
+
+                            <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.1228058870056!2d105.8193348147315!3d21.0277716859989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab743b6ab88d%3A0xfb848cbe2def5dd6!2sHanoi%20Hotel!5e0!3m2!1svi!2s!4v1646062976576!5m2!1svi!2s">
+                                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+
+                            </iframe>
+                        </div>
 
 
 

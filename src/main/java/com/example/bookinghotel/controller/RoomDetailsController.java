@@ -2,6 +2,7 @@ package com.example.bookinghotel.controller;
 
 
 
+import com.example.bookinghotel.entities.Hotel;
 import com.example.bookinghotel.repositories.RoomImageRepository;
 import com.example.bookinghotel.repositories.RoomRepository;
 import com.example.bookinghotel.services.HotelService;
@@ -26,9 +27,13 @@ public class RoomDetailsController {
     @GetMapping("/roomDetails{id}")
     public String roomDetails(@PathVariable Long id, Model model){
 
-//        model.addAttribute("hotelInfo",hotelService.findById(roomService.findById(id).get().getHotel().));
+        model.addAttribute("hotelInfo",hotelService.findById(roomService.findById(id).get().getId()));
         model.addAttribute("roomDetail",roomService.findById(id).get());
         model.addAttribute("roomImage",roomImageRepository.listRoomImage(id));
+
+
+//        System.out.println("get Iframe tu database: " + hotelService.findById(roomService.findById(id).get().getId()));
+
         return "Room/room-details";
     }
 

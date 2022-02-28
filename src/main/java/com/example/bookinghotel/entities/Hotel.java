@@ -16,6 +16,11 @@ public class Hotel {
     private Boolean status = true;
     private String nameOfHotel ;
     private String addressOfHotel;
+    private String iframe;
+
+    public String getIframe() {
+        return iframe;
+    }
 
     public String getAddressOfHotel() {
         return addressOfHotel;
