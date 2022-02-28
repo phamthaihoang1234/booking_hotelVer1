@@ -2,6 +2,7 @@ package com.example.bookinghotel.controller;
 
 
 
+import com.example.bookinghotel.repositories.RoomImageRepository;
 import com.example.bookinghotel.repositories.RoomRepository;
 import com.example.bookinghotel.services.HotelService;
 import com.example.bookinghotel.services.RoomService;
@@ -19,12 +20,15 @@ public class RoomDetailsController {
     private RoomService roomService;
     @Autowired
     private HotelService hotelService;
+    @Autowired
+    private RoomImageRepository roomImageRepository;
 
     @GetMapping("/roomDetails{id}")
     public String roomDetails(@PathVariable Long id, Model model){
 
 //        model.addAttribute("hotelInfo",hotelService.findById(roomService.findById(id).get().getHotel().));
         model.addAttribute("roomDetail",roomService.findById(id).get());
+        model.addAttribute("roomImage",roomImageRepository.listRoomImage(id));
         return "Room/room-details";
     }
 

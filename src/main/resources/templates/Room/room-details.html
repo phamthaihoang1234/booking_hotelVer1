@@ -2582,96 +2582,98 @@
 
 
 
-                //slide ảnh hotel
+
                 <div class="ws_images" style="z-index: 999">
                     <ul>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room01.jpg" alt="room01"
-                                 title="room01" id="wows1_0"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room02.jpg" alt="room02"
-                                 title="room02" id="wows1_1"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room03.jpg" alt="room03"
-                                 title="room03" id="wows1_2"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room04.jpg" alt="room04"
-                                 title="room04" id="wows1_3"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang01.jpg" alt="hanhlang01"
-                                 title="hanhlang01" id="wows1_4"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang02.jpg" alt="hanhlang02"
-                                 title="hanhlang02" id="wows1_5"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang01.jpg" alt="nhahang01"
-                                 title="nhahang01" id="wows1_6"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang02.jpg" alt="nhahang02"
-                                 title="nhahang02" id="wows1_7"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/beboi.jpg" alt="beboi"
-                                 title="beboi" id="wows1_8"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/phongtapthehinh.jpg"
-                                 alt="phongtapthehinh" title="phongtapthehinh" id="wows1_9"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa01.jpg" alt="Spa01"
-                                 title="Spa01" id="wows1_10"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa02.jpg" alt="Spa02"
-                                 title="Spa02" id="wows1_11"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa03.jpg" alt="Spa03"
-                                 title="Spa03" id="wows1_12"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa04.jpg" alt="Spa04"
-                                 title="Spa04" id="wows1_13"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/barpub01.jpg" alt="Bar-Pub01"
-                                 title="Bar-Pub01" id="wows1_14"/></li>
-                        <li><a href="http://wowslider.com"><img
-                                src="../Utilities/slideshow/slideshow2/data1/images/barpub02.jpg"
-                                alt="http://wowslider.com/" title="Bar-Pub02" id="wows1_15"/></a></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/publounge.jpg" alt="Pub-Lounge"
-                                 title="Pub-Lounge" id="wows1_16"/></li>
+                        <th:block th:each="image:${roomImage}">
+                        <li><img th:src="@{${image.getImageUrl()}}" /></li>
+                        </th:block>
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room02.jpg" alt="room02"-->
+<!--                                 title="room02" id="wows1_1"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room03.jpg" alt="room03"-->
+<!--                                 title="room03" id="wows1_2"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room04.jpg" alt="room04"-->
+<!--                                 title="room04" id="wows1_3"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang01.jpg" alt="hanhlang01"-->
+<!--                                 title="hanhlang01" id="wows1_4"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang02.jpg" alt="hanhlang02"-->
+<!--                                 title="hanhlang02" id="wows1_5"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang01.jpg" alt="nhahang01"-->
+<!--                                 title="nhahang01" id="wows1_6"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang02.jpg" alt="nhahang02"-->
+<!--                                 title="nhahang02" id="wows1_7"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/beboi.jpg" alt="beboi"-->
+<!--                                 title="beboi" id="wows1_8"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/phongtapthehinh.jpg"-->
+<!--                                 alt="phongtapthehinh" title="phongtapthehinh" id="wows1_9"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa01.jpg" alt="Spa01"-->
+<!--                                 title="Spa01" id="wows1_10"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa02.jpg" alt="Spa02"-->
+<!--                                 title="Spa02" id="wows1_11"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa03.jpg" alt="Spa03"-->
+<!--                                 title="Spa03" id="wows1_12"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa04.jpg" alt="Spa04"-->
+<!--                                 title="Spa04" id="wows1_13"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/barpub01.jpg" alt="Bar-Pub01"-->
+<!--                                 title="Bar-Pub01" id="wows1_14"/></li>-->
+<!--                        <li><a href="http://wowslider.com"><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/images/barpub02.jpg"-->
+<!--                                alt="http://wowslider.com/" title="Bar-Pub02" id="wows1_15"/></a></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/publounge.jpg" alt="Pub-Lounge"-->
+<!--                                 title="Pub-Lounge" id="wows1_16"/></li>-->
                     </ul>
                 </div>
 
 
 
-                //
-                <div class="ws_bullets">
-                    <div>
-                        <a href="#wows1_0" title="room01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room01.jpg" alt="room01"/>1</span></a>
-                        <a href="#wows1_1" title="room02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room02.jpg" alt="room02"/>2</span></a>
-                        <a href="#wows1_2" title="room03"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room03.jpg" alt="room03"/>3</span></a>
-                        <a href="#wows1_3" title="room04"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room04.jpg" alt="room04"/>4</span></a>
-                        <a href="#wows1_4" title="hanhlang01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang01.jpg" alt="hanhlang01"/>5</span></a>
-                        <a href="#wows1_5" title="hanhlang02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang02.jpg" alt="hanhlang02"/>6</span></a>
-                        <a href="#wows1_6" title="nhahang01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang01.jpg" alt="nhahang01"/>7</span></a>
-                        <a href="#wows1_7" title="nhahang02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang02.jpg" alt="nhahang02"/>8</span></a>
-                        <a href="#wows1_8" title="beboi"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/beboi.jpg"
-                                alt="beboi"/>9</span></a>
-                        <a href="#wows1_9" title="phongtapthehinh"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/phongtapthehinh.jpg"
-                                alt="phongtapthehinh"/>10</span></a>
-                        <a href="#wows1_10" title="Spa01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa01.jpg" alt="Spa01"/>11</span></a>
-                        <a href="#wows1_11" title="Spa02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa02.jpg" alt="Spa02"/>12</span></a>
-                        <a href="#wows1_12" title="Spa03"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa03.jpg" alt="Spa03"/>13</span></a>
-                        <a href="#wows1_13" title="Spa04"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa04.jpg" alt="Spa04"/>14</span></a>
-                        <a href="#wows1_14" title="Bar-Pub01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub01.jpg" alt="Bar-Pub01"/>15</span></a>
-                        <a href="#wows1_15" title="Bar-Pub02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub02.jpg" alt="Bar-Pub02"/>16</span></a>
-                        <a href="#wows1_16" title="Pub-Lounge"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/publounge.jpg" alt="Pub-Lounge"/>17</span></a>
-                    </div>
-                </div>
+
+
+<!--                <div class="ws_bullets">-->
+<!--                    <div>-->
+<!--                        <a href="#wows1_0" title="room01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room01.jpg" alt="room01"/>1</span></a>-->
+<!--                        <a href="#wows1_1" title="room02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room02.jpg" alt="room02"/>2</span></a>-->
+<!--                        <a href="#wows1_2" title="room03"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room03.jpg" alt="room03"/>3</span></a>-->
+<!--                        <a href="#wows1_3" title="room04"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room04.jpg" alt="room04"/>4</span></a>-->
+<!--                        <a href="#wows1_4" title="hanhlang01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang01.jpg" alt="hanhlang01"/>5</span></a>-->
+<!--                        <a href="#wows1_5" title="hanhlang02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang02.jpg" alt="hanhlang02"/>6</span></a>-->
+<!--                        <a href="#wows1_6" title="nhahang01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang01.jpg" alt="nhahang01"/>7</span></a>-->
+<!--                        <a href="#wows1_7" title="nhahang02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang02.jpg" alt="nhahang02"/>8</span></a>-->
+<!--                        <a href="#wows1_8" title="beboi"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/beboi.jpg"-->
+<!--                                alt="beboi"/>9</span></a>-->
+<!--                        <a href="#wows1_9" title="phongtapthehinh"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/phongtapthehinh.jpg"-->
+<!--                                alt="phongtapthehinh"/>10</span></a>-->
+<!--                        <a href="#wows1_10" title="Spa01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa01.jpg" alt="Spa01"/>11</span></a>-->
+<!--                        <a href="#wows1_11" title="Spa02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa02.jpg" alt="Spa02"/>12</span></a>-->
+<!--                        <a href="#wows1_12" title="Spa03"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa03.jpg" alt="Spa03"/>13</span></a>-->
+<!--                        <a href="#wows1_13" title="Spa04"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa04.jpg" alt="Spa04"/>14</span></a>-->
+<!--                        <a href="#wows1_14" title="Bar-Pub01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub01.jpg" alt="Bar-Pub01"/>15</span></a>-->
+<!--                        <a href="#wows1_15" title="Bar-Pub02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub02.jpg" alt="Bar-Pub02"/>16</span></a>-->
+<!--                        <a href="#wows1_16" title="Pub-Lounge"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/publounge.jpg" alt="Pub-Lounge"/>17</span></a>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
 
-                <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com/vi">slider</a>
-                    by WOWSlider.com v8.6
-                </div>
+<!--                <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com/vi">slider</a>-->
+<!--                    by WOWSlider.com v8.6-->
+<!--                </div>-->
 
 
 
@@ -2688,7 +2690,7 @@
 
 
 
-            //dia chi gan hotel
+
             <!--<div id="aboutHotel-infoTabs" style="height: 350px; width: 100%; border-bottom: 1px solid rgb(238,238,238)">-->
             <div id="aboutHotel-infoTabs" class="container-fluid"
                  style="width: 100%; border-bottom: 1px solid rgb(238,238,238)">
@@ -3011,9 +3013,6 @@
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>6+</option>
                             </select>
                         </td>
                     </tr>
@@ -3029,31 +3028,33 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
                         <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                         <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                     </tr>
+
                     <tr id="room-row2" style="background-color: white; display: none">
                         <td> &nbsp; 2</td>
                         <td>
                             <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
                     </tr>
+
                     <tr id="room-row3" style="background-color: white; display: none">
                         <td> &nbsp; 3</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
@@ -3061,18 +3062,18 @@
                     <tr id="room-row4" style="background-color: white; display: none">
                         <td> &nbsp; 4</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
                     </tr>
                     <tr id="room-row5" style="background-color: white; display: none">
                         <td> &nbsp; 5</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
@@ -3080,9 +3081,9 @@
                     <tr id="room-row6" style="background-color: white; display: none">
                         <td> &nbsp; 6</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
                         <!--<td>-->
                         <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
                         <!--</td>-->
