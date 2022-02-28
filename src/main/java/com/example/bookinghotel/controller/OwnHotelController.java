@@ -94,7 +94,6 @@ public class OwnHotelController {
 //        roles.add(roleUser);
 
         user.setRoles(roles);
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         user.setToken("user");
         user.setActive(true);
