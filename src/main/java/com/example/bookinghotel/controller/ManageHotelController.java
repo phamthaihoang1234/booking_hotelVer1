@@ -3,7 +3,10 @@ package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.Hotel;
 import com.example.bookinghotel.services.HotelService;
+import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,9 @@ public class ManageHotelController {
 
     @Autowired
     private HotelService hotelService;
+
+    @Autowired
+    private UserService userService;
 
 
 //    @GetMapping("/manageHotels")
@@ -29,9 +35,24 @@ public class ManageHotelController {
         return "Pages/index";
     }
 
+
+    private String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
     @GetMapping("/homepageHotel")
     public String homepageHotel(Model model){
-        model.addAttribute("hotels", hotelService.findAll());
+        model.addAttribute("hotels", hotelService.findAllHotelByUserId(userService.findByUserName(getPrincipal()).getId()));
+       // model.addAttribute("hotels",hotelService.findAll());
         return "Pages/hotelManage/all-hotel";
     }
 
@@ -48,6 +69,7 @@ public class ManageHotelController {
         System.out.println(hotel.getId());
         System.out.println(hotel.getNameOfHotel());
         System.out.println(hotel.getAddressOfHotel());
+       hotel.setUser(userService.findByUserName(getPrincipal()));
         hotelService.save(hotel);
 //        model.addAttribute("listHotel", hotelService.findAll());
 
@@ -56,24 +78,12 @@ public class ManageHotelController {
         return "redirect:/homepageHotel";
     }
 
-//    @GetMapping("/findOne")
-//    @ResponseBody
-//    public Hotel findHotelById(long id){
-//        System.out.println("id la :"+id);
-//        return hotelService.findById(id).get();
-//    }
+
 
     @GetMapping("/findOne/{id}")
     public String findHotelById(@PathVariable("id") long id, Model model){
-        System.out.println("vao find one");
+
         model.addAttribute("hotel",hotelService.findById(id).get());
-        System.out.println("vao findone: "+ hotelService.findById(id).get().getId());
-        System.out.println(hotelService.findById(id).get().getAddressOfHotel());
-        System.out.println(hotelService.findById(id).get().getNameOfHotel());
-        System.out.println(hotelService.findById(id).get().getStatus());
-
-
-
         return "Pages/hotelManage/form-edit-hotel";
     }
 
