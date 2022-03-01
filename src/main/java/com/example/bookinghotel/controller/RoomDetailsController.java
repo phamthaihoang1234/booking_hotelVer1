@@ -30,7 +30,9 @@ public class RoomDetailsController {
     @GetMapping("/roomDetails{id}")
     public String roomDetails(@PathVariable Long id, Model model){
 
+        //lay ra thong tin room
         model.addAttribute("roomDetail",roomService.findById(id).get());
+
         model.addAttribute("roomImage",roomImageRepository.listRoomImage(id));
 
         //lay ra link iframe gg map
