@@ -32,7 +32,7 @@ public class RoomDetailsController {
 
         //lay ra thong tin room
         model.addAttribute("roomDetail",roomService.findById(id).get());
-
+        //lay ra image theo id room
         model.addAttribute("roomImage",roomImageRepository.listRoomImage(id));
 
         //lay ra link iframe gg map
