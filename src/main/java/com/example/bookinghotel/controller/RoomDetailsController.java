@@ -24,8 +24,8 @@ public class RoomDetailsController {
     private HotelService hotelService;
     @Autowired
     private RoomImageRepository roomImageRepository;
-    @Autowired
-    private HotelRepository hotelRepository;
+//    @Autowired
+//    private HotelRepository hotelRepository;
 
     @GetMapping("/roomDetails{id}")
     public String roomDetails(@PathVariable Long id, Model model){
