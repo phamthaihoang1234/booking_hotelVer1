@@ -91,9 +91,10 @@ public class OwnHotelController {
 //        roleService.save(roleUser);
         Set<Role> roles = new HashSet<>();
         roles.add(roleOwner);
-
+//        roles.add(roleUser);
 
         user.setRoles(roles);
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         user.setToken("user");
         user.setActive(true);
@@ -206,37 +207,6 @@ public class OwnHotelController {
 
 
         return "Pages/roomManage/all-room";
-    }
-
-    @GetMapping("/findOneRoom/{id}")
-    public String findRoomById(@PathVariable("id") long id , Model model){
-        model.addAttribute("room", roomService.findById(id).get());
-        model.addAttribute("listProperty", typeService.getAll());
-        return "Pages/roomManage/edit-room";
-    }
-
-    @PostMapping("/saveEditRoom")
-    public String updateRoom(@ModelAttribute Room room){
-
-        MultipartFile multipartFile = room.getImage();
-        String fileName = multipartFile.getOriginalFilename();
-
-        try {
-            FileCopyUtils.copy(room.getImage().getBytes(), new File(fileUpload + fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        room.setImgSrc3(fileName);
-       roomService.save(room);
-
-
-        return "redirect:/roomHomepage";
-    }
-
-    @GetMapping("/deleteRoom")
-    public String deleteRoomById(long id){
-        roomService.deleteById(id);
-        return "redirect:/roomHomepage";
     }
 
 

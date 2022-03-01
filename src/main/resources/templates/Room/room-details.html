@@ -1373,7 +1373,8 @@
 //             $('.name-of-hotel').text(localStorage.searchhotels_tmp_nameofhotel);
 //             $('.address-of-hotel').text(localStorage.searchhotels_tmp_addofhotel);
             // xac dinh vi tri tren Google map, chi thay doi dia chi & cố định tại Đà Nẵng
-            $('#right-infoTabs iframe').attr('src', 'https://maps.google.com/maps?hl=en&q=' + localStorage.searchhotels_tmp_addofhotel_2 + '&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed');
+            // $('#right-infoTabs iframe').attr('src', 'https://maps.google.com/maps?hl=en&q=' + localStorage.searchhotels_tmp_addofhotel_2 + '&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed');
+
             // sau khi load xong thi check user da~ login hay chua
             // phai them delay thi moi' kich hoat duoc localStorage + id tu` file header1
 //      se~ check + load sau khi load xong part-header1.html
@@ -2546,7 +2547,10 @@
 <body>
 <div id="container">
 
+
     <div id="header"></div>
+
+
 
     <div id="aboutHotel" class="container" style="background-color: rgb(246,245,245); margin: 0; padding: 0">
         <div id="left-aboutHotel" style="width: 65%; float: left; position: relative; background-color: white">
@@ -2560,119 +2564,123 @@
             <div id="wowslider-container1">
                 <!--neu dung margin-top: 380px => khi zoom browser thi chu~ bi. day? xuog' -->
                 <div style="position: absolute; z-index: 1000; color: white; text-shadow: 1px 0px black; margin-left: 50px;bottom: 45px">
-                    <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span><br/>
+                    <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span><br/>
+
+
                     <div style="font-size: 15px">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
+                        <span th:text="${roomDetail.getHotel().getHotel_standard()}"></span>
                         <span class="glyphicon glyphicon-star"></span>
                     </div>
+
+
                     <!--<span class="glyphicon glyphicon-map-marker" style="font-size: 10px"> 3 Nguyễn Văn Linh, Q Hải Châu, Đà Nẵng</span>-->
                     <div style="font-size: 15px">
                         <span class="glyphicon glyphicon-map-marker"></span>
                         <span class="address-of-hotel">
 <!--                            3 Nguyễn Văn Linh, Q Hải Châu, Đà Nẵng-->
-                            <span th:text="${hotelInfo.get().getAddressOfHotel()}"></span>
+                            <span th:text="${roomDetail.getHotel().getAddressOfHotel()}"></span>
                         </span>
                     </div>
                 </div>
 
 
 
-                //slide ảnh hotel
+
                 <div class="ws_images" style="z-index: 999">
                     <ul>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room01.jpg" alt="room01"
-                                 title="room01" id="wows1_0"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room02.jpg" alt="room02"
-                                 title="room02" id="wows1_1"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room03.jpg" alt="room03"
-                                 title="room03" id="wows1_2"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room04.jpg" alt="room04"
-                                 title="room04" id="wows1_3"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang01.jpg" alt="hanhlang01"
-                                 title="hanhlang01" id="wows1_4"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang02.jpg" alt="hanhlang02"
-                                 title="hanhlang02" id="wows1_5"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang01.jpg" alt="nhahang01"
-                                 title="nhahang01" id="wows1_6"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang02.jpg" alt="nhahang02"
-                                 title="nhahang02" id="wows1_7"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/beboi.jpg" alt="beboi"
-                                 title="beboi" id="wows1_8"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/phongtapthehinh.jpg"
-                                 alt="phongtapthehinh" title="phongtapthehinh" id="wows1_9"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa01.jpg" alt="Spa01"
-                                 title="Spa01" id="wows1_10"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa02.jpg" alt="Spa02"
-                                 title="Spa02" id="wows1_11"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa03.jpg" alt="Spa03"
-                                 title="Spa03" id="wows1_12"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa04.jpg" alt="Spa04"
-                                 title="Spa04" id="wows1_13"/></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/barpub01.jpg" alt="Bar-Pub01"
-                                 title="Bar-Pub01" id="wows1_14"/></li>
-                        <li><a href="http://wowslider.com"><img
-                                src="../Utilities/slideshow/slideshow2/data1/images/barpub02.jpg"
-                                alt="http://wowslider.com/" title="Bar-Pub02" id="wows1_15"/></a></li>
-                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/publounge.jpg" alt="Pub-Lounge"
-                                 title="Pub-Lounge" id="wows1_16"/></li>
+                        <th:block th:each="image:${roomImage}">
+                        <li><img th:src="@{${image.getImageUrl()}}" /></li>
+                        </th:block>
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room02.jpg" alt="room02"-->
+<!--                                 title="room02" id="wows1_1"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room03.jpg" alt="room03"-->
+<!--                                 title="room03" id="wows1_2"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room04.jpg" alt="room04"-->
+<!--                                 title="room04" id="wows1_3"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang01.jpg" alt="hanhlang01"-->
+<!--                                 title="hanhlang01" id="wows1_4"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang02.jpg" alt="hanhlang02"-->
+<!--                                 title="hanhlang02" id="wows1_5"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang01.jpg" alt="nhahang01"-->
+<!--                                 title="nhahang01" id="wows1_6"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang02.jpg" alt="nhahang02"-->
+<!--                                 title="nhahang02" id="wows1_7"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/beboi.jpg" alt="beboi"-->
+<!--                                 title="beboi" id="wows1_8"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/phongtapthehinh.jpg"-->
+<!--                                 alt="phongtapthehinh" title="phongtapthehinh" id="wows1_9"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa01.jpg" alt="Spa01"-->
+<!--                                 title="Spa01" id="wows1_10"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa02.jpg" alt="Spa02"-->
+<!--                                 title="Spa02" id="wows1_11"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa03.jpg" alt="Spa03"-->
+<!--                                 title="Spa03" id="wows1_12"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa04.jpg" alt="Spa04"-->
+<!--                                 title="Spa04" id="wows1_13"/></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/barpub01.jpg" alt="Bar-Pub01"-->
+<!--                                 title="Bar-Pub01" id="wows1_14"/></li>-->
+<!--                        <li><a href="http://wowslider.com"><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/images/barpub02.jpg"-->
+<!--                                alt="http://wowslider.com/" title="Bar-Pub02" id="wows1_15"/></a></li>-->
+<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/publounge.jpg" alt="Pub-Lounge"-->
+<!--                                 title="Pub-Lounge" id="wows1_16"/></li>-->
                     </ul>
                 </div>
 
 
 
-                //
-                <div class="ws_bullets">
-                    <div>
-                        <a href="#wows1_0" title="room01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room01.jpg" alt="room01"/>1</span></a>
-                        <a href="#wows1_1" title="room02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room02.jpg" alt="room02"/>2</span></a>
-                        <a href="#wows1_2" title="room03"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room03.jpg" alt="room03"/>3</span></a>
-                        <a href="#wows1_3" title="room04"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room04.jpg" alt="room04"/>4</span></a>
-                        <a href="#wows1_4" title="hanhlang01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang01.jpg" alt="hanhlang01"/>5</span></a>
-                        <a href="#wows1_5" title="hanhlang02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang02.jpg" alt="hanhlang02"/>6</span></a>
-                        <a href="#wows1_6" title="nhahang01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang01.jpg" alt="nhahang01"/>7</span></a>
-                        <a href="#wows1_7" title="nhahang02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang02.jpg" alt="nhahang02"/>8</span></a>
-                        <a href="#wows1_8" title="beboi"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/beboi.jpg"
-                                alt="beboi"/>9</span></a>
-                        <a href="#wows1_9" title="phongtapthehinh"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/phongtapthehinh.jpg"
-                                alt="phongtapthehinh"/>10</span></a>
-                        <a href="#wows1_10" title="Spa01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa01.jpg" alt="Spa01"/>11</span></a>
-                        <a href="#wows1_11" title="Spa02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa02.jpg" alt="Spa02"/>12</span></a>
-                        <a href="#wows1_12" title="Spa03"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa03.jpg" alt="Spa03"/>13</span></a>
-                        <a href="#wows1_13" title="Spa04"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa04.jpg" alt="Spa04"/>14</span></a>
-                        <a href="#wows1_14" title="Bar-Pub01"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub01.jpg" alt="Bar-Pub01"/>15</span></a>
-                        <a href="#wows1_15" title="Bar-Pub02"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub02.jpg" alt="Bar-Pub02"/>16</span></a>
-                        <a href="#wows1_16" title="Pub-Lounge"><span><img
-                                src="../Utilities/slideshow/slideshow2/data1/tooltips/publounge.jpg" alt="Pub-Lounge"/>17</span></a>
-                    </div>
-                </div>
+
+
+<!--                <div class="ws_bullets">-->
+<!--                    <div>-->
+<!--                        <a href="#wows1_0" title="room01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room01.jpg" alt="room01"/>1</span></a>-->
+<!--                        <a href="#wows1_1" title="room02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room02.jpg" alt="room02"/>2</span></a>-->
+<!--                        <a href="#wows1_2" title="room03"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room03.jpg" alt="room03"/>3</span></a>-->
+<!--                        <a href="#wows1_3" title="room04"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room04.jpg" alt="room04"/>4</span></a>-->
+<!--                        <a href="#wows1_4" title="hanhlang01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang01.jpg" alt="hanhlang01"/>5</span></a>-->
+<!--                        <a href="#wows1_5" title="hanhlang02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang02.jpg" alt="hanhlang02"/>6</span></a>-->
+<!--                        <a href="#wows1_6" title="nhahang01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang01.jpg" alt="nhahang01"/>7</span></a>-->
+<!--                        <a href="#wows1_7" title="nhahang02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang02.jpg" alt="nhahang02"/>8</span></a>-->
+<!--                        <a href="#wows1_8" title="beboi"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/beboi.jpg"-->
+<!--                                alt="beboi"/>9</span></a>-->
+<!--                        <a href="#wows1_9" title="phongtapthehinh"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/phongtapthehinh.jpg"-->
+<!--                                alt="phongtapthehinh"/>10</span></a>-->
+<!--                        <a href="#wows1_10" title="Spa01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa01.jpg" alt="Spa01"/>11</span></a>-->
+<!--                        <a href="#wows1_11" title="Spa02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa02.jpg" alt="Spa02"/>12</span></a>-->
+<!--                        <a href="#wows1_12" title="Spa03"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa03.jpg" alt="Spa03"/>13</span></a>-->
+<!--                        <a href="#wows1_13" title="Spa04"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa04.jpg" alt="Spa04"/>14</span></a>-->
+<!--                        <a href="#wows1_14" title="Bar-Pub01"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub01.jpg" alt="Bar-Pub01"/>15</span></a>-->
+<!--                        <a href="#wows1_15" title="Bar-Pub02"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub02.jpg" alt="Bar-Pub02"/>16</span></a>-->
+<!--                        <a href="#wows1_16" title="Pub-Lounge"><span><img-->
+<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/publounge.jpg" alt="Pub-Lounge"/>17</span></a>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
 
-                <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com/vi">slider</a>
-                    by WOWSlider.com v8.6
-                </div>
+<!--                <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com/vi">slider</a>-->
+<!--                    by WOWSlider.com v8.6-->
+<!--                </div>-->
 
 
 
-                <div class="ws_shadow"></div>
+<!--                <div class="ws_shadow"></div>-->
             </div>
 
 
@@ -2685,11 +2693,12 @@
 
 
 
-            //dia chi gan hotel
+
             <!--<div id="aboutHotel-infoTabs" style="height: 350px; width: 100%; border-bottom: 1px solid rgb(238,238,238)">-->
             <div id="aboutHotel-infoTabs" class="container-fluid"
                  style="width: 100%; border-bottom: 1px solid rgb(238,238,238)">
                 <div class="row">
+
                     <!--<div id="left-infoTabs" style="width: 55%; float: left">-->
                     <div id="left-infoTabs" class="col-sm-6 col-md-6">
                         <div class="container" style="width: 95%; margin-top: 30px; margin-left: 30px">
@@ -2706,81 +2715,81 @@
                             </ul>
 
                             <div class="tab-content">
-                                <div id="home" class="tab-pane fade in active">
-                                    <br/>
-                                    <table class="table borderless">
-                                        <tr>
-                                            <td>Bảo tàng Chăm</td>
-                                            <td>0.1 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sông Hàn</td>
-                                            <td>0.1 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Các bãi biển</td>
-                                            <td>2 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bán đảo Sơn Trà</td>
-                                            <td>3.2 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Núi Bà Nà</td>
-                                            <td>9 Km</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="menu1" class="tab-pane fade">
-                                    <br/>
-                                    <table class="table borderless">
-                                        <tr>
-                                            <td>Apsara Restaurant</td>
-                                            <td>0.3 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Café Trà Cung Đình</td>
-                                            <td>0.5 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trúc Lâm Viên</td>
-                                            <td>2 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nhà hàng Bia Tiệp Tulip</td>
-                                            <td>2.5 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nhà hàng Estasy</td>
-                                            <td>1 Km</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div id="menu2" class="tab-pane fade">
-                                    <br/>
-                                    <table class="table borderless">
-                                        <tr>
-                                            <td>Chợ Hàn</td>
-                                            <td>0.4 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Chợ Cồn</td>
-                                            <td>1 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Siêu thị Big C</td>
-                                            <td>1 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trung tâm thương mại Vincom</td>
-                                            <td>2 Km</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lotte Mart</td>
-                                            <td>2 Km</td>
-                                        </tr>
-                                    </table>
-                                </div>
+<!--                                <div id="home" class="tab-pane fade in active">-->
+<!--                                    <br/>-->
+<!--                                    <table class="table borderless">-->
+<!--                                        <tr>-->
+<!--                                            <td>Bảo tàng Chăm</td>-->
+<!--                                            <td>0.1 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Sông Hàn</td>-->
+<!--                                            <td>0.1 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Các bãi biển</td>-->
+<!--                                            <td>2 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Bán đảo Sơn Trà</td>-->
+<!--                                            <td>3.2 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Núi Bà Nà</td>-->
+<!--                                            <td>9 Km</td>-->
+<!--                                        </tr>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div id="menu1" class="tab-pane fade">-->
+<!--                                    <br/>-->
+<!--                                    <table class="table borderless">-->
+<!--                                        <tr>-->
+<!--                                            <td>Apsara Restaurant</td>-->
+<!--                                            <td>0.3 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Café Trà Cung Đình</td>-->
+<!--                                            <td>0.5 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Trúc Lâm Viên</td>-->
+<!--                                            <td>2 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Nhà hàng Bia Tiệp Tulip</td>-->
+<!--                                            <td>2.5 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Nhà hàng Estasy</td>-->
+<!--                                            <td>1 Km</td>-->
+<!--                                        </tr>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div id="menu2" class="tab-pane fade">-->
+<!--                                    <br/>-->
+<!--                                    <table class="table borderless">-->
+<!--                                        <tr>-->
+<!--                                            <td>Chợ Hàn</td>-->
+<!--                                            <td>0.4 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Chợ Cồn</td>-->
+<!--                                            <td>1 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Siêu thị Big C</td>-->
+<!--                                            <td>1 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Trung tâm thương mại Vincom</td>-->
+<!--                                            <td>2 Km</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Lotte Mart</td>-->
+<!--                                            <td>2 Km</td>-->
+<!--                                        </tr>-->
+<!--                                    </table>-->
+<!--                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -2798,16 +2807,23 @@
 
 
 
-                        //Thẻ iframe gg map
-<!--                        <div class="embed-responsive embed-responsive-4by3">-->
-<!--                            &lt;!&ndash;left: 0 => ho tro noi rong pic (khi co' Grid, se tu* dong tao margin, padding)&ndash;&gt;-->
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <!--left: 0 => ho tro noi rong pic (khi co' Grid, se tu* dong tao margin, padding)-->
 <!--                            <iframe style="left: 0px; " class="embed-responsive-item" frameborder="0" scrolling="no"-->
 <!--                                    marginheight="0" marginwidth="0" width="auto" height="auto" allowfullscreen-->
-<!--                                    src="https://maps.google.com/maps?hl=en&q=3 Nguyễn Văn Linh, Q Hải Châu, Đà Nẵng&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed">-->
-<!--                                &lt;!&ndash;<div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div>&ndash;&gt;-->
-<!--                                &lt;!&ndash;<div><small><a href="https://ww.premiumlinkgenerator.com/">premium link generator</a></small></div>&ndash;&gt;-->
+<!--                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.1228058870056!2d105.8193348147315!3d21.0277716859989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab743b6ab88d%3A0xfb848cbe2def5dd6!2sHanoi%20Hotel!5e0!3m2!1svi!2s!4v1646062976576!5m2!1svi!2s">-->
+<!--&lt;!&ndash;                                <div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div><small><a href="https://ww.premiumlinkgenerator.com/">premium link generator</a></small></div>&ndash;&gt;-->
 <!--                            </iframe>-->
-<!--                        </div>-->
+
+                            <iframe
+                                th:src="@{${iframe}}"
+                                width="auto" height="auto" style="border:0;" allowfullscreen="" loading="lazy">
+<!--                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.1228058870056!2d105.8193348147315!3d21.0277716859989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab743b6ab88d%3A0xfb848cbe2def5dd6!2sHanoi%20Hotel!5e0!3m2!1svi!2s!4v1646062976576!5m2!1svi!2s">-->
+<!--                                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy">-->
+
+                            </iframe>
+                        </div>
 
 
 
@@ -2925,29 +2941,29 @@
 
 
 
-            //mo ta khach san
+
             <!--<div id="description" style="width: 85%; height: 350px; margin-left: 5%">-->
             <div id="description" class="container" style="width: 85%; margin-left: 50px">
                 <div class="title">Mô tả khách sạn</div>
                 <div class="redline"></div>
                 <p style="text-align: justify">
                     Nếu bạn đang muốn tìm một khách sạn có vị trí thuận lợi thuộc <span
-                        class="name-of-location">Đà Nẵng</span>,
+                        class="name-of-location"></span>,
                     không lựa chọn nào tốt hơn <span class="name-of-hotel">
-                    <span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span>. Từ đây, khách có thể dễ
+                    <span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span>. Từ đây, khách có thể dễ
                     dàng tiếp
                     cận được nét đẹp sống động của thành phố ở mọi góc cạnh. Với vị trí thuận lợi, khách sạn dễ dàng
                     tiếp
                     cận những điểm tham quan du lịch nổi tiếng của thành phố.<br/><br/>
-                    <span class="name-of-hotel"><span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span> mang lại dịch vụ hoàn hảo, làm hài lòng cả những vị
+                    <span class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span> mang lại dịch vụ hoàn hảo, làm hài lòng cả những vị
                     khách khó tính nhất với những tiện nghi sang trọng tuyệt vời. Khi nghỉ ngơi trong khách sạn tuyệt
                     vời
                     này, khách có thể tận hưởng Miễn phí Wi-fi tất cả các phòng, quầy lễ tân 24 giờ, tiện nghi cho người
                     khuyết tật, Wi-Fi ở khu vực công cộng, phục vụ phòng.<br/><br/>
                     Khách có thể chọn 114 phòng có không khí yên bình và tuyệt vời. phòng thể dục, phòng xông hơi, hồ
                     bơi trong nhà, spa, massage của khách sạn là nơi lý tưởng để thư giãn và đổi gió sau một ngày bận
-                    rộn. <span class="name-of-hotel"><span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span> là một sự lựa chọn thông minh cho du khách khi
-                    đến <span class="name-of-location">Đà Nẵng</span>, nơi mang lại cho họ một kì nghỉ thư giãn và thoải
+                    rộn. <span class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span> là một sự lựa chọn thông minh cho du khách khi
+                    đến <span class="name-of-location"></span>, nơi mang lại cho họ một kì nghỉ thư giãn và thoải
                     mái.
                 </p>
             </div>
@@ -2956,19 +2972,23 @@
 
             <div style="margin-left: 50px; color: rgb(70,68,79); line-height: 75px">
                 <!--dung div thi bi. <br/>-->
-                <a href="homepage.html" style="color: grey">Trang chủ</a>
+                <a th:href="@{/}" style="color: grey">Trang chủ</a>
                 <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>
-                <a href="search-hotels.html" style="color: grey">
-                    <span class="name-of-location">Đà Nẵng</span>
+                <a th:href="@{search-hotels/}" style="color: grey">
+                    <span class="name-of-location"></span>
                 </a>
                 <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>
-                <b>YOY <span class="name-of-hotel"><span th:text="${hotelInfo.get().getNameOfHotel()}"></span></span></b>
+                <b>YOY <span class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span></b>
             </div>
         </div>
         <!--tam dat. height de ho tro fill color (vi ko xac dinh dc height cua right-aboutHotel)-->
         <!--neu height: 1715px; du* qua nhieu thi` ko the scroll xuong' sat' mep' cua footer, trang goc' khi zoom
         browser thi ben trai bi thu nho con` ben phai van~ giu~ nguyen -->
         <!--background-color: rgb(246,245,245) height: 1675px;  -->
+
+
+
+
         <div id="right-aboutHotel" style="width: 35%; float: right; bottom: 0">
             <!--<div id="right-aboutHotel" style="width: 400px; height: 1715px; background-color: rgb(246,245,245); float: right; bottom: 0">-->
             <div id="right-aboutHotel-1" style="width: 93%; margin: auto; margin-top: 5px">
@@ -3004,13 +3024,12 @@
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>6+</option>
                             </select>
                         </td>
                     </tr>
                 </table>
+
+
                 <!--chua hover duoc -->
                 <table id="mytable" class="table table-hover" style="margin-top: -22px">
                     <tr id="mytable-th" style="color: rgb(122,118,118)">
@@ -3022,31 +3041,33 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
+                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
+                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                     </tr>
+
                     <tr id="room-row2" style="background-color: white; display: none">
                         <td> &nbsp; 2</td>
                         <td>
                             <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
                     </tr>
+
                     <tr id="room-row3" style="background-color: white; display: none">
                         <td> &nbsp; 3</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
@@ -3054,18 +3075,18 @@
                     <tr id="room-row4" style="background-color: white; display: none">
                         <td> &nbsp; 4</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
                     </tr>
                     <tr id="room-row5" style="background-color: white; display: none">
                         <td> &nbsp; 5</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <td>1.500.000</td>
                         <td class="row-total">1.500.000</td>
@@ -3073,9 +3094,9 @@
                     <tr id="room-row6" style="background-color: white; display: none">
                         <td> &nbsp; 6</td>
                         <td>
-                            <img src="../../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
+                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
                         <!--<td>-->
                         <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
                         <!--</td>-->
@@ -3136,6 +3157,7 @@
                     </div>
                 </div>
 
+
                 <!--them div de cai` text-align: center-->
                 <div style="text-align: center; margin-top: 10px;">
                     <input id="book-now" type="button" class="btn mybtn-style1" value="ĐẶT PHÒNG">
@@ -3145,6 +3167,9 @@
                     <a href="#" style="color: rgb(220,30,40)">Các điều khoản và Điều kiện</a>
                 </div>
             </div>
+
+
+
             <!-- sau khi click DAT PHONG -->
             <div id="right-aboutHotel-2" style="width: 90%; margin: auto; margin-top: 15px; display: none; bottom: 0">
                 <!--borderless-->
@@ -3166,6 +3191,8 @@
                         <!--<td>...</td>-->
                     </tr>
                 </table>
+
+
 
                 <form id="thanhtoan" name="formthanhtoan">
                     <b>THÔNG TIN CHI TIẾT:</b>
@@ -3254,7 +3281,8 @@
                         </div>
                     </div>
                 </form>
-//
+
+
                 <div id="verify-code" style="clear: both; width: 93%; display: none; margin: auto">
                     <hr style="margin-top: -10px"/>
                     <form>
@@ -3289,7 +3317,13 @@
         </div>
     </div>
 
-    <div id="footer"></div>
+
+
+
+
+    <div id="footer">
+
+    </div>
 
     <!-- dat. them o day thi moi' dung` dc-->
     <!-- Form Sign-Up & Log In: Ho tro link den' file Sign-up -->

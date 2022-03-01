@@ -16,6 +16,11 @@ public class Hotel {
     private Boolean status = true;
     private String nameOfHotel ;
     private String addressOfHotel;
+    private String iframe;
+
+    public String getIframe() {
+        return iframe;
+    }
 
     public String getAddressOfHotel() {
         return addressOfHotel;
@@ -57,19 +62,7 @@ public class Hotel {
         this.status = status;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="userId", nullable = false, updatable = false)
-    private UserInfo user;
-
-    public UserInfo getUser() {
-        return user;
-    }
-
-    public void setUser(UserInfo user) {
-        this.user = user;
-    }
-
-    //    phan dung them vao
+//    phan dung them vao
     private int hotel_standard;
     private String phone;
     public String getPhone() {
