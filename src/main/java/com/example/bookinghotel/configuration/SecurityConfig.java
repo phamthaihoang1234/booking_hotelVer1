@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/login").access("hasAnyRole('ROLE_USER')")
                 .antMatchers("/manageHotels").access("hasRole('ROLE_OWNER')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
-
+//
             //  .and().formLogin().successHandler(customSuccessHandler)
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
