@@ -1783,6 +1783,8 @@
                     //ho tro khi click DAT PHONG
                     $('#table-result-21').html(iRoom);
                     $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
 
                     var iTotal = 0;
                     for (var j = 1; j <= amount; j++) {
@@ -1969,6 +1971,8 @@
                     //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
                     $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
                     $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
+                    $('#right-aboutHotel-checkin').val(check_in.toLocaleDateString());
+                    $('#right-aboutHotel-checkout').val(check_out.toLocaleDateString());
                     // lam` mo` div, se fadeOut tai #book-now-2 click
                     $('.tmp-left-aboutHotel').fadeIn();
                 }
@@ -2564,7 +2568,7 @@
             <div id="wowslider-container1">
                 <!--neu dung margin-top: 380px => khi zoom browser thi chu~ bi. day? xuog' -->
                 <div style="position: absolute; z-index: 1000; color: white; text-shadow: 1px 0px black; margin-left: 50px;bottom: 45px">
-                    <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span><br/>
+<!--                    <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span><br/>-->
 
 
                     <div style="font-size: 15px">
@@ -3019,12 +3023,9 @@
                         <th style="text-align: right; color: rgb(122,118,118)">PHÒNG</th>
                         <td>
                             <!--gia tri cua select co the tuy` thuoc vao thong bao' con` bao nhieu phong` tai trang search-hotels-->
-                            <select id="slt-rooms" class="form-control" style="width: 70px">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
+
+                            <input type="number" class="form-control" id="slt-rooms" style="margin-top: -5px;width: 63px;
+">
                         </td>
                     </tr>
                 </table>
@@ -3041,68 +3042,16 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
                         <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                         <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                     </tr>
 
-                    <tr id="room-row2" style="background-color: white; display: none">
-                        <td> &nbsp; 2</td>
-                        <td>
-                            <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
-                        </td>
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
-                    </tr>
 
-                    <tr id="room-row3" style="background-color: white; display: none">
-                        <td> &nbsp; 3</td>
-                        <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
-                        </td>
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
-                    </tr>
-                    <tr id="room-row4" style="background-color: white; display: none">
-                        <td> &nbsp; 4</td>
-                        <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
-                    </tr>
-                    <tr id="room-row5" style="background-color: white; display: none">
-                        <td> &nbsp; 5</td>
-                        <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
-                        </td>
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
-                    </tr>
-                    <tr id="room-row6" style="background-color: white; display: none">
-                        <td> &nbsp; 6</td>
-                        <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
-                        <!--<td>-->
-                        <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
-                        <!--</td>-->
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
-                    </tr>
                 </table>
 
                 <table id="table-result" class="table borderless" style="margin-top: -15px;">
@@ -3194,7 +3143,11 @@
 
 
 
-                <form id="thanhtoan" name="formthanhtoan">
+                <form th:action="@{/saveBooking}" method="get">
+                    <input id="right-aboutHotel-checkin" name="checkin" hidden />
+                    <input id="right-aboutHotel-checkout" name="checkout" hidden />
+                    <input id="table-21" name="numberOfRoom" hidden />
+                    <input id="table-22" hidden/>
                     <b>THÔNG TIN CHI TIẾT:</b>
                     <table class="table borderless">
                         <tr>
@@ -3235,50 +3188,7 @@
 
                     <div id="bt-thanhtoan" style="font-weight: bold; margin: auto; width: 88%">
                         <input id="bt-thanhtoan1" type="submit" class="btn mybtn-style2"
-                               value="THANH TOÁN TẠI KHÁCH SẠN" style="float: left"
-                        >
-                        <div style="float: left; margin-left: 10px">
-                            <div id="paywith">
-                                <div class="effect-shadow-ul">
-                                    <!--ban dau dung ul, li nhu*ng ko ho tro hover row
-                                    <li style="list-style-image:url('../img/room-bookings/icon%20pay/visa.gif')"> Visa</li> -->
-                                    <!--http://www.w3schools.com/bootstrap/bootstrap_ref_css_tables.asp-->
-                                    <table class="table table-hover borderless">
-                                        <!--khi nao co' trang moi' thi cai` the? a-->
-                                        <thead>
-                                        <tr>
-                                            <th colspan="2">TRẢ VỚI</th>
-                                            <!--<th></th>-->
-                                        </tr>
-                                        </thead>
-                                        <!--<tbody>-->
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/visa.gif"/></td>
-                                            <td>Visa</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/mastercard.png"/></td>
-                                            <td>MasterCard</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/JCB.png"/></td>
-                                            <td>JCB</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/american-express.png"/></td>
-                                            <td>American Express</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/paypal.png"/></td>
-                                            <td>PayPal</td>
-                                        </tr>
-                                        <!--</tbody>-->
-                                    </table>
-                                </div>
-
-                                <input type="button" class="btn mybtn-style1" value="TRẢ BÂY GIỜ">
-                            </div>
-                        </div>
+                               value="THANH TOÁN TẠI KHÁCH SẠN" style="float: left">
                     </div>
                 </form>
 

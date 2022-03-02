@@ -23,15 +23,38 @@ public class HotelDetailDController {
     @Autowired
     PropertyTypeRepository propertyTypeRepository;
 
+
+
+    Long idHotel;
     @GetMapping("/hotel_detail{id}")
     public String hotelDetail(@PathVariable("id") Long id, Model model) {
         Optional<Hotel> hotel = hotelService.findById(id);
+        idHotel = id;
+        System.out.println("idHotel là:"+ idHotel);
         if (hotel.isPresent()) {
             model.addAttribute("background_image", hotel.get().getImages().get(0).getImage());
             model.addAttribute("hotel", hotel.get());
             return "hotel_details/index";
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/saveBooking")
+    public String saveBooking(@RequestParam("checkin") String checkin,
+                              @RequestParam("checkout") String checkout,
+                              @RequestParam("numberOfRoom") String numberOfRoom,
+                              @RequestParam("info-name") String name,
+                              @RequestParam("info-phone") String phone,
+                              @RequestParam("info-email") String email
+    ){
+        System.out.println("vao controller");
+        System.out.println(checkin);
+        System.out.println(checkout);
+        System.out.println(numberOfRoom);
+        System.out.println(name);
+        System.out.println(phone);
+        System.out.println(email);
+        return "redirect:/getRoomsHotelDetail";
     }
 
     @PostMapping("/getRoomsHotelDetail")
