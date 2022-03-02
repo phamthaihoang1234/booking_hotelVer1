@@ -1777,9 +1777,15 @@
 //                chi thay doi so' cua cac ID chu' ko thay doi toan` bo (tranh' bi xoa' ID), ko the dung` rieng cho nut minus, plus
 //                dung` val() ko dung khi thay doi so' luong room' (chi dung' cho nut' minus, plus)
 //                $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
-                    $('#table-result-11').html(iRoom);
+                    var prize = document.getElementById('price').value;
+                    var total = prize*iRoom;
+                    $('#table-result-11').html(total);
                     $('#table-result-12').html(iGuest);
                     $('#table-result-13').html(GetDays());
+                    //document.getElementById('priceTotal').innerHTML = 1234;
+                    $('#priceTotal').html(total);
+                    console.log(prize);
+                    console.log(total);
                     //ho tro khi click DAT PHONG
                     $('#table-result-21').html(iRoom);
                     $('#table-result-22').html(iGuest);
@@ -3047,8 +3053,8 @@
                             <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
-                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
+                        <td><input id="price" readonly th:value="${roomDetail.getPricePerNight()}"></input></td>
+                        <td class="row-total"> <span id="priceTotal" style="font-weight: bold">1</span></td>
                     </tr>
 
 
@@ -3056,6 +3062,7 @@
 
                 <table id="table-result" class="table borderless" style="margin-top: -15px;">
                     <tr>
+
                         <td id="table-result-1">
                             Tổng số
                             <span id="table-result-11" style="font-weight: bold">1</span> Phòng,
