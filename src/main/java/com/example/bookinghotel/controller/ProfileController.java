@@ -40,9 +40,10 @@ public class ProfileController {
         oldUserInfo.setEmail(userInfo.getEmail());
         oldUserInfo.setPhoneNumber(userInfo.getPhoneNumber());
         oldUserInfo.setAddress(userInfo.getAddress());
+        oldUserInfo.setGender(userInfo.getGender());
         System.out.println("Class: ProfileControler | Method: updateProfile |  " + oldUserInfo.getName());
         try {
-            userService.save(oldUserInfo);
+            userService.updateInfor(oldUserInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,19 +62,5 @@ public class ProfileController {
         }
         return userName;
     }
-   /* @PostMapping("/saveEditProfile")
-    public String updateProfile(@ModelAttribute UserInfo userInfo) {
-        UserInfo oldUserInfo = userService.findByUserName(this.getPrincipal());
-        oldUserInfo.setName(userInfo.getName());
-        oldUserInfo.setEmail(userInfo.getEmail());
-        oldUserInfo.setPhoneNumber(userInfo.getPhoneNumber());
-        oldUserInfo.setAddress(userInfo.getAddress());
-        System.out.println("Class: ProfileControler | Method: updateProfile |  " + oldUserInfo.getName());
-        try {
-            userService.save(oldUserInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Pages/modal-user/profile2";
-    }*/
+
 }

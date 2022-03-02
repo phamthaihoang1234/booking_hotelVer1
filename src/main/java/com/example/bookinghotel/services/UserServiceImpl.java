@@ -64,10 +64,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo save(UserInfo user) throws Exception {
-//        if (this.existsByUsername(user.getUsername())) {
-//            throw new RuntimeException(messageSource.getMessage("validators.username.exists", new Object[] {user.getUsername()}, Locale.getDefault()));
-//        }
-//        user.setName(user.getUsername());
+        if (this.existsByUsername(user.getUsername())) {
+            throw new RuntimeException(messageSource.getMessage("validators.username.exists", new Object[] {user.getUsername()}, Locale.getDefault()));
+        }
+        user.setName(user.getUsername());
+        Set<Role> roles = new HashSet<>();
+        user.getRoles().forEach(role -> {
+            if (role.getName().equals("admin")) {
+                Optional<Role> adminRole = roleService.findByName("ROLE_ADMIN");
+                adminRole.ifPresent(roles::add);
+            } else {
+                Optional<Role> userRole = roleService.findByName("ROLE_USER");
+                userRole.ifPresent(roles::add);
+            }
+        });
+        user.setRoles(roles);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public boolean changePassword(UserInfo user) throws Exception{
+        return true;
+
+    }
+
+    @Override
+    public UserInfo updateInfor(UserInfo user) throws Exception{
+        user.setName(user.getName());
+        user.setEmail(user.getEmail());
+        user.setPhoneNumber(user.getPhoneNumber());
+        user.setGender(user.getGender());
 //        Set<Role> roles = new HashSet<>();
 //        user.getRoles().forEach(role -> {
 //            if (role.getName().equals("admin")) {
@@ -79,6 +105,7 @@ public class UserServiceImpl implements UserService {
 //            }
 //        });
 //        user.setRoles(roles);
+        user.setAddress(user.getAddress());
         return userRepository.save(user);
     }
 

@@ -101,7 +101,7 @@
             // http://www.conceptdraw.com/How-To-Guide/geo-map-asia-vietnam
             document.write("<div  id='img-background'>" + "<img src='../img/all-locations/Vietnam-map.png'/>" + "</div>");
 
-            document.write("<div style='width: 90%; color: rgb(70,68,68); margin: auto'>");
+            document.write("<div style='width: 90%; color: rgb(70,68,68); margin: auto;margin-bottom: 80px;'>");
             document.write("<div id='content' class='row' style='line-height: 32px'>");
             // the hien tren Bootstrap Grid (12 cot)
             document.write("<div class='col-sm-1'>");
@@ -142,6 +142,12 @@
             document.write("</div><div id='footer'></div>");
             $("#header").load("/header");
             $("#footer").load("/footer");
+            setTimeout(function(){
+                console.log(document.getElementById("language"));
+                document.getElementById("language").style.display = 'none';
+            },100)
+
+
         }
 
 

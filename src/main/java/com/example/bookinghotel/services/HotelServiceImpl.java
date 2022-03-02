@@ -39,11 +39,6 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public Iterable<Hotel> findAllHotelByUserId(long id) {
-        return hotelRepository.findAllHotelByUserId(id);
-    }
-
-    @Override
     public void delete(Long id) {
         hotelRepository.deleteById(id);
     }
