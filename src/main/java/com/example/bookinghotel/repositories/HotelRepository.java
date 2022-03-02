@@ -16,5 +16,9 @@ public interface HotelRepository extends CrudRepository<Hotel, Long> {
     @Query(nativeQuery = true,value = "select hotel.* from hotel where hotel.name_of_hotel = ?1")
     Optional<Hotel> findByNameOfHotel(String hotel_name);
 
+
     // phan dung code-end
+
+//    @Query(nativeQuery = true, value = "select hotel.* from hotel inner join rooms on hotel.id = rooms.hotel_id where rooms.id = ?1;")
+//    Optional<Hotel> findByRoomId(Long room_id);
 }
