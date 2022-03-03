@@ -1700,6 +1700,77 @@
 //  tai trang chinh thi ho van~ thay' duoc nut' book-now khi vi tri dang o? footer
         });
         //##########################
+
+        var nRoom =0;
+        var nGuess = 0;
+        var totalL = 0;
+
+        $(document).ready(function (){
+            $('#numberGuess').change(function (){
+
+                var iGuest = 0;
+                iGuest = document.getElementById('numberGuess').value;
+                nGuess = iGuest;
+                function GetDays() {
+                    var check_in = new Date(document.getElementById("date1").value);
+                    var check_out = new Date(document.getElementById("date2").value);
+
+                    if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                        //alert('Nhận phòng & Trả phòng không hợp lệ');
+                        //ko can show tooltip, da cai day du tai nut DAT PHONG
+                        return 1;
+                    } else if (check_out < check_in) {
+                        //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                        $('.validation-advice').fadeIn();
+                        return 1;
+                    } else {
+                        return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                    }
+                }
+                if(iGuest > (nRoom*3)){
+                    swal({
+                        title: "Number of guess incorrect!",
+                        text: "The number of people has exceeded the allowed limit!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    document.getElementById('book-now').disabled = true;
+                }
+
+                if(iGuest < 0){
+                    swal({
+                        title: "Number of guess incorrect!",
+                        text: "The number of people has exceeded the allowed limit!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    document.getElementById('book-now').disabled = true;
+                }
+
+                if(iGuest == 0) {
+                    document.getElementById('book-now').disabled = true;
+                }
+
+                if(iGuest <= 0) iGuest = 0;
+                if(nRoom <= 0) nRoom = 0;
+
+                if(iGuest >0 && nRoom > 0 && iGuest <= (nRoom*3)){
+                    document.getElementById('book-now').disabled = false;
+                }
+
+                $('#table-result-11').html(nRoom);
+                $('#table-result-12').html(iGuest);
+                $('#table-result-13').html(GetDays());
+                $('#table-result-21').html(nRoom);
+                $('#table-result-22').html(iGuest);
+                $('#table-21').val(nRoom);
+                $('#table-22').val(iGuest);
+                $('#tien-thanhtoan').val(totalL);
+                $('#table-result-2').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                $('#tien-thanhtoan').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+            });
+        });
+
         $(document).ready(function () {
             $('#slt-rooms').change(function () {
 //          hoac co the dung vong lap duyet tu` Room6 ve` Room2
@@ -1751,10 +1822,12 @@
 //              table-result-1, table-result-2
 //              Tổng số 1 Phòng, 1 Khách & 1 Đêm
                     var iRoom = amount;
-                    var iGuest = 0;
-                    for (var i = 1; i <= amount; i++) {
-                        iGuest = iGuest + parseInt($('#room-row' + i).find('span').text());
-                    }
+                    // var iGuest = 0;
+                    // iGuest = document.getElementById('numberGuess').value;
+
+                    // for (var i = 1; i <= amount; i++) {
+                    //     iGuest = iGuest + parseInt($('#room-row' + i).find('span').text());
+                    // }
 
 //          session 15.4.3 Date	Object
                     function GetDays() {
@@ -1779,32 +1852,89 @@
 //                $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
                     var prize = document.getElementById('price').value;
                    var total ;
+                    var iGuest = 0;
                     total = prize*iRoom;
+                    totalL = total;
+                    nRoom = iRoom
+                    iGuest = nGuess;
+
                     console.log(iRoom);
+                    console.log(iGuest);
+                    console.log(total);
+
+                    if(iGuest == 0){
+                        document.getElementById('book-now').disabled = true;
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    }
+
                     if(iRoom == 0){
                         console.log("vao iRoom =0");
                         document.getElementById('book-now').disabled = true;
-                        $('#table-result-11').html(0);
-                        $('#table-result-12').html(0);
-                        $('#table-result-13').html(0);
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    }
+                    if(iGuest > (nRoom*3) && nGuess > 0 && iGuest > 0 ){
+                        swal({
+                            title: "Number of guess incorrect!",
+                            text: "The number of people has exceeded the allowed limit!",
+                            icon: "warning",
+                            button: "OK",
+                        });
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        document.getElementById('book-now').disabled = true;
                     }
                     if(iRoom < 0){
                         console.log("vao iRoom  <0");
+                        iRoom = 0;
                         swal({
                             title: "Number of room incorrect!",
                             text: "You need to try again enter number of room!",
                             icon: "warning",
                             button: "OK",
                         });
-                        $('#table-result-11').html(0);
-                        $('#table-result-12').html(0);
-                        $('#table-result-13').html(0);
-
-                       // document.getElementById('book-now').disabled = true;
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        document.getElementById('book-now').disabled = true;
 
                     }
 
-                    if(iRoom > 0) {
+                    if(iRoom > 0 && nGuess <= (iRoom*3) && nGuess > 0) {
+                        console.log("vao iromm >=");
+                        console.log(iGuest);
                         document.getElementById('book-now').disabled = false;
                         $('#table-result-11').html(iRoom);
                         $('#table-result-12').html(iGuest);
@@ -1821,6 +1951,8 @@
                         $('#table-21').val(iRoom);
                         $('#table-22').val(iGuest);
                         $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
 
                         var iTotal = 0;
                         for (var j = 1; j <= amount; j++) {
@@ -3069,8 +3201,7 @@
                         <td>
                             <!--gia tri cua select co the tuy` thuoc vao thong bao' con` bao nhieu phong` tai trang search-hotels-->
 
-                            <input type="number" class="form-control" value="0"  id="slt-rooms" style="margin-top: -5px;width: 63px;
-">
+                            <input type="number" class="form-control" value="0"  id="slt-rooms" style="margin-top: -5px;width: 63px;">
                         </td>
                     </tr>
                 </table>
@@ -3087,13 +3218,14 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
-                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+<!--                            <input type="number" class="form-control" value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>-->
+                            <input type="number"  value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
                         <td><input id="price" readonly th:value="${roomDetail.getPricePerNight()}" /></td>
-                        <td class="row-total"> <span id="priceTotal"  style="font-weight: bold">1</span></td>
+                        <td class="row-total">
+                            <span id="priceTotal"  style="font-weight: bold">1</span>
+                        </td>
                     </tr>
 
 
@@ -3108,7 +3240,7 @@
                             <span id="table-result-12" style="font-weight: bold">0</span> Khách &
                             <span id="table-result-13" style="font-weight: bold; text-decoration: underline">0</span><u>
                             Đêm</u>
-                            <span id="table-result-2" style="font-weight: bold; font-size: 25px;margin-left: 75px" >
+                            <span id="table-result-2" style="font-weight: bold; font-size: 25px;margin-left: 55px" >
                              <sup>0<u>đ</u></sup>
                             </span>
                         </td>
