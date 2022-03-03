@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow2/engine1/style.css"/>
     <script type="text/javascript" src="../Utilities/slideshow/slideshow2/engine1/jquery.js"></script>
     <!-- End WOWSlider.com HEAD section -->
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
     </style>
     <style>
@@ -1779,7 +1779,17 @@
 //                $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
                     var prize = document.getElementById('price').value;
                     var total = prize*iRoom;
-                    $('#table-result-11').html(iRoom);
+                    if(iRoom < 0){
+                        swal({
+                            title: "Number of room incorrect!",
+                            text: "You need to try again enter number of room!",
+                            icon: "warning",
+                            button: "OK",
+                        });
+                    }else {
+                        $('#table-result-11').html(iRoom);
+                    }
+
                     $('#table-result-12').html(iGuest);
                     $('#table-result-13').html(GetDays());
                     //document.getElementById('priceTotal').innerHTML = 1234;
@@ -3162,7 +3172,7 @@
 
 
 
-                <form th:action="@{/saveBooking}" method="get">
+                <form th:action="@{/saveBooking}" method="get" onsubmit="return submitForm(this);">
                     <input id="right-aboutHotel-checkin" name="checkin" hidden />
                     <input id="right-aboutHotel-checkout" name="checkout" hidden />
                     <input id="table-21" name="numberOfRoom" hidden />
@@ -3266,6 +3276,40 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function submitForm(form){
+            swal({
+                title:"Are you sure?",
+                text:"This form will be submitted",
+                icon:"warning",
+                buttons:true,
+                dangerMode:true,
+            })
+            .then((isOkey) => {
+                if(isOkey) {
+                    swal({
+                        title: "Good job!",
+                        text: "You have successfully booked your hotel room !",
+                        icon: "success",
+                        buttons:true,
+                        dangerMode:true,
+                    })
+                        .then((isOkey) => {
+                            if(isOkey) {
+                                form.submit();
+                            }else {
+                                form.submit();
+                            }
+
+                        });
+
+                }
+
+            });
+            return false;
+        }
+    </script>
 
     <!--JavaScript-->
     <script src="../../static/js/room-bookings.js"></script>

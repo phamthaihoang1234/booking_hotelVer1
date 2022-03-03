@@ -54,7 +54,7 @@ public class HotelDetailDController {
         System.out.println(name);
         System.out.println(phone);
         System.out.println(email);
-        return "redirect:/getRoomsHotelDetail";
+        return "redirect:/";
     }
 
     @PostMapping("/getRoomsHotelDetail")
