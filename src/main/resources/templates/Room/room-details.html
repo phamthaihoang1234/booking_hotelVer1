@@ -1779,11 +1779,13 @@
 //                $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
                     var prize = document.getElementById('price').value;
                     var total = prize*iRoom;
-                    $('#table-result-11').html(total);
+                    $('#table-result-11').html(iRoom);
                     $('#table-result-12').html(iGuest);
                     $('#table-result-13').html(GetDays());
                     //document.getElementById('priceTotal').innerHTML = 1234;
-                    $('#priceTotal').html(total);
+                    //$('#room-row1 #priceTotal').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'));
+                   // $('#table-result-2').html(total);
+
                     console.log(prize);
                     console.log(total);
                     //ho tro khi click DAT PHONG
@@ -1791,6 +1793,7 @@
                     $('#table-result-22').html(iGuest);
                     $('#table-21').val(iRoom);
                     $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
 
                     var iTotal = 0;
                     for (var j = 1; j <= amount; j++) {
@@ -1802,8 +1805,8 @@
                     iTotal *= GetDays();
 
 //          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
-                    $('#table-result-2').html(iTotal.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
-                    $('#tien-thanhtoan').html(iTotal.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                 }
             });
 
@@ -3053,7 +3056,7 @@
                             <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
-                        <td><input id="price" readonly th:value="${roomDetail.getPricePerNight()}"></input></td>
+                        <td><input id="price" readonly th:value="${roomDetail.getPricePerNight()}" /></td>
                         <td class="row-total"> <span id="priceTotal" style="font-weight: bold">1</span></td>
                     </tr>
 
@@ -3069,11 +3072,14 @@
                             <span id="table-result-12" style="font-weight: bold">1</span> Khách &
                             <span id="table-result-13" style="font-weight: bold; text-decoration: underline">1</span><u>
                             Đêm</u>
+                            <span id="table-result-2" style="font-weight: bold; font-size: 25px;margin-left: 75px">
+                             <sup><u>đ</u></sup>
+                            </span>
                         </td>
                         <td rowspan="2" style="text-align: right">
-                            <span id="table-result-2" style="font-weight: bold; font-size: 25px">
-                            1.500.000 <sup><u>đ</u></sup>
-                            </span>
+<!--                            <span id="table-result-2" style="font-weight: bold; font-size: 25px">-->
+<!--                            1.500.000 <sup><u>đ</u></sup>-->
+<!--                            </span>-->
                         </td>
                     </tr>
                     <tr>
@@ -3188,7 +3194,7 @@
                             </td>
                             <td id="tien-thanhtoan"
                                 style="text-align: right; width: 50%; font-weight: bold; font-size: 25px">
-                                1.500.000 <sup><u>đ</u></sup>
+                                 <sup><u>đ</u></sup>
                             </td>
                         </tr>
                     </table>
