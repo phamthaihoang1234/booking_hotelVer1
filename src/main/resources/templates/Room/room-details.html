@@ -1778,45 +1778,65 @@
 //                dung` val() ko dung khi thay doi so' luong room' (chi dung' cho nut' minus, plus)
 //                $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
                     var prize = document.getElementById('price').value;
-                    var total = prize*iRoom;
+                   var total ;
+                    total = prize*iRoom;
+                    console.log(iRoom);
+                    if(iRoom == 0){
+                        console.log("vao iRoom =0");
+                        document.getElementById('book-now').disabled = true;
+                        $('#table-result-11').html(0);
+                        $('#table-result-12').html(0);
+                        $('#table-result-13').html(0);
+                    }
                     if(iRoom < 0){
+                        console.log("vao iRoom  <0");
                         swal({
                             title: "Number of room incorrect!",
                             text: "You need to try again enter number of room!",
                             icon: "warning",
                             button: "OK",
                         });
-                    }else {
+                        $('#table-result-11').html(0);
+                        $('#table-result-12').html(0);
+                        $('#table-result-13').html(0);
+
+                       // document.getElementById('book-now').disabled = true;
+
+                    }
+
+                    if(iRoom > 0) {
+                        document.getElementById('book-now').disabled = false;
                         $('#table-result-11').html(iRoom);
-                    }
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        //document.getElementById('priceTotal').innerHTML = 1234;
+                        //$('#room-row1 #priceTotal').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'));
+                        // $('#table-result-2').html(total);
 
-                    $('#table-result-12').html(iGuest);
-                    $('#table-result-13').html(GetDays());
-                    //document.getElementById('priceTotal').innerHTML = 1234;
-                    //$('#room-row1 #priceTotal').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'));
-                   // $('#table-result-2').html(total);
+                        console.log(prize);
+                        console.log(total);
+                        //ho tro khi click DAT PHONG
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
 
-                    console.log(prize);
-                    console.log(total);
-                    //ho tro khi click DAT PHONG
-                    $('#table-result-21').html(iRoom);
-                    $('#table-result-22').html(iGuest);
-                    $('#table-21').val(iRoom);
-                    $('#table-22').val(iGuest);
-                    $('#tien-thanhtoan').val(total);
-
-                    var iTotal = 0;
-                    for (var j = 1; j <= amount; j++) {
+                        var iTotal = 0;
+                        for (var j = 1; j <= amount; j++) {
 //                  http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
-                        var replaceDot = $('#room-row' + j).find('.row-total').text().replace(/\./g, "");
-                        iTotal = iTotal + parseInt(replaceDot);
-                    }
+                            var replaceDot = $('#room-row' + j).find('.row-total').text().replace(/\./g, "");
+                            iTotal = iTotal + parseInt(replaceDot);
+                        }
 
-                    iTotal *= GetDays();
+                        iTotal *= GetDays();
 
 //          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
-                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
-                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    }
+
+
                 }
             });
 
@@ -3049,7 +3069,7 @@
                         <td>
                             <!--gia tri cua select co the tuy` thuoc vao thong bao' con` bao nhieu phong` tai trang search-hotels-->
 
-                            <input type="number" class="form-control" id="slt-rooms" style="margin-top: -5px;width: 63px;
+                            <input type="number" class="form-control" value="0"  id="slt-rooms" style="margin-top: -5px;width: 63px;
 ">
                         </td>
                     </tr>
@@ -3073,7 +3093,7 @@
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
                         <td><input id="price" readonly th:value="${roomDetail.getPricePerNight()}" /></td>
-                        <td class="row-total"> <span id="priceTotal" style="font-weight: bold">1</span></td>
+                        <td class="row-total"> <span id="priceTotal"  style="font-weight: bold">1</span></td>
                     </tr>
 
 
@@ -3084,12 +3104,12 @@
 
                         <td id="table-result-1">
                             Tổng số
-                            <span id="table-result-11" style="font-weight: bold">1</span> Phòng,
-                            <span id="table-result-12" style="font-weight: bold">1</span> Khách &
-                            <span id="table-result-13" style="font-weight: bold; text-decoration: underline">1</span><u>
+                            <span id="table-result-11" style="font-weight: bold">0</span> Phòng,
+                            <span id="table-result-12" style="font-weight: bold">0</span> Khách &
+                            <span id="table-result-13" style="font-weight: bold; text-decoration: underline">0</span><u>
                             Đêm</u>
-                            <span id="table-result-2" style="font-weight: bold; font-size: 25px;margin-left: 75px">
-                             <sup><u>đ</u></sup>
+                            <span id="table-result-2" style="font-weight: bold; font-size: 25px;margin-left: 75px" >
+                             <sup>0<u>đ</u></sup>
                             </span>
                         </td>
                         <td rowspan="2" style="text-align: right">
@@ -3138,7 +3158,7 @@
 
                 <!--them div de cai` text-align: center-->
                 <div style="text-align: center; margin-top: 10px;">
-                    <input id="book-now" type="button" class="btn mybtn-style1" value="ĐẶT PHÒNG">
+                    <input id="book-now" type="button" disabled class="btn mybtn-style1"  value="ĐẶT PHÒNG">
                 </div>
 
                 <div style="width: 100%; text-align: center; margin-top: 10px">
