@@ -1910,7 +1910,13 @@
                         return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                     }
                 }
-
+                var tRoom = document.getElementById('slt-rooms').value;
+                var price = document.getElementById('price').value;
+                var total = tRoom*price;
+                $('#tien-thanhtoan').val(total);
+                console.log(tRoom);
+                console.log(price);
+                console.log(total);
                 //nhom nay` co viet o su* kien change Room
                 $('#table-result-13').html(GetDays2());
 
@@ -1926,8 +1932,8 @@
                 iTotal *= GetDays2();
 
 //          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
-                $('#table-result-2').html(iTotal.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
-                $('#tien-thanhtoan').html(iTotal.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
             });
         });
 
