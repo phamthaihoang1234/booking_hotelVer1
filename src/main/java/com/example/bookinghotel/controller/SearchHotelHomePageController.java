@@ -69,7 +69,7 @@ public class SearchHotelHomePageController {
         if(hotel.isPresent()){
             if(preview_value==0){
             boolean checkValidateDateAndBed = checkValidateDateAndBed(start_date,end_date,number_of_people,hotel.get());
-            if(checkValidateDateAndBed == true)ans = hotel.get().getId()+"";
+            if(checkValidateDateAndBed == true) ans = hotel.get().getId()+"";
             else ans = "error";
             }else{
                 ans = hotel.get().getId()+"";
