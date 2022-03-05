@@ -64,6 +64,11 @@ public class SearchHotelHomePageController {
                                     @RequestParam("number_of_people")int number_of_people,
                                     @RequestParam("preview_value") int preview_value,
                                     HttpServletResponse response){
+//        System.out.println(hotel_name);
+//        System.out.println(start_date);
+//        System.out.println(end_date);
+//        System.out.println(number_of_people);
+
         String ans = "error";
         Optional<Hotel> hotel =  hotelService.findHotelByName(hotel_name);
         if(hotel.isPresent()){

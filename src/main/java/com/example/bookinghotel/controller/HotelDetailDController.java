@@ -2,6 +2,7 @@ package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.*;
 import com.example.bookinghotel.repositories.PropertyTypeRepository;
+import com.example.bookinghotel.services.HomeService;
 import com.example.bookinghotel.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -22,6 +26,11 @@ public class HotelDetailDController {
     HotelService hotelService;
     @Autowired
     PropertyTypeRepository propertyTypeRepository;
+
+    @Autowired
+    HomeService homeService;
+
+
 
 
 
@@ -91,6 +100,29 @@ public class HotelDetailDController {
 
         return mv;
 
+    }
+
+    @PostMapping("/checkAvailableHotelByDate")
+    public void checkAvailableHotelByDate(@RequestParam("room_id")String room_id,
+                                    @RequestParam("start_date")String start_date,
+                                    @RequestParam("end_date")String end_date,
+                                          HttpServletResponse response){
+        System.out.println("id cua room la" + room_id);
+        System.out.println("start date " + start_date);
+        System.out.println("end date" + end_date);
+        String ans = "";
+        Room room = homeService.findById(Long.valueOf(room_id)).get();
+       RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),start_date,end_date,1,room.getPropertyType());
+       if(roomGroup == null){
+           System.out.println("deo tim thay khach san");
+           ans = "error";
+       }
+
+        try (PrintWriter out = response.getWriter()) {
+            out.write(ans);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // co the return null neu hotel_id sai

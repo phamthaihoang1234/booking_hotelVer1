@@ -9,6 +9,7 @@
     <!-- Online -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Offline -->
     <link rel="stylesheet" href="../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
@@ -20,6 +21,9 @@
     <script type="text/javascript" src="../Utilities/slideshow/slideshow2/engine1/jquery.js"></script>
     <!-- End WOWSlider.com HEAD section -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <style>
     </style>
     <style>
@@ -1714,16 +1718,24 @@
                 function GetDays() {
                     var check_in = new Date(document.getElementById("date1").value);
                     var check_out = new Date(document.getElementById("date2").value);
-
+                    console.log(document.getElementById("date1").value);
                     if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
                         //alert('Nhận phòng & Trả phòng không hợp lệ');
                         //ko can show tooltip, da cai day du tai nut DAT PHONG
-                        return 1;
+                        console.log(check_in);
+                        console.log(check_in.getMonth());
+                        console.log(check_in.getDate());
+                        console.log(check_in.getDay());
+
+                        return -1;
                     } else if (check_out < check_in) {
                         //xay ra sau cung` (ko nhap chung voi If thu' nhat')
                         $('.validation-advice').fadeIn();
-                        return 1;
+                        return -1;
                     } else {
+                        //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                        console.log("vao tinh ngay");
+                        console.log(check_in);
                         return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                     }
                 }
@@ -1754,7 +1766,7 @@
                 if(iGuest <= 0) iGuest = 0;
                 if(nRoom <= 0) nRoom = 0;
 
-                if(iGuest >0 && nRoom > 0 && iGuest <= (nRoom*3)){
+                if(iGuest >0 && nRoom > 0 && iGuest <= (nRoom*3)  && check == 1 && GetDays() != -1){
                     document.getElementById('book-now').disabled = false;
                 }
 
@@ -1769,6 +1781,89 @@
                 $('#table-result-2').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                 $('#tien-thanhtoan').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
             });
+        });
+
+        var check = 0;
+
+        $(document).ready(function () {
+           $('#date1 ,#date2').change(function (){
+               console.log("vao date1, date2");
+               let token = $("meta[name='_csrf']").attr("content");
+               let header = $("meta[name='_csrf_header']").attr("content");
+               $(document).ajaxSend(function (e, xhr, options) {
+                   xhr.setRequestHeader(header, token);
+               });
+
+               function GetDays() {
+                   var check_in = new Date(document.getElementById("date1").value);
+                   var check_out = new Date(document.getElementById("date2").value);
+                   console.log(document.getElementById("date1").value);
+                   if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                       return -1;
+                   } else if (check_out < check_in) {
+                       //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                       $('.validation-advice').fadeIn();
+                       return -1;
+                   } else {
+                       return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                   }
+               }
+               //if(GetDays() == -1) document.getElementById('book-now').disabled = true;
+
+
+               var date1 = document.getElementById('date1').value;
+               var date2 = document.getElementById("date2").value;
+                console.log(date1);
+                console.log(date2);
+               if(date1 != '' && date2 != '' && GetDays() != -1){
+
+                   $.ajax({
+                       url: '/checkAvailableHotelByDate',
+                       type: 'post',
+                       data: {
+                           'room_id': document.getElementById('roomId').value,
+                           // 'start_date': "2022-03-03",
+                           // 'end_date': "2022-03-07"
+                           'start_date': document.getElementById("date1").value,
+                           'end_date': document.getElementById("date2").value
+
+                       },
+                       dataType: "text",
+                       success: function (data) {
+
+                           if (data == 'error') {
+                               swal({
+                                   title: "SORRY!",
+                                   text: "The hotel has sold out of rooms for the period you have selected!",
+                                   icon: "warning",
+                                   button: "OK",
+                               });
+                               // $('#right-aboutHotel-1').fadeOut();
+                               $('#right-aboutHotel-1').fadeIn();
+                               $('#right-aboutHotel-2').fadeOut();
+                               //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
+                               // $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
+                               // $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
+                               // $('#right-aboutHotel-checkin').val(check_in.toLocaleDateString());
+                               // $('#right-aboutHotel-checkout').val(check_out.toLocaleDateString());
+                               // lam` mo` div, se fadeOut tai #book-now-2 click
+                               //$('.tmp-left-aboutHotel').fadeIn();
+
+                               document.getElementById('book-now').disabled = true;
+                           }else {
+                               check =1;
+                               if(GetDays() != -1) document.getElementById('book-now').disabled = false;
+
+                           }
+                       },
+                       error: function (request, error) {
+                           alert("Request: " + JSON.stringify(request));
+                       }
+                   });
+               }
+
+
+           }) ;
         });
 
         $(document).ready(function () {
@@ -1837,12 +1932,15 @@
                         if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
                             //alert('Nhận phòng & Trả phòng không hợp lệ');
                             //ko can show tooltip, da cai day du tai nut DAT PHONG
-                            return 1;
+                            console.log("vao null");
+                            return -1;
                         } else if (check_out < check_in) {
                             //xay ra sau cung` (ko nhap chung voi If thu' nhat')
                             $('.validation-advice').fadeIn();
-                            return 1;
+                            return -1;
                         } else {
+                            console.log("vao tinh ngay");
+                            console.log(parseInt((check_out - check_in) / (24 * 3600 * 1000)));
                             return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                         }
                     }
@@ -1862,11 +1960,15 @@
                     console.log(iGuest);
                     console.log(total);
 
+
+
+
+
                     if(iGuest == 0){
                         document.getElementById('book-now').disabled = true;
                         $('#table-result-11').html(iRoom);
                         $('#table-result-12').html(iGuest);
-                        $('#table-result-13').html(GetDays());
+                       // $('#table-result-13').html(GetDays());
                         $('#table-result-21').html(iRoom);
                         $('#table-result-22').html(iGuest);
                         $('#table-21').val(iRoom);
@@ -1932,7 +2034,7 @@
 
                     }
 
-                    if(iRoom > 0 && nGuess <= (iRoom*3) && nGuess > 0) {
+                    if(iRoom > 0 && nGuess <= (iRoom*3) && nGuess > 0 && check == 1 && GetDays() != -1) {
                         console.log("vao iromm >=");
                         console.log(iGuest);
                         document.getElementById('book-now').disabled = false;
@@ -2144,7 +2246,8 @@
                 } else {
                     //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                     $('#right-aboutHotel-1').fadeOut();
-                    $('#right-aboutHotel-2').fadeIn();
+                   // $('#right-aboutHotel-1').fadeIn();
+                  $('#right-aboutHotel-2').fadeIn();
                     //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
                     $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
                     $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
@@ -2772,39 +2875,7 @@
                         <th:block th:each="image:${roomImage}">
                         <li><img th:src="@{${image.getImageUrl()}}" /></li>
                         </th:block>
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room02.jpg" alt="room02"-->
-<!--                                 title="room02" id="wows1_1"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room03.jpg" alt="room03"-->
-<!--                                 title="room03" id="wows1_2"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room04.jpg" alt="room04"-->
-<!--                                 title="room04" id="wows1_3"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang01.jpg" alt="hanhlang01"-->
-<!--                                 title="hanhlang01" id="wows1_4"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang02.jpg" alt="hanhlang02"-->
-<!--                                 title="hanhlang02" id="wows1_5"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang01.jpg" alt="nhahang01"-->
-<!--                                 title="nhahang01" id="wows1_6"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang02.jpg" alt="nhahang02"-->
-<!--                                 title="nhahang02" id="wows1_7"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/beboi.jpg" alt="beboi"-->
-<!--                                 title="beboi" id="wows1_8"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/phongtapthehinh.jpg"-->
-<!--                                 alt="phongtapthehinh" title="phongtapthehinh" id="wows1_9"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa01.jpg" alt="Spa01"-->
-<!--                                 title="Spa01" id="wows1_10"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa02.jpg" alt="Spa02"-->
-<!--                                 title="Spa02" id="wows1_11"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa03.jpg" alt="Spa03"-->
-<!--                                 title="Spa03" id="wows1_12"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa04.jpg" alt="Spa04"-->
-<!--                                 title="Spa04" id="wows1_13"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/barpub01.jpg" alt="Bar-Pub01"-->
-<!--                                 title="Bar-Pub01" id="wows1_14"/></li>-->
-<!--                        <li><a href="http://wowslider.com"><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/images/barpub02.jpg"-->
-<!--                                alt="http://wowslider.com/" title="Bar-Pub02" id="wows1_15"/></a></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/publounge.jpg" alt="Pub-Lounge"-->
-<!--                                 title="Pub-Lounge" id="wows1_16"/></li>-->
+
                     </ul>
                 </div>
 
@@ -2812,56 +2883,6 @@
 
 
 
-<!--                <div class="ws_bullets">-->
-<!--                    <div>-->
-<!--                        <a href="#wows1_0" title="room01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room01.jpg" alt="room01"/>1</span></a>-->
-<!--                        <a href="#wows1_1" title="room02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room02.jpg" alt="room02"/>2</span></a>-->
-<!--                        <a href="#wows1_2" title="room03"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room03.jpg" alt="room03"/>3</span></a>-->
-<!--                        <a href="#wows1_3" title="room04"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room04.jpg" alt="room04"/>4</span></a>-->
-<!--                        <a href="#wows1_4" title="hanhlang01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang01.jpg" alt="hanhlang01"/>5</span></a>-->
-<!--                        <a href="#wows1_5" title="hanhlang02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang02.jpg" alt="hanhlang02"/>6</span></a>-->
-<!--                        <a href="#wows1_6" title="nhahang01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang01.jpg" alt="nhahang01"/>7</span></a>-->
-<!--                        <a href="#wows1_7" title="nhahang02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang02.jpg" alt="nhahang02"/>8</span></a>-->
-<!--                        <a href="#wows1_8" title="beboi"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/beboi.jpg"-->
-<!--                                alt="beboi"/>9</span></a>-->
-<!--                        <a href="#wows1_9" title="phongtapthehinh"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/phongtapthehinh.jpg"-->
-<!--                                alt="phongtapthehinh"/>10</span></a>-->
-<!--                        <a href="#wows1_10" title="Spa01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa01.jpg" alt="Spa01"/>11</span></a>-->
-<!--                        <a href="#wows1_11" title="Spa02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa02.jpg" alt="Spa02"/>12</span></a>-->
-<!--                        <a href="#wows1_12" title="Spa03"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa03.jpg" alt="Spa03"/>13</span></a>-->
-<!--                        <a href="#wows1_13" title="Spa04"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa04.jpg" alt="Spa04"/>14</span></a>-->
-<!--                        <a href="#wows1_14" title="Bar-Pub01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub01.jpg" alt="Bar-Pub01"/>15</span></a>-->
-<!--                        <a href="#wows1_15" title="Bar-Pub02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub02.jpg" alt="Bar-Pub02"/>16</span></a>-->
-<!--                        <a href="#wows1_16" title="Pub-Lounge"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/publounge.jpg" alt="Pub-Lounge"/>17</span></a>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-
-
-<!--                <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com/vi">slider</a>-->
-<!--                    by WOWSlider.com v8.6-->
-<!--                </div>-->
-
-
-
-<!--                <div class="ws_shadow"></div>-->
             </div>
 
 
@@ -2896,81 +2917,7 @@
                             </ul>
 
                             <div class="tab-content">
-<!--                                <div id="home" class="tab-pane fade in active">-->
-<!--                                    <br/>-->
-<!--                                    <table class="table borderless">-->
-<!--                                        <tr>-->
-<!--                                            <td>Bảo tàng Chăm</td>-->
-<!--                                            <td>0.1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Sông Hàn</td>-->
-<!--                                            <td>0.1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Các bãi biển</td>-->
-<!--                                            <td>2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Bán đảo Sơn Trà</td>-->
-<!--                                            <td>3.2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Núi Bà Nà</td>-->
-<!--                                            <td>9 Km</td>-->
-<!--                                        </tr>-->
-<!--                                    </table>-->
-<!--                                </div>-->
-<!--                                <div id="menu1" class="tab-pane fade">-->
-<!--                                    <br/>-->
-<!--                                    <table class="table borderless">-->
-<!--                                        <tr>-->
-<!--                                            <td>Apsara Restaurant</td>-->
-<!--                                            <td>0.3 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Café Trà Cung Đình</td>-->
-<!--                                            <td>0.5 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Trúc Lâm Viên</td>-->
-<!--                                            <td>2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Nhà hàng Bia Tiệp Tulip</td>-->
-<!--                                            <td>2.5 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Nhà hàng Estasy</td>-->
-<!--                                            <td>1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                    </table>-->
-<!--                                </div>-->
-<!--                                <div id="menu2" class="tab-pane fade">-->
-<!--                                    <br/>-->
-<!--                                    <table class="table borderless">-->
-<!--                                        <tr>-->
-<!--                                            <td>Chợ Hàn</td>-->
-<!--                                            <td>0.4 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Chợ Cồn</td>-->
-<!--                                            <td>1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Siêu thị Big C</td>-->
-<!--                                            <td>1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Trung tâm thương mại Vincom</td>-->
-<!--                                            <td>2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Lotte Mart</td>-->
-<!--                                            <td>2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                    </table>-->
-<!--                                </div>-->
+
                             </div>
                         </div>
                     </div>
@@ -3223,6 +3170,7 @@
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
                         <td><input id="price" readonly th:value="${roomDetail.getPricePerNight()}" /></td>
+                        <td><input id="roomId" readonly th:value="${roomDetail.getId()}" hidden /></td>
                         <td class="row-total">
                             <span id="priceTotal"  style="font-weight: bold">1</span>
                         </td>
