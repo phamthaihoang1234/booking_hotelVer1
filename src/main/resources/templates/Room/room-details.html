@@ -1852,7 +1852,7 @@
                                document.getElementById('book-now').disabled = true;
                            }else {
                                check =1;
-                               if(GetDays() != -1) document.getElementById('book-now').disabled = false;
+                               if(GetDays() != -1 && nRoom > 0 && nGuess <= (nRoom*3) && nGuess > 0) document.getElementById('book-now').disabled = false;
 
                            }
                        },
