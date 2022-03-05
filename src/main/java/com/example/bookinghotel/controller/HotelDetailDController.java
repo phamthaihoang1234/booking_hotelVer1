@@ -80,13 +80,6 @@ public class HotelDetailDController {
         if (find_hotel.isPresent()) {
             hotel = find_hotel.get();
             List<Room> rooms = hotel.getRooms();
-//            if (rooms != null) {
-//                rooms = sortByPrice(rooms, "ASC");
-//
-//                rooms = filterByDateBookingAndNumberOfPeople(rooms, start_date, end_date, number_of_people);
-//                mv.addObject("rooms", rooms);
-//
-//            }
             if(rooms!=null){
                 List<RoomGroup> roomGroups = getAllFilteredRoomGroup(hotel.getId()
                         ,start_date,end_date,number_of_people);
@@ -113,9 +106,8 @@ public class HotelDetailDController {
         String ans = "";
         Room room = homeService.findById(Long.valueOf(room_id)).get();
        RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),start_date,end_date,1,room.getPropertyType());
-       if(roomGroup == null){
-           System.out.println("deo tim thay khach san");
-           ans = "error";
+       if(roomGroup != null){
+           ans = String.valueOf(roomGroup.getEmpty_rooms().size());
        }
 
         try (PrintWriter out = response.getWriter()) {

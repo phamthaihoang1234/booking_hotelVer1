@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
 </head>
 <body>
 <section class="accomodation_area section_gap">
@@ -15,29 +14,19 @@
         <th:block th:if="${roomGroups}">
             <th:block th:each="group,state:${roomGroups}">
                 <th:block th:if="${state.index}%4==0" th:utext="'&lt;div class=&#34;row mb_30&#34;&gt;'" />
-
-
-
-
                 <div class="col-lg-3 col-sm-6">
-
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
                             <img src="/image/hotel_detail/room1.jpg" alt="">
                             <a th:href="'roomDetails'+${group.getSpecificRoom().getId()}" class="btn theme_btn button_hover">View Detail</a>
                         </div>
                         <a href="#"><h4 class="sec_h4" th:text="${group.getSpecificRoom().getPropertyType().getName()}"></h4><small th:text="'Phòng '+((${group.getSpecificRoom().getTotalOfBedroom()}==4)?'Gia đình':(${group.getSpecificRoom().getTotalOfBedroom()}+' người'))+'(còn '+${group.getEmpty_rooms().size()}+' phòng trống)'"></small></a>
-
                         <h5><span th:text="${group.getSpecificRoom().getPricePerNight()}"></span><span>Vnd</span><small>/Day</small></h5>
                     </div>
                 </div>
                 <th:block th:if="${state.index}%4==3" th:utext="'&lt;/div&gt;'" />
             </th:block>
-
-
-
         </th:block>
-
         <th:block th:unless="${roomGroups}">
             <div>Hiện tại không còn phòng để phục vụ quý khách</div>
         </th:block>

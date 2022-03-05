@@ -1708,9 +1708,126 @@
         var nRoom =0;
         var nGuess = 0;
         var totalL = 0;
+        //
+        // var date1 = new Date(document.getElementById("date1").value);
+        // var date2 = new Date(document.getElementById("date2").value);
+        // console.log(date1);
+        //
+        // if(date1 != '' && date2 != ''){
+        //     console.log("vao ajax");
+        //     $.ajax({
+        //         url: '/checkAvailableHotelByDate',
+        //         type: 'post',
+        //         data: {
+        //             'room_id': document.getElementById('roomId').value,
+        //             // 'start_date': "2022-03-03",
+        //             // 'end_date': "2022-03-07"
+        //             'start_date': document.getElementById("date1").value,
+        //             'end_date': document.getElementById("date2").value
+        //
+        //         },
+        //         dataType: "text",
+        //         success: function (data) {
+        //             numberRoomEmpty = data;
+        //             document.getElementById('roomEmpty').innerText = "We have "+ data + " rooms left";
+        //             if (data == 0) {
+        //                 swal({
+        //                     title: "SORRY!",
+        //                     text: "The hotel has sold out of rooms for the period you have selected!",
+        //                     icon: "warning",
+        //                     button: "OK",
+        //                 });
+        //                 // $('#right-aboutHotel-1').fadeOut();
+        //                 $('#right-aboutHotel-1').fadeIn();
+        //                 $('#right-aboutHotel-2').fadeOut();
+        //                 //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
+        //                 // $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
+        //                 // $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
+        //                 // $('#right-aboutHotel-checkin').val(check_in.toLocaleDateString());
+        //                 // $('#right-aboutHotel-checkout').val(check_out.toLocaleDateString());
+        //                 // lam` mo` div, se fadeOut tai #book-now-2 click
+        //                 //$('.tmp-left-aboutHotel').fadeIn();
+        //
+        //                 document.getElementById('book-now').disabled = true;
+        //             }else {
+        //                 check =1;
+        //                 if(GetDays() != -1 && nRoom > 0 && nGuess <= (nRoom*3) && nGuess > 0) document.getElementById('book-now').disabled = false;
+        //
+        //             }
+        //         },
+        //         error: function (request, error) {
+        //             alert("Request: " + JSON.stringify(request));
+        //         }
+        //     });
+        // }
+
+        window.onload = function exampleFunction() {
+            // document.getElementById('slt-rooms').hidden = true;
+            var date1 = new Date(document.getElementById("date1").value);
+            var date2 = new Date(document.getElementById("date2").value);
+            console.log(date1);
+
+            if(date1 != '' && date2 != ''){
+                let token = $("meta[name='_csrf']").attr("content");
+                let header = $("meta[name='_csrf_header']").attr("content");
+                $(document).ajaxSend(function (e, xhr, options) {
+                    xhr.setRequestHeader(header, token);
+                });
+                console.log("vao ajax");
+                $.ajax({
+                    url: '/checkAvailableHotelByDate',
+                    type: 'post',
+                    data: {
+                        'room_id': document.getElementById('roomId').value,
+                        // 'start_date': "2022-03-03",
+                        // 'end_date': "2022-03-07"
+                        'start_date': document.getElementById("date1").value,
+                        'end_date': document.getElementById("date2").value
+
+                    },
+                    dataType: "text",
+                    success: function (data) {
+                        numberRoomEmpty = data;
+                        document.getElementById('roomEmpty').innerText = "We have "+ data + " rooms left";
+                        if (data == 0) {
+                            swal({
+                                title: "SORRY!",
+                                text: "The hotel has sold out of rooms for the period you have selected!",
+                                icon: "warning",
+                                button: "OK",
+                            });
+                            // $('#right-aboutHotel-1').fadeOut();
+                            $('#right-aboutHotel-1').fadeIn();
+                            $('#right-aboutHotel-2').fadeOut();
+                            //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
+                            // $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
+                            // $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
+                            // $('#right-aboutHotel-checkin').val(check_in.toLocaleDateString());
+                            // $('#right-aboutHotel-checkout').val(check_out.toLocaleDateString());
+                            // lam` mo` div, se fadeOut tai #book-now-2 click
+                            //$('.tmp-left-aboutHotel').fadeIn();
+
+                            document.getElementById('book-now').disabled = true;
+                        }else {
+                            check =1;
+                            if(GetDays() != -1 && nRoom > 0 && nGuess <= (nRoom*3) && nGuess > 0) document.getElementById('book-now').disabled = false;
+
+                        }
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+            }
+        }
+
+
+
 
         $(document).ready(function (){
             $('#numberGuess').change(function (){
+
+
 
                 var iGuest = 0;
                 iGuest = document.getElementById('numberGuess').value;
@@ -1784,7 +1901,7 @@
         });
 
         var check = 0;
-
+        var numberRoomEmpty = 0;
         $(document).ready(function () {
            $('#date1 ,#date2').change(function (){
                console.log("vao date1, date2");
@@ -1830,8 +1947,9 @@
                        },
                        dataType: "text",
                        success: function (data) {
-
-                           if (data == 'error') {
+                           numberRoomEmpty = data;
+                           document.getElementById('roomEmpty').innerText = "We have "+ data + " rooms left";
+                           if (data == 0) {
                                swal({
                                    title: "SORRY!",
                                    text: "The hotel has sold out of rooms for the period you have selected!",
@@ -1963,7 +2081,6 @@
 
 
 
-
                     if(iGuest == 0){
                         document.getElementById('book-now').disabled = true;
                         $('#table-result-11').html(iRoom);
@@ -2011,6 +2128,27 @@
                         $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                         document.getElementById('book-now').disabled = true;
                     }
+                    if(iRoom > numberRoomEmpty){
+                        swal({
+                            title: "INVALID!",
+                            text: "Number of room is invalid!",
+                            icon: "warning",
+                            button: "OK",
+                        });
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        //document.getElementById('slt-rooms').disabled = true;
+                        document.getElementById('book-now').disabled = true;
+                     }
+
                     if(iRoom < 0){
                         console.log("vao iRoom  <0");
                         iRoom = 0;
@@ -2034,7 +2172,7 @@
 
                     }
 
-                    if(iRoom > 0 && nGuess <= (iRoom*3) && nGuess > 0 && check == 1 && GetDays() != -1) {
+                    if(iRoom > 0 && nGuess <= (iRoom*3) && nGuess > 0 && check == 1 && GetDays() != -1 && iRoom <= numberRoomEmpty) {
                         console.log("vao iromm >=");
                         console.log(iGuest);
                         document.getElementById('book-now').disabled = false;
@@ -3139,7 +3277,7 @@
                             <div id="tooltip2" class="validation-advice" style="display: none">Ngày trả phòng ko hợp lệ
                                 !
                             </div>
-                            <input type="date" class="form-control" id="date2" style="margin-top: -5px">
+                            <input type="date" class="form-control" id="date2" style="margin-top: -5px" >
                         </td>
                     </tr>
 
@@ -3148,7 +3286,7 @@
                         <td>
                             <!--gia tri cua select co the tuy` thuoc vao thong bao' con` bao nhieu phong` tai trang search-hotels-->
 
-                            <input type="number" class="form-control" value="0"  id="slt-rooms" style="margin-top: -5px;width: 63px;">
+                            <input type="number" class="form-control" value="0"   id="slt-rooms" style="margin-top: -5px;width: 63px;"  />
                         </td>
                     </tr>
                 </table>
@@ -3198,6 +3336,7 @@
 <!--                            </span>-->
                         </td>
                     </tr>
+                    <tr id="roomEmpty" style="font-weight: bold"></tr>
                     <tr>
                         <td><small>Bao gồm tất cả các loại thuế</small></td>
                     </tr>
@@ -3273,7 +3412,7 @@
 
 
                 <form th:action="@{/saveBooking}" method="get" onsubmit="return submitForm(this);">
-                    <input id="right-aboutHotel-checkin" name="checkin" hidden />
+                    <input id="right-aboutHotel-checkin"  name="checkin" hidden />
                     <input id="right-aboutHotel-checkout" name="checkout" hidden />
                     <input id="table-21" name="numberOfRoom" hidden />
                     <input id="table-22" hidden/>
