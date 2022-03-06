@@ -42,11 +42,13 @@ public class HotelReportController {
     @PostMapping("/saveReport")
     public String saveHotelReport(@ModelAttribute("report") Report report, RedirectAttributes redirect, Model model){
 
+        System.out.println("Room id :" + room_id);
         report.setEmail(report.getEmail());
         report.setMessage(report.getMessage());
         report.setName(report.getName());
         report.setHotel(roomService.findById(room_id).get().getHotel());
         report.setRoom(roomService.findById(room_id).get());
+
 
         reportService.save(report);
 

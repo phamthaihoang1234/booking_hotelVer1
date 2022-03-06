@@ -11,7 +11,7 @@ public class Report {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column
     private String name;
@@ -30,7 +30,7 @@ public class Report {
 
     }
 
-    public Report(int id, String name, String email, String message,Hotel hotel, Room room) {
+    public Report(Long id, String name, String email, String message,Hotel hotel, Room room) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -41,11 +41,11 @@ public class Report {
 
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
