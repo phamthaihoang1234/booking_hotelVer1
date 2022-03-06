@@ -36,7 +36,7 @@ public class RoomDetailsController {
         model.addAttribute("roomImage",roomImageRepository.listRoomImage(id));
 
         //lay ra link iframe gg map
-        model.addAttribute("iframe", "https://www.google.com/maps/embed?pb="+roomService.findById(id).get().getHotel().getIframe());
+        model.addAttribute("iframe", roomService.findById(id).get().getHotel().getIframe());
 
 
 

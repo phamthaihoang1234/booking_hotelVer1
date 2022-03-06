@@ -1776,7 +1776,7 @@
 
 //                chi thay doi so' cua cac ID chu' ko thay doi toan` bo (tranh' bi xoa' ID), ko the dung` rieng cho nut minus, plus
 //                dung` val() ko dung khi thay doi so' luong room' (chi dung' cho nut' minus, plus)
-//                $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
+               $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
                     $('#table-result-11').html(iRoom);
                     $('#table-result-12').html(iGuest);
                     $('#table-result-13').html(GetDays());
@@ -1787,7 +1787,7 @@
                     var iTotal = 0;
                     for (var j = 1; j <= amount; j++) {
 //                  http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
-                        var replaceDot = $('#room-row' + j).find('.row-total').text().replace(/\./g, "");
+                        var replaceDot = $('#room-row' + j).find('.row-total').text().replace(".0", "");
                         iTotal = iTotal + parseInt(replaceDot);
                     }
 
@@ -1806,7 +1806,7 @@
                 $('#mytable-th').fadeIn();
                 $('#table-result').fadeIn();
                 $('#room-row' + target).fadeIn();
-                var replaceDot = $('#room-row' + target).find('.row-total').text().replace(/\./g, "");
+                var replaceDot = $('#room-row' + target).find('.row-total').text().replace(".0", "");
                 $('#room-row' + target).find('.row-total').html(parseInt(replaceDot).toLocaleString('vn-VN'));
                 //
                 $('#extra-room').fadeOut(10);
@@ -1908,7 +1908,7 @@
 
                 for (var j = 1; j <= amount; j++) {
 //              http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
-                    var replaceDot = $('#room-row' + j).find('.row-total').text().replace(/\./g, "");
+                    var replaceDot = $('#room-row' + j).find('.row-total').text().replace(".0", "");
                     iTotal = iTotal + parseInt(replaceDot);
                 }
 
@@ -3024,6 +3024,9 @@
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>6+</option>
                             </select>
                         </td>
                     </tr>
@@ -3041,9 +3044,9 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
                         <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
@@ -3054,54 +3057,54 @@
                         <td> &nbsp; 2</td>
                         <td>
                             <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
+                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
+                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                     </tr>
 
                     <tr id="room-row3" style="background-color: white; display: none">
                         <td> &nbsp; 3</td>
                         <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
+                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
+                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                     </tr>
                     <tr id="room-row4" style="background-color: white; display: none">
                         <td> &nbsp; 4</td>
                         <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
+                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
+                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
+                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                     </tr>
                     <tr id="room-row5" style="background-color: white; display: none">
                         <td> &nbsp; 5</td>
                         <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/>
                         </td>
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
+                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
+                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                     </tr>
                     <tr id="room-row6" style="background-color: white; display: none">
                         <td> &nbsp; 6</td>
                         <td>
-                            <img src="../static/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
                             <span>1</span>
-                            <img src="../static/img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
+                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
                         <!--<td>-->
                         <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
                         <!--</td>-->
-                        <td>1.500.000</td>
-                        <td class="row-total">1.500.000</td>
+                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
+                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
                     </tr>
                 </table>
 
@@ -3343,32 +3346,36 @@
     <script src="../Utilities/smoothscroll-for-websites-master/SmoothScroll.js"></script>
     <script src="../Utilities/LiveChat.js"></script>
     <!--Form Feedback (position: fixed): https://webengage.com/ , phai dang ky', chua tach ra duoc file rieng do co' kem` id-->
-    <script id="_webengage_script_tag" type="text/javascript">
-        var webengage;
-        !function (e, t, n) {
-            function o(e, t) {
-                e[t[t.length - 1]] = function () {
-                    r.__queue.push([t.join("."), arguments])
-                }
-            }
 
-            var i, s, r = e[n], g = " ", l = "init options track onReady".split(g),
-                a = "feedback survey notification".split(g), c = "options render clear abort".split(g),
-                p = "Open Close Submit Complete View Click".split(g), u = "identify login logout setAttribute".split(g);
-            if (!r || !r.__v) {
-                for (e[n] = r = {__queue: [], __v: "5.0", user: {}}, i = 0; i < l.length; i++) o(r, [l[i]]);
-                for (i = 0; i < a.length; i++) {
-                    for (r[a[i]] = {}, s = 0; s < c.length; s++) o(r[a[i]], [a[i], c[s]]);
-                    for (s = 0; s < p.length; s++) o(r[a[i]], [a[i], "on" + p[s]])
-                }
-                for (i = 0; i < u.length; i++) o(r.user, ["user", u[i]]);
-                var f = t.createElement("script"), d = t.getElementById("_webengage_script_tag");
-                f.type = "text/javascript", f.async = !0, f.src = ("https:" == t.location.protocol ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-5.0.js", d.parentNode.insertBefore(f, d)
-            }
-        }(window, document, "webengage");
-        webengage.init('~15ba209b4');
-        webengage.options('isDemoMode', true);
-    </script>
+
+<!--    <script id="_webengage_script_tag" type="text/javascript">-->
+<!--        var webengage;-->
+<!--        !function (e, t, n) {-->
+<!--            function o(e, t) {-->
+<!--                e[t[t.length - 1]] = function () {-->
+<!--                    r.__queue.push([t.join("."), arguments])-->
+<!--                }-->
+<!--            }-->
+
+<!--            var i, s, r = e[n], g = " ", l = "init options track onReady".split(g),-->
+<!--                a = "feedback survey notification".split(g), c = "options render clear abort".split(g),-->
+<!--                p = "Open Close Submit Complete View Click".split(g), u = "identify login logout setAttribute".split(g);-->
+<!--            if (!r || !r.__v) {-->
+<!--                for (e[n] = r = {__queue: [], __v: "5.0", user: {}}, i = 0; i < l.length; i++) o(r, [l[i]]);-->
+<!--                for (i = 0; i < a.length; i++) {-->
+<!--                    for (r[a[i]] = {}, s = 0; s < c.length; s++) o(r[a[i]], [a[i], c[s]]);-->
+<!--                    for (s = 0; s < p.length; s++) o(r[a[i]], [a[i], "on" + p[s]])-->
+<!--                }-->
+<!--                for (i = 0; i < u.length; i++) o(r.user, ["user", u[i]]);-->
+<!--                var f = t.createElement("script"), d = t.getElementById("_webengage_script_tag");-->
+<!--                f.type = "text/javascript", f.async = !0, f.src = ("https:" == t.location.protocol ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-5.0.js", d.parentNode.insertBefore(f, d)-->
+<!--            }-->
+<!--        }(window, document, "webengage");-->
+<!--        webengage.init('~15ba209b4');-->
+<!--        webengage.options('isDemoMode', true);-->
+<!--    </script>-->
+
+
 </div>
 </body>
 </html>
