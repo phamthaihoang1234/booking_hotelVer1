@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class Report {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -29,13 +30,16 @@ public class Report {
 
     }
 
-    public Report(int id, String name, String email, String message, Room room) {
+    public Report(int id, String name, String email, String message,Hotel hotel, Room room) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.message = message;
+        this.hotel = hotel;
         this.room = room;
     }
+
+
 
     public int getId() {
         return id;
