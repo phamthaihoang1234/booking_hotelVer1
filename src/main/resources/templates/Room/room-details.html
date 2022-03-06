@@ -1916,8 +1916,10 @@
                 $('#table-21').val(nRoom);
                 $('#table-22').val(iGuest);
                 $('#tien-thanhtoan').val(totalL);
+                $('#tien-thanh').val(totalL);
                 $('#table-result-2').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                 $('#tien-thanhtoan').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                $('#tien-thanh').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
             });
         });
 
@@ -2214,7 +2216,8 @@
                         $('#tien-thanhtoan').val(total);
                         $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                         $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
-
+                        $('#tien-thanh').val(totalL);
+                        $('#tien-thanh').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                         var iTotal = 0;
                         for (var j = 1; j <= amount; j++) {
 //                  http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
@@ -3415,8 +3418,8 @@
                     <tr>
                         <td>NHẬN PHÒNG</td>
                         <td>TRẢ PHÒNG</td>
-                        <td>PHÒNG</td>
-                        <td>KHÁCH</td>
+                        <td>SỐ PHÒNG</td>
+                        <td>SỐ KHÁCH</td>
                         <td>
                             <a id="book-now-2" href="#" style="color: rgb(220,30,40)">THAY ĐỔI</a>
                         </td>
@@ -3436,7 +3439,10 @@
                     <input id="right-aboutHotel-checkin"  name="checkin" hidden />
                     <input id="right-aboutHotel-checkout" name="checkout" hidden />
                     <input id="table-21" name="numberOfRoom" hidden />
-                    <input id="table-22" hidden/>
+                    <input id="table-22" name="numberOfGu" hidden/>
+                    <input id="tien-thanh" name="totalPrice" hidden/>
+                    <input readonly name="roomId" th:value="${roomDetail.getId()}" hidden /></td>
+
                     <b>THÔNG TIN CHI TIẾT:</b>
                     <table class="table borderless">
                         <tr>

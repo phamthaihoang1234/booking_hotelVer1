@@ -2,9 +2,13 @@ package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.*;
 import com.example.bookinghotel.repositories.PropertyTypeRepository;
+import com.example.bookinghotel.services.BookingService;
 import com.example.bookinghotel.services.HomeService;
 import com.example.bookinghotel.services.HotelService;
+import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +34,12 @@ public class HotelDetailDController {
     @Autowired
     HomeService homeService;
 
+    @Autowired
+    BookingService bookingService;
+
+    @Autowired
+    UserService userService;
+
 
 
 
@@ -48,21 +58,53 @@ public class HotelDetailDController {
         return "redirect:/";
     }
 
+    private String getPrincipal() {
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
     @GetMapping("/saveBooking")
     public String saveBooking(@RequestParam("checkin") String checkin,
                               @RequestParam("checkout") String checkout,
                               @RequestParam("numberOfRoom") String numberOfRoom,
-                              @RequestParam("info-name") String name,
-                              @RequestParam("info-phone") String phone,
-                              @RequestParam("info-email") String email
-    ){
-        System.out.println("vao controller");
+                              @RequestParam("numberOfGu") String numberOfGu,
+                              @RequestParam("totalPrice") String totalPrice,
+                              @RequestParam("roomId") String roomId
+
+    )
+    {
         System.out.println(checkin);
         System.out.println(checkout);
         System.out.println(numberOfRoom);
-        System.out.println(name);
-        System.out.println(phone);
-        System.out.println(email);
+        System.out.println(numberOfGu);
+        System.out.println(totalPrice);
+        System.out.println(roomId);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+        Booking b = new Booking();
+        b.setNumberOfGuests(Integer.parseInt(numberOfGu));
+        b.setPrice(Double.parseDouble(totalPrice));
+        b.setEndDate(LocalDate.parse(checkout,formatter));
+        b.setStartDate(LocalDate.parse(checkin,formatter));
+        b.setUser(userService.findByUserName(getPrincipal()));
+
+        Room room = homeService.findById(Long.valueOf(roomId)).get();
+        RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),checkin,checkout,1,room.getPropertyType());
+        int k = 0;
+        for(int i=0; i < Integer.parseInt(numberOfRoom) ; i++){
+            b.setRoom(roomGroup.getEmpty_rooms().get(k));
+            bookingService.save(b);
+            k++;
+        }
+
         return "redirect:/";
     }
 
