@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns:th="https://www.thymeleaf.org">
+<head lang="en">
     <meta charset="UTF-8">
     <title>Hotel Report</title>
 
@@ -90,12 +90,12 @@
         /* Location, Phone, Email Section */
         .contact-list {
             list-style-type: none;
-            margin-left: -30px;
+            margin: 0 0 0 60px;
             padding-right: 20px;
         }
 
         .list-item {
-            line-height: 4;
+            line-height: 5;
             color: #aaa;
         }
 
@@ -103,18 +103,19 @@
             font: 300 18px 'Lato', sans-serif;
             letter-spacing: 1.9px;
             color: #bbb;
+            margin-left: 2px;
         }
 
         .place {
-            margin-left: 62px;
+            margin-left: 15px;
         }
 
         .phone {
-            margin-left: 56px;
+            margin-left: 15px;
         }
 
         .gmail {
-            margin-left: 53px;
+            margin-left: 15px;
         }
 
         .contact-text a {
@@ -135,7 +136,7 @@
             font-size: 22px;
             text-align: center;
             width: 100%;
-            margin: 0 auto;
+            margin: 0 0 0 20px;
             padding: 0;
         }
 
@@ -207,7 +208,6 @@
             }
 
             .direct-contact-container {
-                margin-top: 60px;
                 max-width: 300px;
             }
             .social-media-list li {
@@ -240,6 +240,7 @@
 
             .direct-contact-container {
                 margin-top: 60px;
+                margin-left: 60px;
                 max-width: 280px;
             }
             .social-media-list {
@@ -317,11 +318,19 @@
         <div class="direct-contact-container">
 
             <ul class="contact-list">
-                <li class="list-item"><i class="fa fa-map-marker fa-2x"><span class="contact-text place">City, State</span></i></li>
 
-                <li class="list-item"><i class="fa fa-phone fa-2x"><span class="contact-text phone"><a href="tel:1-212-555-5555" title="Give me a call">(212) 555-2368</a></span></i></li>
+                <li class="list-item"><i class="fa-solid fa-hotel fa-2x"></i><span class="contact-text gmail">
+                    <span th:text="${roomInfo.getHotel().getNameOfHotel()}"></span>
+                </span></i></li>
 
-                <li class="list-item"><i class="fa fa-envelope fa-2x"><span class="contact-text gmail"><a href="mailto:#" title="Send me an email">hitmeup@gmail.com</a></span></i></li>
+                <li class="list-item"><i class="fa fa-map-marker fa-2x"><span class="contact-text place">
+                    <span th:text="${roomInfo.getHotel().getAddressOfHotel()}"></span>
+                </span></i></li>
+
+                <li class="list-item"><i class="fa fa-phone fa-2x"><span class="contact-text phone"><a href="tel:1-212-555-5555" title="Give me a call">
+                    <span th:text="${roomInfo.getHotel().getPhone()}"></span>
+                </a></span></i></li>
+
 
             </ul>
 
@@ -342,7 +351,6 @@
             </ul>
             <hr>
 
-            <div class="copyright">&copy; ALL OF THE RIGHTS RESERVED</div>
 
         </div>
 

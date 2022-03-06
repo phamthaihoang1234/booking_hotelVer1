@@ -25,12 +25,15 @@ public class Report {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    public Report(int id, String name, String email, String message, Hotel hotel, Room room) {
+    public Report(){
+
+    }
+
+    public Report(int id, String name, String email, String message, Room room) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.message = message;
-        this.hotel = hotel;
         this.room = room;
     }
 
