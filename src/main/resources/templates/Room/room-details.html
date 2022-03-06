@@ -1911,6 +1911,7 @@
                 $('#table-result-11').html(nRoom);
                 $('#table-result-12').html(iGuest);
                 $('#table-result-13').html(GetDays());
+                $('#table-13').val(GetDays());
                 $('#table-result-21').html(nRoom);
                 $('#table-result-22').html(iGuest);
                 $('#table-21').val(nRoom);
@@ -2217,6 +2218,7 @@
                         $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                         $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                         $('#tien-thanh').val(totalL);
+                        $('#table-13').val(GetDays());
                         $('#tien-thanh').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                         var iTotal = 0;
                         for (var j = 1; j <= amount; j++) {
@@ -3441,6 +3443,7 @@
                     <input id="table-21" name="numberOfRoom" hidden />
                     <input id="table-22" name="numberOfGu" hidden/>
                     <input id="tien-thanh" name="totalPrice" hidden/>
+                    <input id="table-13" name="numberNight" hidden/>
                     <input readonly name="roomId" th:value="${roomDetail.getId()}" hidden /></td>
 
                     <b>THÔNG TIN CHI TIẾT:</b>

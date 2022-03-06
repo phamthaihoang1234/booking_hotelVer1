@@ -71,30 +71,34 @@ public class HotelDetailDController {
         return userName;
     }
 
+    public static String getLocalDate(String date){
+        String[] arr = date.split("/");
+        if(arr[0].length() == 1){
+            return arr[2] +"-"+ "0" + arr[0]+ "-" +arr[1];
+        }
+        return arr[2] +"-"+arr[0]+"-"+arr[1];
+    }
+
     @GetMapping("/saveBooking")
     public String saveBooking(@RequestParam("checkin") String checkin,
                               @RequestParam("checkout") String checkout,
                               @RequestParam("numberOfRoom") String numberOfRoom,
                               @RequestParam("numberOfGu") String numberOfGu,
                               @RequestParam("totalPrice") String totalPrice,
-                              @RequestParam("roomId") String roomId
+                              @RequestParam("roomId") String roomId,
+                              @RequestParam("numberNight") String numberNight
 
     )
     {
-        System.out.println(checkin);
-        System.out.println(checkout);
-        System.out.println(numberOfRoom);
-        System.out.println(numberOfGu);
-        System.out.println(totalPrice);
-        System.out.println(roomId);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
         Booking b = new Booking();
+        b.setNumNight(Integer.parseInt(numberNight));
         b.setNumberOfGuests(Integer.parseInt(numberOfGu));
         b.setPrice(Double.parseDouble(totalPrice));
-        b.setEndDate(LocalDate.parse(checkout,formatter));
-        b.setStartDate(LocalDate.parse(checkin,formatter));
-        b.setUser(userService.findByUserName(getPrincipal()));
+        b.setEndDate(LocalDate.parse(getLocalDate(checkout)));
+        b.setStartDate(LocalDate.parse(getLocalDate(checkin)));
+
+        b.setUser(userService.findById(1L).get());
+       // b.setUser(userService.findByUserName(getPrincipal()));
 
         Room room = homeService.findById(Long.valueOf(roomId)).get();
         RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),checkin,checkout,1,room.getPropertyType());
