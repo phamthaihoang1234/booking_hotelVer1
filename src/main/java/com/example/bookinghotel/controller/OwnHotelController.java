@@ -88,7 +88,7 @@ public class OwnHotelController {
 //        Role roleUser = new Role();
 //        roleUser.setName("ROLE_USER");
         roleService.save(roleOwner);
-
+//        roleService.save(roleUser);
         Set<Role> roles = new HashSet<>();
         roles.add(roleOwner);
 
