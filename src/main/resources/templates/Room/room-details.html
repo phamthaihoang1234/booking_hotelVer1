@@ -9,6 +9,7 @@
     <!-- Online -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Offline -->
     <link rel="stylesheet" href="../Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
@@ -19,7 +20,10 @@
     <link rel="stylesheet" type="text/css" href="../Utilities/slideshow/slideshow2/engine1/style.css"/>
     <script type="text/javascript" src="../Utilities/slideshow/slideshow2/engine1/jquery.js"></script>
     <!-- End WOWSlider.com HEAD section -->
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <style>
     </style>
     <style>
@@ -1700,6 +1704,310 @@
 //  tai trang chinh thi ho van~ thay' duoc nut' book-now khi vi tri dang o? footer
         });
         //##########################
+
+        var nRoom =0;
+        var nGuess = 0;
+        var totalL = 0;
+        //
+        // var date1 = new Date(document.getElementById("date1").value);
+        // var date2 = new Date(document.getElementById("date2").value);
+        // console.log(date1);
+        //
+        // if(date1 != '' && date2 != ''){
+        //     console.log("vao ajax");
+        //     $.ajax({
+        //         url: '/checkAvailableHotelByDate',
+        //         type: 'post',
+        //         data: {
+        //             'room_id': document.getElementById('roomId').value,
+        //             // 'start_date': "2022-03-03",
+        //             // 'end_date': "2022-03-07"
+        //             'start_date': document.getElementById("date1").value,
+        //             'end_date': document.getElementById("date2").value
+        //
+        //         },
+        //         dataType: "text",
+        //         success: function (data) {
+        //             numberRoomEmpty = data;
+        //             document.getElementById('roomEmpty').innerText = "We have "+ data + " rooms left";
+        //             if (data == 0) {
+        //                 swal({
+        //                     title: "SORRY!",
+        //                     text: "The hotel has sold out of rooms for the period you have selected!",
+        //                     icon: "warning",
+        //                     button: "OK",
+        //                 });
+        //                 // $('#right-aboutHotel-1').fadeOut();
+        //                 $('#right-aboutHotel-1').fadeIn();
+        //                 $('#right-aboutHotel-2').fadeOut();
+        //                 //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
+        //                 // $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
+        //                 // $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
+        //                 // $('#right-aboutHotel-checkin').val(check_in.toLocaleDateString());
+        //                 // $('#right-aboutHotel-checkout').val(check_out.toLocaleDateString());
+        //                 // lam` mo` div, se fadeOut tai #book-now-2 click
+        //                 //$('.tmp-left-aboutHotel').fadeIn();
+        //
+        //                 document.getElementById('book-now').disabled = true;
+        //             }else {
+        //                 check =1;
+        //                 if(GetDays() != -1 && nRoom > 0 && nGuess <= (nRoom*3) && nGuess > 0) document.getElementById('book-now').disabled = false;
+        //
+        //             }
+        //         },
+        //         error: function (request, error) {
+        //             alert("Request: " + JSON.stringify(request));
+        //         }
+        //     });
+        // }
+
+        window.onload = function exampleFunction() {
+            // document.getElementById('slt-rooms').hidden = true;
+            var date1 = new Date(document.getElementById("date1").value);
+            var date2 = new Date(document.getElementById("date2").value);
+            console.log(date1);
+            function GetDays() {
+                var check_in = new Date(document.getElementById("date1").value);
+                var check_out = new Date(document.getElementById("date2").value);
+                console.log(document.getElementById("date1").value);
+                if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                    //alert('Nhận phòng & Trả phòng không hợp lệ');
+                    //ko can show tooltip, da cai day du tai nut DAT PHONG
+                    return -1;
+                } else if (check_out < check_in) {
+                    //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                    $('.validation-advice').fadeIn();
+                    return -1;
+                } else {
+                    //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                    console.log("vao tinh ngay");
+                    console.log(check_in);
+                    return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                }
+            }
+
+            $('#table-result-13').html(GetDays());
+
+            if(date1 != '' && date2 != ''){
+                let token = $("meta[name='_csrf']").attr("content");
+                let header = $("meta[name='_csrf_header']").attr("content");
+                $(document).ajaxSend(function (e, xhr, options) {
+                    xhr.setRequestHeader(header, token);
+                });
+                console.log("vao ajax");
+                $.ajax({
+                    url: '/checkAvailableHotelByDate',
+                    type: 'post',
+                    data: {
+                        'room_id': document.getElementById('roomId').value,
+                        // 'start_date': "2022-03-03",
+                        // 'end_date': "2022-03-07"
+                        'start_date': document.getElementById("date1").value,
+                        'end_date': document.getElementById("date2").value
+
+                    },
+                    dataType: "text",
+                    success: function (data) {
+                        numberRoomEmpty = data;
+                        document.getElementById('roomEmpty').innerText = "We have "+ data + " rooms left";
+                        if (data == 0) {
+                            swal({
+                                title: "SORRY!",
+                                text: "The hotel has sold out of rooms for the period you have selected!",
+                                icon: "warning",
+                                button: "OK",
+                            });
+                            // $('#right-aboutHotel-1').fadeOut();
+                            $('#right-aboutHotel-1').fadeIn();
+                            $('#right-aboutHotel-2').fadeOut();
+                            //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
+                            // $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
+                            // $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
+                            // $('#right-aboutHotel-checkin').val(check_in.toLocaleDateString());
+                            // $('#right-aboutHotel-checkout').val(check_out.toLocaleDateString());
+                            // lam` mo` div, se fadeOut tai #book-now-2 click
+                            //$('.tmp-left-aboutHotel').fadeIn();
+
+                            document.getElementById('book-now').disabled = true;
+                        }else {
+                            check =1;
+                            if(GetDays() != -1 && nRoom > 0 && nGuess <= (nRoom*3) && nGuess > 0) document.getElementById('book-now').disabled = false;
+
+                        }
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+            }
+        }
+
+
+
+
+        $(document).ready(function (){
+            $('#numberGuess').change(function (){
+
+
+
+                var iGuest = 0;
+                iGuest = document.getElementById('numberGuess').value;
+                nGuess = iGuest;
+                function GetDays() {
+                    var check_in = new Date(document.getElementById("date1").value);
+                    var check_out = new Date(document.getElementById("date2").value);
+                    console.log(document.getElementById("date1").value);
+                    if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                        //alert('Nhận phòng & Trả phòng không hợp lệ');
+                        //ko can show tooltip, da cai day du tai nut DAT PHONG
+                        console.log(check_in);
+                        console.log(check_in.getMonth());
+                        console.log(check_in.getDate());
+                        console.log(check_in.getDay());
+
+                        return -1;
+                    } else if (check_out < check_in) {
+                        //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                        $('.validation-advice').fadeIn();
+                        return -1;
+                    } else {
+                        //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                        console.log("vao tinh ngay");
+                        console.log(check_in);
+                        return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                    }
+                }
+                if(iGuest > (nRoom*3)){
+                    swal({
+                        title: "Number of guess incorrect!",
+                        text: "The number of people has exceeded the allowed limit!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    document.getElementById('book-now').disabled = true;
+                }
+
+                if(iGuest < 0){
+                    swal({
+                        title: "Number of guess incorrect!",
+                        text: "The number of people has exceeded the allowed limit!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    document.getElementById('book-now').disabled = true;
+                }
+
+                if(iGuest == 0) {
+                    document.getElementById('book-now').disabled = true;
+                }
+
+                if(iGuest <= 0) iGuest = 0;
+                if(nRoom <= 0) nRoom = 0;
+
+                if(iGuest >0 && nRoom > 0 && iGuest <= (nRoom*3)  && check == 1 && GetDays() != -1){
+                    document.getElementById('book-now').disabled = false;
+                }
+
+                $('#table-result-11').html(nRoom);
+                $('#table-result-12').html(iGuest);
+                $('#table-result-13').html(GetDays());
+                $('#table-13').val(GetDays());
+                $('#table-result-21').html(nRoom);
+                $('#table-result-22').html(iGuest);
+                $('#table-21').val(nRoom);
+                $('#table-22').val(iGuest);
+                $('#tien-thanhtoan').val(totalL);
+                $('#tien-thanh').val(totalL);
+                $('#table-result-2').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                $('#tien-thanhtoan').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                $('#tien-thanh').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+            });
+        });
+
+        var check = 0;
+        var numberRoomEmpty = 0;
+        $(document).ready(function () {
+           $('#date1 ,#date2').change(function (){
+               console.log("vao date1, date2");
+               let token = $("meta[name='_csrf']").attr("content");
+               let header = $("meta[name='_csrf_header']").attr("content");
+               $(document).ajaxSend(function (e, xhr, options) {
+                   xhr.setRequestHeader(header, token);
+               });
+
+               function GetDays() {
+                   var check_in = new Date(document.getElementById("date1").value);
+                   var check_out = new Date(document.getElementById("date2").value);
+                   console.log(document.getElementById("date1").value);
+                   if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                       return -1;
+                   } else if (check_out < check_in) {
+                       //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                       $('.validation-advice').fadeIn();
+                       return -1;
+                   } else {
+                       return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                   }
+               }
+               //if(GetDays() == -1) document.getElementById('book-now').disabled = true;
+
+
+               var date1 = document.getElementById('date1').value;
+               var date2 = document.getElementById("date2").value;
+                console.log(date1);
+                console.log(date2);
+               if(date1 != '' && date2 != '' && GetDays() != -1){
+
+                   $.ajax({
+                       url: '/checkAvailableHotelByDate',
+                       type: 'post',
+                       data: {
+                           'room_id': document.getElementById('roomId').value,
+                           // 'start_date': "2022-03-03",
+                           // 'end_date': "2022-03-07"
+                           'start_date': document.getElementById("date1").value,
+                           'end_date': document.getElementById("date2").value
+
+                       },
+                       dataType: "text",
+                       success: function (data) {
+                           numberRoomEmpty = data;
+                           document.getElementById('roomEmpty').innerText = "We have "+ data + " rooms left";
+                           if (data == 0) {
+                               swal({
+                                   title: "SORRY!",
+                                   text: "The hotel has sold out of rooms for the period you have selected!",
+                                   icon: "warning",
+                                   button: "OK",
+                               });
+                               // $('#right-aboutHotel-1').fadeOut();
+                               $('#right-aboutHotel-1').fadeIn();
+                               $('#right-aboutHotel-2').fadeOut();
+                               //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
+                               // $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
+                               // $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
+                               // $('#right-aboutHotel-checkin').val(check_in.toLocaleDateString());
+                               // $('#right-aboutHotel-checkout').val(check_out.toLocaleDateString());
+                               // lam` mo` div, se fadeOut tai #book-now-2 click
+                               //$('.tmp-left-aboutHotel').fadeIn();
+
+                               document.getElementById('book-now').disabled = true;
+                           }else {
+                               check =1;
+                               if(GetDays() != -1 && nRoom > 0 && nGuess <= (nRoom*3) && nGuess > 0) document.getElementById('book-now').disabled = false;
+
+                           }
+                       },
+                       error: function (request, error) {
+                           alert("Request: " + JSON.stringify(request));
+                       }
+                   });
+               }
+
+
+           }) ;
+        });
+
         $(document).ready(function () {
             $('#slt-rooms').change(function () {
 //          hoac co the dung vong lap duyet tu` Room6 ve` Room2
@@ -1751,10 +2059,12 @@
 //              table-result-1, table-result-2
 //              Tổng số 1 Phòng, 1 Khách & 1 Đêm
                     var iRoom = amount;
-                    var iGuest = 0;
-                    for (var i = 1; i <= amount; i++) {
-                        iGuest = iGuest + parseInt($('#room-row' + i).find('span').text());
-                    }
+                    // var iGuest = 0;
+                    // iGuest = document.getElementById('numberGuess').value;
+
+                    // for (var i = 1; i <= amount; i++) {
+                    //     iGuest = iGuest + parseInt($('#room-row' + i).find('span').text());
+                    // }
 
 //          session 15.4.3 Date	Object
                     function GetDays() {
@@ -1764,38 +2074,167 @@
                         if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
                             //alert('Nhận phòng & Trả phòng không hợp lệ');
                             //ko can show tooltip, da cai day du tai nut DAT PHONG
-                            return 1;
+                            console.log("vao null");
+                            return -1;
                         } else if (check_out < check_in) {
                             //xay ra sau cung` (ko nhap chung voi If thu' nhat')
                             $('.validation-advice').fadeIn();
-                            return 1;
+                            return -1;
                         } else {
+                            console.log("vao tinh ngay");
+                            console.log(parseInt((check_out - check_in) / (24 * 3600 * 1000)));
                             return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                         }
                     }
 
 //                chi thay doi so' cua cac ID chu' ko thay doi toan` bo (tranh' bi xoa' ID), ko the dung` rieng cho nut minus, plus
 //                dung` val() ko dung khi thay doi so' luong room' (chi dung' cho nut' minus, plus)
-               $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
-                    $('#table-result-11').html(iRoom);
-                    $('#table-result-12').html(iGuest);
-                    $('#table-result-13').html(GetDays());
-                    //ho tro khi click DAT PHONG
-                    $('#table-result-21').html(iRoom);
-                    $('#table-result-22').html(iGuest);
+//                $('#table-result-1').html("Tổng số " + iRoom + " Phòng, " + iGuest + " Khách & " + GetDays() + " Đêm");
+                    var prize = document.getElementById('price').value;
+                   var total ;
+                    var iGuest = 0;
+                    total = prize*iRoom;
+                    totalL = total;
+                    nRoom = iRoom
+                    iGuest = nGuess;
 
-                    var iTotal = 0;
-                    for (var j = 1; j <= amount; j++) {
-//                  http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
-                        var replaceDot = $('#room-row' + j).find('.row-total').text().replace(".0", "");
-                        iTotal = iTotal + parseInt(replaceDot);
+                    console.log(iRoom);
+                    console.log(iGuest);
+                    console.log(total);
+
+
+
+
+                    if(iGuest == 0){
+                        document.getElementById('book-now').disabled = true;
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                       // $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                     }
 
-                    iTotal *= GetDays();
+                    if(iRoom == 0){
+                        console.log("vao iRoom =0");
+                        document.getElementById('book-now').disabled = true;
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    }
+                    if(iGuest > (nRoom*3) && nGuess > 0 && iGuest > 0 ){
+                        swal({
+                            title: "Number of guess incorrect!",
+                            text: "The number of people has exceeded the allowed limit!",
+                            icon: "warning",
+                            button: "OK",
+                        });
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        document.getElementById('book-now').disabled = true;
+                    }
+                    if(iRoom > numberRoomEmpty){
+                        swal({
+                            title: "INVALID!",
+                            text: "Number of room is invalid!",
+                            icon: "warning",
+                            button: "OK",
+                        });
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        //document.getElementById('slt-rooms').disabled = true;
+                        document.getElementById('book-now').disabled = true;
+                     }
+
+                    if(iRoom < 0){
+                        console.log("vao iRoom  <0");
+                        iRoom = 0;
+                        swal({
+                            title: "Number of room incorrect!",
+                            text: "You need to try again enter number of room!",
+                            icon: "warning",
+                            button: "OK",
+                        });
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        document.getElementById('book-now').disabled = true;
+
+                    }
+
+                    if(iRoom > 0 && nGuess <= (iRoom*3) && nGuess > 0 && check == 1 && GetDays() != -1 && iRoom <= numberRoomEmpty) {
+                        console.log("vao iromm >=");
+                        console.log(iGuest);
+                        document.getElementById('book-now').disabled = false;
+                        $('#table-result-11').html(iRoom);
+                        $('#table-result-12').html(iGuest);
+                        $('#table-result-13').html(GetDays());
+                        //document.getElementById('priceTotal').innerHTML = 1234;
+                        //$('#room-row1 #priceTotal').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'));
+                        // $('#table-result-2').html(total);
+
+                        console.log(prize);
+                        console.log(total);
+                        //ho tro khi click DAT PHONG
+                        $('#table-result-21').html(iRoom);
+                        $('#table-result-22').html(iGuest);
+                        $('#table-21').val(iRoom);
+                        $('#table-22').val(iGuest);
+                        $('#tien-thanhtoan').val(total);
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanh').val(totalL);
+                        $('#table-13').val(GetDays());
+                        $('#tien-thanh').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        var iTotal = 0;
+                        for (var j = 1; j <= amount; j++) {
+//                  http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
+                            var replaceDot = $('#room-row' + j).find('.row-total').text().replace(/\./g, "");
+                            iTotal = iTotal + parseInt(replaceDot);
+                        }
+
+                        iTotal *= GetDays();
 
 //          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
-                    $('#table-result-2').html(iTotal.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
-                    $('#tien-thanhtoan').html(iTotal.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                        $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    }
+
+
                 }
             });
 
@@ -1806,7 +2245,7 @@
                 $('#mytable-th').fadeIn();
                 $('#table-result').fadeIn();
                 $('#room-row' + target).fadeIn();
-                var replaceDot = $('#room-row' + target).find('.row-total').text().replace(".0", "");
+                var replaceDot = $('#room-row' + target).find('.row-total').text().replace(/\./g, "");
                 $('#room-row' + target).find('.row-total').html(parseInt(replaceDot).toLocaleString('vn-VN'));
                 //
                 $('#extra-room').fadeOut(10);
@@ -1899,7 +2338,13 @@
                         return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                     }
                 }
-
+                var tRoom = document.getElementById('slt-rooms').value;
+                var price = document.getElementById('price').value;
+                var total = tRoom*price;
+                $('#tien-thanhtoan').val(total);
+                console.log(tRoom);
+                console.log(price);
+                console.log(total);
                 //nhom nay` co viet o su* kien change Room
                 $('#table-result-13').html(GetDays2());
 
@@ -1908,15 +2353,15 @@
 
                 for (var j = 1; j <= amount; j++) {
 //              http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
-                    var replaceDot = $('#room-row' + j).find('.row-total').text().replace(".0", "");
+                    var replaceDot = $('#room-row' + j).find('.row-total').text().replace(/\./g, "");
                     iTotal = iTotal + parseInt(replaceDot);
                 }
 
                 iTotal *= GetDays2();
 
 //          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
-                $('#table-result-2').html(iTotal.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
-                $('#tien-thanhtoan').html(iTotal.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
             });
         });
 
@@ -1965,10 +2410,13 @@
                 } else {
                     //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                     $('#right-aboutHotel-1').fadeOut();
-                    $('#right-aboutHotel-2').fadeIn();
+                   // $('#right-aboutHotel-1').fadeIn();
+                  $('#right-aboutHotel-2').fadeIn();
                     //update checkin, checkout: http://www.w3schools.com/jsref/jsref_obj_date.asp
                     $('#right-aboutHotel-2-checkin').html(check_in.toLocaleDateString());
                     $('#right-aboutHotel-2-checkout').html(check_out.toLocaleDateString());
+                    $('#right-aboutHotel-checkin').val(check_in.toLocaleDateString());
+                    $('#right-aboutHotel-checkout').val(check_out.toLocaleDateString());
                     // lam` mo` div, se fadeOut tai #book-now-2 click
                     $('.tmp-left-aboutHotel').fadeIn();
                 }
@@ -2564,7 +3012,7 @@
             <div id="wowslider-container1">
                 <!--neu dung margin-top: 380px => khi zoom browser thi chu~ bi. day? xuog' -->
                 <div style="position: absolute; z-index: 1000; color: white; text-shadow: 1px 0px black; margin-left: 50px;bottom: 45px">
-                    <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span><br/>
+<!--                    <span style="font-weight: bolder; font-size: 30px" class="name-of-hotel"><span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span></span><br/>-->
 
 
                     <div style="font-size: 15px">
@@ -2591,39 +3039,7 @@
                         <th:block th:each="image:${roomImage}">
                         <li><img th:src="@{${image.getImageUrl()}}" /></li>
                         </th:block>
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room02.jpg" alt="room02"-->
-<!--                                 title="room02" id="wows1_1"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room03.jpg" alt="room03"-->
-<!--                                 title="room03" id="wows1_2"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/room04.jpg" alt="room04"-->
-<!--                                 title="room04" id="wows1_3"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang01.jpg" alt="hanhlang01"-->
-<!--                                 title="hanhlang01" id="wows1_4"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/hanhlang02.jpg" alt="hanhlang02"-->
-<!--                                 title="hanhlang02" id="wows1_5"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang01.jpg" alt="nhahang01"-->
-<!--                                 title="nhahang01" id="wows1_6"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/nhahang02.jpg" alt="nhahang02"-->
-<!--                                 title="nhahang02" id="wows1_7"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/beboi.jpg" alt="beboi"-->
-<!--                                 title="beboi" id="wows1_8"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/phongtapthehinh.jpg"-->
-<!--                                 alt="phongtapthehinh" title="phongtapthehinh" id="wows1_9"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa01.jpg" alt="Spa01"-->
-<!--                                 title="Spa01" id="wows1_10"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa02.jpg" alt="Spa02"-->
-<!--                                 title="Spa02" id="wows1_11"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa03.jpg" alt="Spa03"-->
-<!--                                 title="Spa03" id="wows1_12"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/spa04.jpg" alt="Spa04"-->
-<!--                                 title="Spa04" id="wows1_13"/></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/barpub01.jpg" alt="Bar-Pub01"-->
-<!--                                 title="Bar-Pub01" id="wows1_14"/></li>-->
-<!--                        <li><a href="http://wowslider.com"><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/images/barpub02.jpg"-->
-<!--                                alt="http://wowslider.com/" title="Bar-Pub02" id="wows1_15"/></a></li>-->
-<!--                        <li><img src="../Utilities/slideshow/slideshow2/data1/images/publounge.jpg" alt="Pub-Lounge"-->
-<!--                                 title="Pub-Lounge" id="wows1_16"/></li>-->
+
                     </ul>
                 </div>
 
@@ -2631,56 +3047,6 @@
 
 
 
-<!--                <div class="ws_bullets">-->
-<!--                    <div>-->
-<!--                        <a href="#wows1_0" title="room01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room01.jpg" alt="room01"/>1</span></a>-->
-<!--                        <a href="#wows1_1" title="room02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room02.jpg" alt="room02"/>2</span></a>-->
-<!--                        <a href="#wows1_2" title="room03"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room03.jpg" alt="room03"/>3</span></a>-->
-<!--                        <a href="#wows1_3" title="room04"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/room04.jpg" alt="room04"/>4</span></a>-->
-<!--                        <a href="#wows1_4" title="hanhlang01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang01.jpg" alt="hanhlang01"/>5</span></a>-->
-<!--                        <a href="#wows1_5" title="hanhlang02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/hanhlang02.jpg" alt="hanhlang02"/>6</span></a>-->
-<!--                        <a href="#wows1_6" title="nhahang01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang01.jpg" alt="nhahang01"/>7</span></a>-->
-<!--                        <a href="#wows1_7" title="nhahang02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/nhahang02.jpg" alt="nhahang02"/>8</span></a>-->
-<!--                        <a href="#wows1_8" title="beboi"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/beboi.jpg"-->
-<!--                                alt="beboi"/>9</span></a>-->
-<!--                        <a href="#wows1_9" title="phongtapthehinh"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/phongtapthehinh.jpg"-->
-<!--                                alt="phongtapthehinh"/>10</span></a>-->
-<!--                        <a href="#wows1_10" title="Spa01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa01.jpg" alt="Spa01"/>11</span></a>-->
-<!--                        <a href="#wows1_11" title="Spa02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa02.jpg" alt="Spa02"/>12</span></a>-->
-<!--                        <a href="#wows1_12" title="Spa03"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa03.jpg" alt="Spa03"/>13</span></a>-->
-<!--                        <a href="#wows1_13" title="Spa04"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/spa04.jpg" alt="Spa04"/>14</span></a>-->
-<!--                        <a href="#wows1_14" title="Bar-Pub01"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub01.jpg" alt="Bar-Pub01"/>15</span></a>-->
-<!--                        <a href="#wows1_15" title="Bar-Pub02"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/barpub02.jpg" alt="Bar-Pub02"/>16</span></a>-->
-<!--                        <a href="#wows1_16" title="Pub-Lounge"><span><img-->
-<!--                                src="../Utilities/slideshow/slideshow2/data1/tooltips/publounge.jpg" alt="Pub-Lounge"/>17</span></a>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-
-
-<!--                <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com/vi">slider</a>-->
-<!--                    by WOWSlider.com v8.6-->
-<!--                </div>-->
-
-
-
-<!--                <div class="ws_shadow"></div>-->
             </div>
 
 
@@ -2715,81 +3081,7 @@
                             </ul>
 
                             <div class="tab-content">
-<!--                                <div id="home" class="tab-pane fade in active">-->
-<!--                                    <br/>-->
-<!--                                    <table class="table borderless">-->
-<!--                                        <tr>-->
-<!--                                            <td>Bảo tàng Chăm</td>-->
-<!--                                            <td>0.1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Sông Hàn</td>-->
-<!--                                            <td>0.1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Các bãi biển</td>-->
-<!--                                            <td>2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Bán đảo Sơn Trà</td>-->
-<!--                                            <td>3.2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Núi Bà Nà</td>-->
-<!--                                            <td>9 Km</td>-->
-<!--                                        </tr>-->
-<!--                                    </table>-->
-<!--                                </div>-->
-<!--                                <div id="menu1" class="tab-pane fade">-->
-<!--                                    <br/>-->
-<!--                                    <table class="table borderless">-->
-<!--                                        <tr>-->
-<!--                                            <td>Apsara Restaurant</td>-->
-<!--                                            <td>0.3 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Café Trà Cung Đình</td>-->
-<!--                                            <td>0.5 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Trúc Lâm Viên</td>-->
-<!--                                            <td>2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Nhà hàng Bia Tiệp Tulip</td>-->
-<!--                                            <td>2.5 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Nhà hàng Estasy</td>-->
-<!--                                            <td>1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                    </table>-->
-<!--                                </div>-->
-<!--                                <div id="menu2" class="tab-pane fade">-->
-<!--                                    <br/>-->
-<!--                                    <table class="table borderless">-->
-<!--                                        <tr>-->
-<!--                                            <td>Chợ Hàn</td>-->
-<!--                                            <td>0.4 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Chợ Cồn</td>-->
-<!--                                            <td>1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Siêu thị Big C</td>-->
-<!--                                            <td>1 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Trung tâm thương mại Vincom</td>-->
-<!--                                            <td>2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td>Lotte Mart</td>-->
-<!--                                            <td>2 Km</td>-->
-<!--                                        </tr>-->
-<!--                                    </table>-->
-<!--                                </div>-->
+
                             </div>
                         </div>
                     </div>
@@ -3011,7 +3303,7 @@
                             <div id="tooltip2" class="validation-advice" style="display: none">Ngày trả phòng ko hợp lệ
                                 !
                             </div>
-                            <input type="date" class="form-control" id="date2" style="margin-top: -5px">
+                            <input type="date" class="form-control" id="date2" style="margin-top: -5px" >
                         </td>
                     </tr>
 
@@ -3019,15 +3311,8 @@
                         <th style="text-align: right; color: rgb(122,118,118)">PHÒNG</th>
                         <td>
                             <!--gia tri cua select co the tuy` thuoc vao thong bao' con` bao nhieu phong` tai trang search-hotels-->
-                            <select id="slt-rooms" class="form-control" style="width: 70px">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>6+</option>
-                            </select>
+
+                            <input type="number" class="form-control" value="0"   id="slt-rooms" style="margin-top: -5px;width: 63px;"  />
                         </td>
                     </tr>
                 </table>
@@ -3044,85 +3329,40 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
-                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/>
+<!--                            <input type="number" class="form-control" value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>-->
+                            <input type="number"  value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
-                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
+                        <td><input id="price" readonly th:value="${roomDetail.getPricePerNight()}" /></td>
+                        <td><input id="roomId" readonly th:value="${roomDetail.getId()}" hidden /></td>
+                        <td class="row-total">
+                            <span id="priceTotal"  style="font-weight: bold">1</span>
+                        </td>
                     </tr>
 
-                    <tr id="room-row2" style="background-color: white; display: none">
-                        <td> &nbsp; 2</td>
-                        <td>
-                            <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
-                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/>
-                        </td>
-                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                    </tr>
 
-                    <tr id="room-row3" style="background-color: white; display: none">
-                        <td> &nbsp; 3</td>
-                        <td>
-                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/>
-                        </td>
-                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                    </tr>
-                    <tr id="room-row4" style="background-color: white; display: none">
-                        <td> &nbsp; 4</td>
-                        <td>
-                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
-                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                    </tr>
-                    <tr id="room-row5" style="background-color: white; display: none">
-                        <td> &nbsp; 5</td>
-                        <td>
-                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/>
-                        </td>
-                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                    </tr>
-                    <tr id="room-row6" style="background-color: white; display: none">
-                        <td> &nbsp; 6</td>
-                        <td>
-                            <img src="../img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span>1</span>
-                            <img src="../img/room-bookings/plus-25.png" class="plus img-allowed"/></td>
-                        <!--<td>-->
-                        <!--<input type="number" min="1" max="3" value="1" class="form-control" style="width: 65px"/>-->
-                        <!--</td>-->
-                        <td><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                        <td class="row-total"><span th:text="${roomDetail.getPricePerNight()}"></span></td>
-                    </tr>
                 </table>
 
                 <table id="table-result" class="table borderless" style="margin-top: -15px;">
                     <tr>
+
                         <td id="table-result-1">
                             Tổng số
-                            <span id="table-result-11" style="font-weight: bold">1</span> Phòng,
-                            <span id="table-result-12" style="font-weight: bold">1</span> Khách &
-                            <span id="table-result-13" style="font-weight: bold; text-decoration: underline">1</span><u>
+                            <span id="table-result-11" style="font-weight: bold">0</span> Phòng,
+                            <span id="table-result-12" style="font-weight: bold">0</span> Khách &
+                            <span id="table-result-13" style="font-weight: bold; text-decoration: underline">0</span><u>
                             Đêm</u>
-                        </td>
-                        <td rowspan="2" style="text-align: right">
-                            <span id="table-result-2" style="font-weight: bold; font-size: 25px">
-                            1.500.000 <sup><u>đ</u></sup>
+                            <span id="table-result-2" style="font-weight: bold; font-size: 25px;margin-left: 55px" >
+                             <sup>0<u>đ</u></sup>
                             </span>
                         </td>
+                        <td rowspan="2" style="text-align: right">
+<!--                            <span id="table-result-2" style="font-weight: bold; font-size: 25px">-->
+<!--                            1.500.000 <sup><u>đ</u></sup>-->
+<!--                            </span>-->
+                        </td>
                     </tr>
+                    <tr id="roomEmpty" style="font-weight: bold"></tr>
                     <tr>
                         <td><small>Bao gồm tất cả các loại thuế</small></td>
                     </tr>
@@ -3163,7 +3403,7 @@
 
                 <!--them div de cai` text-align: center-->
                 <div style="text-align: center; margin-top: 10px;">
-                    <input id="book-now" type="button" class="btn mybtn-style1" value="ĐẶT PHÒNG">
+                    <input id="book-now" type="button" disabled class="btn mybtn-style1"  value="ĐẶT PHÒNG">
                 </div>
 
                 <div style="width: 100%; text-align: center; margin-top: 10px">
@@ -3180,8 +3420,8 @@
                     <tr>
                         <td>NHẬN PHÒNG</td>
                         <td>TRẢ PHÒNG</td>
-                        <td>PHÒNG</td>
-                        <td>KHÁCH</td>
+                        <td>SỐ PHÒNG</td>
+                        <td>SỐ KHÁCH</td>
                         <td>
                             <a id="book-now-2" href="#" style="color: rgb(220,30,40)">THAY ĐỔI</a>
                         </td>
@@ -3197,7 +3437,15 @@
 
 
 
-                <form id="thanhtoan" name="formthanhtoan">
+                <form th:action="@{/saveBooking}" method="get" onsubmit="return submitForm(this);">
+                    <input id="right-aboutHotel-checkin"  name="checkin" hidden />
+                    <input id="right-aboutHotel-checkout" name="checkout" hidden />
+                    <input id="table-21" name="numberOfRoom" hidden />
+                    <input id="table-22" name="numberOfGu" hidden/>
+                    <input id="tien-thanh" name="totalPrice" hidden/>
+                    <input id="table-13" name="numberNight" hidden/>
+                    <input readonly name="roomId" th:value="${roomDetail.getId()}" hidden /></td>
+
                     <b>THÔNG TIN CHI TIẾT:</b>
                     <table class="table borderless">
                         <tr>
@@ -3218,7 +3466,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="email" name="info-email" class="form-control" placeholder="Email"
+                                <input type="email" name="info-email" required class="form-control" placeholder="Email"
                                        style="height: 40px; margin-top: -10px"/>
                             </td>
                         </tr>
@@ -3231,57 +3479,14 @@
                             </td>
                             <td id="tien-thanhtoan"
                                 style="text-align: right; width: 50%; font-weight: bold; font-size: 25px">
-                                1.500.000 <sup><u>đ</u></sup>
+                                 <sup><u>đ</u></sup>
                             </td>
                         </tr>
                     </table>
 
                     <div id="bt-thanhtoan" style="font-weight: bold; margin: auto; width: 88%">
                         <input id="bt-thanhtoan1" type="submit" class="btn mybtn-style2"
-                               value="THANH TOÁN TẠI KHÁCH SẠN" style="float: left"
-                        >
-                        <div style="float: left; margin-left: 10px">
-                            <div id="paywith">
-                                <div class="effect-shadow-ul">
-                                    <!--ban dau dung ul, li nhu*ng ko ho tro hover row
-                                    <li style="list-style-image:url('../img/room-bookings/icon%20pay/visa.gif')"> Visa</li> -->
-                                    <!--http://www.w3schools.com/bootstrap/bootstrap_ref_css_tables.asp-->
-                                    <table class="table table-hover borderless">
-                                        <!--khi nao co' trang moi' thi cai` the? a-->
-                                        <thead>
-                                        <tr>
-                                            <th colspan="2">TRẢ VỚI</th>
-                                            <!--<th></th>-->
-                                        </tr>
-                                        </thead>
-                                        <!--<tbody>-->
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/visa.gif"/></td>
-                                            <td>Visa</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/mastercard.png"/></td>
-                                            <td>MasterCard</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/JCB.png"/></td>
-                                            <td>JCB</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/american-express.png"/></td>
-                                            <td>American Express</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../../static/img/room-bookings/pay_with/paypal.png"/></td>
-                                            <td>PayPal</td>
-                                        </tr>
-                                        <!--</tbody>-->
-                                    </table>
-                                </div>
-
-                                <input type="button" class="btn mybtn-style1" value="TRẢ BÂY GIỜ">
-                            </div>
-                        </div>
+                               value="THANH TOÁN TẠI KHÁCH SẠN" style="float: left">
                     </div>
                 </form>
 
@@ -3341,41 +3546,71 @@
         </div>
     </div>
 
+    <script>
+        function submitForm(form){
+            swal({
+                title:"Are you sure?",
+                text:"This form will be submitted",
+                icon:"warning",
+                buttons:true,
+                dangerMode:true,
+            })
+            .then((isOkey) => {
+                if(isOkey) {
+                    swal({
+                        title: "Good job!",
+                        text: "You have successfully booked your hotel room !",
+                        icon: "success",
+                        buttons:true,
+                        dangerMode:true,
+                    })
+                        .then((isOkey) => {
+                            if(isOkey) {
+                                form.submit();
+                            }else {
+                                form.submit();
+                            }
+
+                        });
+
+                }
+
+            });
+            return false;
+        }
+    </script>
+
     <!--JavaScript-->
     <script src="../../static/js/room-bookings.js"></script>
     <script src="../Utilities/smoothscroll-for-websites-master/SmoothScroll.js"></script>
     <script src="../Utilities/LiveChat.js"></script>
     <!--Form Feedback (position: fixed): https://webengage.com/ , phai dang ky', chua tach ra duoc file rieng do co' kem` id-->
+    <script id="_webengage_script_tag" type="text/javascript">
+        var webengage;
+        !function (e, t, n) {
+            function o(e, t) {
+                e[t[t.length - 1]] = function () {
+                    r.__queue.push([t.join("."), arguments])
+                }
+            }
 
-
-<!--    <script id="_webengage_script_tag" type="text/javascript">-->
-<!--        var webengage;-->
-<!--        !function (e, t, n) {-->
-<!--            function o(e, t) {-->
-<!--                e[t[t.length - 1]] = function () {-->
-<!--                    r.__queue.push([t.join("."), arguments])-->
-<!--                }-->
-<!--            }-->
-
-<!--            var i, s, r = e[n], g = " ", l = "init options track onReady".split(g),-->
-<!--                a = "feedback survey notification".split(g), c = "options render clear abort".split(g),-->
-<!--                p = "Open Close Submit Complete View Click".split(g), u = "identify login logout setAttribute".split(g);-->
-<!--            if (!r || !r.__v) {-->
-<!--                for (e[n] = r = {__queue: [], __v: "5.0", user: {}}, i = 0; i < l.length; i++) o(r, [l[i]]);-->
-<!--                for (i = 0; i < a.length; i++) {-->
-<!--                    for (r[a[i]] = {}, s = 0; s < c.length; s++) o(r[a[i]], [a[i], c[s]]);-->
-<!--                    for (s = 0; s < p.length; s++) o(r[a[i]], [a[i], "on" + p[s]])-->
-<!--                }-->
-<!--                for (i = 0; i < u.length; i++) o(r.user, ["user", u[i]]);-->
-<!--                var f = t.createElement("script"), d = t.getElementById("_webengage_script_tag");-->
-<!--                f.type = "text/javascript", f.async = !0, f.src = ("https:" == t.location.protocol ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-5.0.js", d.parentNode.insertBefore(f, d)-->
-<!--            }-->
-<!--        }(window, document, "webengage");-->
-<!--        webengage.init('~15ba209b4');-->
-<!--        webengage.options('isDemoMode', true);-->
-<!--    </script>-->
-
-
+            var i, s, r = e[n], g = " ", l = "init options track onReady".split(g),
+                a = "feedback survey notification".split(g), c = "options render clear abort".split(g),
+                p = "Open Close Submit Complete View Click".split(g), u = "identify login logout setAttribute".split(g);
+            if (!r || !r.__v) {
+                for (e[n] = r = {__queue: [], __v: "5.0", user: {}}, i = 0; i < l.length; i++) o(r, [l[i]]);
+                for (i = 0; i < a.length; i++) {
+                    for (r[a[i]] = {}, s = 0; s < c.length; s++) o(r[a[i]], [a[i], c[s]]);
+                    for (s = 0; s < p.length; s++) o(r[a[i]], [a[i], "on" + p[s]])
+                }
+                for (i = 0; i < u.length; i++) o(r.user, ["user", u[i]]);
+                var f = t.createElement("script"), d = t.getElementById("_webengage_script_tag");
+                f.type = "text/javascript", f.async = !0, f.src = ("https:" == t.location.protocol ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-5.0.js", d.parentNode.insertBefore(f, d)
+            }
+        }(window, document, "webengage");
+        webengage.init('~15ba209b4');
+        webengage.options('isDemoMode', true);
+    </script>
 </div>
 </body>
 </html>

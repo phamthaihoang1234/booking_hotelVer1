@@ -1,7 +1,8 @@
 # booking_hotelVer1
 Team 5
 Project : Hotel Booking
-Farmwwork : Spring boot , MySql , Hibernate
+Farmwwork : Spring boot 
+            MySql , Hibernate
 
 Mentor : Thầy Nguyễn Đức Trung
 
