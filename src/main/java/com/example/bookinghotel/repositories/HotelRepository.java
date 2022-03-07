@@ -19,6 +19,5 @@ public interface HotelRepository extends CrudRepository<Hotel, Long> {
 
     // phan dung code-end
 
-//    @Query(nativeQuery = true, value = "select hotel.* from hotel inner join rooms on hotel.id = rooms.hotel_id where rooms.id = ?1;")
-//    Optional<Hotel> findByRoomId(Long room_id);
+
 }
