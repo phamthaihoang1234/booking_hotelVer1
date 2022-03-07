@@ -58,4 +58,11 @@ public class HotelReportController {
         return "Room/hotel_report";
     }
 
+
+    @GetMapping("/hotelReportList_owner")
+    public String hotelReportListOwner(){
+        return "/Pages/owner/hotel_report_list";
+    }
+
+
 }
