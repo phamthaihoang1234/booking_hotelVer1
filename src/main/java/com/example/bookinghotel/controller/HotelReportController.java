@@ -45,6 +45,7 @@ public class HotelReportController {
         System.out.println("Room id :" + room_id);
         report.setEmail(report.getEmail());
         report.setMessage(report.getMessage());
+        report.setPhoneNumber(report.getPhoneNumber());
         report.setName(report.getName());
         report.setHotel(roomService.findById(room_id).get().getHotel());
         report.setRoom(roomService.findById(room_id).get());

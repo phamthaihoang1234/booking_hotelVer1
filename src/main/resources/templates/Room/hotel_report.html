@@ -237,7 +237,7 @@
             }
 
 
-            .name, .email, textarea {
+            .name, .email,.phone, textarea {
                 width: 280px;
             }
 
@@ -275,6 +275,7 @@
             e.preventDefault();
             e.target.elements.name.value = '';
             e.target.elements.email.value = '';
+            e.target.elements.phone.value = '';
             e.target.elements.message.value = '';
         });
     </script>
@@ -296,6 +297,12 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <input type="text" class="form-control" id="name" placeholder="NAME" name="name" value="" th:field="*{name}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="phone" value="" th:field="*{phoneNumber}" required>
                 </div>
             </div>
 
@@ -333,7 +340,6 @@
                 <li class="list-item"><i class="fa fa-phone fa-2x"><span class="contact-text phone"><a href="tel:1-212-555-5555" title="Give me a call">
                     <span th:text="${roomInfo.getHotel().getPhone()}"></span>
                 </a></span></i></li>
-
 
             </ul>
 

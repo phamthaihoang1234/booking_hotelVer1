@@ -2,6 +2,7 @@ package com.example.bookinghotel.entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 
 @Entity
@@ -14,8 +15,24 @@ public class Report {
     private Long id;
 
     @Column
+    @NotEmpty(message = "Name is not empty")
+    @NotNull
     private String name;
+
+
+    @NotEmpty
+    @Email(message = "Email is not valid")
     private String email;
+
+    @Size(max = 10, min = 10, message = "Mobile number should be of 10 digits")
+    @Pattern(regexp = "[0-9]{10}" ,message = "Phone number is invalid" )
+    @NotNull
+    @NotEmpty
+    private String phoneNumber;
+
+    @Size(max = 1000, min = 1)
+    @NotNull
+    @NotEmpty(message = "Message is not empty")
     private String message;
 
     @ManyToOne
@@ -30,16 +47,15 @@ public class Report {
 
     }
 
-    public Report(Long id, String name, String email, String message,Hotel hotel, Room room) {
+    public Report(Long id, String name, String email, String phoneNumber, String message, Hotel hotel, Room room) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.phoneNumber = phoneNumber;
         this.message = message;
         this.hotel = hotel;
         this.room = room;
     }
-
-
 
     public Long getId() {
         return id;
@@ -63,6 +79,14 @@ public class Report {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getMessage() {
