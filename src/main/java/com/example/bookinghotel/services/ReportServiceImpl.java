@@ -19,4 +19,10 @@ public class ReportServiceImpl implements ReportService{
         return hotelReportRepository.save(report);
     }
 
+    @Override
+    public void delete(Long id) {
+        hotelReportRepository.deleteById(id);
+    }
+
+
 }
