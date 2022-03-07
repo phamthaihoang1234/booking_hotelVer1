@@ -6,6 +6,6 @@ public interface ReportService {
 
     Report save(Report report);
 
-    Report delete(Long id);
+    void delete(Long id);
 
 }
