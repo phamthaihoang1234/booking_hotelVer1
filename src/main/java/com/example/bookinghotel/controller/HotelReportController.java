@@ -59,9 +59,18 @@ public class HotelReportController {
     }
 
 
-    @GetMapping("/hotelReportList_owner")
-    public String hotelReportListOwner(){
+    @GetMapping("/hotelReportList")
+    public String hotelReportListOwner(Model model){
+
+        model.addAttribute("report",hotelReportRepository.findAll());
+
         return "/Pages/owner/hotel_report_list";
+    }
+
+    @GetMapping("/deleteReport")
+    public String deleteHotelReport(long id){
+        reportService.delete(id);
+        return "redirect:/hotelReportList";
     }
 
 
