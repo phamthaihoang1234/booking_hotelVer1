@@ -399,21 +399,19 @@
                                                             </div>
                                                             <div class="col-12 col-sm-6">
                                                                 <label>Giới tính</label>
-                                                                <br>
-                                                                <label class="radio-container m-r-45">Name
-                                                                    <input type="radio" id="male" name="gender"
-                                                                           value="Male" th:value="${userInfo.gender}"
-                                                                           class="form-control"
-                                                                           th:field="*{userInfo.gender}" required>
-                                                                    <span class="checkmark"></span>
-                                                                </label>
-                                                                <label class="radio-container">Nữ
-                                                                    <input type="radio" name="gender" id="female"
-                                                                           value="Female" th:value="${userInfo.gender}"
-                                                                           class="form-control"
-                                                                           th:field="*{userInfo.gender}" required>
-
-                                                                </label></div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"  th:field="*{userInfo.gender}" id="flexRadioMale" value="Male">
+                                                                    <label class="form-check-label" for="flexRadioMale">
+                                                                        Nam
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"  th:field="*{userInfo.gender}" id="flexRadioFemale" value="Female" checked>
+                                                                    <label class="form-check-label" for="flexRadioFemale">
+                                                                        Nữ
+                                                                    </label>
+                                                                </div>
+                                                            </div>
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label>Địa chỉ </label>
