@@ -2,8 +2,13 @@ package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.*;
 import com.example.bookinghotel.repositories.PropertyTypeRepository;
+import com.example.bookinghotel.services.BookingService;
+import com.example.bookinghotel.services.HomeService;
 import com.example.bookinghotel.services.HotelService;
+import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -23,14 +31,84 @@ public class HotelDetailDController {
     @Autowired
     PropertyTypeRepository propertyTypeRepository;
 
+    @Autowired
+    HomeService homeService;
+
+    @Autowired
+    BookingService bookingService;
+
+    @Autowired
+    UserService userService;
+
+
+
+
+
+    Long idHotel;
     @GetMapping("/hotel_detail{id}")
     public String hotelDetail(@PathVariable("id") Long id, Model model) {
         Optional<Hotel> hotel = hotelService.findById(id);
+        idHotel = id;
+        System.out.println("idHotel là:"+ idHotel);
         if (hotel.isPresent()) {
             model.addAttribute("background_image", hotel.get().getImages().get(0).getImage());
             model.addAttribute("hotel", hotel.get());
             return "hotel_details/index";
         }
+        return "redirect:/";
+    }
+
+    private String getPrincipal() {
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
+    public static String getLocalDate(String date){
+        String[] arr = date.split("/");
+        if(arr[0].length() == 1){
+            return arr[2] +"-"+ "0" + arr[0]+ "-" +arr[1];
+        }
+        return arr[2] +"-"+arr[0]+"-"+arr[1];
+    }
+
+    @GetMapping("/saveBooking")
+    public String saveBooking(@RequestParam("checkin") String checkin,
+                              @RequestParam("checkout") String checkout,
+                              @RequestParam("numberOfRoom") String numberOfRoom,
+                              @RequestParam("numberOfGu") String numberOfGu,
+                              @RequestParam("totalPrice") String totalPrice,
+                              @RequestParam("roomId") String roomId,
+                              @RequestParam("numberNight") String numberNight
+
+    )
+    {
+        Booking b = new Booking();
+        b.setNumNight(Integer.parseInt(numberNight));
+        b.setNumberOfGuests(Integer.parseInt(numberOfGu));
+        b.setPrice(Double.parseDouble(totalPrice));
+        b.setEndDate(LocalDate.parse(getLocalDate(checkout)));
+        b.setStartDate(LocalDate.parse(getLocalDate(checkin)));
+
+        b.setUser(userService.findById(1L).get());
+       // b.setUser(userService.findByUserName(getPrincipal()));
+
+        Room room = homeService.findById(Long.valueOf(roomId)).get();
+        RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),checkin,checkout,1,room.getPropertyType());
+        int k = 0;
+        for(int i=0; i < Integer.parseInt(numberOfRoom) ; i++){
+            b.setRoom(roomGroup.getEmpty_rooms().get(k));
+            bookingService.save(b);
+            k++;
+        }
+
         return "redirect:/";
     }
 
@@ -48,13 +126,6 @@ public class HotelDetailDController {
         if (find_hotel.isPresent()) {
             hotel = find_hotel.get();
             List<Room> rooms = hotel.getRooms();
-//            if (rooms != null) {
-//                rooms = sortByPrice(rooms, "ASC");
-//
-//                rooms = filterByDateBookingAndNumberOfPeople(rooms, start_date, end_date, number_of_people);
-//                mv.addObject("rooms", rooms);
-//
-//            }
             if(rooms!=null){
                 List<RoomGroup> roomGroups = getAllFilteredRoomGroup(hotel.getId()
                         ,start_date,end_date,number_of_people);
@@ -68,6 +139,28 @@ public class HotelDetailDController {
 
         return mv;
 
+    }
+
+    @PostMapping("/checkAvailableHotelByDate")
+    public void checkAvailableHotelByDate(@RequestParam("room_id")String room_id,
+                                    @RequestParam("start_date")String start_date,
+                                    @RequestParam("end_date")String end_date,
+                                          HttpServletResponse response){
+        System.out.println("id cua room la" + room_id);
+        System.out.println("start date " + start_date);
+        System.out.println("end date" + end_date);
+        String ans = "";
+        Room room = homeService.findById(Long.valueOf(room_id)).get();
+       RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),start_date,end_date,1,room.getPropertyType());
+       if(roomGroup != null){
+           ans = String.valueOf(roomGroup.getEmpty_rooms().size());
+       }
+
+        try (PrintWriter out = response.getWriter()) {
+            out.write(ans);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // co the return null neu hotel_id sai

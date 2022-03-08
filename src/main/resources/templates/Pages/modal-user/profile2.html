@@ -399,21 +399,19 @@
                                                             </div>
                                                             <div class="col-12 col-sm-6">
                                                                 <label>Giới tính</label>
-                                                                <br>
-                                                                <label class="radio-container m-r-45">Name
-                                                                    <input type="radio" id="male" name="gender"
-                                                                           value="Male" th:value="${userInfo.gender}"
-                                                                           class="form-control"
-                                                                           th:field="*{userInfo.gender}" required>
-                                                                    <span class="checkmark"></span>
-                                                                </label>
-                                                                <label class="radio-container">Nữ
-                                                                    <input type="radio" name="gender" id="female"
-                                                                           value="Female" th:value="${userInfo.gender}"
-                                                                           class="form-control"
-                                                                           th:field="*{userInfo.gender}" required>
-
-                                                                </label></div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"  th:field="*{userInfo.gender}" id="flexRadioMale" value="Male">
+                                                                    <label class="form-check-label" for="flexRadioMale">
+                                                                        Nam
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"  th:field="*{userInfo.gender}" id="flexRadioFemale" value="Female" checked>
+                                                                    <label class="form-check-label" for="flexRadioFemale">
+                                                                        Nữ
+                                                                    </label>
+                                                                </div>
+                                                            </div>
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label>Địa chỉ </label>
@@ -472,114 +470,138 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-content profile-tab-cont">
-                            <div class="tab-pane fade show active" id="termOfService_tab">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title d-flex justify-content-between">
-                                                    <span>Thông tin điều khoản dịch vụ</span>
-                                                    <a class="edit-link" data-toggle="modal"
-                                                       href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Chỉnh
-                                                        sửa thông tin điều khoản</a>
-                                                </h5>
-                                                <div class="row mt-5">
-                                                    <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Nội dung điều khoản: </p>
-                                                    <p class="col-sm-9" th:text="${userInfo.name}"></p>
-                                                </div>
 
+                        <div class="tab-pane fade" id="termOfService_tab">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Điều khoản dịch vụ:</span>
+                                                <a class="edit-link" data-toggle="modal"
+                                                   href="#edit_termOfService"><i class="fa fa-edit mr-1"></i>Chỉnh
+                                                    sửa</a>
+                                            </h5>
+                                            <div class="row mt-5">
+                                                <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Điều khoản: </p>
+                                                <p class="col-sm-9" th:text="${userInfo.name}"></p>
                                             </div>
-                                        </div>
-                                        <div class="modal fade" id="edit_termOfService" aria-hidden="true" role="dialog">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Chỉnh sửa thông tin điều khoản</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="row form-row">
-                                                                <div class="col-12 col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <label>Họ và tên</label>
-                                                                        <input type="text" class="form-control"
-                                                                               th:value="${userInfo.name}"
-                                                                               th:field="*{userInfo.name}" id="txtTermOfService">
-                                                                    </div>
-                                                                </div>
 
-                                                            <button type="submit" class="btn btn-primary btn-block"
-                                                                    id="btEditProfile" onclick="saveInforUpdate()"
-                                                            >Xác nhận
-                                                                chỉnh sửa
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="edit_termOfService" aria-hidden="true"
+                                         role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Chỉnh sửa điều khoản</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="row form-row">
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Điều khoản dịch vụ: </label>
+                                                                    <input type="text" class="form-control"
+                                                                           th:value="${userInfo.name}"
+                                                                           th:field="*{userInfo.name}" id="txtRule">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary btn-block"
+                                                                id="btEditTermOfService" onclick=""
+                                                        >Xác nhận
+                                                            chỉnh sửa điều khoản
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="../assets/js/jquery-3.5.1.min.js"></script>
-<script src="../assets/js/popper.min.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/moment.min.js"></script>
-<script src="../assets/js/select2.min.js"></script>
-<script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
-<script src="../assets/js/script.js"></script>
-<script type="text/javascript" src="../assets/js/profile.js"></script>
-<script>
-    document.getElementById("buttonChangePass").addEventListener("click", function (event) {
-        event.preventDefault()
-        let newPass = document.getElementsByName("newPassword")[0]
-        let newPass2 = document.getElementsByName("newPassword2")[0]
-        if (newPass.value.length <= 8) {
-            console.log("NewPass: " + newPass.value)
-            document.getElementById("message").innerText = "Mật khẩu chưa đủ 8 kí tự"
-        } else if (newPass.value.length != newPass2.value.length) {
-            console.log("NewPass: " + newPass.value)
-            console.log("NewPass2: " + newPass2.value)
-            document.getElementById("message").innerText = "Mật khẩu mới và xác nhận mật khẩu mới chưa trùng khớp"
-        } else {
-            $("#FormChangePassWord").submit()
-        }
-    });
-    document.getElementById("btEditProfile").addEventListener("click", function (event) {
-        event.preventDefault()
-        let txtName = document.getElementsByName("txtName")[0]
-        let txtEmail = document.getElementsByName("txtEmail")[0]
-        let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
-        let txtAddress = document.getElementsByName("txtAddress")[0]
-        $("input[name='gender']").each(function () {
-            alert($(this).val());
+    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="../assets/js/jquery-3.5.1.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/moment.min.js"></script>
+    <script src="../assets/js/select2.min.js"></script>
+    <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script type="text/javascript" src="../assets/js/profile.js"></script>
+    <script>
+        document.getElementById("buttonChangePass").addEventListener("click", function (event) {
+            event.preventDefault()
+            let newPass = document.getElementsByName("newPassword")[0]
+            let newPass2 = document.getElementsByName("newPassword2")[0]
+            if (newPass.value.length <= 8) {
+                console.log("NewPass: " + newPass.value)
+                document.getElementById("message").innerText = "Mật khẩu chưa đủ 8 kí tự"
+            } else if (newPass.value.length != newPass2.value.length) {
+                console.log("NewPass: " + newPass.value)
+                console.log("NewPass2: " + newPass2.value)
+                document.getElementById("message").innerText = "Mật khẩu mới và xác nhận mật khẩu mới chưa trùng khớp"
+            } else {
+                $("#FormChangePassWord").submit()
+            }
         });
-        let regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b$/
-        let regexEmail = /^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$/
-        if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0 ||) {
-            document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
-        } else if (numericReg.test(txtPhoneNumber)) {
-            document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
-        } else if (regexEmail.test(txtEmail)) {
-            document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
-        } else {
-            $("#FormChangePassWord").submit()
-        }
-    })
-    ;
-</script>
+        // document.getElementById("btEditProfile").addEventListener("click", function (event) {
+        //     event.preventDefault()
+        //     let txtName = document.getElementsByName("txtName")[0]
+        //     let txtEmail = document.getElementsByName("txtEmail")[0]
+        //     let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
+        //     let txtAddress = document.getElementsByName("txtAddress")[0]
+        //     $("input[name='gender']").each(function () {
+        //         alert($(this).val());
+        //     });
+        //     let regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b$/
+        //     let regexEmail = /^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$/
+        //     if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0 ||) {
+        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
+        //     } else if (numericReg.test(txtPhoneNumber)) {
+        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
+        //     } else if (regexEmail.test(txtEmail)) {
+        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
+        //     } else {
+        //         $("#FormChangePassWord").submit()
+        //     }
+        // })
+        // ;
+        // document.getElementById("btEditProfile").addEventListener("click", function (event) {
+        //     event.preventDefault()
+        //     let txtName = document.getElementsByName("txtName")[0]
+        //     let txtEmail = document.getElementsByName("txtEmail")[0]
+        //     let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
+        //     let txtAddress = document.getElementsByName("txtAddress")[0]
+        //     $("input[name='gender']").each(function () {
+        //         alert($(this).val());
+        //     });
+        //     let regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b$/
+        //     let regexEmail = /^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$/
+        //     if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0 ||) {
+        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
+        //     } else if (numericReg.test(txtPhoneNumber)) {
+        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
+        //     } else if (regexEmail.test(txtEmail)) {
+        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
+        //     } else {
+        //         $("#FormChangePassWord").submit()
+        //     }
+        // })
+        // ;
+    </script>
+</div>
 </body>
 
 </html>

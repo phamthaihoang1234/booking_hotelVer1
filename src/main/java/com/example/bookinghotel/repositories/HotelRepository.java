@@ -2,7 +2,6 @@ package com.example.bookinghotel.repositories;
 
 
 import com.example.bookinghotel.entities.Hotel;
-import com.example.bookinghotel.entities.Room;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -18,8 +17,7 @@ public interface HotelRepository extends CrudRepository<Hotel, Long> {
     Optional<Hotel> findByNameOfHotel(String hotel_name);
 
 
-    @Query(value = "SELECT * FROM hotel where user_id = ?1", nativeQuery = true)
-    Iterable<Hotel> findAllHotelByUserId(long id);
-
     // phan dung code-end
+
+
 }

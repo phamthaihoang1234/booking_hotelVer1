@@ -74,10 +74,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/","login","/register","/sendEmail").permitAll()
+        http.authorizeRequests().antMatchers("/","login","/register","/sendEmail","/checkAvailableHotelByDate").permitAll()
                 .antMatchers(HttpMethod.POST).permitAll()
                 //.antMatchers("/login").access("hasAnyRole('ROLE_USER')")
-                .antMatchers("/manageHotels","/homepageHotel","/roomHomepage").access("hasRole('ROLE_OWNER')")
+                .antMatchers("/manageHotels").access("hasRole('ROLE_OWNER')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
 
             //  .and().formLogin().successHandler(customSuccessHandler)

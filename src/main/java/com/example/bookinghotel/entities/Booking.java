@@ -13,13 +13,13 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Booking extends AbstractEntity implements Serializable {
     @Column(name = "number_of_guests")
-    private Byte numberOfGuests;
+    private int numberOfGuests;
 
-    @Column(name = "number_of_children")
-    private Byte numberOfChildren;
-
-    @Column(name = "number_of_infants")
-    private Byte numberOfInfants;
+//    @Column(name = "number_of_children")
+//    private Byte numberOfChildren;
+//
+//    @Column(name = "number_of_infants")
+//    private Byte numberOfInfants;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -28,10 +28,10 @@ public class Booking extends AbstractEntity implements Serializable {
     @Column(name = "status", length = 15)
     private BookingStatus status;
 
-    @Transient
+    @Column(name = "num_Night")
     private int numNight;
 
-    @Transient
+    @Column(name = "total_Prize")
     private double price;
 
     // fetch = FetchType.LAZY khi select đối tượng Booking thì mặc định không query các đối tượng User liên quan.
@@ -58,28 +58,12 @@ public class Booking extends AbstractEntity implements Serializable {
 //    @JsonIgnore
     private Room room;
 
-    public Byte getNumberOfGuests() {
+    public int getNumberOfGuests() {
         return numberOfGuests;
     }
 
-    public void setNumberOfGuests(Byte numberOfGuests) {
+    public void setNumberOfGuests(int numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
-    }
-
-    public Byte getNumberOfChildren() {
-        return numberOfChildren;
-    }
-
-    public void setNumberOfChildren(Byte numberOfChildren) {
-        this.numberOfChildren = numberOfChildren;
-    }
-
-    public Byte getNumberOfInfants() {
-        return numberOfInfants;
-    }
-
-    public void setNumberOfInfants(Byte numberOfInfants) {
-        this.numberOfInfants = numberOfInfants;
     }
 
     public LocalDate getStartDate() {
@@ -106,6 +90,22 @@ public class Booking extends AbstractEntity implements Serializable {
         this.status = status;
     }
 
+    public int getNumNight() {
+        return numNight;
+    }
+
+    public void setNumNight(int numNight) {
+        this.numNight = numNight;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public UserInfo getUser() {
         return user;
     }
@@ -120,21 +120,5 @@ public class Booking extends AbstractEntity implements Serializable {
 
     public void setRoom(Room room) {
         this.room = room;
-    }
-
-    public int getNumNight() {
-        return this.endDate.getDayOfMonth() - this.startDate.getDayOfMonth();
-    }
-
-    public void setNumNight(int numNight) {
-        this.numNight = numNight;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public double getPrice() {
-        return (this.getNumNight() * this.room.getPricePerNight());
     }
 }
