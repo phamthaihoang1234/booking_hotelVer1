@@ -1531,6 +1531,8 @@
 
         });
 
+
+
         //  link to search-hotels
         $(document).ready(function () {
             //ko duoc $('#left-nav-city').click(function(){
@@ -1760,6 +1762,20 @@
         //         }
         //     });
         // }
+
+        $(document).ready(function (){
+            $('.minus img-not-allowed').click(function (){
+                var iGuest = 0;
+                iGuest = document.getElementById('numberGuess').value;
+                $('#numberGuess').val(iGuest-1);
+            })
+
+            $('.plus img-allowed').click(function (){
+                var iGuest = 0;
+                iGuest = document.getElementById('numberGuess').value;
+                $('#numberGuess').val(iGuest+1);
+            })
+        });
 
         window.onload = function exampleFunction() {
             // document.getElementById('slt-rooms').hidden = true;
@@ -3329,8 +3345,11 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
+                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
+                            <span id="numberGuess">1</span>
+                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
 <!--                            <input type="number" class="form-control" value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>-->
-                            <input type="number"  value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>
+<!--                            <input type="number"  value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>-->
                         </td>
                         <!--tuy theo chinh sach cua tung` ks ma` gia phong` duoc quy dinh theo SL khach' o?-->
                         <td><input id="price" readonly th:value="${roomDetail.getPricePerNight()}" /></td>
