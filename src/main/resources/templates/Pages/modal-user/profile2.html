@@ -462,8 +462,8 @@
                                                     khẩu
                                                 </button>
                                                 <!--/*@thymesVar id="statusChangePassWord" type=""*/-->
-                                                <p style="color: red;" th:if="${statusChangePassWord}"
-                                                   th:text="${statusChangePassWord}"></p>
+                                                <p style="color: red;"
+                                                   th:text="*{statusChangePassWord}"></p>
                                             </form>
                                         </div>
                                     </div>
@@ -545,7 +545,7 @@
             event.preventDefault()
             let newPass = document.getElementsByName("newPassword")[0]
             let newPass2 = document.getElementsByName("newPassword2")[0]
-            if (newPass.value.length <= 8) {
+            if (newPass.value.length < 8) {
                 console.log("NewPass: " + newPass.value)
                 document.getElementById("message").innerText = "Mật khẩu chưa đủ 8 kí tự"
             } else if (newPass.value.length != newPass2.value.length) {

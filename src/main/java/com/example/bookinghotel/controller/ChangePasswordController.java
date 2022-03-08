@@ -29,12 +29,16 @@ public class ChangePasswordController {
     private UserInfo oldUserInfo;
 
     @PostMapping("/saveChangePasword")
-    public String saveChangePasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPassword2, Model model, @ModelAttribute UserInfo userInfo) {
+    public String saveChangePasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Model model, @ModelAttribute UserInfo userInfo) {
         UserInfo user = null;
         try{
-            user = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword).get();
-          //  UserInfo.getPasswordEncoder().matches(oldPassword,user.getPassword());
-            if (user != null) {
+            user = userService.findByUserName(this.getPrincipal());
+           boolean verifyPassword= UserInfo.getPasswordEncoder().matches(oldPassword,user.getPassword());
+            System.out.println("Class: ChangePasswordController | Method: saveChangePasword | verifyPassword:"+verifyPassword);
+            System.out.println("Class: ChangePasswordController | Method: saveChangePasword | user.getPassword():"+user.getPassword());
+            System.out.println("Class: ChangePasswordController | Method: saveChangePasword | oldPassword:"+oldPassword);
+
+            if (verifyPassword) {
                 user.setPassword(newPassword);
                 userService.save(user);
                 model.addAttribute("statusChangePassWord", "Thay đổi mật khẩu thành công !!!");
@@ -45,8 +49,9 @@ public class ChangePasswordController {
             e.printStackTrace();
             model.addAttribute("statusChangePassWord", "e.printStackTrace()");
         }
-        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
-        return "Pages/modal-user/profile2";
+        System.out.println("Class: ChangePasswordController | Method: saveChangePasword | statusChangePassWord:"+model.getAttribute("statusChangePassWord").toString());
+
+        return  model.getAttribute("statusChangePassWord").toString();
     }
 
 
