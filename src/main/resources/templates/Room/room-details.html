@@ -1854,7 +1854,7 @@
             nGuess = parseInt($(x).parent().find('span').text());
 
 
-            if(nGuess == 3 || numberRoomEmpty == 0){
+            if(nGuess == 3 || numberRoomEmpty == 0 || nRoom == 0){
                 document.getElementById('plusG').classList.remove("guess-plus");
                 document.getElementById('plusG').classList.add("img-not-allowed");
             }else {
@@ -2038,7 +2038,14 @@
              nRoom = parseInt($(this).parent().find('span').text());
             console.log(nRoom);
             $('#slt-rooms').html(nRoom-1);
+            if(nRoom-1 == 0){
+                console.log("dkm");
+                document.getElementById('plusG').classList.remove("guess-plus");
+                document.getElementById('plusG').classList.add("img-not-allowed");
+                $('#numberGuess').html(0);
+                nGuess=0;
 
+            }
             var amount = nRoom-1;
             var iRoom = amount;
                 function GetDays() {
