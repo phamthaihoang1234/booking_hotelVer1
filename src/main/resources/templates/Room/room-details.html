@@ -1094,7 +1094,25 @@
             transition: background .3s linear;
         }
 
-        .img-allowed {
+        .img-allowed  {
+            cursor: pointer;
+
+
+        }
+
+        .room-minus{
+            cursor: pointer;
+        }
+
+        .guess-plus {
+            cursor: pointer;
+        }
+
+        .guess-minus{
+            cursor: pointer;
+        }
+
+        .room-plus {
             cursor: pointer;
         }
 
@@ -1777,6 +1795,616 @@
             })
         });
 
+        // $(document).ready(function (){
+        //     $('.room-minus').click(function (){
+        //         console.log("vao minus");
+        //         nRoom = document.getElementById('slt-rooms').value;
+        //         $('#slt-rooms').val(nRoom-1);
+        //     })
+        //
+        //     $('.room-plus').click(function (){
+        //
+        //         nRoom = document.getElementById('slt-rooms').value;
+        //         $('#slt-rooms').val(nRoom+1);
+        //     })
+        // });
+
+
+        function minusRoom(x){
+            nRoom = parseInt($(x).parent().find('span').text());
+
+
+            if(nRoom == 0){
+                document.getElementById('minusR').classList.remove("room-minus");
+                document.getElementById('minusR').classList.add("img-not-allowed");
+            }else {
+                document.getElementById('minusR').classList.add("room-minus");
+                document.getElementById('minusR').classList.remove("img-not-allowed");
+            }
+        }
+
+        function plusRoom(x){
+            nRoom = parseInt($(x).parent().find('span').text());
+            console.log("vao di chuot");
+            console.log(nRoom);
+
+            if(nRoom == numberRoomEmpty){
+                document.getElementById('plusR').classList.remove("room-plus");
+                document.getElementById('plusR').classList.add("img-not-allowed");
+            }else {
+                document.getElementById('plusR').classList.add("room-plus");
+                document.getElementById('plusR').classList.remove("img-not-allowed");
+            }
+        }
+
+        function minusGuess(x){
+            nGuess = parseInt($(x).parent().find('span').text());
+
+
+            if(nGuess == 0){
+                document.getElementById('minusG').classList.remove("guess-minus");
+                document.getElementById('minusG').classList.add("img-not-allowed");
+            }else {
+                document.getElementById('minusG').classList.add("guess-minus");
+                document.getElementById('minusG').classList.remove("img-not-allowed");
+            }
+        }
+
+        function plusGuess(x){
+            nGuess = parseInt($(x).parent().find('span').text());
+
+
+            if(nGuess == 3 || numberRoomEmpty == 0){
+                document.getElementById('plusG').classList.remove("guess-plus");
+                document.getElementById('plusG').classList.add("img-not-allowed");
+            }else {
+                document.getElementById('plusG').classList.add("guess-plus");
+                document.getElementById('plusG').classList.remove("img-not-allowed");
+            }
+        }
+
+        $(document).on("click", '.guess-minus', function (){
+            nGuess = parseInt($(this).parent().find('span').text());
+
+            $('#numberGuess').html(nGuess-1);
+
+            if(nGuess - 1 == 0){
+                document.getElementById('minusG').classList.remove("guess-minus");
+                document.getElementById('minusG').classList.add("img-not-allowed");
+            }else {
+                document.getElementById('minusG').classList.add("guess-minus");
+                document.getElementById('minusG').classList.remove("img-not-allowed");
+            }
+            var iGuest = 0;
+            iGuest = nGuess -1 ;
+            nGuess = iGuest;
+            function GetDays() {
+                var check_in = new Date(document.getElementById("date1").value);
+                var check_out = new Date(document.getElementById("date2").value);
+                console.log(document.getElementById("date1").value);
+                if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                    //alert('Nhận phòng & Trả phòng không hợp lệ');
+                    //ko can show tooltip, da cai day du tai nut DAT PHONG
+                    console.log(check_in);
+                    console.log(check_in.getMonth());
+                    console.log(check_in.getDate());
+                    console.log(check_in.getDay());
+
+                    return 0;
+                } else if (check_out < check_in) {
+                    //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                    $('.validation-advice').fadeIn();
+                    return 0;
+                } else {
+                    //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                    console.log("vao tinh ngay");
+                    console.log(check_in);
+                    return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                }
+            }
+            if(iGuest > (nRoom*3)){
+                swal({
+                    title: "Number of guess incorrect!",
+                    text: "The number of people has exceeded the allowed limit!",
+                    icon: "warning",
+                    button: "OK",
+                });
+                document.getElementById('book-now').disabled = true;
+            }
+
+            if(iGuest < 0){
+                swal({
+                    title: "Number of guess incorrect!",
+                    text: "The number of people has exceeded the allowed limit!",
+                    icon: "warning",
+                    button: "OK",
+                });
+                document.getElementById('book-now').disabled = true;
+            }
+
+            if(iGuest == 0) {
+                document.getElementById('book-now').disabled = true;
+            }
+
+            if(iGuest <= 0) iGuest = 0;
+            if(nRoom <= 0) nRoom = 0;
+
+            if(iGuest >0 && nRoom > 0 && iGuest <= (nRoom*3)  && check == 1 && GetDays() != -1){
+                document.getElementById('book-now').disabled = false;
+            }
+
+            $('#table-result-11').html(nRoom);
+            $('#table-result-12').html(iGuest);
+            $('#table-result-13').html(GetDays());
+            $('#table-13').val(GetDays());
+            $('#table-result-21').html(nRoom);
+            $('#table-result-22').html(iGuest);
+            $('#table-21').val(nRoom);
+            $('#table-22').val(iGuest);
+            $('#tien-thanhtoan').val(totalL);
+            $('#tien-thanh').val(totalL);
+            $('#table-result-2').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+            $('#tien-thanhtoan').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+            $('#tien-thanh').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+        });
+
+        $(document).on("click", '.guess-plus', function (){
+            nGuess = parseInt($(this).parent().find('span').text());
+
+            $('#numberGuess').html(nGuess+1);
+
+            if(nGuess + 1 == 3){
+                document.getElementById('plusG').classList.remove("guess-plus");
+                document.getElementById('plusG').classList.add("img-not-allowed");
+            }else {
+                document.getElementById('plusG').classList.add("guess-plus");
+                document.getElementById('plusG').classList.remove("img-not-allowed");
+            }
+            var iGuest = 0;
+            iGuest = nGuess +1 ;
+            nGuess = iGuest;
+            function GetDays() {
+                var check_in = new Date(document.getElementById("date1").value);
+                var check_out = new Date(document.getElementById("date2").value);
+                console.log(document.getElementById("date1").value);
+                if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                    //alert('Nhận phòng & Trả phòng không hợp lệ');
+                    //ko can show tooltip, da cai day du tai nut DAT PHONG
+                    console.log(check_in);
+                    console.log(check_in.getMonth());
+                    console.log(check_in.getDate());
+                    console.log(check_in.getDay());
+
+                    return 0;
+                } else if (check_out < check_in) {
+                    //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                    $('.validation-advice').fadeIn();
+                    return 0;
+                } else {
+                    //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                    console.log("vao tinh ngay");
+                    console.log(check_in);
+                    return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                }
+            }
+            if(iGuest > (nRoom*3)){
+                swal({
+                    title: "Number of guess incorrect!",
+                    text: "The number of people has exceeded the allowed limit!",
+                    icon: "warning",
+                    button: "OK",
+                });
+                document.getElementById('book-now').disabled = true;
+            }
+
+            if(iGuest < 0){
+                swal({
+                    title: "Number of guess incorrect!",
+                    text: "The number of people has exceeded the allowed limit!",
+                    icon: "warning",
+                    button: "OK",
+                });
+                document.getElementById('book-now').disabled = true;
+            }
+
+            if(iGuest == 0) {
+                document.getElementById('book-now').disabled = true;
+            }
+
+            if(iGuest <= 0) iGuest = 0;
+            if(nRoom <= 0) nRoom = 0;
+
+            if(iGuest >0 && nRoom > 0 && iGuest <= (nRoom*3)  && check == 1 && GetDays() != -1){
+                document.getElementById('book-now').disabled = false;
+            }
+
+            $('#table-result-11').html(nRoom);
+            $('#table-result-12').html(iGuest);
+            $('#table-result-13').html(GetDays());
+            $('#table-13').val(GetDays());
+            $('#table-result-21').html(nRoom);
+            $('#table-result-22').html(iGuest);
+            $('#table-21').val(nRoom);
+            $('#table-22').val(iGuest);
+            $('#tien-thanhtoan').val(totalL);
+            $('#tien-thanh').val(totalL);
+            $('#table-result-2').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+            $('#tien-thanhtoan').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+            $('#tien-thanh').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+        });
+
+
+        $(document).on("click", '.room-minus', function () {
+             nRoom = parseInt($(this).parent().find('span').text());
+            console.log(nRoom);
+            $('#slt-rooms').html(nRoom-1);
+
+            var amount = nRoom-1;
+            var iRoom = amount;
+                function GetDays() {
+                    var check_in = new Date(document.getElementById("date1").value);
+                    var check_out = new Date(document.getElementById("date2").value);
+
+                    if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                        //alert('Nhận phòng & Trả phòng không hợp lệ');
+                        //ko can show tooltip, da cai day du tai nut DAT PHONG
+                        console.log("vao null");
+                        return 0;
+                    } else if (check_out < check_in) {
+                        //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                        $('.validation-advice').fadeIn();
+                        return 0;
+                    } else {
+                        console.log("vao tinh ngay");
+                        console.log(parseInt((check_out - check_in) / (24 * 3600 * 1000)));
+                        return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                    }
+                }
+
+
+                var prize = document.getElementById('price').value;
+                var total ;
+                var iGuest = 0;
+                total = prize*iRoom;
+                totalL = total;
+                nRoom = iRoom
+                iGuest = nGuess;
+
+                console.log(iRoom);
+                console.log(iGuest);
+                console.log(total);
+
+            if(nRoom == 0){
+                document.getElementById('minusR').classList.remove("room-minus");
+                document.getElementById('minusR').classList.add("img-not-allowed");
+            }else {
+                document.getElementById('minusR').classList.add("room-minus");
+                document.getElementById('minusR').classList.remove("img-not-allowed");
+            }
+
+
+
+
+                if(iGuest == 0){
+                    document.getElementById('book-now').disabled = true;
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    // $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                }
+
+                if(iRoom == 0){
+                    console.log("vao iRoom =0");
+                    document.getElementById('book-now').disabled = true;
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                }
+                if(iGuest > (nRoom*3) && nGuess > 0 && iGuest > 0 ){
+                    swal({
+                        title: "Number of guess incorrect!",
+                        text: "The number of people has exceeded the allowed limit!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    document.getElementById('book-now').disabled = true;
+                }
+                if(iRoom > numberRoomEmpty){
+                    swal({
+                        title: "INVALID!",
+                        text: "Number of room is invalid!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    //document.getElementById('slt-rooms').disabled = true;
+                    document.getElementById('book-now').disabled = true;
+                }
+
+                if(iRoom < 0){
+                    console.log("vao iRoom  <0");
+                    iRoom = 0;
+                    swal({
+                        title: "Number of room incorrect!",
+                        text: "You need to try again enter number of room!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    document.getElementById('book-now').disabled = true;
+
+                }
+
+                if(iRoom > 0 && nGuess <= (iRoom*3) && nGuess > 0 && check == 1 && GetDays() != -1 && iRoom <= numberRoomEmpty) {
+                    console.log("vao iromm >=");
+                    console.log(iGuest);
+                    document.getElementById('book-now').disabled = false;
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    //document.getElementById('priceTotal').innerHTML = 1234;
+                    //$('#room-row1 #priceTotal').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'));
+                    // $('#table-result-2').html(total);
+
+                    console.log(prize);
+                    console.log(total);
+                    //ho tro khi click DAT PHONG
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanh').val(totalL);
+                    $('#table-13').val(GetDays());
+                    $('#tien-thanh').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    var iTotal = 0;
+                    for (var j = 1; j <= amount; j++) {
+//                  http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
+                        var replaceDot = $('#room-row' + j).find('.row-total').text().replace(/\./g, "");
+                        iTotal = iTotal + parseInt(replaceDot);
+                    }
+
+                    iTotal *= GetDays();
+
+//          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                }
+
+
+
+        });
+
+        $(document).on("click", '.room-plus', function () {
+            nRoom = parseInt($(this).parent().find('span').text());
+            console.log(nRoom);
+            $('#slt-rooms').html(nRoom+1);
+            var amount = nRoom+1;
+
+            if(amount == numberRoomEmpty){
+                document.getElementById('plusR').classList.remove("room-plus");
+                document.getElementById('plusR').classList.add("img-not-allowed");
+            }else {
+                document.getElementById('plusR').classList.add("room-plus");
+                document.getElementById('plusR').classList.remove("img-not-allowed");
+            }
+
+
+                var iRoom = amount;
+                function GetDays() {
+                    var check_in = new Date(document.getElementById("date1").value);
+                    var check_out = new Date(document.getElementById("date2").value);
+
+                    if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
+                        //alert('Nhận phòng & Trả phòng không hợp lệ');
+                        //ko can show tooltip, da cai day du tai nut DAT PHONG
+                        console.log("vao null");
+                        return 0;
+                    } else if (check_out < check_in) {
+                        //xay ra sau cung` (ko nhap chung voi If thu' nhat')
+                        $('.validation-advice').fadeIn();
+                        return 0;
+                    } else {
+                        console.log("vao tinh ngay");
+                        console.log(parseInt((check_out - check_in) / (24 * 3600 * 1000)));
+                        return parseInt((check_out - check_in) / (24 * 3600 * 1000));
+                    }
+                }
+
+
+            var prize = document.getElementById('price').value;
+                var total ;
+                var iGuest = 0;
+                total = prize*iRoom;
+                totalL = total;
+                nRoom = iRoom
+                iGuest = nGuess;
+
+                console.log(iRoom);
+                console.log(iGuest);
+                console.log(total);
+
+
+
+
+                if(iGuest == 0){
+                    document.getElementById('book-now').disabled = true;
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    // $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                }
+
+                if(iRoom == 0){
+                    console.log("vao iRoom =0");
+                    document.getElementById('book-now').disabled = true;
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                }
+                if(iGuest > (nRoom*3) && nGuess > 0 && iGuest > 0 ){
+                    swal({
+                        title: "Number of guess incorrect!",
+                        text: "The number of people has exceeded the allowed limit!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    document.getElementById('book-now').disabled = true;
+                }
+                if(iRoom > numberRoomEmpty){
+                    swal({
+                        title: "INVALID!",
+                        text: "Number of room is invalid!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    //document.getElementById('slt-rooms').disabled = true;
+                    document.getElementById('book-now').disabled = true;
+                }
+
+                if(iRoom < 0){
+                    console.log("vao iRoom  <0");
+                    iRoom = 0;
+                    swal({
+                        title: "Number of room incorrect!",
+                        text: "You need to try again enter number of room!",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    document.getElementById('book-now').disabled = true;
+
+                }
+
+                if(iRoom > 0 && nGuess <= (iRoom*3) && nGuess > 0 && check == 1 && GetDays() != -1 && iRoom <= numberRoomEmpty) {
+                    console.log("vao iromm >=");
+                    console.log(iGuest);
+                    document.getElementById('book-now').disabled = false;
+                    $('#table-result-11').html(iRoom);
+                    $('#table-result-12').html(iGuest);
+                    $('#table-result-13').html(GetDays());
+                    //document.getElementById('priceTotal').innerHTML = 1234;
+                    //$('#room-row1 #priceTotal').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'));
+                    // $('#table-result-2').html(total);
+
+                    console.log(prize);
+                    console.log(total);
+                    //ho tro khi click DAT PHONG
+                    $('#table-result-21').html(iRoom);
+                    $('#table-result-22').html(iGuest);
+                    $('#table-21').val(iRoom);
+                    $('#table-22').val(iGuest);
+                    $('#tien-thanhtoan').val(total);
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanh').val(totalL);
+                    $('#table-13').val(GetDays());
+                    $('#tien-thanh').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    var iTotal = 0;
+                    for (var j = 1; j <= amount; j++) {
+//                  http://stackoverflow.com/questions/16970237/jquery-replace-g-do-not-work-for-me-but-others
+                        var replaceDot = $('#room-row' + j).find('.row-total').text().replace(/\./g, "");
+                        iTotal = iTotal + parseInt(replaceDot);
+                    }
+
+                    iTotal *= GetDays();
+
+//          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
+                    $('#table-result-2').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                    $('#tien-thanhtoan').html(total.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                }
+
+
+
+        });
+
+
+
         window.onload = function exampleFunction() {
             // document.getElementById('slt-rooms').hidden = true;
             var date1 = new Date(document.getElementById("date1").value);
@@ -1789,11 +2417,11 @@
                 if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
                     //alert('Nhận phòng & Trả phòng không hợp lệ');
                     //ko can show tooltip, da cai day du tai nut DAT PHONG
-                    return -1;
+                    return 0;
                 } else if (check_out < check_in) {
                     //xay ra sau cung` (ko nhap chung voi If thu' nhat')
                     $('.validation-advice').fadeIn();
-                    return -1;
+                    return 0;
                 } else {
                     //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                     console.log("vao tinh ngay");
@@ -1825,8 +2453,9 @@
                     dataType: "text",
                     success: function (data) {
                         numberRoomEmpty = data;
-                        document.getElementById('roomEmpty').innerText = "We have "+ data + " rooms left";
+
                         if (data == 0) {
+                            document.getElementById('roomEmpty').innerText = "We have no "+  " rooms left";
                             swal({
                                 title: "SORRY!",
                                 text: "The hotel has sold out of rooms for the period you have selected!",
@@ -1846,6 +2475,7 @@
 
                             document.getElementById('book-now').disabled = true;
                         }else {
+                            document.getElementById('roomEmpty').innerText = "We have "+ data + " rooms left";
                             check =1;
                             if(GetDays() != -1 && nRoom > 0 && nGuess <= (nRoom*3) && nGuess > 0) document.getElementById('book-now').disabled = false;
 
@@ -1855,6 +2485,8 @@
                         alert("Request: " + JSON.stringify(request));
                     }
                 });
+            }else {
+                $('#table-result-13').html(0);
             }
         }
 
@@ -1863,9 +2495,6 @@
 
         $(document).ready(function (){
             $('#numberGuess').change(function (){
-
-
-
                 var iGuest = 0;
                 iGuest = document.getElementById('numberGuess').value;
                 nGuess = iGuest;
@@ -1881,11 +2510,11 @@
                         console.log(check_in.getDate());
                         console.log(check_in.getDay());
 
-                        return -1;
+                        return 0;
                     } else if (check_out < check_in) {
                         //xay ra sau cung` (ko nhap chung voi If thu' nhat')
                         $('.validation-advice').fadeIn();
-                        return -1;
+                        return 0;
                     } else {
                         //return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                         console.log("vao tinh ngay");
@@ -1956,11 +2585,11 @@
                    var check_out = new Date(document.getElementById("date2").value);
                    console.log(document.getElementById("date1").value);
                    if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
-                       return -1;
+                       return 0;
                    } else if (check_out < check_in) {
                        //xay ra sau cung` (ko nhap chung voi If thu' nhat')
                        $('.validation-advice').fadeIn();
-                       return -1;
+                       return 0;
                    } else {
                        return parseInt((check_out - check_in) / (24 * 3600 * 1000));
                    }
@@ -2011,7 +2640,11 @@
                            }else {
                                check =1;
                                if(GetDays() != -1 && nRoom > 0 && nGuess <= (nRoom*3) && nGuess > 0) document.getElementById('book-now').disabled = false;
-
+                               $('#tien-thanhtoan').val(totalL);
+                               $('#tien-thanh').val(totalL);
+                               $('#table-result-2').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                               $('#tien-thanhtoan').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
+                               $('#tien-thanh').html(totalL.toLocaleString('vn-VN', {style: 'currency', currency: 'VND'}));
                            }
                        },
                        error: function (request, error) {
@@ -2026,6 +2659,7 @@
 
         $(document).ready(function () {
             $('#slt-rooms').change(function () {
+                console.log("vao khi so phong thay doi");
 //          hoac co the dung vong lap duyet tu` Room6 ve` Room2
                 var amount = $(this).val();
 //phai dao nguoc amount lon' nhat' xay ra truoc' roi` thoat' dk return false, cac
@@ -2091,11 +2725,11 @@
                             //alert('Nhận phòng & Trả phòng không hợp lệ');
                             //ko can show tooltip, da cai day du tai nut DAT PHONG
                             console.log("vao null");
-                            return -1;
+                            return 0;
                         } else if (check_out < check_in) {
                             //xay ra sau cung` (ko nhap chung voi If thu' nhat')
                             $('.validation-advice').fadeIn();
-                            return -1;
+                            return 0;
                         } else {
                             console.log("vao tinh ngay");
                             console.log(parseInt((check_out - check_in) / (24 * 3600 * 1000)));
@@ -2344,10 +2978,10 @@
                     var check_out = new Date(document.getElementById("date2").value);
 
                     if ((isNaN(check_in) == true || isNaN(check_out) == true)) {
-                        return 1;
+                        return 0;
                     } else if (check_out < check_in) {
                         $('.validation-advice').fadeIn();
-                        return 1;
+                        return 0;
                     } else {
                         //neu lan truoc do' co fadeIn thi bay h se fadeOut
                         $('.validation-advice').fadeOut();
@@ -3327,8 +3961,10 @@
                         <th style="text-align: right; color: rgb(122,118,118)">PHÒNG</th>
                         <td>
                             <!--gia tri cua select co the tuy` thuoc vao thong bao' con` bao nhieu phong` tai trang search-hotels-->
-
-                            <input type="number" class="form-control" value="0"   id="slt-rooms" style="margin-top: -5px;width: 63px;"  />
+                            <img src="/img/room-bookings/minus-25.png" id="minusR" onmouseover="minusRoom(this)" class="room-minus img-not-allowed"/>
+                            <span id="slt-rooms">0</span>
+                            <img src="/img/room-bookings/plus-25.png" id="plusR" onmouseover="plusRoom(this)" class="room-plus img-not-allowed"/>
+<!--                            <input type="number" class="form-control" value="0"   id="slt-rooms" style="margin-top: -5px;width: 63px;"  />-->
                         </td>
                     </tr>
                 </table>
@@ -3345,9 +3981,9 @@
                     <tr id="room-row1" style="background-color: white">
                         <td> &nbsp; 1</td>
                         <td>
-                            <img src="/img/room-bookings/minus-25.png" class="minus img-not-allowed"/>
-                            <span id="numberGuess">1</span>
-                            <img src="/img/room-bookings/plus-25.png" class="plus img-allowed"/>
+                            <img src="/img/room-bookings/minus-25.png" id="minusG" onmouseover="minusGuess(this)" class="guess-minus img-not-allowed"/>
+                            <span id="numberGuess">0</span>
+                            <img src="/img/room-bookings/plus-25.png" id="plusG" onmouseover="plusGuess(this)"  style="margin-left: -2px;" class="guess-plus img-not-allowed"/>
 <!--                            <input type="number" class="form-control" value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>-->
 <!--                            <input type="number"  value="0"  id="numberGuess" style="margin-top: -5px;width: 63px";>-->
                         </td>
