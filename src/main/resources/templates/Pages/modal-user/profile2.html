@@ -370,7 +370,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                    <form th:action="@{/saveEditProfile}" method="post"
+                                                          id="FormChangeInformation">
                                                         <div class="row form-row">
                                                             <div class="col-12 col-sm-6">
                                                                 <div class="form-group">
@@ -400,14 +401,21 @@
                                                             <div class="col-12 col-sm-6">
                                                                 <label>Giới tính</label>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"  th:field="*{userInfo.gender}" id="flexRadioMale" value="Male">
+                                                                    <input class="form-check-input" type="radio"
+                                                                           name="flexRadioDefault"
+                                                                           th:field="*{userInfo.gender}"
+                                                                           id="flexRadioMale" value="Nam">
                                                                     <label class="form-check-label" for="flexRadioMale">
                                                                         Nam
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"  th:field="*{userInfo.gender}" id="flexRadioFemale" value="Female" checked>
-                                                                    <label class="form-check-label" for="flexRadioFemale">
+                                                                    <input class="form-check-input" type="radio"
+                                                                           name="flexRadioDefault"
+                                                                           th:field="*{userInfo.gender}"
+                                                                           id="flexRadioFemale" value="Nữ">
+                                                                    <label class="form-check-label"
+                                                                           for="flexRadioFemale">
                                                                         Nữ
                                                                     </label>
                                                                 </div>
@@ -422,11 +430,10 @@
                                                             </div>
                                                             <div id="messageUpdateProfile" style="color:red;"></div>
                                                         </div>
-                                                        <button type="submit" class="btn btn-primary btn-block"
-                                                                id="btEditProfile" onclick="saveInforUpdate()"
-                                                        >Xác nhận
+                                                        <div onclick="submitForm2()" class="btn btn-primary btn-block"
+                                                             id="btEditProfile">Xác nhận
                                                             chỉnh sửa
-                                                        </button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
@@ -462,8 +469,8 @@
                                                     khẩu
                                                 </button>
                                                 <!--/*@thymesVar id="statusChangePassWord" type=""*/-->
-                                                <p style="color: red;"
-                                                   th:text="*{statusChangePassWord}"></p>
+                                                <!--                                                <p style="color: red;"-->
+                                                <!--                                                   th:text="*{statusChangePassWord}"></p>-->
                                             </form>
                                         </div>
                                     </div>
@@ -541,8 +548,10 @@
     <script src="../assets/js/script.js"></script>
     <script type="text/javascript" src="../assets/js/profile.js"></script>
     <script>
+        console.log("funtion o day" )
         document.getElementById("buttonChangePass").addEventListener("click", function (event) {
             event.preventDefault()
+
             let newPass = document.getElementsByName("newPassword")[0]
             let newPass2 = document.getElementsByName("newPassword2")[0]
             if (newPass.value.length < 8) {
@@ -556,50 +565,40 @@
                 $("#FormChangePassWord").submit()
             }
         });
-        // document.getElementById("btEditProfile").addEventListener("click", function (event) {
-        //     event.preventDefault()
-        //     let txtName = document.getElementsByName("txtName")[0]
-        //     let txtEmail = document.getElementsByName("txtEmail")[0]
-        //     let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
-        //     let txtAddress = document.getElementsByName("txtAddress")[0]
-        //     $("input[name='gender']").each(function () {
-        //         alert($(this).val());
-        //     });
-        //     let regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b$/
-        //     let regexEmail = /^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$/
-        //     if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0 ||) {
-        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
-        //     } else if (numericReg.test(txtPhoneNumber)) {
-        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
-        //     } else if (regexEmail.test(txtEmail)) {
-        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
-        //     } else {
-        //         $("#FormChangePassWord").submit()
-        //     }
-        // })
-        // ;
-        // document.getElementById("btEditProfile").addEventListener("click", function (event) {
-        //     event.preventDefault()
-        //     let txtName = document.getElementsByName("txtName")[0]
-        //     let txtEmail = document.getElementsByName("txtEmail")[0]
-        //     let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
-        //     let txtAddress = document.getElementsByName("txtAddress")[0]
-        //     $("input[name='gender']").each(function () {
-        //         alert($(this).val());
-        //     });
-        //     let regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b$/
-        //     let regexEmail = /^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$/
-        //     if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0 ||) {
-        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
-        //     } else if (numericReg.test(txtPhoneNumber)) {
-        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
-        //     } else if (regexEmail.test(txtEmail)) {
-        //         document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
-        //     } else {
-        //         $("#FormChangePassWord").submit()
-        //     }
-        // })
-        // ;
+
+    </script>
+    <script>
+        console.log("funtion o day submitForm2" )
+        function submitForm2() {
+            // let txtName = document.getElementsByName("txtName")[0]
+            // let txtEmail = document.getElementsByName("txtEmail")[0]
+            // let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
+            // let txtAddress = document.getElementsByName("txtAddress")[0]
+            // var gender = document.getElementsByName("flexRadioDefault").values()
+            // var genderValue;
+            // var regexPhone = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+            // var regexEmail = /^[\w]+@[\w]+\.[^\w]+$/;
+            // for (i = 0; i < gender.length; i++) {
+            //     if (gender[i].checked)
+            //         genderValue = gender[i].value;
+            // }
+            // if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0) {
+            //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
+            // } else if (regexPhone.test(txtPhoneNumber)) {
+            //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
+            // } else if (regexEmail.test(txtEmail)) {
+            //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
+            // } else {
+                alert("Cập nhật thông tin thành công")
+                console.log("Cập nhật thông tin thành công")
+                setTimeout(function () {
+                    $("#FormChangePassWord").submit()
+                }, 3000)
+            // }
+
+        }
+        ;
+
     </script>
 </div>
 </body>
