@@ -35,8 +35,12 @@ public class Blog {
     private String imgSrc;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "blog_id",nullable = false, updatable = false)
+    @JoinColumn(name = "user_id",nullable = false, updatable = false)
     private UserInfo User;
+
+    public Blog() {
+
+    }
 
     public Long getId() {
         return id;
