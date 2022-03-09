@@ -327,9 +327,10 @@
                 <div class="alt-send-button">
                     <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
                 </div>
-
             </button>
 
+            <p style="color: lawngreen;" th:if="${globalMessage}"
+               th:text="${globalMessage}"></p>
         </form>
 <!--        <iframe class = "myifram hidden" name="hidden_iframe"></iframe>-->
         <!-- Left contact page -->
@@ -394,10 +395,9 @@
         }
 
         var formElement = document.querySelector(options.form);
+
         if (formElement){
-
             options.rules.forEach(function (rule) {
-
                 var inputElement = formElement.querySelector(rule.selector);
                 if (inputElement){
                     inputElement.onblur = function () {
@@ -411,6 +411,7 @@
                         errorElement.innerText = '';
                         inputElement.parentElement.classList.remove('invalid');
                     }
+
                 }
             });
         }
@@ -418,7 +419,6 @@
 
 
     Validator.isRequired = function (selector) {
-
         return {
             selector: selector,
             test: function (value) {
@@ -428,12 +428,21 @@
     }
 
     Validator.isEmail = function (selector) {
-
         return {
             selector: selector,
             test: function (value) {
                 var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 return regex.test(value) ? undefined : 'Email không hợp lệ!'
+            }
+        }
+    }
+
+    Validator.isPhoneNumber = function (selector) {
+        return {
+            selector: selector,
+            test: function (value) {
+                var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                return vnf_regex.test(value) ? undefined : 'Số điện thoại của bạn không đúng định dạng!'
             }
         }
     }
@@ -444,7 +453,9 @@
         errorSelector : '.form-message',
         rules: [
             Validator.isRequired('#phone'),
+            Validator.isPhoneNumber('#phone'),
             Validator.isRequired('#name'),
+            Validator.isRequired('#email'),
             Validator.isEmail('#email'),
         ]
     });
