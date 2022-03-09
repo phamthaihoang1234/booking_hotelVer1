@@ -79,6 +79,19 @@
             transition: all .2s ease-in-out;
         }
 
+        .alt-home-button {
+            width: 100px;
+            height: 34px;
+            transition: all .2s ease-in-out;
+        }
+
+        .text-home{
+            display: block;
+            font: 700 12px 'Lato', sans-serif;
+            letter-spacing: 2px;
+            padding-top: 5px;
+        }
+
         .send-text {
             display: block;
             margin-top: 10px;
@@ -368,7 +381,19 @@
                     <i class="fa fa-instagram" aria-hidden="true"></i></a>
                 </li>
             </ul>
-
+            <div style="margin-left: 150px">
+                <!--dung div thi bi. <br/>-->
+                <a class="btn btn-primary alt-home-button" th:href="@{/}"><span class="text-home">Trang chủ</span></a>
+<!--                <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>-->
+<!--                <a th:href="@{search-hotels/}" style="color: grey">-->
+<!--                    <span class="name-of-location"></span>-->
+<!--                </a>-->
+<!--                <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>-->
+<!--                <b>YOY <span class="name-of-hotel">-->
+<!--                    <a th:href="@{/roomDetails${}" style="color: grey">-->
+<!--                    <span th:text="${roomDetail.getHotel().getNameOfHotel()}"></span>-->
+<!--                </span></b>-->
+            </div>
 
         </div>
 
