@@ -16,6 +16,17 @@ public class Blog {
     @Column(name = "Title")
     private String title;
 
+    public String getScript() {
+        return script;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
+    }
+
+    @Column(name = "Script")
+    private String script;
+
     @Column(name = "Description")
     private String description;
 

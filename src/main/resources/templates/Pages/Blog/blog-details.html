@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 	<meta charset="utf-8">
@@ -19,8 +20,8 @@
 	<div class="main-wrapper">
 		<div class="header">
 			<div class="header-left">
-				<a href="index.html" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
-				<a href="index.html" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
+				<a th:href="@{/}" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
+				<a th:href="@{/}" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
 			</div>
 			<a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
 			<a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
@@ -88,16 +89,16 @@
 						<div class="topnav-dropdown-footer"> <a href="#">View all Notifications</a> </div>
 					</div>
 				</li>
-				<li class="nav-item dropdown has-arrow">
+				<li class="nav-item dropdown has-arrow" th:if="${#authorization.expression('isAuthenticated()')}">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Soeng Souy"></span> </a>
 					<div class="dropdown-menu">
 						<div class="user-header">
 							<div class="avatar avatar-sm"> <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
 							<div class="user-text">
-								<h6>Soeng Souy</h6>
-								<p class="text-muted mb-0">Administrator</p>
+								<span sec:authentication="name"></span>
+								<p class="text-muted mb-0">Hotel Owner</p>
 							</div>
-						</div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="login.html">Logout</a> </div>
+						</div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" th:href="@{/logout}">Logout</a> </div>
 				</li>
 			</ul>
 		</div>
@@ -114,47 +115,20 @@
 								<li><a href="add-booking.html"> Add Booking </a></li>
 							</ul>
 						</li>
-						<li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
+						<li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Manage Hotel </span> <span class="menu-arrow"></span></a>
 							<ul class="submenu_class" style="display: none;">
-								<li><a href="all-customer.html"> All customers </a></li>
-								<li><a href="edit-customer.html"> Edit Customer </a></li>
-								<li><a href="add-customer.html"> Add Customer </a></li>
+								<li><a th:href="@{/homepageHotel}"> All Hotel </a></li>
+
 							</ul>
 						</li>
 						<li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
 							<ul class="submenu_class" style="display: none;">
-								<li><a href="all-rooms.html">All Rooms </a></li>
-								<li><a href="edit-room.html"> Edit Rooms </a></li>
-								<li><a href="add-room.html"> Add Rooms </a></li>
+								<li><a th:href="@{/roomHomepage}">All Rooms </a></li>
+								<!--                            <li><a href="edit-room.html"> Edit Rooms </a></li>-->
+								<!--                            <li><a href="add-room.html"> Add Rooms </a></li>-->
 							</ul>
 						</li>
-						<li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Staff </span> <span class="menu-arrow"></span></a>
-							<ul class="submenu_class" style="display: none;">
-								<li><a href="all-staff.html">All Staff </a></li>
-								<li><a href="edit-staff.html"> Edit Staff </a></li>
-								<li><a href="add-staff.html"> Add Staff </a></li>
-							</ul>
-						</li>
-						<li> <a href="pricing.html"><i class="far fa-money-bill-alt"></i> <span>Pricing</span></a> </li>
-						<li class="submenu"> <a href="#"><i class="fas fa-share-alt"></i> <span> Apps </span> <span class="menu-arrow"></span></a>
-							<ul class="submenu_class" style="display: none;">
-								<li><a href="chat.html"><i class="fas fa-comments"></i><span> Chat </span></a></li>
-								<li class="submenu"> <a href="#"><i class="fas fa-video camera"></i> <span> Calls </span> <span class="menu-arrow"></span></a>
-									<ul class="submenu_class" style="display: none;">
-										<li><a href="voice-call.html"> Voice Call </a></li>
-										<li><a href="video-call.html"> Video Call </a></li>
-										<li><a href="incoming-call.html"> Incoming Call </a></li>
-									</ul>
-								</li>
-								<li class="submenu"> <a href="#"><i class="fas fa-envelope"></i> <span> Email </span> <span class="menu-arrow"></span></a>
-									<ul class="submenu_class" style="display: none;">
-										<li><a href="compose.html">Compose Mail </a></li>
-										<li><a href="inbox.html"> Inbox </a></li>
-										<li><a href="mail-veiw.html"> Mail Veiw </a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
+
 						<li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Employees </span> <span class="menu-arrow"></span></a>
 							<ul class="submenu_class" style="display: none;">
 								<li><a href="employees.html">Employees List </a></li>
@@ -172,17 +146,11 @@
 								<li><a href="provident-fund.html">Provident Fund </a></li>
 							</ul>
 						</li>
-						<li class="submenu"> <a href="#"><i class="fas fa-book"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
-							<ul class="submenu_class" style="display: none;">
-								<li><a href="salary.html">Employee Salary </a></li>
-								<li><a href="salary-veiw.html">Payslip </a></li>
-							</ul>
-						</li>
-						<li> <a href="calendar.html"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a> </li>
+
 						<li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
 							<ul class="submenu_class" style="display: none;">
 								<li><a href="blog.html">Blog </a></li>
-								<li><a class="active" href="blog-details.html">Blog Veiw </a></li>
+								<li><a href="blog-details.html">Blog Veiw </a></li>
 								<li><a href="add-blog.html">Add Blog </a></li>
 								<li><a href="edit-blog.html">Edit Blog </a></li>
 							</ul>
@@ -198,29 +166,7 @@
 						<li> <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a> </li>
 						<li class="list-divider"></li>
 						<li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>
-						<li class="submenu"> <a href="#"><i class="fas fa-laptop"></i> <span> Components </span> <span class="menu-arrow"></span></a>
-							<ul class="submenu_class" style="display: none;">
-								<li><a href="uikit.html">UI Kit </a></li>
-								<li><a href="typography.html">Typography </a></li>
-								<li><a href="tabs.html">Tabs </a></li>
-							</ul>
-						</li>
-						<li class="submenu"> <a href="#"><i class="fas fa-edit"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-							<ul class="submenu_class" style="display: none;">
-								<li><a href="form-basic-inputs.html">Basic Input </a></li>
-								<li><a href="form-input-groups.html">Input Groups </a></li>
-								<li><a href="form-horizontal.html">Horizontal Form </a></li>
-								<li><a href="form-vertical.html">Vertical Form </a></li>
-							</ul>
-						</li>
-						<li class="submenu"> <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
-							<ul class="submenu_class" style="display: none;">
-								<li><a href="tables-basic.html">Basic Table </a></li>
-								<li><a href="tables-datatables.html">Data Table </a></li>
-							</ul>
-						</li>
-						<li class="list-divider"></li>
-						<li class="menu-title mt-3"> <span>EXTRAS</span> </li>
+
 						<li class="submenu"> <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
 							<ul class="submenu_class" style="display: none;">
 								<li><a href="login.html">Login </a></li>
@@ -254,18 +200,18 @@
 				<div class="row mt-3">
 					<div class="col-md-8">
 						<div class="blog-view">
-							<article class="blog blog-single-post">
-								<h3 class="blog-title">Do you know the ABCs of Hotel?</h3>
+							<article class="blog blog-single-post" >
+								<h3 class="blog-title" th:text="${blog.title}"></h3>
 								<div class="blog-image">
-									<a href="blog-details.html"><img alt="" src="assets/img/product/product-01.jpg" class="img-fluid mt-4"></a>
+									<a href="blog-details.html"><img alt="" th:src="${blog.getImgSrc()}" class="img-fluid mt-4"></a>
 								</div>
 								<div class="blog-content mt-4">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+									<p th:text="${blog.script}"></p>
+
 									<blockquote>
-										<p>Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. </p>
+										<p th:text="${blog.description}"></p>
 									</blockquote>
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+
 								</div>
 							</article>
 							<div class="widget author-widget clearfix">
@@ -274,8 +220,8 @@
 									<div class="about-author-img">
 										<div class="author-img-wrap"> <img class="img-fluid rounded-circle" alt="" src="assets/img/profiles/avatar-15.jpg"> </div>
 									</div>
-									<div class="author-details"> <span class="blog-author-name">Linda Barrett</span>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+									<div class="author-details"> <span class="blog-author-name" th:text="${blog.User.username}"></span>
+										Phone: <p th:text="${blog.User.phoneNumber}"></p>
 									</div>
 								</div>
 							</div>

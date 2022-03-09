@@ -144,6 +144,9 @@ public class OwnHotelController {
     @GetMapping("/roomHomepage")
     public String homepageRoom(Model model){
         model.addAttribute("rooms",roomService.findAllByHotelId(idHotel));
+        for (Room r:roomService.findAllByHotelId(idHotel)) {
+            System.out.println(r.getPropertyType().getName());
+        }
         return "Pages/roomManage/all-room";
     }
 

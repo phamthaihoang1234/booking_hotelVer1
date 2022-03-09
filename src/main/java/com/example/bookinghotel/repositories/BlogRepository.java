@@ -14,6 +14,14 @@ import java.util.Optional;
 @Repository
 public interface BlogRepository extends CrudRepository<Blog, Long> {
 
-//    @Query(value = "SELECT * FROM blog where hotel_id = ?1", nativeQuery = true)
-//    Iterable<Room> findAllRoomByUserId(long id);
+    @Query(value = "SELECT * FROM blog", nativeQuery = true)
+    Iterable<Blog> findAllBlog();
+
+    @Query(value = "SELECT * FROM blog where user_id = ?1", nativeQuery = true)
+    Iterable<Blog> findAllBlogByUserId(long id);
+
+    @Query(value = "SELECT * FROM blog where id = ?1", nativeQuery = true)
+    Iterable<Blog> findBlogById(long id);
+
+
 }
