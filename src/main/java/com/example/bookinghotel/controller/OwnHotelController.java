@@ -130,28 +130,7 @@ public class OwnHotelController {
 
     }
 
-//    @GetMapping("/manageHotel")
-//    public String manageHotel(){
-//        return "/Pages/owner/manageHotel";
-//    }
-//
-//
-//    @GetMapping("/hotel")
-//    public String showform(Model model){
-//        model.addAttribute("hotel", new Hotel());
-//        return "/greeting";
-//    }
-//
-//    @PostMapping("/createHotel")
-//    public String showform(Model model, @ModelAttribute Hotel hotel){
-//        hotelService.save(hotel);
-//        model.addAttribute("listHotel", hotelService.findAll());
-//
-//
-//
-//        return "/result";
-//    }
-//
+
     public Long idHotel;
 
 
