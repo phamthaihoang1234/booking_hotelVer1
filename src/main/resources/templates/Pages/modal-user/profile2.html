@@ -548,7 +548,6 @@
     <script src="../assets/js/script.js"></script>
     <script type="text/javascript" src="../assets/js/profile.js"></script>
     <script>
-        console.log("funtion o day" )
         document.getElementById("buttonChangePass").addEventListener("click", function (event) {
             event.preventDefault()
 
@@ -562,39 +561,42 @@
                 console.log("NewPass2: " + newPass2.value)
                 document.getElementById("message").innerText = "Mật khẩu mới và xác nhận mật khẩu mới chưa trùng khớp"
             } else {
-                $("#FormChangePassWord").submit()
+                alert("Cập nhật mật khẩu thành công")
+                console.log("Cập nhật mật khẩu thành công")
+                setTimeout(function () {
+                    $("#FormChangePassWord").submit()
+                }, 2000)
             }
         });
 
     </script>
     <script>
-        console.log("funtion o day submitForm2" )
         function submitForm2() {
-            // let txtName = document.getElementsByName("txtName")[0]
-            // let txtEmail = document.getElementsByName("txtEmail")[0]
-            // let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
-            // let txtAddress = document.getElementsByName("txtAddress")[0]
-            // var gender = document.getElementsByName("flexRadioDefault").values()
-            // var genderValue;
-            // var regexPhone = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-            // var regexEmail = /^[\w]+@[\w]+\.[^\w]+$/;
-            // for (i = 0; i < gender.length; i++) {
-            //     if (gender[i].checked)
-            //         genderValue = gender[i].value;
-            // }
-            // if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0) {
-            //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
+            let txtName = document.getElementsByName("txtName")[0]
+            let txtEmail = document.getElementsByName("txtEmail")[0]
+            let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
+            let txtAddress = document.getElementsByName("txtAddress")[0]
+            let gender = document.getElementsByName("flexRadioDefault").values()
+            let genderValue;
+            // let regexPhone = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+            // let regexEmail = /^[\w]+@[\w]+\.[^\w]+$/;
+            for (i = 0; i < gender.length; i++) {
+                if (gender[i].checked)
+                    genderValue = gender[i].value;
+            }
+            if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0) {
+                document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
             // } else if (regexPhone.test(txtPhoneNumber)) {
             //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
             // } else if (regexEmail.test(txtEmail)) {
             //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
-            // } else {
+            } else {
                 alert("Cập nhật thông tin thành công")
                 console.log("Cập nhật thông tin thành công")
                 setTimeout(function () {
-                    $("#FormChangePassWord").submit()
-                }, 3000)
-            // }
+                    $("#FormChangeInformation").submit()
+                }, 2000)
+            }
 
         }
         ;
