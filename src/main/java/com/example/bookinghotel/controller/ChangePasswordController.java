@@ -28,6 +28,14 @@ public class ChangePasswordController {
     private UserInfo userInfo;
     private UserInfo oldUserInfo;
 
+    @GetMapping("/ChangePassword")
+    public String goToChangePassword(HttpServletRequest request, Model model) {
+        // id=5
+        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
+        return "Pages/modal-user/ChangePassWord";
+
+    }
+
     @PostMapping("/saveChangePasword")
     public String saveChangePasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Model model, @ModelAttribute UserInfo userInfo) {
         UserInfo user = null;
@@ -51,7 +59,7 @@ public class ChangePasswordController {
         }
         System.out.println("Class: ChangePasswordController | Method: saveChangePasword | statusChangePassWord:"+model.getAttribute("statusChangePassWord").toString());
 
-        return  model.getAttribute("statusChangePassWord").toString();
+        return "Pages/modal-user/ChangePassWord";
     }
 
 
