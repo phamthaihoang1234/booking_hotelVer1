@@ -324,7 +324,7 @@
 
                     <div class="tab-pane fade show active" id="termOfService_tab">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title d-flex justify-content-between">
@@ -335,7 +335,7 @@
                                         </h5>
                                         <div class="row mt-5">
                                             <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Điều khoản: </p>
-                                            <p class="col-sm-9" th:text="${userInfo.name}"></p>
+                                            <p class="col-sm-9" th:text="${termOfUser.details}"></p>
                                         </div>
 
                                     </div>
@@ -351,19 +351,21 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form>
+                                                <form th:action="@{/saveTermOfUser}" method="post"
+                                                      id="FormChangeTermOfService">
                                                     <div class="row form-row">
                                                         <div class="col-12 col-sm-6">
                                                             <div class="form-group">
                                                                 <label>Điều khoản dịch vụ: </label>
                                                                 <input type="text" class="form-control"
-                                                                       th:value="${userInfo.name}"
-                                                                       th:field="*{userInfo.name}" id="txtRule">
+                                                                       th:value="${termOfUser.details}"
+                                                                       th:field="*{termOfUser.details}" name="details">
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div id="message" style="color:red;"></div>
                                                     <button type="submit" class="btn btn-primary btn-block"
-                                                            id="btEditTermOfService" onclick=""
+                                                            id="btEditTermOfService"
                                                     >Xác nhận
                                                         chỉnh sửa điều khoản
                                                     </button>
@@ -391,63 +393,22 @@
 <script src="../assets/js/script.js"></script>
 <script type="text/javascript" src="../assets/js/profile.js"></script>
 <script>
-    document.getElementById("buttonChangePass").addEventListener("click", function (event) {
+    document.getElementById("btEditTermOfService").addEventListener("click", function (event) {
         event.preventDefault()
-
-        let newPass = document.getElementsByName("newPassword")[0]
-        let newPass2 = document.getElementsByName("newPassword2")[0]
-        if (newPass.value.length < 8) {
-            console.log("NewPass: " + newPass.value)
-            document.getElementById("message").innerText = "Mật khẩu chưa đủ 8 kí tự"
-        } else if (newPass.value.length != newPass2.value.length) {
-            console.log("NewPass: " + newPass.value)
-            console.log("NewPass2: " + newPass2.value)
-            document.getElementById("message").innerText = "Mật khẩu mới và xác nhận mật khẩu mới chưa trùng khớp"
+        console.log("Đã vào chỉnh sửa điều khoản")
+        var dataTermOfService = document.getElementsByName("details")[0]
+        console.log("dataTermOfService: " + dataTermOfService.value)
+        if (dataTermOfService.value.length ==0) {
+            console.log("dataTermOfService: " + dataTermOfService.value)
+            document.getElementById("message").innerText = "Điều khoản không được để trống"
         } else {
-            alert("Cập nhật mật khẩu thành công")
-            console.log("Cập nhật mật khẩu thành công")
+            alert("Cập nhật điều khoản thành công")
+            console.log("Cập nhật điều khoản thành công")
             setTimeout(function () {
-                $("#FormChangePassWord").submit()
-            }, 2000)
+                $("#FormChangeTermOfService").submit()
+            }, 1000)
         }
     });
-
-</script>
-<script>
-    function submitForm2() {
-        console.log("Đã gọi đến hàm submitForm2")
-        let txtName = document.getElementsByName("txtName")[0]
-        let txtEmail = document.getElementsByName("txtEmail")[0]
-        let txtPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
-        let txtAddress = document.getElementsByName("txtAddress")[0]
-        var gender = document.getElementsByName("flexRadioDefault")
-        let genderValue = "";
-        // const regexPhoneNumber = /^((\+)33|0)[1-9](\d{2}){4}$/;
-        var i = 0;
-        console.log("genderSize :" + gender.length)
-        for (i = 0; i < gender.length; i++) {
-            if (gender[i].checked) {
-                genderValue = gender[i].value;
-            }
-            console.log("genderValue :" + gender[i].value)
-        }
-        // if (txtName.value.length == 0 || txtEmail.value.length == 0 || txtPhoneNumber.value.length == 0 || txtAddress.value.length == 0) {
-        //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
-        // // } else if (regexPhone.test(txtPhoneNumber)) {
-        // //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng format."
-        // // } else if (regexEmail.test(txtEmail)) {
-        // //     document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng format."
-        // } else {
-        //     alert("Cập nhật thông tin thành công")
-        //     console.log("Cập nhật thông tin thành công")
-        //     setTimeout(function () {
-        //         $("#FormChangeInformation").submit()
-        //     }, 2000)
-        // }
-
-
-    }
-    ;
 
 </script>
 </div>

@@ -324,7 +324,7 @@
                     <div class="tab-content profile-tab-cont">
                         <div class="tab-pane fade show active" id="per_details_tab">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title d-flex justify-content-between">
@@ -377,24 +377,24 @@
                                                                            th:field="*{userInfo.name}" name="txtName2">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12 col-sm-6">
+                                                            <div class="col-12 col-sm-8">
                                                                 <div class="form-group">
-                                                                    <label>Địa chỉ Email</label>
+                                                                    <label>Địa chỉ Email:</label>
                                                                     <input type="email" class="form-control"
                                                                            th:value="${userInfo.email}"
                                                                            th:field="*{userInfo.email}"
                                                                            name="txtEmail"></div>
                                                             </div>
-                                                            <div class="col-12 col-sm-6">
+                                                            <div class="col-12 col-sm-8">
                                                                 <div class="form-group">
-                                                                    <label>Số điện thoại</label>
+                                                                    <label>Số điện thoại:</label>
                                                                     <input type="text"
                                                                            th:value="${userInfo.phoneNumber}"
                                                                            th:field="*{userInfo.phoneNumber}"
                                                                            name="txtPhoneNumber"
                                                                            class="form-control"></div>
                                                             </div>
-                                                            <div class="col-12 col-sm-6">
+                                                            <div class="col-12 col-sm-8">
                                                                 <label>Giới tính</label>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
@@ -457,23 +457,22 @@
     <script>
         function submitForm2() {
             console.log("Đã gọi đến hàm submitForm2")
-            let dataName = document.getElementsByName("txtName2")[0]
-            let dataEmail = document.getElementsByName("txtEmail")[0]
-            let dataPhoneNumber = document.getElementsByName("txtPhoneNumber")[0]
-            let dataAddress = document.getElementsByName("txtAddress")[0]
-            const regexPhoneNumber = /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/;
+            let dataName = document.getElementsByName("name")[0]
+            let dataEmail = document.getElementsByName("email")[0]
+            let dataPhoneNumber = document.getElementsByName("phoneNumber")[0]
+            let dataAddress = document.getElementsByName("address")[0]
+            const regexPhoneNumber = /((09|03|07|08|05)+([0-9]{8})\b)/;
             const regexEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            console.log("regexPhoneNumber.test(txtPhoneNumber) :" + !regexPhoneNumber.test(dataPhoneNumber))
-            console.log("regexPhoneNumber.test(txtPhoneNumber) :" + !regexEmail.test(dataEmail))
-            console.log("txtName.value.length  :" + dataName.value.length )
-            console.log("txtEmail.value.length  :" + dataEmail.value.length )
-            console.log("txtPhoneNumber.value.length  :" + dataPhoneNumber.value.length )
-            console.log("txtAddress.value.length  :" + dataAddress.value.length )
+            console.log("regexPhoneNumber.test(txtPhoneNumber) :" + !regexPhoneNumber.test(dataPhoneNumber.value))
+            console.log("regexEmail.test(dataEmail) :" + !regexEmail.test(dataEmail.value))
+            console.log("txtName.value.length  :" + dataName.value )
+            console.log("txtEmail.value.length  :" + dataEmail.value )
+            console.log("txtPhoneNumber.value.length  :" + dataPhoneNumber.value )
             if (dataName.value.length == 0 || dataEmail.value.length == 0 || dataPhoneNumber.value.length == 0 || dataAddress.value.length == 0) {
                 document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập đầy đủ thông tin."
-            } else if (!regexPhoneNumber.test(dataPhoneNumber)) {
+            } else if (!regexPhoneNumber.test(dataPhoneNumber.value)) {
                 document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập số điện thoại đúng định dạng."
-            } else if (!regexEmail.test(dataEmail)) {
+            } else if (!regexEmail.test(dataEmail.value)) {
                 document.getElementById("messageUpdateProfile").innerText = "Vui lòng nhập địa chỉ email đúng định dạng."
             } else {
                 alert("Cập nhật thông tin thành công")

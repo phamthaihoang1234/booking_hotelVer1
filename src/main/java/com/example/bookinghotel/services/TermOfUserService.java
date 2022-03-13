@@ -2,13 +2,14 @@ package com.example.bookinghotel.services;
 
 
 import com.example.bookinghotel.entities.Role;
+import com.example.bookinghotel.entities.TermOfUser;
 
 import java.util.Optional;
 
 public interface TermOfUserService {
-    Optional<Role> findByName(String name);
+    Optional<TermOfUser> findById(Long id);
 
-    Role save(Role role);
+    TermOfUser save(TermOfUser termOfUser);
 
-    Iterable<Role> findAll();
+    Iterable<TermOfUser> findAll();
 }
