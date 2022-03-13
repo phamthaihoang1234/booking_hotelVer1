@@ -1,7 +1,8 @@
 package com.example.bookinghotel.controller;
-
+import com.example.bookinghotel.entities.TermOfUser;
 import com.example.bookinghotel.entities.UserInfo;
 import com.example.bookinghotel.repositories.UserRepository;
+import com.example.bookinghotel.services.TermOfUserService;
 import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,33 +20,37 @@ public class TermsOfUseController {
     @Autowired
     private UserService userService;
     @Autowired
+    private TermOfUserService termOfUserService;
+    @Autowired
     private UserRepository userRepository;
     private UserInfo userInfo;
     private UserInfo oldUserInfo;
+    private TermOfUser termOfUser;
 
     @GetMapping("/TermOfUser")
     public String goToTermOfUser(HttpServletRequest request, Model model) {
         // id=5
-        model.addAttribute("TermOfUser", userService.findByUserName(this.getPrincipal()));
+        System.out.println("Class: TermOfUserService | Method: updateTermOfUser |  " + termOfUserService.findById(1L).get().getDetails());
+        System.out.println("Class: TermOfUserService | Method: updateTermOfUser |  " + termOfUserService.findById(1L).get().getId());
+        model.addAttribute("termOfUser", termOfUserService.findById(1L).get());
+        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
+
         return "Pages/modal-user/TermsOfUse";
 
     }
 
     @PostMapping("/saveTermOfUser")
-    public String updateTermOfUser(@ModelAttribute UserInfo userInfo) {
-        UserInfo oldUserInfo = userService.findByUserName(this.getPrincipal());
-        oldUserInfo.setName(userInfo.getName());
-        oldUserInfo.setEmail(userInfo.getEmail());
-        oldUserInfo.setPhoneNumber(userInfo.getPhoneNumber());
-        oldUserInfo.setAddress(userInfo.getAddress());
-        oldUserInfo.setGender(userInfo.getGender());
-        System.out.println("Class: saveTermOfUser | Method: saveTermOfUser |  " + oldUserInfo.getName());
+    public String updateTermOfUser(@ModelAttribute TermOfUser termOfUser1, Model model) {
+        TermOfUser oldTermOfUser= termOfUserService.findById(1L).get();
+        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
+        oldTermOfUser.setDetails(termOfUser1.getDetails());
+        System.out.println("Class: TermOfUserService | Method: updateTermOfUser |  " + termOfUser1.getDetails());
         try {
-            userService.updateInfor(oldUserInfo);
+            termOfUserService.save(oldTermOfUser);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Pages/modal-user/profile2";
+        return "Pages/modal-user/TermsOfUse";
     }
 
     private String getPrincipal() {
