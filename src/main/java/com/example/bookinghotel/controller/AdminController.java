@@ -15,10 +15,12 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping("/admin_manageHomepage")
     public String adminManageHomepage(){
         return "/Pages/Admin/admin_manageHomepage";
     }
+
 
     @GetMapping("/user_list")
     public String user_list(Model model){
@@ -31,4 +33,5 @@ public class AdminController {
     public String owner_list(){
         return "/Pages/Admin/owner_list";
     }
+
 }

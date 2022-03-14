@@ -311,8 +311,8 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="user : ${userList}">
-                                        <td>
-                                            <span th:text="${user.getRoles()}"></span>
+                                        <td th:each="role : ${user.getRoles()}">
+                                            <span th:text="${role.getName()}"></span>
                                         </td>
                                         <td>ST-001</td>
                                         <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ea9e85878793888f98848b86aa8d878b8386c4898587">[email&#160;protected]</a></td>

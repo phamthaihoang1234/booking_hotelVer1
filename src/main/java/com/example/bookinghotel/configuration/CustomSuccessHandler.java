@@ -52,7 +52,10 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             url = "/";
         } else if (isBooker(roles)) {
             url = "/";
-        } else {
+        } else if (isAdmin(roles)) {
+            url = "/";
+        }
+        else {
             url = "/accessDenied";
         }
 
