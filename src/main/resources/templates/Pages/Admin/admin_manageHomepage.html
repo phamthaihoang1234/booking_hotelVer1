@@ -141,6 +141,20 @@
                             <li><a href="add-staff.html"> Add Staff </a></li>
                         </ul>
                     </li>
+                    <li class="submenu"><a href="#"><i class="fas fa-user"></i> <span> Điều khoản </span> <span
+                            class="menu-arrow"></span></a>
+                        <ul class="submenu_class" style="display: none;">
+<!--                            <li><a th:href="@{/GetDetailsProfile}"> Chỉnh sửa thông tin </a></li>-->
+<!--                            <li><a th:href="@{/ChangePassword}"> Thay đổi mật khẩu </a></li>-->
+                            <li><a th:href="@{/TermOfUser}"> Thay đổi điều khoản </a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý phòng </span> <span class="menu-arrow"></span></a>
+                        <ul class="submenu_class" style="display: none;">
+                            <li><a th:href="@{/getAllRoomOfRoleAdmin}"> Tất cả phòng </a></li>
+
+                        </ul>
+                    </li>
                     <li> <a href="pricing.html"><i class="far fa-money-bill-alt"></i> <span>Pricing</span></a> </li>
                     <li class="submenu"> <a href="#"><i class="fas fa-share-alt"></i> <span> Apps </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
