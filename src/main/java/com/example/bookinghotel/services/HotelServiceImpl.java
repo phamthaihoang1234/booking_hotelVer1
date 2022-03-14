@@ -29,6 +29,11 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    public Iterable<Hotel> findAllHotelByUserId(long id) {
+        return hotelRepository.findAllHotelByUserId(id);
+    }
+
+    @Override
     public Optional<Hotel> findById(Long id) {
         return hotelRepository.findById(id);
     }

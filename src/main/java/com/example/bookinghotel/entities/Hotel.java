@@ -18,6 +18,19 @@ public class Hotel {
     private String addressOfHotel;
     private String iframe;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="userId", nullable = false, updatable = false)
+    private UserInfo user;
+
+    public UserInfo getUser() {
+        return user;
+    }
+
+    public void setUser(UserInfo user) {
+        this.user = user;
+    }
+
     public String getIframe() {
         return iframe;
     }

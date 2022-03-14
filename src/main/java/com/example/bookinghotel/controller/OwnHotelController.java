@@ -127,28 +127,7 @@ public class OwnHotelController {
 
     }
 
-//    @GetMapping("/manageHotel")
-//    public String manageHotel(){
-//        return "/Pages/owner/manageHotel";
-//    }
-//
-//
-//    @GetMapping("/hotel")
-//    public String showform(Model model){
-//        model.addAttribute("hotel", new Hotel());
-//        return "/greeting";
-//    }
-//
-//    @PostMapping("/createHotel")
-//    public String showform(Model model, @ModelAttribute Hotel hotel){
-//        hotelService.save(hotel);
-//        model.addAttribute("listHotel", hotelService.findAll());
-//
-//
-//
-//        return "/result";
-//    }
-//
+
     public Long idHotel;
 
 
@@ -162,6 +141,9 @@ public class OwnHotelController {
     @GetMapping("/roomHomepage")
     public String homepageRoom(Model model){
         model.addAttribute("rooms",roomService.findAllByHotelId(idHotel));
+        for (Room r:roomService.findAllByHotelId(idHotel)) {
+            System.out.println(r.getPropertyType().getName());
+        }
         return "Pages/roomManage/all-room";
     }
 

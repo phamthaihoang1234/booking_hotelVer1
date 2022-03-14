@@ -58,6 +58,8 @@
         });
 
     </script>
+
+
 </head>
 <body>
 
@@ -81,19 +83,7 @@
                         <!-- neu nam trong li => anh huong den position se~ bi. day? theo li (chinh margin-left thu? cong)
                         con` neu' dat ngoai` thi` bi. anh huong su* kien mouseenter, mouseleave -->
                         <div id="left-nav-A" class="tmp-left-nav">
-                            <!--<div class="left-nav-city-sub">-->
-<!--                            <div class="nav-ddnoibat" style="width: 20%; float: left; margin-left: 10px">-->
-<!--                                <span class="nav-title-loaiphong">Địa điểm nổi tiếng</span>-->
-<!--                                <ul style="list-style-type: none">-->
-<!--                                    <li>Phố Cổ</li>-->
-<!--                                    <li>Quận Hoàn Kiếm</li>-->
-<!--                                    <li>Quận Tây Hồ</li>-->
-<!--                                    <li>Quận Đống Đa</li>-->
-<!--                                    <li>Sân vận động quốc gia Mỹ Đình</li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-                            <!--                            các phần có hotelType bị đỏ không phải là lỗi! vì lúc tạo name trả về phần tên thành phố đã được sửa thành -->
-                            <!--                            pattern ( để nhập được các tham số hà nội, hcm, đà nẵng)-->
+
                             <div class="nav-ddkhac" style="width: 95%; margin-left:20px;">
                                 <!-- width: 75%: do da~ cai`  margin-left: 10px cua div tren -->
                                 <div class="row">
@@ -370,6 +360,9 @@
                     <li class="left-nav-city">
                         <span class="txt-name-location">TẤT CẢ</span>
                     </li>
+                    <li class="left-nav-city">
+                        <a  th:href="@{/allBlog}" style="color:white;text-decoration: none !important; ">BLOG</a>
+                    </li>
                 </ul>
             </div>
 
@@ -543,69 +536,7 @@
                 </th:block>
                 <div class="col-xs-1 col-sm-1 col-md-1"></div>
             </div>
-            <!--            <br/>-->
-            <!--            <div class="row">-->
-            <!--                <div class="col-xs-1 col-sm-1 col-md-1"></div>-->
 
-            <!--                <div class="col-xs-5 col-sm-5 col-md-5" style="display: inline-flex">-->
-            <!--                    <div style="width: 22%">-->
-            <!--                        <img class="effect-shadow img-responsive" src="img/homepage/comment1_mrbean.jpg"-->
-            <!--                             style="border-radius: 5px"/>-->
-            <!--                        &lt;!&ndash;<img src="img/homepage/quote.png" style="margin-top: -85px; float: right"/>&ndash;&gt;-->
-            <!--                    </div>-->
-            <!--                    <img src="img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>-->
-            <!--                    <p style="width: 70%">-->
-            <!--                        Lần đầu tiên tôi đặt phòng ở YOY, đó là một trải nghiệm tuyệt vời về dịch vụ nghỉ-->
-            <!--                        dưỡng của các khu nghỉ dưỡng cao cấp mà các bạn giới thiệu cho chúng tôi.-->
-            <!--                        Tôi và gia đình tôi vô cùng hài lòng về điều đó!!!!!<br/>-->
-            <!--                        <span class="comment_name">Mr.Bean</span><span class="comment_country"> - England</span>-->
-            <!--                    </p>-->
-            <!--                </div>-->
-
-            <!--                <div class="col-xs-5 col-sm-5 col-md-5" style="display: inline-flex">-->
-            <!--                    <div style="width: 22%">-->
-            <!--                        <img class="effect-shadow img-responsive" src="img/homepage/comment1_binladen.jpg"-->
-            <!--                             style="border-radius: 5px"/>-->
-            <!--                    </div>-->
-            <!--                    <img src="img/homepage/quote.png" width="20" height="20" style="margin-left: 3px"/>-->
-            <!--                    <p style="width: 70%">-->
-            <!--                        Thật tuyệt vời!!! Đó là lí do tôi không bao giờ khủng bố Việt Nam !!!<br/>-->
-            <!--                        &lt;!&ndash;Lần đầu tiên tôi đặt phòng ở YOY, đó là một trải nghiệm tuyệt vời về dịch vụ nghỉ&ndash;&gt;-->
-            <!--                        &lt;!&ndash;dưỡng của các khu nghỉ dưỡng  cao cấp mà các bạn giới thiệu cho chúng tôi.&ndash;&gt;-->
-            <!--                        &lt;!&ndash;Tôi và gia đình tôi vô cùng hài lòng về điều đó!!!!!<br/>&ndash;&gt;-->
-            <!--                        <span class="comment_name">Osama bin Laden</span><span-->
-            <!--                            class="comment_country"> - Saudi Arabia</span>-->
-            <!--                    </p>-->
-            <!--                </div>-->
-
-            <!--                <div class="col-xs-1 col-sm-1 col-md-1"></div>-->
-            <!--            </div>-->
-
-            <!--            &lt;!&ndash; muon the hien dung' thi` div ben tren phai xac dinh chieu cao (do co dung` ul li, float)&ndash;&gt;-->
-            <!--            <div class="container" style="margin: 0 auto; margin-top: 25px; width: 90%; clear: both">-->
-            <!--                <div class="row">-->
-            <!--                    <div class="col-xs-4 col-sm-4 col-md-4">-->
-            <!--                        <img class="img-responsive" src="img/homepage/comment2_forbes.png"><br/>-->
-            <!--                        <p>...YOY hotels provide standardization on 30 measures in each room including free wifi and-->
-            <!--                            breakfast, flatscreen TVs, spotless white bed linen and so on...-->
-            <!--                        </p>-->
-            <!--                    </div>-->
-            <!--                    <div class="col-xs-4 col-sm-4 col-md-4">-->
-            <!--                        <img class="img-responsive" src="img/homepage/comment2_techcrucnch.png"><br/>-->
-            <!--                        <p>...On the YOY platform, guests can do on-demand booking without waiting for a reply from a-->
-            <!--                            host, and they can check in and out instantaneously instead of waiting at a reservation-->
-            <!--                            desk...-->
-            <!--                        </p>-->
-            <!--                    </div>-->
-            <!--                    <div class="col-xs-4 col-sm-4 col-md-4">-->
-            <!--                        <img class="img-responsive" src="img/homepage/comment2_thehindu.png"><br/>-->
-            <!--                        <p>...The YOY Rooms mobile app is the world’s first personal room service app that allows guests-->
-            <!--                            staying-->
-            <!--                            at an YOY to order room service directly from their smartphones...-->
-            <!--                        </p>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
         </div>
     </div>
     <!-- ban dau` dat trong id comment + dug` margin-top => khi zoom browser se~ ko chinh xac -->
