@@ -1,14 +1,20 @@
 package com.example.bookinghotel.controller;
 
 
+import com.example.bookinghotel.repositories.BookingRepository;
+import com.example.bookinghotel.services.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BookingController {
+
+    @Autowired
+    private BookingService bookingService;
+    @Autowired
+    private BookingRepository bookingRepository;
 
 //    @GetMapping("/saveBooking")
 //    public String saveBooking(@RequestParam("checkin") String checkin,
@@ -27,4 +33,25 @@ public class BookingController {
 //        System.out.println(email);
 //        return "redirect:/";
 //    }
+
+
+    @GetMapping("/listBooking")
+    public String listBooking(Model model){
+
+        model.addAttribute("bookingList",bookingRepository.findAll());
+
+        return "/Pages/Bookings/booking_list";
+    }
+
+
+    @GetMapping("/addBooking")
+    public String addBooking(){
+        return "/Pages/Bookings/add_booking_list";
+    }
+
+
+    @GetMapping("/editBooking")
+    public String editBooking(){
+        return "/Pages/Bookings/edit_booking_list";
+    }
 }
