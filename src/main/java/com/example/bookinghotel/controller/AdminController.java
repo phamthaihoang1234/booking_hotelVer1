@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AdminController {
 
-    @Autowired
-    private UserInfo userInfo;
 
     @Autowired
     private UserService userService;
@@ -24,7 +22,7 @@ public class AdminController {
 
     @GetMapping("/user_list")
     public String user_list(Model model){
-        model.addAttribute("userList",userService.findAll())
+        model.addAttribute("userList",userService.findAll());
         return "/Pages/Admin/user_list";
     }
 
