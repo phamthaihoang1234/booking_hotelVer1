@@ -12,6 +12,22 @@ import java.util.List;
 @Table(name = "bookings")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Booking extends AbstractEntity implements Serializable {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Column(name = "number_of_guests")
     private int numberOfGuests;
 

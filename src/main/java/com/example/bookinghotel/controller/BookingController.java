@@ -42,4 +42,16 @@ public class BookingController {
 
         return "/Pages/Bookings/booking_list";
     }
+
+
+    @GetMapping("/addBooking")
+    public String addBooking(){
+        return "/Pages/Bookings/add_booking_list";
+    }
+
+
+    @GetMapping("/editBooking")
+    public String editBooking(){
+        return "/Pages/Bookings/edit_booking_list";
+    }
 }
