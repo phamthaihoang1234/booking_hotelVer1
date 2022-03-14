@@ -163,13 +163,7 @@ public class OwnHotelController {
         model.addAttribute("rooms",roomService.findAllByHotelId(idHotel));
         return "Pages/roomManage/all-room";
     }
-//
-//                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý phòng </span> <span class="menu-arrow"></span></a>
-//                        <ul class="submenu_class" style="display: none;">
-//                            <li><a th:href="@{/getAllRoomOfRoleAdmin}"> Tất cả phòng </a></li>
-//
-//                        </ul>
-//                    </li>
+
     @GetMapping("/getAllRoomOfRoleAdmin")
     public String getAllRoomOfRoleAdmin(Model model){
         model.addAttribute("rooms",roomService.findAll());

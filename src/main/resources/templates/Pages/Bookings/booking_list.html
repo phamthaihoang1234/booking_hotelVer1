@@ -120,13 +120,13 @@
 
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/roomHomepage}">All Rooms </a></li>
-                            <!--                            <li><a href="edit-room.html"> Edit Rooms </a></li>-->
-                            <!--                            <li><a href="add-room.html"> Add Rooms </a></li>-->
-                        </ul>
-                    </li>
+<!--                    <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>-->
+<!--                        <ul class="submenu_class" style="display: none;">-->
+<!--                            <li><a th:href="@{/roomHomepage}">All Rooms </a></li>-->
+<!--                            &lt;!&ndash;                            <li><a href="edit-room.html"> Edit Rooms </a></li>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <li><a href="add-room.html"> Add Rooms </a></li>&ndash;&gt;-->
+<!--                        </ul>-->
+<!--                    </li>-->
 <!--                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Staff </span> <span class="menu-arrow"></span></a>-->
 <!--                        <ul class="submenu_class" style="display: none;">-->
 <!--                            <li><a href="all-staff.html">All Staff </a></li>-->
@@ -186,14 +186,14 @@
                             <li><a href="edit-blog.html">Edit Blog </a></li>
                         </ul>
                     </li>
-                    <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
-                    <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="expense-reports.html">Expense Report </a></li>
-                            <li><a href="invoice-reports.html">Invoice Report </a></li>
-                        </ul>
-                    </li>
+<!--                    <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>-->
+<!--                    <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>-->
+<!--                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>-->
+<!--                        <ul class="submenu_class" style="display: none;">-->
+<!--                            <li><a href="expense-reports.html">Expense Report </a></li>-->
+<!--                            <li><a href="invoice-reports.html">Invoice Report </a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li> <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a> </li>
 <!--                    <li class="list-divider"></li>-->
 <!--                    <li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>-->
@@ -249,10 +249,10 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <div class="mt-5">
-                            <h4 class="card-title float-left mt-2">Appointments</h4>
-                            <a href="add-booking.html" class="btn btn-primary float-right veiwbutton ">Add Booking</a>
-                        </div>
+<!--                        <div class="mt-5">-->
+<!--                            <h4 class="card-title float-left mt-2">Appointments</h4>-->
+<!--                            <a href="add-booking.html" class="btn btn-primary float-right veiwbutton ">Add Booking</a>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -293,7 +293,7 @@
                                         <td><span th:text="${booking.getUser().getEmail()}"></span></td>
                                         <td><span th:text="${booking.getUser().getPhoneNumber()}"></span></td>
                                         <td>
-                                            <span th:text="${booking.getStatus()}"></span>
+                                            <div class="btn btn-sm bg-success-light mr-2" th:text="${booking.getRoom().getStatus()} ? 'ACTIVE' : 'RETIRED'"></div>
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
