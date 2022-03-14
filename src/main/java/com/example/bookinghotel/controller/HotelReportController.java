@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+
 
 @Controller
 public class HotelReportController {
@@ -41,7 +43,7 @@ public class HotelReportController {
 //    }
 
     @PostMapping("/saveReport")
-    public String saveHotelReport(@ModelAttribute("report") Report report, BindingResult result, RedirectAttributes redirect, Model model){
+    public String saveHotelReport(@ModelAttribute("report") @Valid Report report, BindingResult result, RedirectAttributes redirect, Model model){
 
         System.out.println("Room id :" + room_id);
         report.setEmail(report.getEmail());
@@ -51,9 +53,14 @@ public class HotelReportController {
         report.setHotel(roomService.findById(room_id).get().getHotel());
         report.setRoom(roomService.findById(room_id).get());
 
-
-        redirect.addFlashAttribute("globalMessage", "Report Successful!");
-        reportService.save(report);
+        if(result.hasErrors()){
+            model.addAttribute("globalMessage", "Gửi không thành công!");
+        }else{
+            model.addAttribute("globalMessage", "Gửi thành công!");
+            reportService.save(report);
+        }
+//        redirect.addFlashAttribute("globalMessage", "Gửi thành công!");
+//        reportService.save(report);
         model.addAttribute("roomInfo", roomService.findById(room_id).get());
         return "Room/hotel_report";
     }
