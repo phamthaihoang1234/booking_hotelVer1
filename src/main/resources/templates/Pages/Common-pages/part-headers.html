@@ -162,6 +162,16 @@ search-hotels.html & book-now -->
                         </li>
                         </span>
 
+                        <span sec:authorize="hasRole('ADMIN')">
+                            <li style="margin-left: 19px">
+                            <a th:href="@{/manageHotels}">
+                                <i class="material-icons" style="color: rgb(166, 166, 166)">card_travel</i>
+                                <span>Manage hotel</span>
+                            </a>
+
+                        </li>
+                        </span>
+
                         <li class="divider"></li>
                         <li>
                             <a class="container-fluid" th:href="@{/logout}"
