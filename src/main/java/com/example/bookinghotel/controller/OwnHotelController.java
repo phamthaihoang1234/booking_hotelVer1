@@ -91,7 +91,7 @@ public class OwnHotelController {
 //        roleService.save(roleUser);
         Set<Role> roles = new HashSet<>();
         roles.add(roleOwner);
-
+//        roles.add(roleUser);
 
         user.setRoles(roles);
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
