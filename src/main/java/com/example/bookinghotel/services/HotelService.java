@@ -14,7 +14,7 @@ public interface HotelService {
 
     Hotel save(Hotel province);
 
-
+    Iterable<Hotel> findAllHotelByUserId(long id);
 
     void delete(Long id);
 
