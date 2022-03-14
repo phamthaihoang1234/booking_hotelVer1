@@ -45,7 +45,7 @@
 											</span>
                                         <div class="media-body">
                                             <p class="noti-details"><span class="noti-title"
-                                                                          th:text="${userInfo.username}"></span> has
+                                                                          th:text="${hotelOwnerProfile.getName()}"></span> has
                                                 approved <span class="noti-title">your estimate</span></p>
                                             <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
                                         </div>
@@ -304,9 +304,9 @@
                                                   src="../assets/img/profiles/avatar-02.jpg"> </a>
                             </div>
                             <div class="col ml-md-n2 profile-user-info">
-                                <h4 class="user-name mb-3" th:text="${userInfo.username}"></h4>
+                                <h4 class="user-name mb-3" th:text="${hotelOwnerProfile.getName()}"></h4>
                                 <h6 class="text-muted mt-1">Customer</h6>
-                                <div class="about-text" th:text="${userInfo.address}"></div>
+                                <div class="about-text" th:text="${hotelOwnerProfile.getAddress()}"></div>
                             </div>
                             <div class="col-auto profile-btn"><a href="" class="btn btn-primary">
                                 Thông báo
@@ -335,24 +335,24 @@
                                             </h5>
                                             <div class="row mt-5">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Họ và tên: </p>
-                                                <p class="col-sm-9" th:text="${userInfo.name}"></p>
+                                                <p class="col-sm-9" th:text="${hotelOwnerProfile.getName()}"></p>
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Địa chỉ Email: </p>
-                                                <p class="col-sm-9" th:text="${userInfo.email}"></p>
+                                                <p class="col-sm-9" th:text="${hotelOwnerProfile.getEmail()}"></p>
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Giới tính: </p>
-                                                <p class="col-sm-9" th:text="${userInfo.gender}"></p>
+                                                <p class="col-sm-9" th:text="${hotelOwnerProfile.getGender()}"></p>
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Số điện thoại: </p>
-                                                <p class="col-sm-9" th:text="${userInfo.phoneNumber}"></p>
+                                                <p class="col-sm-9" th:text="${hotelOwnerProfile.getPhoneNumber()}"></p>
                                             </div>
 
                                             <div class="row">
                                                 <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Địa chỉ: </p>
-                                                <p class="col-sm-9" th:text="${userInfo.address}"></p>
+                                                <p class="col-sm-9" th:text="${hotelOwnerProfile.getAddress()}"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -366,31 +366,31 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form th:action="@{/saveEditProfile}" method="post"
+                                                    <form th:action="@{/hotelOwnerProfile/save}" method="post"
                                                           id="FormChangeInformation">
                                                         <div class="row form-row">
                                                             <div class="col-12 col-sm-6">
                                                                 <div class="form-group">
                                                                     <label>Họ và tên</label>
                                                                     <input type="text" class="form-control"
-                                                                           th:value="${userInfo.name}"
-                                                                           th:field="*{userInfo.name}" name="txtName2">
+                                                                           th:value="${hotelOwnerProfile.name}"
+                                                                           th:field="*{hotelOwnerProfile.name}" name="txtName2">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-sm-8">
                                                                 <div class="form-group">
                                                                     <label>Địa chỉ Email:</label>
                                                                     <input type="email" class="form-control"
-                                                                           th:value="${userInfo.email}"
-                                                                           th:field="*{userInfo.email}"
+                                                                           th:value="${hotelOwnerProfile.email}"
+                                                                           th:field="*{hotelOwnerProfile.email}"
                                                                            name="txtEmail"></div>
                                                             </div>
                                                             <div class="col-12 col-sm-8">
                                                                 <div class="form-group">
                                                                     <label>Số điện thoại:</label>
                                                                     <input type="text"
-                                                                           th:value="${userInfo.phoneNumber}"
-                                                                           th:field="*{userInfo.phoneNumber}"
+                                                                           th:value="${hotelOwnerProfile.phoneNumber}"
+                                                                           th:field="*{hotelOwnerProfile.phoneNumber}"
                                                                            name="txtPhoneNumber"
                                                                            class="form-control"></div>
                                                             </div>
@@ -399,7 +399,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                            name="gender"
-                                                                           th:field="*{userInfo.gender}"
+                                                                           th:field="*{hotelOwnerProfile.gender}"
                                                                            id="flexRadioMale" value="Nam">
                                                                     <label class="form-check-label" for="flexRadioMale">
                                                                         Nam
@@ -408,7 +408,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                            name="gender"
-                                                                           th:field="*{userInfo.gender}"
+                                                                           th:field="*{hotelOwnerProfile.gender}"
                                                                            id="flexRadioFemale" value="Nữ">
                                                                     <label class="form-check-label"
                                                                            for="flexRadioFemale">
@@ -420,8 +420,8 @@
                                                                 <div class="form-group">
                                                                     <label>Địa chỉ </label>
                                                                     <input type="text" class="form-control"
-                                                                           th:value="${userInfo.address}"
-                                                                           th:field="*{userInfo.address}"
+                                                                           th:value="${hotelOwnerProfile.address}"
+                                                                           th:field="*{hotelOwnerProfile.address}"
                                                                            name="txtAddress"></div>
                                                             </div>
                                                             <div id="messageUpdateProfile" style="color:red;"></div>
