@@ -2,6 +2,7 @@ package com.example.bookinghotel.repositories;
 
 
 import com.example.bookinghotel.entities.Booking;
+import com.example.bookinghotel.entities.Report;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -19,4 +20,6 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
 
     @Query(value = "select * from bookings where user_id = ?1 and room_id = ?2 and start_date = ?3 limit 1", nativeQuery = true)
     Optional<Booking> findByStartDateAndUserIdAndRoomId(Long userId, Long roomId, LocalDate date);
+
+    Iterable<Booking> findAll();
 }

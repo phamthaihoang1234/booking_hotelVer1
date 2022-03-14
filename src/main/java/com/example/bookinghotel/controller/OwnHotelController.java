@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -163,13 +164,7 @@ public class OwnHotelController {
         model.addAttribute("rooms",roomService.findAllByHotelId(idHotel));
         return "Pages/roomManage/all-room";
     }
-//
-//                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý phòng </span> <span class="menu-arrow"></span></a>
-//                        <ul class="submenu_class" style="display: none;">
-//                            <li><a th:href="@{/getAllRoomOfRoleAdmin}"> Tất cả phòng </a></li>
-//
-//                        </ul>
-//                    </li>
+
     @GetMapping("/getAllRoomOfRoleAdmin")
     public String getAllRoomOfRoleAdmin(Model model){
         model.addAttribute("rooms",roomService.findAll());
@@ -250,24 +245,22 @@ public class OwnHotelController {
 
 
     @GetMapping("/hotelOwnerProfile")
-    public String editHotelOwnerProfile(Model model){
-        model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
-        if(userService.findByUserName(this.getPrincipal()).getRoles().equals("ROLE_USER")){
-            return "Pages/modal-user/profile2";
-        }
+    public String editHotelOwnerProfile(HttpServletRequest request,Model model){
+        model.addAttribute("hotelOwner",userService.findByUserName(this.getPrincipal()));
         return "Pages/owner/hotelOwnerProfile";
     }
 
     @PostMapping("/hotelOwnerProfile/save")
-    public String saveEditHotelOwnerProfile(@ModelAttribute UserInfo hotelOwnerProfile) {
+    public String saveEditHotelOwnerProfile(@ModelAttribute UserInfo hotelOwner) {
 
-        UserInfo oldHotelOwnerProfile = userService.findByUserName(this.getPrincipal());
-        oldHotelOwnerProfile.setName(hotelOwnerProfile.getName());
-        oldHotelOwnerProfile.setEmail(hotelOwnerProfile.getEmail());
-        oldHotelOwnerProfile.setPhoneNumber(hotelOwnerProfile.getPhoneNumber());
-        oldHotelOwnerProfile.setAddress(hotelOwnerProfile.getAddress());
+        UserInfo oldHotelOwner = userService.findByUserName(this.getPrincipal());
+        oldHotelOwner.setName(hotelOwner.getName());
+        oldHotelOwner.setEmail(hotelOwner.getEmail());
+        oldHotelOwner.setPhoneNumber(hotelOwner.getPhoneNumber());
+        oldHotelOwner.setAddress(hotelOwner.getAddress());
+        oldHotelOwner.setGender(hotelOwner.getGender());
         try{
-            userService.save(oldHotelOwnerProfile);
+            userService.save(oldHotelOwner);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -275,31 +268,41 @@ public class OwnHotelController {
     }
 
 
+    @GetMapping("/OwnerChangePassword")
+    public String getOwnerChangePassword(HttpServletRequest request, Model model) {
+
+        model.addAttribute("hotelOwner", userService.findByUserName(this.getPrincipal()));
+        return "Pages/owner/owner_changePassword";
+
+    }
 
 
-    @PostMapping("/saveHotelOwnerNewPasword")
-    public String saveHotelOwnerNewPasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPasswordAgain, HttpServletResponse response, @ModelAttribute UserInfo userInfo, Model model) {
+    @PostMapping("/saveOwnerChangePassword")
+    public String saveOwnerChangePasword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Model model, @ModelAttribute UserInfo hotelOwner) {
+        UserInfo user = null;
+        try{
+            user = userService.findByUserName(this.getPrincipal());
+            boolean verifyPassword= UserInfo.getPasswordEncoder().matches(oldPassword,user.getPassword());
+            System.out.println("Class: ChangePasswordController | Method: saveChangePasword | verifyPassword:"+verifyPassword);
+            System.out.println("Class: ChangePasswordController | Method: saveChangePasword | user.getPassword():"+user.getPassword());
+            System.out.println("Class: ChangePasswordController | Method: saveChangePasword | oldPassword:"+oldPassword);
 
-        UserInfo hotelOwner = null;
-
-        try {
-            hotelOwner = userService.existsByUsernameAndPassword(this.getPrincipal(), oldPassword).get();
-
-            if (hotelOwner !=  null) {
-                hotelOwner.setPassword(newPassword);
-                userService.save(hotelOwner);
+            if (verifyPassword) {
+                user.setPassword(newPassword);
+                userService.save(user);
                 model.addAttribute("statusChangePassWord", "Thay đổi mật khẩu thành công !!!");
-            }
-            else {
+            }else{
                 model.addAttribute("statusChangePassWord", "Mật khẩu cũ không đúng !!!");
             }
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("statusChangePassWord", "e.printStackTrace()");
         }
-        model.addAttribute("hotelOwnerProfile",userService.findByUserName(this.getPrincipal()));
-        return "Pages/owner/hotelOwnerProfile";
+        System.out.println("Class: ChangePasswordController | Method: saveChangePasword | statusChangePassWord:"+model.getAttribute("statusChangePassWord").toString());
+
+        return "Pages/owner/owner_changePassword";
     }
+
 
 
 
