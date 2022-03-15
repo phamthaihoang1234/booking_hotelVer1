@@ -2,7 +2,6 @@ package com.example.bookinghotel.controller;
 
 
 import com.example.bookinghotel.entities.Report;
-import com.example.bookinghotel.entities.Room;
 import com.example.bookinghotel.repositories.HotelReportRepository;
 import com.example.bookinghotel.services.ReportService;
 import com.example.bookinghotel.services.RoomService;
@@ -71,7 +70,7 @@ public class HotelReportController {
 
         model.addAttribute("report",hotelReportRepository.findAll());
 
-        return "/Pages/owner/hotel_report_list";
+        return "/Pages/Admin/hotel_report_list";
     }
 
     @GetMapping("/deleteReport")

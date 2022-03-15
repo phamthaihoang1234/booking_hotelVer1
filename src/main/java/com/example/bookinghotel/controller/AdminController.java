@@ -51,13 +51,29 @@ public class AdminController {
                             @RequestParam(name ="email", required = false) String email){
 
         Iterable<UserInfo> userList = null;
-        if(StringUtils.hasText(name)){
+        if(StringUtils.hasText(name) && StringUtils.hasText(phone) && StringUtils.hasText(email)){
+            userList = userRepository.findByNameAndPhoneNumberAndEmail(name, phone, email);
+        }
+        else if(StringUtils.hasText(name)){
             userList = userRepository.findByNameContaining(name);
-        }else{
+        }else if(StringUtils.hasText(phone)){
+            userList = userRepository.findByPhoneNumberContaining(phone);
+        }else if(StringUtils.hasText(email)){
+            userList = userRepository.findByEmailContaining(email);
+        }
+        else{
             userList = userRepository.findAll();
         }
         model.addAttribute("userList",userList);
+        model.addAttribute("admin",userService.findByUserName(this.getPrincipal()));
         return "/Pages/Admin/user_list";
+    }
+
+
+    @GetMapping("/deleteUserInUserList")
+    public String deleteUserInUserList(long id){
+        userService.delete(id);
+        return "redirect:/user_list";
     }
 
 
