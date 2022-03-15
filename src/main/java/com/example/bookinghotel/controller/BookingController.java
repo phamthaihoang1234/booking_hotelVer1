@@ -11,10 +11,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 @Controller
 public class BookingController {
@@ -64,12 +62,7 @@ public class BookingController {
         }
         model.addAttribute("bookingList",bookingList);
 
-        return "/Pages/Bookings/demo";
-    }
-
-    @GetMapping("/demo")
-    public String demo(){
-        return "Pages/Bookings/demo";
+        return "/Pages/Bookings/booking_list";
     }
 
 
