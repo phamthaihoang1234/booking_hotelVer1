@@ -78,8 +78,34 @@ public class AdminController {
 
 
     @GetMapping("/owner_list")
-    public String owner_list(){
+    public String owner_list(Model model,
+                             @RequestParam(name = "name", required = false) String name,
+                             @RequestParam(name = "phone",required = false) String phone,
+                             @RequestParam(name ="email", required = false) String email){
+
+        Iterable<UserInfo> ownerList = null;
+        if(StringUtils.hasText(name) && StringUtils.hasText(phone) && StringUtils.hasText(email)){
+            ownerList = userRepository.findByNameAndPhoneNumberAndEmail(name, phone, email);
+        }
+        else if(StringUtils.hasText(name)){
+            ownerList = userRepository.findByNameContaining(name);
+        }else if(StringUtils.hasText(phone)){
+            ownerList = userRepository.findByPhoneNumberContaining(phone);
+        }else if(StringUtils.hasText(email)){
+            ownerList = userRepository.findByEmailContaining(email);
+        }
+        else{
+            ownerList = userRepository.findAll();
+        }
+        model.addAttribute("ownerList",ownerList);
+        model.addAttribute("admin",userService.findByUserName(this.getPrincipal()));
         return "/Pages/Admin/owner_list";
+    }
+
+    @GetMapping("/deleteUserInOwnerList")
+    public String deleteUserInOwnerList(long id){
+        userService.delete(id);
+        return "redirect:/owner_list";
     }
 
 }
