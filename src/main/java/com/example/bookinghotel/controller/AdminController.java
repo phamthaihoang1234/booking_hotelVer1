@@ -108,4 +108,10 @@ public class AdminController {
         return "redirect:/owner_list";
     }
 
+
+    @GetMapping("/demo")
+    public String demo(){
+        return "/Pages/Admin/demo";
+    }
+
 }
