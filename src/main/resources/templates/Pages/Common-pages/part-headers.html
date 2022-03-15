@@ -139,18 +139,25 @@ search-hotels.html & book-now -->
 <!--                        <span class="caret" ></span>-->
                     </button>
                     <ul class="dropdown-menu">
-                        <li style="line-height: 30px">
-                                <i class="material-icons" style="color: rgb(166, 166, 166)">info</i>
 
-                                <span sec:authorize="hasRole('USER')">
-                                <a th:href="@{/GetDetailsProfile}">Thông tin tài khoản</a>
-                                </span>
 
-                                <span sec:authorize="hasRole('OWNER')">
-                                <a th:href="@{/hotelOwnerProfile}">Thông tin tài khoản</a>
-                                </span>
+                        <span sec:authorize="hasRole('USER')">
+                            <li style="line-height: 30px">
+                                <a th:href="@{/GetDetailsProfile}">
+                                    <i class="material-icons" style="color: rgb(166, 166, 166)">info</i>
+                                    <span>Thông tin tài khoản</span></a>
+                            </li>
+                        </span>
 
-                        </li>
+                        <span sec:authorize="hasRole('OWNER')">
+                            <li style="line-height: 30px">
+                                <a th:href="@{/hotelOwnerProfile}">
+                                    <i class="material-icons" style="color: rgb(166, 166, 166)">info</i>
+                                    <span>Thông tin tài khoản</span></a>
+                            </li>
+                        </span>
+
+
 
                         <span sec:authorize="hasRole('OWNER')">
                             <li style="margin-left: 19px">

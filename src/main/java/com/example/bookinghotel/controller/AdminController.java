@@ -4,6 +4,8 @@ package com.example.bookinghotel.controller;
 import com.example.bookinghotel.entities.UserInfo;
 import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +18,23 @@ public class AdminController {
     private UserService userService;
 
 
+    private String getPrincipal() {
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
+
     @GetMapping("/admin_manageHomepage")
-    public String adminManageHomepage(){
+    public String adminManageHomepage(Model model){
+        model.addAttribute("admin",userService.findByUserName(this.getPrincipal()));
         return "/Pages/Admin/admin_manageHomepage";
     }
 
