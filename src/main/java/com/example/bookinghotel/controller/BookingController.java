@@ -11,7 +11,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 @Controller
 public class BookingController {
@@ -42,18 +45,20 @@ public class BookingController {
 
     @GetMapping("/listBooking")
     public String listBooking(Model model,
-                              @RequestParam(value = "start_date",required = false) String start_date,
-                              @RequestParam(value = "end_date",required = false) String end_date){
+                              @RequestParam(name = "start_date",required = false) String start_date,
+                              @RequestParam(name = "end_date",required = false) String end_date){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         System.out.println("ngay bat dau: "+ start_date);
         System.out.println("ngay ket thuc: "+ end_date);
         Iterable<Booking> bookingList = null;
         if(StringUtils.hasText(start_date) && StringUtils.hasText(end_date)){
-            bookingList = bookingRepository.findByStartDateAndEndDate(LocalDate.parse(start_date),LocalDate.parse(end_date));
+            bookingList = bookingRepository.findByStartDateAndEndDate(LocalDate.parse(start_date,formatter),LocalDate.parse(end_date,formatter));
         }else if(StringUtils.hasText(start_date)){
-            bookingList = bookingRepository.findByStartDate(LocalDate.parse(start_date));
+            bookingList = bookingRepository.findByStartDate(LocalDate.parse(start_date,formatter));
         }else if(StringUtils.hasText(end_date)){
-            bookingList = bookingRepository.findByEndDate(LocalDate.parse(end_date));
+            bookingList = bookingRepository.findByEndDate(LocalDate.parse(end_date,formatter));
         }else{
             bookingList = bookingRepository.findAll();
         }
