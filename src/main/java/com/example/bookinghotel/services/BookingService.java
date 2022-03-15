@@ -7,7 +7,7 @@ import com.example.bookinghotel.entities.Booking;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public interface BookingService  {
+public interface BookingService {
 
     Iterable<Booking> findAll();
 
@@ -21,4 +21,5 @@ public interface BookingService  {
 
     Optional<Booking> findByStartDateAndUserIdAndRoomId(Long userId, Long roomId, LocalDate date);
 
+    void delete(Long id);
 }

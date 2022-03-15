@@ -31,4 +31,6 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
     Iterable<Booking> findByStartDateAndEndDate(LocalDate date1, LocalDate date2);
 
     Iterable<Booking> findAll();
+
+
 }

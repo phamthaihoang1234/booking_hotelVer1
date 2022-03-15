@@ -66,6 +66,13 @@ public class BookingController {
     }
 
 
+    @GetMapping("/deleteBooking")
+    public String deleteBooking(Long id){
+        bookingService.delete(id);
+        return "redirect:/listBooking";
+    }
+
+
     @GetMapping("/addBooking")
     public String addBooking(){
         return "/Pages/Bookings/add_booking_list";
