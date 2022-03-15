@@ -2,13 +2,16 @@ package com.example.bookinghotel.controller;
 
 
 import com.example.bookinghotel.entities.UserInfo;
+import com.example.bookinghotel.repositories.UserRepository;
 import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminController {
@@ -16,6 +19,8 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
 
     private String getPrincipal() {
@@ -40,8 +45,18 @@ public class AdminController {
 
 
     @GetMapping("/user_list")
-    public String user_list(Model model){
-        model.addAttribute("userList",userService.findAll());
+    public String user_list(Model model,
+                            @RequestParam(name = "name", required = false) String name,
+                            @RequestParam(name = "phone",required = false) String phone,
+                            @RequestParam(name ="email", required = false) String email){
+
+        Iterable<UserInfo> userList = null;
+        if(StringUtils.hasText(name)){
+            userList = userRepository.findByNameContaining(name);
+        }else{
+            userList = userRepository.findAll();
+        }
+        model.addAttribute("userList",userList);
         return "/Pages/Admin/user_list";
     }
 
