@@ -109,7 +109,7 @@ public class HotelDetailDController {
             b.setPrice(Double.parseDouble(totalPrice));
             b.setEndDate(LocalDate.parse(getLocalDate(checkout)));
             b.setStartDate(LocalDate.parse(getLocalDate(checkin)));
-            b.setUser(userService.findById(1L).get());
+            b.setUser(userService.findByUserName(getPrincipal()));
             b.setRoom(roomGroup.getEmpty_rooms().get(i));
             bookingService.save(b);
 
