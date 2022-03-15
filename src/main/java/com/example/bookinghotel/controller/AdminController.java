@@ -109,9 +109,4 @@ public class AdminController {
     }
 
 
-    @GetMapping("/demo")
-    public String demo(){
-        return "/Pages/Admin/demo";
-    }
-
 }
