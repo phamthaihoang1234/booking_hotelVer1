@@ -1854,7 +1854,7 @@
             nGuess = parseInt($(x).parent().find('span').text());
 
 
-            if(nGuess == 3 || numberRoomEmpty == 0 || nRoom == 0){
+            if(nGuess == (3*nRoom) || numberRoomEmpty == 0 || nRoom == 0){
                 document.getElementById('plusG').classList.remove("guess-plus");
                 document.getElementById('plusG').classList.add("img-not-allowed");
             }else {
@@ -1953,7 +1953,7 @@
 
             $('#numberGuess').html(nGuess+1);
 
-            if(nGuess + 1 == 3){
+            if(nGuess + 1 == (3*nRoom)){
                 document.getElementById('plusG').classList.remove("guess-plus");
                 document.getElementById('plusG').classList.add("img-not-allowed");
             }else {
