@@ -73,8 +73,6 @@ public class HotelDetailDController {
 
     public static String getLocalDate(String date){
         String[] arr = date.split("/");
-
-
         if(arr[0].length() == 1){
             arr[0] = "0"+ arr[0];
         }
@@ -96,23 +94,22 @@ public class HotelDetailDController {
 
     )
     {
-        Booking b = new Booking();
-        b.setNumNight(Integer.parseInt(numberNight));
-        b.setNumberOfGuests(Integer.parseInt(numberOfGu));
-        b.setPrice(Double.parseDouble(totalPrice));
-        b.setEndDate(LocalDate.parse(getLocalDate(checkout)));
-        b.setStartDate(LocalDate.parse(getLocalDate(checkin)));
 
-        b.setUser(userService.findById(1L).get());
        // b.setUser(userService.findByUserName(getPrincipal()));
 
         Room room = homeService.findById(Long.valueOf(roomId)).get();
-        RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),checkin,checkout,1,room.getPropertyType());
-        int k = 0;
+        RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),getLocalDate(checkin),getLocalDate(checkout),1,room.getPropertyType());
+
         for(int i=0; i < Integer.parseInt(numberOfRoom) ; i++){
-            b.setRoom(roomGroup.getEmpty_rooms().get(k));
+            Booking b = new Booking();
+            b.setNumNight(Integer.parseInt(numberNight));
+            b.setNumberOfGuests(Integer.parseInt(numberOfGu));
+            b.setPrice(Double.parseDouble(totalPrice));
+            b.setEndDate(LocalDate.parse(getLocalDate(checkout)));
+            b.setStartDate(LocalDate.parse(getLocalDate(checkin)));
+            b.setUser(userService.findByUserName(getPrincipal()));
+            b.setRoom(roomGroup.getEmpty_rooms().get(i));
             bookingService.save(b);
-            k++;
         }
 
         return "redirect:/";
@@ -189,9 +186,7 @@ public class HotelDetailDController {
     // co the return null neu khach san khong ton tai hoac khong co phong thich hop
     public RoomGroup getFilteredRoomGroup(Long hotel_id, String start_date, String end_date, int number_of_people, PropertyType type) {
         RoomGroup rg = null;
-
         Optional<Hotel> hotel = hotelService.findById(hotel_id);
-
         if (hotel.isPresent()) {
             List<Room> rooms = hotel.get().getRooms();
             if (rooms!=null&&!rooms.isEmpty()) {
