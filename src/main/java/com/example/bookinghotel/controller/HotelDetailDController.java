@@ -100,7 +100,7 @@ public class HotelDetailDController {
        // b.setUser(userService.findByUserName(getPrincipal()));
 
         Room room = homeService.findById(Long.valueOf(roomId)).get();
-        RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),checkin,checkout,1,room.getPropertyType());
+        RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),getLocalDate(checkin),getLocalDate(checkout),1,room.getPropertyType());
 
         for(int i=0; i < Integer.parseInt(numberOfRoom) ; i++){
             Booking b = new Booking();
@@ -112,7 +112,6 @@ public class HotelDetailDController {
             b.setUser(userService.findByUserName(getPrincipal()));
             b.setRoom(roomGroup.getEmpty_rooms().get(i));
             bookingService.save(b);
-
         }
 
         return "redirect:/";
