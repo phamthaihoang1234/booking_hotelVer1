@@ -72,12 +72,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return db;
     }
 
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/","login","/register","/sendEmail","/checkAvailableHotelByDate").permitAll()
                 .antMatchers(HttpMethod.POST).permitAll()
                 //.antMatchers("/login").access("hasAnyRole('ROLE_USER')")
                 .antMatchers("/manageHotels").access("hasRole('ROLE_OWNER')")
+                .antMatchers("/saveBooking").access("hasRole('ROLE_USER')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
 
             //  .and().formLogin().successHandler(customSuccessHandler)
