@@ -23,10 +23,11 @@
     <div class="row" style="color: white" th:if="${row}">
 
         <th:block th:each="hotel,count:${row}">
-        <div class="col-sm-6 carousel slide" style="display: flex;justify-content: center; " th:id="'demo'+${RowState.index}+${count.index}" data-interval="false" onclick="callLink(this)">
-            <a th:href="'/hotel_detail'+${hotel.getId()}" class="link"></a>
+        <div class="col-sm-6 carousel slide" style="display: flex;justify-content: center; " th:id="'demo'+${RowState.index}+${count.index}" data-interval="false" >
 
-            <div class="carousel-inner" style=" border-radius: 20px;position: relative ;">
+
+            <div class="carousel-inner" style=" border-radius: 20px;position: relative ;" onclick="callLink(this)">
+                <a th:href="'/hotel_detail'+${hotel.getId()}" class="link"></a>
                 <div class="loaiphong" style="font-size: 13px" th:text="${hotel.getHotel_property().getType()}"> </div>
                 <!--http://www.vandahotel.vn/-->
                 <!-- SUPERIOR | DELUXE | GRAND SUITE | FAMILY JUNIOR SUITE -->
@@ -58,11 +59,11 @@
             </div>
             <!--Logo tao ra khi lam` slide tu` pm ngoai`,
             sau khi tat' di van~ click duoc ra trang http://wowslider.com/-->
-            <a class="carousel-control-prev" th:href="'#demo'+${RowState.index}+${count.index}" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
+            <a class="carousel-control-prev" th:href="'#demo'+${RowState.index}+${count.index}" data-slide="prev" style="z-index: 9999">
+                <span class="carousel-control-prev-icon" style="z-index: 9999" ></span>
             </a>
-            <a class="carousel-control-next" th:href="'#demo'+${RowState.index}+${count.index}" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
+            <a class="carousel-control-next" th:href="'#demo'+${RowState.index}+${count.index}" data-slide="next" style="z-index: 9999">
+                <span class="carousel-control-next-icon" style="z-index: 9999" ></span>
             </a>
 
 
