@@ -4,37 +4,30 @@
     <meta charset="UTF-8">
     <title>YOY | search-hotels</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="/css/search-hotels.css">-->
     <link rel="stylesheet" href="/css/search-hotels.css">
-
-
     <link rel="stylesheet" href="/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-
-    <!-- Start WOWSlider.com section -->
     <script src="/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
-    <!--<script type="text/javascript" src="/js/search-hotels.js"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
-
-    <!--nhóm js nay` phai dat phia' sau cac slide thi moi' chay duoc (co le code tren chua cai ready...)-->
-    <!--autocomplete-suggestions-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">-->
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/Utilities/autocomplete-suggestions/style.css">
-<!--    <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>-->
+    <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/Utilities/autocomplete-suggestions/jquery.autocomplete.min.js"></script>
     <script type="text/javascript" src="/Utilities/autocomplete-suggestions/locations-autocomplete.js"></script>
-
-
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
+    <!--Slider-->
     <link rel="stylesheet" href="/Utilities/RangeSlider/jquery-ui.css">
     <script src="/Utilities/RangeSlider/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <style>
         .ws_images img {
             border-radius: 4px;
@@ -287,7 +280,7 @@
 
                         </th:block>
                         <li><input type="radio" name="hotel_types1" value="all"/>Bất kì</li>
-                        <li><a id="loai-them" data-toggle="modal" href="#myModal"
+                        <li><a id="loai-them" data-toggle="modal" data-target="#myModal"
                                style="color: black; font-size: small"> Thêm ...</a></li>
 
                     </ul>

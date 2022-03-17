@@ -2,9 +2,14 @@ package com.example.bookinghotel.controller;
 
 
 import com.example.bookinghotel.entities.Booking;
+import com.example.bookinghotel.entities.UserInfo;
 import com.example.bookinghotel.repositories.BookingRepository;
 import com.example.bookinghotel.services.BookingService;
+import com.example.bookinghotel.services.HotelService;
+import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -21,6 +26,10 @@ public class BookingController {
     private BookingService bookingService;
     @Autowired
     private BookingRepository bookingRepository;
+    @Autowired
+    private HotelService hotelService;
+    @Autowired
+    private UserService userService;
 
 //    @GetMapping("/saveBooking")
 //    public String saveBooking(@RequestParam("checkin") String checkin,
@@ -52,13 +61,13 @@ public class BookingController {
         System.out.println("ngay ket thuc: "+ end_date);
         Iterable<Booking> bookingList = null;
         if(StringUtils.hasText(start_date) && StringUtils.hasText(end_date)){
-            bookingList = bookingRepository.findByStartDateAndEndDate(LocalDate.parse(start_date,formatter),LocalDate.parse(end_date,formatter));
+            bookingList = bookingRepository.findByStartDateAndEndDate(hotelService.findAllHotelByUserId(userService.findByUserName(this.getPrincipal()).getId()).iterator().next().getId(),LocalDate.parse(start_date,formatter),LocalDate.parse(end_date,formatter));
         }else if(StringUtils.hasText(start_date)){
-            bookingList = bookingRepository.findByStartDate(LocalDate.parse(start_date,formatter));
+            bookingList = bookingRepository.findByStartDate(hotelService.findAllHotelByUserId(userService.findByUserName(this.getPrincipal()).getId()).iterator().next().getId(),LocalDate.parse(start_date,formatter));
         }else if(StringUtils.hasText(end_date)){
-            bookingList = bookingRepository.findByEndDate(LocalDate.parse(end_date,formatter));
+            bookingList = bookingRepository.findByEndDate(hotelService.findAllHotelByUserId(userService.findByUserName(this.getPrincipal()).getId()).iterator().next().getId(),LocalDate.parse(end_date,formatter));
         }else{
-            bookingList = bookingRepository.findAll();
+            bookingList = bookingRepository.findAllBookingByHotelId(hotelService.findAllHotelByUserId(userService.findByUserName(this.getPrincipal()).getId()).iterator().next().getId());
         }
         model.addAttribute("bookingList",bookingList);
 
@@ -82,5 +91,18 @@ public class BookingController {
     @GetMapping("/editBooking")
     public String editBooking(){
         return "/Pages/Bookings/edit_booking_list";
+    }
+
+    private String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
     }
 }

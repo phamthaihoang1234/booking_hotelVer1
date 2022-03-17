@@ -50,6 +50,12 @@ public class ManageHotelController {
         return "Pages/hotelManage/all-hotel";
     }
 
+    @GetMapping("/getAllHotel")
+    public String getAllHotel(Model model){
+      model.addAttribute("hotels",hotelService.findAll());
+        return "Pages/hotelManage/all-hotel-admin";
+    }
+
 
     @GetMapping("/showFormCreHotel")
     public String showFormCreateHotel(Model model){
