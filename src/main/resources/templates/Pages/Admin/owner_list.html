@@ -88,19 +88,16 @@
                     <div class="topnav-dropdown-footer"> <a href="#">View all Notifications</a> </div>
                 </div>
             </li>
-            <li class="nav-item dropdown has-arrow">
+            <li class="nav-item dropdown has-arrow" th:if="${#authorization.expression('isAuthenticated()')}">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Soeng Souy"></span> </a>
                 <div class="dropdown-menu">
                     <div class="user-header">
                         <div class="avatar avatar-sm"> <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
                         <div class="user-text">
-                            <!--                            <h6><span th:text="${admin.username}"></span></h6>-->
-                            <p class="text-muted mb-0">Administrator</p>
+                            <span sec:authentication="name"></span>
+                            <p class="text-muted mb-0">Admin</p>
                         </div>
-                    </div>
-                    <a class="dropdown-item" href="settings.html">Account Settings</a>
-                    <a class="dropdown-item" th:href="@{/logout}">Logout</a>
-                </div>
+                    </div><a class="dropdown-item" th:href="@{/logout}">Logout</a> </div>
             </li>
         </ul>
     </div>
