@@ -129,7 +129,7 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title mt-5">Add Hotel</h3> </div>
+                        <h3 class="page-title mt-5">Thêm khách sạn</h3> </div>
                 </div>
             </div>
             <div class="row">
@@ -139,9 +139,9 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Name</label>
+                                    <label>Tên khách sạn</label>
                                     <div class="time-icon">
-                                        <input type="text" class="form-control" th:field="*{nameOfHotel}" id="datetimepicker4" placeholder="Name" required>
+                                        <input type="text" class="form-control" th:field="*{nameOfHotel}" id="datetimepicker4" placeholder="Tên khách sạn" required>
                                     </div>
                                 </div>
                             </div>
@@ -149,16 +149,25 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Address</label>
+                                    <label>Địa chỉ</label>
                                     <div>
-                                        <input type="text" class="form-control" th:field="*{addressOfHotel}" placeholder="Address" required >
+                                        <input type="text" class="form-control" th:field="*{addressOfHotel}" placeholder="Địa chỉ" required >
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Status</label>
+                                    <label>Số điện thoại</label>
+                                    <div>
+                                        <input type="text" class="form-control"  placeholder="Số điện thoại" required >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Trạng thái</label>
                                     <select class="form-control" name="sellist1" th:field="*{status}">
                                         <option th:value="true" th:text="ACTIVE"></option>
                                         <option th:value="false" th:text="RETIRED"></option>
