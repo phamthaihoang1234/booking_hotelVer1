@@ -72,17 +72,19 @@ public class HotelDetailDController {
     }
 
     public static String getLocalDate(String date){
-        String[] arr = date.split("/");
+        if(date != ""){
+            String[] arr = date.split("/");
 
 
-        if(arr[0].length() == 1){
-            arr[0] = "0"+ arr[0];
+            if(arr[0].length() == 1){
+                arr[0] = "0"+ arr[0];
+            }
+            if(arr[1].length() == 1){
+                arr[1] = "0"+ arr[1];
+            }
+            return arr[2] +"-"+arr[0]+"-"+arr[1];
         }
-        if(arr[1].length() == 1){
-            arr[1] = "0"+ arr[1];
-        }
-
-        return arr[2] +"-"+arr[0]+"-"+arr[1];
+        return null;
     }
 
     @GetMapping("/saveBooking")
@@ -156,10 +158,17 @@ public class HotelDetailDController {
         System.out.println("end date" + end_date);
         String ans = "";
         Room room = homeService.findById(Long.valueOf(room_id)).get();
-       RoomGroup roomGroup = getFilteredRoomGroup(room.getHotel().getId(),start_date,end_date,1,room.getPropertyType());
-       if(roomGroup != null){
-           ans = String.valueOf(roomGroup.getEmpty_rooms().size());
-       }
+        RoomGroup roomGroup = null ;
+        if(start_date != "" && end_date != ""){
+            roomGroup = getFilteredRoomGroup(room.getHotel().getId(),start_date,end_date,1,room.getPropertyType());
+        }else {
+            roomGroup = getFilteredRoomGroup(room.getHotel().getId(),"2000-03-18","2000-03-21",1,room.getPropertyType());
+        }
+        if(roomGroup == null){
+            ans = String.valueOf(0);
+        }else {
+            ans = String.valueOf(roomGroup.getEmpty_rooms().size());
+        }
 
         try (PrintWriter out = response.getWriter()) {
             out.write(ans);
