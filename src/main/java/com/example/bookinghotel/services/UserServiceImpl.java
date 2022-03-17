@@ -63,6 +63,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public UserInfo save(UserInfo user) throws Exception {
 //        if (this.existsByUsername(user.getUsername())) {
 //            throw new RuntimeException(messageSource.getMessage("validators.username.exists", new Object[] {user.getUsername()}, Locale.getDefault()));

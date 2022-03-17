@@ -25,4 +25,6 @@ public interface UserService extends UserDetailsService {
     public boolean changePassword(UserInfo user) throws Exception;
 
     Optional<UserInfo> existsByUsernameAndPassword(String email, String password) throws Exception;
+
+    void delete(Long id);
 }

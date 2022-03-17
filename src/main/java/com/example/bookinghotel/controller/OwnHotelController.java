@@ -282,6 +282,7 @@ public class OwnHotelController {
         }
         System.out.println("Class: ChangePasswordController | Method: saveChangePasword | statusChangePassWord:"+model.getAttribute("statusChangePassWord").toString());
 
+        model.addAttribute("hotelOwner", userService.findByUserName(this.getPrincipal()));
         return "Pages/owner/owner_changePassword";
     }
 
