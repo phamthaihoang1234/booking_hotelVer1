@@ -53,6 +53,12 @@ public class AdminController {
         Iterable<UserInfo> userList = null;
         if(StringUtils.hasText(name) && StringUtils.hasText(phone) && StringUtils.hasText(email)){
             userList = userRepository.findByNameAndPhoneNumberAndEmail(name, phone, email);
+        }else if(StringUtils.hasText(name) && StringUtils.hasText(phone)){
+            userList = userRepository.findByNameAndPhoneNumber(name,phone);
+        }else if(StringUtils.hasText(name) && StringUtils.hasText(email)){
+            userList = userRepository.findByNameAndEmail(name, email);
+        }else if(StringUtils.hasText(phone) && StringUtils.hasText(email)){
+            userList = userRepository.findByPhoneNumberAndEmail(phone, email);
         }
         else if(StringUtils.hasText(name)){
             userList = userRepository.findByNameContaining(name);
@@ -86,6 +92,12 @@ public class AdminController {
         Iterable<UserInfo> ownerList = null;
         if(StringUtils.hasText(name) && StringUtils.hasText(phone) && StringUtils.hasText(email)){
             ownerList = userRepository.findByNameAndPhoneNumberAndEmail(name, phone, email);
+        }else if(StringUtils.hasText(name) && StringUtils.hasText(phone)){
+            ownerList = userRepository.findByNameAndPhoneNumber(name,phone);
+        }else if(StringUtils.hasText(name) && StringUtils.hasText(email)){
+            ownerList = userRepository.findByNameAndEmail(name, email);
+        }else if(StringUtils.hasText(phone) && StringUtils.hasText(email)){
+            ownerList = userRepository.findByPhoneNumberAndEmail(phone, email);
         }
         else if(StringUtils.hasText(name)){
             ownerList = userRepository.findByNameContaining(name);

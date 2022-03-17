@@ -25,6 +25,15 @@ public interface UserRepository extends CrudRepository<UserInfo, Long> {
     @Query(value = "SELECT * FROM booking_hotelver10.users Where users.name like concat('%',?1,'%') and users.phone_number like concat('%',?2,'%') and users.email like concat('%',?3,'%')", nativeQuery = true)
     Iterable<UserInfo> findByNameAndPhoneNumberAndEmail(String name,String phone, String email);
 
+    @Query(value = "SELECT * FROM booking_hotelver10.users Where users.name like concat('%',?1,'%') and users.phone_number like concat('%',?2,'%')", nativeQuery = true)
+    Iterable<UserInfo> findByNameAndPhoneNumber(String name, String phone);
+
+    @Query(value = "SELECT * FROM booking_hotelver10.users Where users.name like concat('%',?1,'%') and users.email like concat('%',?2,'%')", nativeQuery = true)
+    Iterable<UserInfo> findByNameAndEmail(String name, String email);
+
+    @Query(value = "SELECT * FROM booking_hotelver10.users Where users.phone_number like concat('%',?1,'%') and users.email like concat('%',?2,'%')", nativeQuery = true)
+    Iterable<UserInfo> findByPhoneNumberAndEmail(String phone, String email);
+
     @Query(value = "SELECT * FROM booking_hotelver10.users Where users.name like concat('%',?1,'%')", nativeQuery = true)
     Iterable<UserInfo> findByNameContaining(String name);
 
