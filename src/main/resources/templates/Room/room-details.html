@@ -3826,6 +3826,7 @@
                             <ul style="border-left: 1px solid rgb(223,221,221)">
                                 <li class="li-title">Nhận phòng</li>
                                 <li>Giờ nhận phòng sau 11:45 AM</li>
+                                <li>Mỗi phòng tối đa chỉ ở được 3 người</li>
                                 <li>Tuổi nhận phòng tối thiểu từ 18</li>
                                 <br/>
                                 <li class="li-title">Trả phòng</li>
@@ -3943,7 +3944,7 @@
                     <tr id="mytable-th" style="color: rgb(122,118,118)">
                         <th style="border: none">PHÒNG#</th>
                         <th style="border: none">KHÁCH</th>
-                        <th style="border: none">GIÁ/PHÒNG/ĐÊM (đ)</th>
+                        <th style="border: none">GIÁ/PHÒNG (đ)</th>
                         <th style="border: none">SỐ TIỀN (đ)</th>
                     </tr>
                     <tr id="room-row1" style="background-color: white">
@@ -4174,8 +4175,8 @@
     <script>
         function submitForm(form){
             swal({
-                title:"Are you sure?",
-                text:"This form will be submitted",
+                title:"Bạn đã chắc chắn?",
+                text:"Lịch đặt phòng của bạn sẽ được xử lý tức thời",
                 icon:"warning",
                 buttons:true,
                 dangerMode:true,
@@ -4183,8 +4184,8 @@
             .then((isOkey) => {
                 if(isOkey) {
                     swal({
-                        title: "Good job!",
-                        text: "You have successfully booked your hotel room !",
+                        title: "Bạn đã đặt phòng thành công!",
+                        text: "Chúc quí khách có một kỳ nghỉ tuyệt vời bên người thân!",
                         icon: "success",
                         buttons:true,
                         dangerMode:true,
