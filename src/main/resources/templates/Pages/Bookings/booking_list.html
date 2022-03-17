@@ -215,12 +215,12 @@
                                         <th>Room Type</th>
                                         <th>Hotel</th>
                                         <th>Total Numbers</th>
-                                        <th>Arrival Date</th>
-                                        <th>Depature Date</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
                                         <th>Number of Night</th>
                                         <th>Email</th>
                                         <th>Ph.Number</th>
-<!--                                        <th>Status</th>-->
+                                        <th>Status</th>
 <!--                                        <th class="text-right">Actions</th>-->
                                     </tr>
                                     </thead>
@@ -238,9 +238,9 @@
                                         <td><span th:text="${booking.getNumNight()}"></span></td>
                                         <td><span th:text="${booking.getUser().getEmail()}"></span></td>
                                         <td><span th:text="${booking.getUser().getPhoneNumber()}"></span></td>
-<!--                                        <td>-->
-<!--                                            <div class="btn btn-sm bg-success-light mr-2" th:text="${booking.getStatus()} ? 'RETIRED' : 'ACTIVE'"></div>-->
-<!--                                        </td>-->
+                                        <td>
+                                            <div class="btn btn-sm bg-success-light mr-2" th:text="${booking.getStatus()} ? 'RETIRED' : 'ACTIVE'"></div>
+                                        </td>
 <!--                                        <td class="text-right">-->
 <!--                                            <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>-->
 <!--                                                <div class="dropdown-menu dropdown-menu-right">-->
