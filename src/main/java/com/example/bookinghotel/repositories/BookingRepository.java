@@ -47,5 +47,10 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
 
     Iterable<Booking> findAll();
 
+    @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
+            "inner join rooms on bookings.room_id = rooms.id " +
+            "inner join hotel on rooms.hotel_id = hotel.id " +
+            "where bookings.user_id = ?1",nativeQuery = true)
+    Iterable<Booking> findAllBookingByUserId(Long id);
 
 }
