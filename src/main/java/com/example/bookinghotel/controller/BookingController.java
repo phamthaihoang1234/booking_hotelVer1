@@ -98,8 +98,8 @@ public class BookingController {
         return "/Pages/Bookings/booking_list";
     }
 
-    @GetMapping("/listAllBookingOfUser")
-    public String listAllBookingOfUser(Model model,
+    @GetMapping("/listAllBookingOfCustomer")
+    public String listAllBookingOfCustomer(Model model,
                                      @RequestParam(name = "start_date",required = false) String start_date,
                                      @RequestParam(name = "end_date",required = false) String end_date){
 
@@ -121,7 +121,7 @@ public class BookingController {
         }
         model.addAttribute("bookingList",bookingList);
 
-        return "/Pages/Bookings/booking_list";
+        return "/Pages/Bookings/booking_list_of_custommer";
     }
 
     @GetMapping("/deleteBooking")
