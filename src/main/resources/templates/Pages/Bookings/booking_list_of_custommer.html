@@ -140,7 +140,7 @@
                 <div class="row align-items-center">
                     <div class="col">
                         <div class="mt-5">
-                            <h4 class="card-title float-left mt-2">List Booking</h4>
+                            <h4 class="card-title float-left mt-2">Danh sách lịch đặt</h4>
                         </div>
                     </div>
                 </div>
@@ -149,44 +149,34 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <form th:action="@{/listBooking}">
+                    <form th:action="@{/listAllBookingOfCustomer}">
                         <div class="row formtype">
-<!--                            <div class="col-md-3">-->
-<!--                                <div class="form-group">-->
-<!--                                    <label>Purchased By</label>-->
-<!--                                    <select class="form-control" id="sel1" name="sellist1">-->
-<!--                                        <option>Select Buyer</option>-->
-<!--                                        <option>Loren Gatlin</option>-->
-<!--                                        <option>Tarah Shrosphire</option>-->
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--                            </div>-->
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>From</label>
+                                    <label>Ngày nhận phòng</label>
                                     <div class="cal-icon">
                                         <div id="tooltip1" class="validation-advice" style="display: none">Ngày nhận phòng ko hợp lệ
                                             !
                                         </div>
-                                        <input name="start_date" id="date1" type="text" class="form-control datetimepicker">
+                                        <input name="start_date" id="date1" type="text" th:value="${start_date}" class="form-control datetimepicker">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>To</label>
+                                    <label>Ngày trả phòng</label>
                                     <div class="cal-icon">
                                         <div id="tooltip2" class="validation-advice" style="display: none">Ngày trả phòng ko hợp lệ
                                             !
                                         </div>
-                                        <input name="end_date" id="date2" type="text" class="form-control datetimepicker">
+                                        <input name="end_date" id="date2" th:value="${end_date}" type="text"  class="form-control datetimepicker">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Search</label>
-                                    <button type="submit" class="btn btn-success btn-block mt-0 search_button"> Search </button>
+                                    <label>Tìm kiếm</label>
+                                    <button type="submit" class="btn btn-success btn-block mt-0 search_button"> Tìm kiếm </button>
 
                                 </div>
                             </div>
@@ -204,26 +194,21 @@
                                 <table class="datatable table table-stripped table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th>Booking ID</th>
-                                        <th>Name</th>
-                                        <th>Room Type</th>
-                                        <th>Hotel</th>
-                                        <th>Total Numbers</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Number of Night</th>
+                                        <th>Kiểu phòng</th>
+                                        <th>Tên khách sạn</th>
+                                        <th>Số khách</th>
+                                        <th>Ngày nhận phòng</th>
+                                        <th>Ngày trả phòng</th>
+                                        <th>Số đêm ở khách sạn</th>
                                         <th>Email</th>
-                                        <th>Ph.Number</th>
-                                        <th>Status</th>
+                                        <th>Điện thoại</th>
+                                        <th>Trang thái</th>
+                                        <th></th>
 <!--                                        <th class="text-right">Actions</th>-->
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="booking : ${bookingList}">
-                                        <td><span th:text="${booking.getId()}"></span></td>
-                                        <td>
-                                            <span th:text="${booking.getUser().getName()}"></span>
-                                        </td>
                                         <td><span th:text="${booking.getRoom().getPropertyType().getName()}"></span></td>
                                         <th><span th:text="${booking.getRoom().getHotel().getNameOfHotel()}"></span></th>
                                         <td><span th:text="${booking.getNumberOfGuests()}"></span></td>
@@ -232,17 +217,19 @@
                                         <td><span th:text="${booking.getNumNight()}"></span></td>
                                         <td><span th:text="${booking.getUser().getEmail()}"></span></td>
                                         <td><span th:text="${booking.getUser().getPhoneNumber()}"></span></td>
+<!--                                        <td><span th:text="${booking.getStatus()}"></span></td>-->
                                         <td>
-                                            <div class="btn btn-sm bg-success-light mr-2" th:text="${booking.getStatus()} ? 'RETIRED' : 'ACTIVE'"></div>
+                                            <div class="btn btn-sm bg-success-light mr-2" th:text="${booking.getStatus()} ? 'Đã hoàn thành' : 'Đã đặt'"></div>
                                         </td>
-<!--                                        <td class="text-right">-->
-<!--                                            <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>-->
-<!--                                                <div class="dropdown-menu dropdown-menu-right">-->
-<!--                                                    <a class="dropdown-item delBtn" th:href=""><i class="fas fa-trash-alt m-r-5"></i>Chỉnh sửa</a>-->
-<!--                                                    <a class="dropdown-item delBtn" th:href=""><i class="fas fa-trash-alt m-r-5"></i>Delete</a>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </td>-->
+                                        <td class="text-right">
+                                            <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" th:href="@{editBooking/(id=${booking.getId()})}">Chỉnh sửa</a>
+                                                    <a class="dropdown-item delBtn" th:href="@{deleteBooking/(id=${booking.getId()})}"><i class="fas fa-trash-alt m-r-5"></i>Xóa</a>
+
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -318,39 +305,6 @@
     });
 
 </script>
-
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        $('.validation-advice').click(function () {-->
-<!--            $(this).fadeOut();-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        $('#date2').change(function () {-->
-<!--//            se xay ra khi gia tri dien day du? dd/mm/yyyy-->
-<!--//            alert('changed');-->
-<!--            var check_in = new Date(document.getElementById("date1").value);-->
-<!--            var check_out = new Date(document.getElementById("date2").value);-->
-
-<!--            console.log("check_in:"+check_in);-->
-<!--            console.log("check_in:"+check_out);-->
-<!--            alert(check_out < check_in);-->
-<!--            if (check_in == undefinded || check_out < check_in) {-->
-<!--                alert("Ngày trả phòng không được nhỏ hơn ngày nhận phòng");-->
-<!--                $('.validation-advice').fadeIn();-->
-<!--                // return 0;-->
-<!--            }-->
-<!--            // else {-->
-<!--            //     //neu lan truoc do' co fadeIn thi bay h se fadeOut-->
-<!--            //     $('.validation-advice').fadeOut();-->
-<!--            //     // return parseInt((check_out - check_in) / (24 * 3600 * 1000));-->
-<!--            // }-->
-
-<!--        });-->
-
-<!--    });-->
 
 </script>
 </body>
