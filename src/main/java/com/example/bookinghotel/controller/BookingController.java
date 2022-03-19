@@ -101,7 +101,7 @@ public class BookingController {
     public String listAllBookingOfCustomer(Model model,
                                            @RequestParam(name = "start_date", required = false) String start_date,
                                            @RequestParam(name = "end_date", required = false) String end_date) {
-
+        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //        String start_date1=LocalDate.parse(start_date,formatter).toString();
 //        String end_date1=LocalDate.parse(start_date,formatter).toString();

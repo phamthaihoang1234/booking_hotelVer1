@@ -60,17 +60,15 @@
     </style>
 </head>
 <body>
-
 <div class="main-wrapper">
-
     <div class="header">
         <div class="header-left">
-            <a th:href="@{/}" class="logo"> <img src="../assets/img/hotel_logo.png" width="50" height="70"
-                                                 alt="logo">
+            <a href="http://localhost:8090/" class="logo"> <img src="../assets/img/hotel_logo.png" width="50" height="70"
+                                                       alt="logo">
                 <span class="logoclass">HOTEL</span> </a>
-            <a th:href="@{/}" class="logo logo-small"> <img src="../assets/img/hotel_logo.png" alt="Logo"
-                                                            width="30"
-                                                            height="30"> </a>
+            <a href="../index.html" class="logo logo-small"> <img src="../assets/img/hotel_logo.png" alt="Logo"
+                                                                  width="30"
+                                                                  height="30"> </a>
         </div>
         <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
         <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
@@ -82,58 +80,111 @@
                     <div class="topnav-dropdown-header"><span class="notification-title">Notifications</span> <a
                             href="javascript:void(0)" class="clear-noti"> Clear All </a></div>
                     <div class="noti-content">
+                        <ul class="notification-list">
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media"> <span class="avatar avatar-sm">
+											<img class="avatar-img rounded-circle" alt="User Image"
+                                                 src="../assets/img/profiles/avatar-02.jpg">
+											</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title"
+                                                                          th:text="${userInfo.username}"></span> has
+                                                approved <span class="noti-title">your estimate</span></p>
+                                            <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media"> <span class="avatar avatar-sm">
+											<img class="avatar-img rounded-circle" alt="User Image"
+                                                 src="../assets/img/profiles/avatar-11.jpg">
+											</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">International Software
+													Inc</span> has sent you a invoice in the amount of <span
+                                                    class="noti-title">$218</span></p>
+                                            <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media"> <span class="avatar avatar-sm">
+											<img class="avatar-img rounded-circle" alt="User Image"
+                                                 src="../assets/img/profiles/avatar-17.jpg">
+											</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">John Hendry</span> sent a
+                                                cancellation request <span class="noti-title">Apple iPhone
+													XR</span></p>
+                                            <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media"> <span class="avatar avatar-sm">
+											<img class="avatar-img rounded-circle" alt="User Image"
+                                                 src="../assets/img/profiles/avatar-13.jpg">
+											</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">Mercury Software
+													Inc</span> added a new product <span class="noti-title">Apple
+													MacBook Pro</span></p>
+                                            <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="topnav-dropdown-footer"><a href="#">View all Notifications</a></div>
                 </div>
             </li>
-            <li class="nav-item dropdown has-arrow" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Soeng Souy"></span> </a>
+            <li class="nav-item dropdown has-arrow">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img
+                        class="rounded-circle" src="../assets/img/profiles/avatar-01.jpg" width="31"
+                        alt="Soeng Souy"></span> </a>
                 <div class="dropdown-menu">
                     <div class="user-header">
-                        <div class="avatar avatar-sm"> <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
+                        <div class="avatar avatar-sm"><img src="../assets/img/profiles/avatar-01.jpg" alt="User Image"
+                                                           class="avatar-img rounded-circle"></div>
                         <div class="user-text">
-                            <span sec:authentication="name"></span>
-                            <p class="text-muted mb-0">Hotel Owner</p>
+                            <h6 th:text="${userInfo.username}"></h6>
                         </div>
-                    </div> <a class="dropdown-item" th:href="@{/hotelOwnerProfile}">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" th:href="@{/logout}">Logout</a> </div>
+                    </div>
+                    <a class="dropdown-item" href="/logout">Đăng xuất</a></div>
             </li>
         </ul>
     </div>
-
-
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
-                    <li>
-                        <a href="index.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
-                    </li>
+                    <li><a href="http://localhost:8090/"><i class="fas fa-tachometer-alt"></i> <span>Trang chủ</span></a></li>
                     <li class="list-divider"></li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"><a href="#"><i class="fas fa-user"></i> <span> Tài khoản </span> <span
+                            class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li class="active"><a th:href="@{/listBooking}"> All Booking </a></li>
+                            <li><a th:href="@{/GetDetailsProfile}"> Chỉnh sửa thông tin </a></li>
+                            <li><a th:href="@{/ChangePassword}"> Thay đổi mật khẩu </a></li>
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Hotel Manage </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"><a href="#"><i class="fas fa-suitcase"></i> <span> Lịch đặt </span> <span
+                            class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/homepageHotel}"> All hotel </a></li>
+                            <li><a th:href="@{/listAllBookingOfCustomer}"> Tất cả lịch đặt </a></li>
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/manageBlog}">All Blog </a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a>
-                    </li>
-                    <li class="list-divider"></li>
                 </ul>
             </div>
         </div>
     </div>
-
-
     <div class="page-wrapper">
         <div class="content container-fluid">
             <div class="page-header">
@@ -155,10 +206,12 @@
                                 <div class="form-group">
                                     <label>Ngày nhận phòng</label>
                                     <div class="cal-icon">
-                                        <div id="tooltip1" class="validation-advice" style="display: none">Ngày nhận phòng ko hợp lệ
+                                        <div id="tooltip1" class="validation-advice" style="display: none">Ngày nhận
+                                            phòng ko hợp lệ
                                             !
                                         </div>
-                                        <input name="start_date" id="date1" type="text" th:value="${start_date}" class="form-control datetimepicker">
+                                        <input name="start_date" id="date1" type="text" th:value="${start_date}"
+                                               class="form-control datetimepicker">
                                     </div>
                                 </div>
                             </div>
@@ -166,17 +219,21 @@
                                 <div class="form-group">
                                     <label>Ngày trả phòng</label>
                                     <div class="cal-icon">
-                                        <div id="tooltip2" class="validation-advice" style="display: none">Ngày trả phòng ko hợp lệ
+                                        <div id="tooltip2" class="validation-advice" style="display: none">Ngày trả
+                                            phòng ko hợp lệ
                                             !
                                         </div>
-                                        <input name="end_date" id="date2" th:value="${end_date}" type="text"  class="form-control datetimepicker">
+                                        <input name="end_date" id="date2" th:value="${end_date}" type="text"
+                                               class="form-control datetimepicker">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tìm kiếm</label>
-                                    <button type="submit" class="btn btn-success btn-block mt-0 search_button"> Tìm kiếm </button>
+                                    <button type="submit" class="btn btn-success btn-block mt-0 search_button"> Tìm
+                                        kiếm
+                                    </button>
 
                                 </div>
                             </div>
@@ -204,28 +261,38 @@
                                         <th>Điện thoại</th>
                                         <th>Trang thái</th>
                                         <th></th>
-<!--                                        <th class="text-right">Actions</th>-->
+                                        <!--                                        <th class="text-right">Actions</th>-->
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="booking : ${bookingList}">
-                                        <td><span th:text="${booking.getRoom().getPropertyType().getName()}"></span></td>
-                                        <th><span th:text="${booking.getRoom().getHotel().getNameOfHotel()}"></span></th>
+                                        <td><span th:text="${booking.getRoom().getPropertyType().getName()}"></span>
+                                        </td>
+                                        <th><span th:text="${booking.getRoom().getHotel().getNameOfHotel()}"></span>
+                                        </th>
                                         <td><span th:text="${booking.getNumberOfGuests()}"></span></td>
                                         <td><span th:text="${booking.getStartDate()}"></span></td>
                                         <td><span th:text="${booking.getEndDate()}"></span></td>
                                         <td><span th:text="${booking.getNumNight()}"></span></td>
                                         <td><span th:text="${booking.getUser().getEmail()}"></span></td>
                                         <td><span th:text="${booking.getUser().getPhoneNumber()}"></span></td>
-<!--                                        <td><span th:text="${booking.getStatus()}"></span></td>-->
+                                        <!--                                        <td><span th:text="${booking.getStatus()}"></span></td>-->
                                         <td>
-                                            <div class="btn btn-sm bg-success-light mr-2" th:text="${booking.getStatus()} ? 'Đã hoàn thành' : 'Đã đặt'"></div>
+                                            <div class="btn btn-sm bg-success-light mr-2"
+                                                 th:text="${booking.getStatus()} ? 'Đã hoàn thành' : 'Đã đặt'"></div>
                                         </td>
                                         <td class="text-right">
-                                            <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
+                                            <div class="dropdown dropdown-action"><a href="#"
+                                                                                     class="action-icon dropdown-toggle"
+                                                                                     data-toggle="dropdown"
+                                                                                     aria-expanded="false"><i
+                                                    class="fas fa-ellipsis-v ellipse_color"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" th:href="@{editBooking/(id=${booking.getId()})}">Chỉnh sửa</a>
-                                                    <a class="dropdown-item delBtn" th:href="@{deleteBooking/(id=${booking.getId()})}"><i class="fas fa-trash-alt m-r-5"></i>Xóa</a>
+                                                    <a class="dropdown-item"
+                                                       th:href="@{editBooking/(id=${booking.getId()})}">Chỉnh sửa</a>
+                                                    <a class="dropdown-item delBtn"
+                                                       th:href="@{deleteBooking/(id=${booking.getId()})}"><i
+                                                            class="fas fa-trash-alt m-r-5"></i>Xóa</a>
 
                                                 </div>
                                             </div>
