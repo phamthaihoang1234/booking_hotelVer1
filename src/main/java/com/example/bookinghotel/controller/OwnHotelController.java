@@ -1,6 +1,7 @@
 package com.example.bookinghotel.controller;
 
 import com.example.bookinghotel.entities.*;
+import com.example.bookinghotel.repositories.RoomRepository;
 import com.example.bookinghotel.repositories.UserRepository;
 import com.example.bookinghotel.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +53,10 @@ public class OwnHotelController {
 
     @Autowired
     private HomeService roomService;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -148,8 +154,17 @@ public class OwnHotelController {
     }
 
     @GetMapping("/getAllRoomOfRoleAdmin")
-    public String getAllRoomOfRoleAdmin(Model model){
-        model.addAttribute("rooms",roomService.findAll());
+    public String getAllRoomOfRoleAdmin(Model model , @RequestParam(name = "nameHotel", required = false) String nameHotel){
+        Iterable<Room> roomList = null;
+        if(StringUtils.hasText(nameHotel)){
+            roomList=roomRepository.findAllRoomWithAdminWithNameHotel(nameHotel);
+            model.addAttribute("nameHotel",nameHotel);
+        }
+        else{
+            roomList=roomRepository.findAllRoomWithAdmin();
+        }
+
+        model.addAttribute("rooms",roomList);
         return "Pages/roomManage/all_room_admin";
     }
 

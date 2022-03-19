@@ -19,8 +19,6 @@ public interface HotelRepository extends CrudRepository<Hotel, Long> {
 
 
     // phan dung code-end
-
-
     @Query(value = "SELECT * FROM hotel where user_id = ?1", nativeQuery = true)
     Iterable<Hotel> findAllHotelByUserId(long id);
 
