@@ -124,6 +124,7 @@ public class HotelDetailDController {
             b.setStartDate(LocalDate.parse(getLocalDate(checkin)));
             b.setUser(userService.findByUserName(getPrincipal()));
             b.setRoom(roomGroup.getEmpty_rooms().get(i));
+            b.setStatus(1);
             bookingService.save(b);
         }
 

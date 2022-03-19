@@ -130,6 +130,7 @@ public class BookingController {
         } else {
             bookingList = bookingRepository.findAllBookingByUserId(id);
         }
+
         model.addAttribute("bookingList", bookingList);
         model.addAttribute("start_date", start_date);
         model.addAttribute("end_date", end_date);
@@ -137,14 +138,18 @@ public class BookingController {
         return "/Pages/Bookings/booking_list_of_custommer";
     }
     @GetMapping("/deleteBookingOfCustomer")
-    public String deleteBookingOfCustomer(Long id) {
+    public String deleteBookingOfCustomer(Long id,Model model) {
         System.out.println("Class: BookingController | Method: deleteBookingOfCustomer | ID Booking:" + id);
-        bookingRepository.deleteBookingById(id);
-        return "redirect:/booking_list_of_custommer";
+        bookingRepository.findById(id).get().setStatus(0);
+        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
+        bookingRepository.save(bookingRepository.findById(id).get());
+
+        return "/Pages/Bookings/booking_list_of_custommer";
     }
     @GetMapping("/deleteBooking")
     public String deleteBooking(Long id) {
-        bookingService.delete(id);
+        bookingRepository.findById(id).get().setStatus(0);
+        bookingRepository.save(bookingRepository.findById(id).get());
         return "redirect:/listBooking";
     }
 
