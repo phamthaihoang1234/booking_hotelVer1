@@ -19,8 +19,8 @@
 <div class="main-wrapper">
     <div class="header">
         <div class="header-left">
-            <a href="index.html" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
-            <a href="index.html" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
+            <a href="http://localhost:8090/" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
+            <a href="http://localhost:8090/" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
         </div>
         <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
         <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
@@ -41,14 +41,13 @@
                         <div class="avatar avatar-sm"> <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
                         <div class="user-text">
                             <span sec:authentication="name"></span>
-                            <p class="text-muted mb-0">Admin</p>
                         </div>
-                    </div><a class="dropdown-item" th:href="@{/logout}">Logout</a> </div>
+                    </div><a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a> </div>
             </li>
         </ul>
         <div class="top-nav-search">
             <form>
-                <input type="text" class="form-control" placeholder="Search here">
+                <input type="text" class="form-control" placeholder="Tìm kiếm">
                 <button class="btn" type="submit"><i class="fas fa-search"></i></button>
             </form>
         </div>
@@ -70,11 +69,9 @@
                             <li><a th:href="@{/owner_list}">Tất cả hotel owner</a></li>
                         </ul>
                     </li>
-                    <li class="submenu"><a href="#"><i class="fas fa-user"></i> <span> Điều khoản </span> <span
+                    <li class="submenu"><a href="#"><i class="far fa-money-bill-alt"></i> <span> Điều khoản </span> <span
                             class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-<!--                            <li><a th:href="@{/GetDetailsProfile}"> Chỉnh sửa thông tin </a></li>-->
-<!--                            <li><a th:href="@{/ChangePassword}"> Thay đổi mật khẩu </a></li>-->
                             <li><a th:href="@{/TermOfUser}"> Thay đổi điều khoản </a></li>
                         </ul>
                     </li>
@@ -88,9 +85,9 @@
                             <li><a th:href="@{/getAllRoomOfRoleAdmin}"> Tất cả phòng </a></li>
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Quản lý đặt lịch </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Quản lý lịch đặt </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/getAllHotel}"> Tất cả các đơn hàng </a></li>
+                            <li><a th:href="@{/listBookingOfAdmin}"> Tất cả lịch đặt</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -102,7 +99,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-12 mt-5">
-                        <h3 class="page-title mt-3">Good Morning</h3>
+                        <h3 class="page-title mt-3">Xin chào</h3>
                         <h3 class="page-title mt-3" style="color: blue"><span th:text="${admin.getUsername()}"></span></h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item active">Dashboard</li>

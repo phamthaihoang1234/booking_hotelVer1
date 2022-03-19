@@ -100,7 +100,7 @@
                 <div class="row align-items-center">
                     <div class="col">
                         <div class="mt-5">
-                            <h4 class="card-title float-left mt-2">Quản lý khách sạn</h4> <a th:href="@{/showFormCreHotel}" class="btn btn-primary float-right veiwbutton">Add Hotels</a> </div>
+                            <h4 class="card-title float-left mt-2">Quản lý phòng</h4> </div>
                     </div>
                 </div>
             </div>
@@ -112,35 +112,43 @@
                                 <table class="datatable table table-stripped table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th>Mã khách sạn</th>
+                                        <th>Mã phòng</th>
                                         <th>Tên</th>
+                                        <th>Hình ảnh</th>
                                         <th>Địa chỉ</th>
+                                        <th>Số đêm</th>
+                                        <th>Tổng phòng ngủ</th>
+                                        <th>Tổng phòng khách</th>
+                                        <th>Loại phòng</th>
                                         <th>Tình trạng</th>
-                                        <th class="text-right"></th>
+<!--                                        <th class="text-right"></th>-->
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="h : ${hotels}">
-                                        <td th:text="${h.getId()}"></td>
-                                        <td th:text="${h.getNameOfHotel()}"></td>
-                                        <td th:text="${h.getAddressOfHotel()}"></td>
+                                    <tr th:each="r : ${rooms}">
+                                        <td th:text="${r.id}"></td>
+                                        <td th:text="${r.name}"></td>
+                                        <td><img th:src="${r.getImgSrc3()}" width="50px" height="50px"></td>
+                                        <td th:text="${r.address}"></td>
+                                        <td th:text="${r.pricePerNight}"></td>
+                                        <td th:text="${r.totalOfBedroom}"></td>
+                                        <td th:text="${r.totalOfBathroom}"></td>
+                                        <td th:text="${r.propertyType.name}"></td>
 
                                         <td>
-                                            <div class="btn btn-sm bg-success-light mr-2" th:text="${h.getStatus()} ? 'Tạm dừng' : 'Đang hoạt động'"></div>
+                                            <div class="btn btn-sm bg-success-light mr-2" th:text="${r.status} ? 'Còn trống' : 'Đã đầy'"></div>
                                         </td>
-                                        <td class="text-right">
-                                            <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-<!--                                                    <a class="dropdown-item" th:href="@{findOne/{id}(id=${h.id})}"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>-->
-                                                    <a class="dropdown-item delBtn" th:href="@{delete/(id=${h.id})}"><i class="fas fa-trash-alt m-r-5"></i> Xóa</a>
-                                                </div>
-                                            </div>
-                                        </td>
+<!--                                        <td class="text-right">-->
+<!--                                            <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>-->
+<!--                                                <div class="dropdown-menu dropdown-menu-right">-->
+<!--&lt;!&ndash;                                                    <a class="dropdown-item" th:href="@{findOneRoom/{id}(id=${r.id})}"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>&ndash;&gt;-->
+<!--                                                    <a class="dropdown-item delBtn" th:href="@{deleteRoom/(id=${r.id})}"><i class="fas fa-trash-alt m-r-5"></i> Xóa</a>-->
+
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
 
                                     </tr>
-
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -175,18 +183,7 @@
                 </div>
             </div>
         </div>
-<!--        <div id="delete_asset" class="modal fade delete-modal" role="dialog">-->
-<!--            <div class="modal-dialog modal-dialog-centered">-->
-<!--                <div class="modal-content">-->
-<!--                    <div class="modal-body text-center"> <img src="assets/img/sent.png" alt="" width="50" height="46">-->
-<!--                        <h3 class="delete_class">Are you sure want to delete this Asset?</h3>-->
-<!--                        <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>-->
-<!--                            <button class="btn btn-danger"><a th:href="@{delete/(id=${h.id})}" ></a>Delete</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+
     </div>
 </div>
 <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>

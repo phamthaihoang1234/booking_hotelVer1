@@ -150,7 +150,7 @@ public class OwnHotelController {
     @GetMapping("/getAllRoomOfRoleAdmin")
     public String getAllRoomOfRoleAdmin(Model model){
         model.addAttribute("rooms",roomService.findAll());
-        return "Pages/roomManage/all-room";
+        return "Pages/roomManage/all_room_admin";
     }
 
     @GetMapping("/createRoom")
