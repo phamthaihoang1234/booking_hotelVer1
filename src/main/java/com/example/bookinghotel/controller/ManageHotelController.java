@@ -76,6 +76,11 @@ public class ManageHotelController {
        return "Pages/hotelManage/form-add-hotel";
     }
 
+    @GetMapping("/CreateHotelOfAdmin")
+    public String CreateHotelOfAdmin(Model model){
+        model.addAttribute("hotel", new Hotel());
+        return "Pages/hotelManage/form-add-hotel";
+    }
 
     @PostMapping("/createHotel")
     public String showform(Model model, @ModelAttribute Hotel hotel){
