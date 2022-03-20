@@ -29,8 +29,8 @@ public class HotelReportController {
 
     public Long room_id;
 
-    @GetMapping("/report/{id}")
-    public String hotelReport(@PathVariable Long id,Model model){
+    @GetMapping("/report")
+    public String hotelReport(Long id,Model model){
         model.addAttribute("report",new Report());
         model.addAttribute("roomInfo",roomService.findById(id).get());
         room_id = id;
