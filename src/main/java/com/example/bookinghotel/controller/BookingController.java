@@ -138,13 +138,13 @@ public class BookingController {
         return "/Pages/Bookings/booking_list_of_custommer";
     }
     @GetMapping("/deleteBookingOfCustomer")
-    public String deleteBookingOfCustomer(Long id,Model model) {
+    public String deleteBookingOfCustomer(Long id,Model model,
+                                          @RequestParam(name = "start_date", required = false) String start_date,
+                                          @RequestParam(name = "end_date", required = false) String end_date) {
         System.out.println("Class: BookingController | Method: deleteBookingOfCustomer | ID Booking:" + id);
         bookingRepository.findById(id).get().setStatus(0);
-        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
         bookingRepository.save(bookingRepository.findById(id).get());
-
-        return "/Pages/Bookings/booking_list_of_custommer";
+        return listAllBookingOfCustomer(model, start_date, end_date);
     }
     @GetMapping("/deleteBooking")
     public String deleteBooking(Long id) {
