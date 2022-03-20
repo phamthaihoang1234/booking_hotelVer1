@@ -29,18 +29,18 @@ public class ManageHotelController {
     private HotelRepository hotelRepository;
 
     @GetMapping("/manageHotels")
-    public String manageHotel(Model model){
+    public String manageHotel(Model model) {
         //model.addAttribute("hotels", hotelService.findAll());
         return "Pages/index";
     }
 
 
-    private String getPrincipal(){
+    private String getPrincipal() {
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof UserDetails) {
-            userName = ((UserDetails)principal).getUsername();
+            userName = ((UserDetails) principal).getUsername();
 
         } else {
             userName = principal.toString();
@@ -49,41 +49,54 @@ public class ManageHotelController {
     }
 
     @GetMapping("/homepageHotel")
-    public String homepageHotel(Model model){
+    public String homepageHotel(Model model) {
         model.addAttribute("hotels", hotelService.findAllHotelByUserId(userService.findByUserName(getPrincipal()).getId()));
         // model.addAttribute("hotels",hotelService.findAll());
         return "Pages/hotelManage/all-hotel";
     }
 
     @GetMapping("/getAllHotel")
-    public String getAllHotel(Model model , @RequestParam(name = "nameHotel", required = false) String nameHotel){
+    public String getAllHotel(Model model, @RequestParam(name = "nameHotel", required = false) String nameHotel) {
         Iterable<Hotel> hotelList = null;
-        if(StringUtils.hasText(nameHotel)){
+        if (StringUtils.hasText(nameHotel)) {
             hotelList = hotelRepository.findByAllHotelWithName(nameHotel);
-            model.addAttribute("nameHotel",nameHotel);
-        }
-        else{
+            model.addAttribute("nameHotel", nameHotel);
+        } else {
             hotelList = hotelService.findAll();
         }
-      model.addAttribute("hotels",hotelList);
+        model.addAttribute("hotels", hotelList);
+        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
         return "Pages/hotelManage/all-hotel-admin";
     }
 
 
     @GetMapping("/showFormCreHotel")
-    public String showFormCreateHotel(Model model){
-        model.addAttribute("hotel", new Hotel());
-       return "Pages/hotelManage/form-add-hotel";
-    }
-
-    @GetMapping("/CreateHotelOfAdmin")
-    public String CreateHotelOfAdmin(Model model){
+    public String showFormCreateHotel(Model model) {
         model.addAttribute("hotel", new Hotel());
         return "Pages/hotelManage/form-add-hotel";
     }
 
+    @GetMapping("/ShowDetailsOfHotelOfAdmin")
+    public String ShowDetailsOfHotelOfAdmin(Model model) {
+        model.addAttribute("hotel", new Hotel());
+        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
+        return "Pages/hotelManage/formCreHotelForAdmin";
+    }
+
+    @PostMapping("/CreateHotelOfAdmin")
+    public String CreateHotelOfAdmin(Model model, @ModelAttribute Hotel hotel) {
+        System.out.println(hotel.getId());
+        System.out.println(hotel.getNameOfHotel());
+        System.out.println(hotel.getAddressOfHotel());
+        hotel.setUser(userService.findByUserName(getPrincipal()));
+        hotelService.save(hotel);
+        model.addAttribute("hotel", new Hotel());
+        model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
+        return "Pages/hotelManage/all-hotel-admin";
+    }
+
     @PostMapping("/createHotel")
-    public String showform(Model model, @ModelAttribute Hotel hotel){
+    public String showform(Model model, @ModelAttribute Hotel hotel) {
         System.out.println(hotel.getId());
         System.out.println(hotel.getNameOfHotel());
         System.out.println(hotel.getAddressOfHotel());
@@ -92,21 +105,19 @@ public class ManageHotelController {
 //        model.addAttribute("listHotel", hotelService.findAll());
 
 
-
         return "redirect:/homepageHotel";
     }
 
 
-
     @GetMapping("/findOne/{id}")
-    public String findHotelById(@PathVariable("id") long id, Model model){
+    public String findHotelById(@PathVariable("id") long id, Model model) {
         System.out.println("vao find one");
-        model.addAttribute("hotel",hotelService.findById(id).get());
+        model.addAttribute("hotel", hotelService.findById(id).get());
         return "Pages/hotelManage/form-edit-hotel";
     }
 
     @PostMapping("/saveEdit")
-    public String updateHotel(@ModelAttribute Hotel hotel){
+    public String updateHotel(@ModelAttribute Hotel hotel) {
         Optional<Hotel> oldHotel = hotelService.findById(hotel.getId());
         System.out.println("vao saveedit: " + hotel.getAddressOfHotel());
         System.out.println(oldHotel.get().getAddressOfHotel());
@@ -120,7 +131,7 @@ public class ManageHotelController {
     }
 
     @GetMapping("/delete")
-    public String deleteHotel(long id){
+    public String deleteHotel(long id) {
         hotelService.delete(id);
         return "redirect:/homepageHotel";
     }
