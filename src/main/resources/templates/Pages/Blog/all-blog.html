@@ -107,74 +107,32 @@
                 <ul>
                     <li> <a href="index.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
                     <li class="list-divider"></li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Lịch đặt phòng </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a href="all-booking.html"> All Booking </a></li>
-                            <li><a href="edit-booking.html"> Edit Booking </a></li>
-                            <li><a href="add-booking.html"> Add Booking </a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Hotel Manage </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a class="active" th:href="@{/homepageHotel}"> All Hotel </a></li>
+                            <li><a th:href="@{/listBooking}"> Lịch đặt phòng </a></li>
 
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý khách sạn  </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/roomHomepage}">All Rooms </a></li>
-                            <!--                            <li><a href="edit-room.html"> Edit Rooms </a></li>-->
-                            <!--                            <li><a href="add-room.html"> Add Rooms </a></li>-->
+                            <li><a class="active" th:href="@{/homepageHotel}"> Tất cả </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Phòng </span> <span class="menu-arrow"></span></a>
+                        <ul class="submenu_class" style="display: none;">
+                            <li><a th:href="@{/roomHomepage}">Tất cả </a></li>
+
                         </ul>
                     </li>
 
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Bài viết </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a href="blog.html">Blog </a></li>
-                            <li><a href="blog-details.html">Blog Veiw </a></li>
-                            <li><a href="add-blog.html">Add Blog </a></li>
-                            <li><a href="edit-blog.html">Edit Blog </a></li>
-                        </ul>
-                    </li>
-                    <!--                    <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>-->
-                    <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="expense-reports.html">Expense Report </a></li>
-                            <li><a href="invoice-reports.html">Invoice Report </a></li>
-                        </ul>
-                    </li>
-                    <li> <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a> </li>
-                    <li class="list-divider"></li>
-                    <li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-laptop"></i> <span> Components </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="uikit.html">UI Kit </a></li>
-                            <li><a href="typography.html">Typography </a></li>
-                            <li><a href="tabs.html">Tabs </a></li>
+                            <li><a th:href="@{/manageBlog}">Bài viết </a></li>
+
                         </ul>
                     </li>
 
-                    <li class="submenu"> <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="login.html">Login </a></li>
-                            <li><a href="register.html">Register </a></li>
-                            <li><a href="forgot-password.html">Forgot Password </a></li>
-                            <li><a href="change-password.html">Change Password </a></li>
-                            <li><a href="lock-screen.html">Lockscreen </a></li>
-                            <li><a href="profile.html">Profile </a></li>
-                            <li><a href="gallery.html">Gallery </a></li>
-                            <li><a href="error-404.html">404 Error </a></li>
-                            <li><a href="error-500.html">500 Error </a></li>
-                            <li><a href="blank-page.html">Blank Page </a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-share-alt"></i> <span> Multi Level </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="">Level 1 </a></li>
-                            <li><a href="">Level 2 </a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -185,7 +143,7 @@
                 <div class="row align-items-center">
                     <div class="col">
                         <div class="mt-5">
-                            <h4 class="card-title float-left mt-2">Manage Blog</h4> <a th:href="@{/createBlog}" class="btn btn-primary float-right veiwbutton">Add Blog</a> </div>
+                            <h4 class="card-title float-left mt-2">QUẢN LÝ BÀI VIẾT</h4> <a th:href="@{/createBlog}" class="btn btn-primary float-right veiwbutton">THÊM MỚI </a> </div>
                     </div>
                 </div>
             </div>
@@ -197,12 +155,12 @@
                                 <table class="datatable table table-stripped table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th>Blog ID</th>
-                                        <th>Title</th>
-                                        <th>Image</th>
-                                        <th>Script</th>
+                                        <th>STT</th>
+                                        <th>TIÊU ĐỀ</th>
+                                        <th>ẢNH</th>
+                                        <th>CONTENT</th>
 
-                                        <th class="text-right">Actions</th>
+                                        <th class="text-right">THAO TÁC</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -214,8 +172,8 @@
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" th:href="@{findOneBlog/{id}(id=${b.id})}"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item delBtn" th:href="@{deleteBlog/(id=${b.id})}"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
+                                                    <a class="dropdown-item" th:href="@{findOneBlog/{id}(id=${b.id})}"><i class="fas fa-pencil-alt m-r-5"></i> SỬA</a>
+                                                    <a class="dropdown-item delBtn" th:href="@{deleteBlog/(id=${b.id})}"><i class="fas fa-trash-alt m-r-5"></i> XÓA</a>
 
                                                 </div>
                                             </div>
@@ -239,7 +197,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Delete Record</h5>
+                        <h5 class="modal-title" id="myModalLabel">XÓA BẢN GHI</h5>
                         <button aria-label="Close" class="close" data-dismiss="modal"
                                 type="button">
                             <span aria-hidden="true">&times;</span>
@@ -247,14 +205,14 @@
                     </div>
                     <div class="modal-body">
                         <p class="alert alert-danger">
-                            Are you sure you want to delete this product?
+                            BẠN CÓ MUỐN XÓA BẢN GHI KHÔNG?
                         </p>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-dismiss="modal"
-                                type="button">Close
+                                type="button">ĐÓNG
                         </button>
-                        <a class="btn btn-danger" href="" id="delRef">Delete</a>
+                        <a class="btn btn-danger" href="" id="delRef">XÓA</a>
                     </div>
                 </div>
             </div>
