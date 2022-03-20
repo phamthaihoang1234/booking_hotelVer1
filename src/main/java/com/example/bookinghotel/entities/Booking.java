@@ -40,9 +40,9 @@ public class Booking extends AbstractEntity implements Serializable {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", length = 15)
-    private BookingStatus status;
+
+    @Column(name = "status")
+    private int status;
 
     @Column(name = "num_Night")
     private int numNight;
@@ -98,11 +98,11 @@ public class Booking extends AbstractEntity implements Serializable {
         this.endDate = endDate;
     }
 
-    public BookingStatus getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(BookingStatus status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

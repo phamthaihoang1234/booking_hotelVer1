@@ -2,6 +2,8 @@ package com.example.bookinghotel.controller;
 
 
 import com.example.bookinghotel.entities.Hotel;
+import com.example.bookinghotel.entities.UserInfo;
+import com.example.bookinghotel.repositories.HotelRepository;
 import com.example.bookinghotel.services.HotelService;
 import com.example.bookinghotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -22,6 +25,8 @@ public class ManageHotelController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private HotelRepository hotelRepository;
 
     @GetMapping("/manageHotels")
     public String manageHotel(Model model){
@@ -51,8 +56,16 @@ public class ManageHotelController {
     }
 
     @GetMapping("/getAllHotel")
-    public String getAllHotel(Model model){
-      model.addAttribute("hotels",hotelService.findAll());
+    public String getAllHotel(Model model , @RequestParam(name = "nameHotel", required = false) String nameHotel){
+        Iterable<Hotel> hotelList = null;
+        if(StringUtils.hasText(nameHotel)){
+            hotelList = hotelRepository.findByAllHotelWithName(nameHotel);
+            model.addAttribute("nameHotel",nameHotel);
+        }
+        else{
+            hotelList = hotelService.findAll();
+        }
+      model.addAttribute("hotels",hotelList);
         return "Pages/hotelManage/all-hotel-admin";
     }
 

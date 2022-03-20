@@ -45,4 +45,9 @@ public class BookingServiceImpl implements BookingService {
     public Optional<Booking> findByStartDateAndUserIdAndRoomId(Long userId, Long roomId, LocalDate date) {
         return bookingRepository.findByStartDateAndUserIdAndRoomId(userId, roomId, date);
     }
+
+    @Override
+    public void delete(Long id) {
+        bookingRepository.deleteById(id);
+    }
 }
