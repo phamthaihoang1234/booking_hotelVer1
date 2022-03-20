@@ -86,7 +86,7 @@
 								</li>
 							</ul>
 						</div>
-						<div class="topnav-dropdown-footer"> <a href="#">View all Notifications</a> </div>
+						<div class="topnav-dropdown-footer"> <a href="#">THÔNG BÁO</a> </div>
 					</div>
 				</li>
 				<li class="nav-item dropdown has-arrow" th:if="${#authorization.expression('isAuthenticated()')}">
@@ -98,7 +98,7 @@
 								<span sec:authentication="name"></span>
 								<p class="text-muted mb-0">Hotel Owner</p>
 							</div>
-						</div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" th:href="@{/logout}">Logout</a> </div>
+						</div> <a class="dropdown-item" href="profile.html">THÔNG TIN CÁ NHÂN</a> <a class="dropdown-item" href="settings.html">CÀI ĐẶT</a> <a class="dropdown-item" th:href="@{/logout}">ĐĂNG XUẤT</a> </div>
 				</li>
 			</ul>
 		</div>
@@ -107,12 +107,10 @@
 				<div id="sidebar-menu" class="sidebar-menu">
 					<ul>
 
-						<li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
+						<li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> BÀI VIẾT </span> <span class="menu-arrow"></span></a>
 							<ul class="submenu_class" style="display: none;">
-								<li><a class="active" href="blog.html">Blog </a></li>
-<!--								<li><a href="blog-details.html">Blog Veiw </a></li>-->
-<!--								<li><a href="add-blog.html">Add Blog </a></li>-->
-<!--								<li><a href="edit-blog.html">Edit Blog </a></li>-->
+								<li><a class="active" href="blog.html">BÀI VIẾT </a></li>
+
 							</ul>
 						</li>
 
@@ -126,7 +124,7 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<div class="mt-5">
-								<h4 class="card-title float-left mt-2">Blog</h4></div>
+								<h4 class="card-title float-left mt-2">BÀI VIẾT</h4></div>
 						</div>
 					</div>
 				</div>
@@ -144,7 +142,7 @@
 								<p class="card-text mt-3" th:text="${b.getScript()}"> </p>
 								<div class="card-img-overlay">
 
-									<a th:href="@{viewDetailBlog/{id}(id=${b.id})}"  class="btn btn-light btn-sm">Read Detail</a>
+									<a th:href="@{viewDetailBlog/{id}(id=${b.id})}"  class="btn btn-light btn-sm">ĐỌC BÀI VIẾT</a>
 								</div>
 <!--								<a th:href="@{viewDetailBlog/{id}(id=${b.id})}" class="btn btn-light btn-sm">Read Detail</a>-->
 

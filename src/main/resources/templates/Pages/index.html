@@ -115,70 +115,36 @@
                 <ul>
                     <li class="active"> <a href="index.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
                     <li class="list-divider"></li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Hotel Manage </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý khách sạn </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/homepageHotel}"> All hotel </a></li>
-
-                        </ul>
-                    </li>
-<!--                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý phòng </span> <span class="menu-arrow"></span></a>-->
-<!--                        <ul class="submenu_class" style="display: none;">-->
-<!--                            <li><a th:href="@{/getAllRoomOfRoleAdmin}"> Tất cả phòng </a></li>-->
-
-<!--                        </ul>-->
-<!--                    </li>-->
-                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/listBooking}"> All Booking </a></li>
-                            <!--                            <li><a href="edit-booking.html"> Edit Booking </a></li>-->
-                            <!--                            <li><a href="add-booking.html"> Add Booking </a></li>-->
-                        </ul>
-                    </li>
-<!--                    <li class="submenu"> <a href="#"><i class="fas fa-book"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>-->
-<!--                        <ul class="submenu_class" style="display: none;">-->
-<!--                            <li><a href="salary.html">Employee Salary </a></li>-->
-<!--                            <li><a href="salary-veiw.html">Payslip </a></li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-                    <li> <a href="calendar.html"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a> </li>
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/manageBlog}">All Blog </a></li>
-
+                            <li><a th:href="@{/homepageHotel}"> Tất cả khách sạn </a></li>
 
                         </ul>
                     </li>
 
-                    <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Lịch đặt phòng </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/hotelReportList}">Hotel Report </a></li>
-<!--                            <li><a href="invoice-reports.html">Invoice Report </a></li>-->
+                            <li><a th:href="@{/listBooking}"> Lịch đặt phòng </a></li>
+
+                        </ul>
+                    </li>
+
+
+                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Bài viết </span> <span class="menu-arrow"></span></a>
+                        <ul class="submenu_class" style="display: none;">
+                            <li><a th:href="@{/manageBlog}">Bài viết </a></li>
+                        </ul>
+                    </li>
+
+
+                        <ul class="submenu_class" style="display: none;">
+                            <li><a th:href="@{/hotelReportList}">Báo cáo khách sạn </a></li>
+
                         </ul>
                     </li>
 
                     <li class="list-divider"></li>
-                    <li class="menu-title mt-3"> <span>EXTRAS</span> </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="login.html">Login </a></li>
-                            <li><a href="register.html">Register </a></li>
-                            <li><a href="forgot-password.html">Forgot Password </a></li>
-                            <li><a href="change-password.html">Change Password </a></li>
-                            <li><a href="lock-screen.html">Lockscreen </a></li>
-                            <li><a href="profile.html">Profile </a></li>
-                            <li><a href="gallery.html">Gallery </a></li>
-                            <li><a href="error-404.html">404 Error </a></li>
-                            <li><a href="error-500.html">500 Error </a></li>
-                            <li><a href="blank-page.html">Blank Page </a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-share-alt"></i> <span> Multi Level </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="">Level 1 </a></li>
-                            <li><a href="">Level 2 </a></li>
-                        </ul>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -202,7 +168,7 @@
                             <div class="dash-widget-header">
                                 <div>
                                     <h3 class="card_widget_header">236</h3>
-                                    <h6 class="text-muted">Total Booking</h6> </div>
+                                    <h6 class="text-muted">Tổng lịch đặt phòng</h6> </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0"> <span class="opacity-7 text-muted"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
 									<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
 									<circle cx="8.5" cy="7" r="4"></circle>
@@ -219,7 +185,7 @@
                             <div class="dash-widget-header">
                                 <div>
                                     <h3 class="card_widget_header">180</h3>
-                                    <h6 class="text-muted">Available Rooms</h6> </div>
+                                    <h6 class="text-muted">Phòng trống</h6> </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0"> <span class="opacity-7 text-muted"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
 									<line x1="12" y1="1" x2="12" y2="23"></line>
 									<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -252,7 +218,7 @@
                             <div class="dash-widget-header">
                                 <div>
                                     <h3 class="card_widget_header">364</h3>
-                                    <h6 class="text-muted">Collections</h6> </div>
+                                    <h6 class="text-muted">Sưu tầm</h6> </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0"> <span class="opacity-7 text-muted"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
 									<circle cx="12" cy="12" r="10"></circle>
 									<line x1="2" y1="12" x2="22" y2="12"></line>
@@ -268,7 +234,7 @@
                 <div class="col-md-12 col-lg-6">
                     <div class="card card-chart">
                         <div class="card-header">
-                            <h4 class="card-title">VISITORS</h4> </div>
+                            <h4 class="card-title">Khách du lịch</h4> </div>
                         <div class="card-body">
                             <div id="line-chart"></div>
                         </div>
@@ -277,107 +243,14 @@
                 <div class="col-md-12 col-lg-6">
                     <div class="card card-chart">
                         <div class="card-header">
-                            <h4 class="card-title">ROOMS BOOKED</h4> </div>
+                            <h4 class="card-title">Phòng đã đặt</h4> </div>
                         <div class="card-body">
                             <div id="donut-chart"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 d-flex">
-                    <div class="card card-table flex-fill">
-                        <div class="card-header">
-                            <h4 class="card-title float-left mt-2">Booking</h4>
-                            <button type="button" class="btn btn-primary float-right veiwbutton">Veiw All</button>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-center">
-                                    <thead>
-                                    <tr>
-                                        <th>Booking ID</th>
-                                        <th>Name</th>
-                                        <th>Email ID</th>
-                                        <th>Aadhar Number</th>
-                                        <th class="text-center">Room Type</th>
-                                        <th class="text-right">Number</th>
-                                        <th class="text-center">Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0001</div>
-                                        </td>
-                                        <td class="text-nowrap">Tommy Bernal</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3743585a5a4e55524559565b77524f565a475b521954585a">[email&#160;protected]</a></td>
-                                        <td>12414786454545</td>
-                                        <td class="text-center">Double</td>
-                                        <td class="text-right">
-                                            <div>631-254-6480</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0002</div>
-                                        </td>
-                                        <td class="text-nowrap">Ellen Thill</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89fbe0eae1e8fbedebfbe6ebfafdc9ecf1e8e4f9e5eca7eae6e4">[email&#160;protected]</a></td>
-                                        <td>5456223232322</td>
-                                        <td class="text-center">Double</td>
-                                        <td class="text-right">
-                                            <div>830-468-1042</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0003</div>
-                                        </td>
-                                        <td class="text-nowrap">Corina Kelsey</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76131a1a1318021e1f1a1a36130e171b061a135815191b">[email&#160;protected]</a></td>
-                                        <td>454543232625</td>
-                                        <td class="text-center">Single</td>
-                                        <td class="text-right">
-                                            <div>508-335-5531</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0004</div>
-                                        </td>
-                                        <td class="text-nowrap">Carolyn Lane</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="50333f22393e313b353c23352910373d31393c7e333f3d">[email&#160;protected]</a></td>
-                                        <td>2368989562621</td>
-                                        <td class="text-center">Double</td>
-                                        <td class="text-right">
-                                            <div>262-260-1170</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap">
-                                            <div>BKG-0005</div>
-                                        </td>
-                                        <td class="text-nowrap">Denise</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c7f7d6e73706572707d72795c7b717d7570327f7371">[email&#160;protected]</a></td>
-                                        <td>3245455582287</td>
-                                        <td class="text-center">Single</td>
-                                        <td class="text-right">
-                                            <div>570-458-0070</div>
-                                        </td>
-                                        <td class="text-center"> <span class="badge badge-pill bg-success inv-badge">INACTIVE</span> </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

@@ -107,32 +107,28 @@
                 <ul>
                     <li> <a href="index.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
                     <li class="list-divider"></li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Lịch đặt phòng </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a href="all-booking.html"> All Booking </a></li>
-                            <li><a href="edit-booking.html"> Edit Booking </a></li>
-                            <li><a href="add-booking.html"> Add Booking </a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Manage Hotel </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/homepageHotel}"> All Hotel </a></li>
+                            <li><a th:href="@{/listBooking}"> Lịch đặt phòng </a></li>
 
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý khách sạn  </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/roomHomepage}">All Rooms </a></li>
-                            <!--                            <li><a href="edit-room.html"> Edit Rooms </a></li>-->
-                            <!--                            <li><a href="add-room.html"> Add Rooms </a></li>-->
+                            <li><a class="active" th:href="@{/homepageHotel}"> Tất cả </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Phòng </span> <span class="menu-arrow"></span></a>
+                        <ul class="submenu_class" style="display: none;">
+                            <li><a th:href="@{/roomHomepage}">Tất cả </a></li>
+
                         </ul>
                     </li>
 
-
-
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Bài viết </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/manageBlog}">Blog </a></li>
+                            <li><a th:href="@{/manageBlog}">Bài viết </a></li>
 
                         </ul>
                     </li>
