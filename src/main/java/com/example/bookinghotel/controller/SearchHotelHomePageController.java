@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -39,14 +40,15 @@ public class SearchHotelHomePageController {
         Iterable<Hotel> hotels = hotelService.findAll();
         //lay toan bo ten cua hotel de ho tro tim kiem bang js
         for (Hotel hotel : hotels) {
-            ans+=hotel.getNameOfHotel()+",";
+            String formatName = hotel.getNameOfHotel().replace(',','|');
+            ans += formatName + ",";
         }
-        if(ans.isEmpty()){
+        if (ans.isEmpty()) {
             // thong bao neu loi xay ra khong lay duoc thong tin cua hotel
-            ans="cant get hotel names";
-        }else{
+            ans = "cant get hotel names";
+        } else {
             // loai bo dau "," cuoi cung
-            ans = ans.substring(0,ans.length()-2);
+            ans = ans.substring(0, ans.length() - 2);
         }
         // xu ly van de dau trong data
         response.setContentType("text/html; charset=UTF-8");
@@ -57,27 +59,31 @@ public class SearchHotelHomePageController {
             e.printStackTrace();
         }
     }
+
     @PostMapping("/checkAvailableHotel")
-    public void checkAvailableHotel(@RequestParam("hotel_name")String hotel_name,
-                                    @RequestParam("start_date")String start_date,
-                                    @RequestParam("end_date")String end_date,
-                                    @RequestParam("number_of_people")int number_of_people,
+    public void checkAvailableHotel(@RequestParam("hotel_name") String hotel_name,
+                                    @RequestParam("start_date") String start_date,
+                                    @RequestParam("end_date") String end_date,
+                                    @RequestParam("number_of_people") int number_of_people,
                                     @RequestParam("preview_value") int preview_value,
-                                    HttpServletResponse response){
+                                    HttpServletResponse response) {
 //        System.out.println(hotel_name);
 //        System.out.println(start_date);
 //        System.out.println(end_date);
 //        System.out.println(number_of_people);
 
         String ans = "error";
-        Optional<Hotel> hotel =  hotelService.findHotelByName(hotel_name);
-        if(hotel.isPresent()){
-            if(preview_value==0){
-            boolean checkValidateDateAndBed = checkValidateDateAndBed(start_date,end_date,number_of_people,hotel.get());
-            if(checkValidateDateAndBed == true) ans = hotel.get().getId()+"";
-            else ans = "error";
-            }else{
-                ans = hotel.get().getId()+"";
+        hotel_name = hotel_name.replace('|',',');
+        Optional<Hotel> hotel = hotelService.findHotelByName(hotel_name);
+
+        if (hotel.isPresent()) {
+            if (preview_value == 0) {
+                boolean checkValidateDateAndBed = checkValidateDateAndBed(start_date, end_date, number_of_people, hotel.get());
+
+                if (checkValidateDateAndBed == true) ans = hotel.get().getId() + "";
+                else ans = "error";
+            } else {
+                ans = hotel.get().getId() + "";
             }
             // tim duoc return id
 
@@ -89,13 +95,13 @@ public class SearchHotelHomePageController {
             e.printStackTrace();
         }
     }
-    private boolean checkValidateDateAndBed(String start_date,String end_date,int number_of_people,Hotel hotel){
-        boolean ans = false; // check dieu kien thoi gian book
-        boolean ans2 = false;// check dieu kien so giuong
+
+    private boolean checkValidateDateAndBed(String start_date, String end_date, int number_of_people, Hotel hotel) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dtf = dtf.withLocale(Locale.getDefault());
         LocalDate start_dateD = LocalDate.now();
         LocalDate end_dateD = LocalDate.now();
+        List<Room> acceptedRooms = new ArrayList<>();
         try {
             start_dateD = LocalDate.parse(start_date);
             end_dateD = LocalDate.parse(end_date);
@@ -111,40 +117,23 @@ public class SearchHotelHomePageController {
                                 // booking hien tai dap ung yeu cau khong thay doi gia tri valid
                             } else {
                                 isValid = false;//khong dap ung yeu cau
+                                break;
                             }
                         }
-                    } else {
-                        isValid = false;
                     }
                     if (isValid == true) {
-                        ans = true;// tim duoc phong trong trong khac san.
-                        break;
+                        if (rooms.get(j).getTotalOfBedroom() == number_of_people)
+                            acceptedRooms.add(rooms.get(j));
                     }
-                }
+                    System.out.println(j);
+              }
             }
-        }catch(Exception e){
-            for(int i = 0 ; i < 10;i++){
-                System.out.println("Loi xay ra khi xu ly ham checkValidateDate");
-            }
+        } catch (Exception e) {
             e.printStackTrace();
-            for(int i = 0 ; i < 10;i++){
-                System.out.println("Loi xay ra khi xu ly ham checkValidateDate");
-            }
         }
 
-            List<Room> rooms = hotel.getRooms();
-            boolean findAvailableRoom = false;
-            for (int j = 0; j < rooms.size(); j++) {
-                if (rooms.get(j).getTotalOfBedroom() >= number_of_people) {
-                    findAvailableRoom = true;
-                    break;
-                }
-            }
-            if (findAvailableRoom == true) {
-                ans2 = true;
-            }
 
-        return ans==true&&ans2==true;
+        return acceptedRooms.size() > 0;
     }
     // phan dung code-end
 

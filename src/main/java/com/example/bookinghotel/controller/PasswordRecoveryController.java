@@ -65,7 +65,7 @@ public class PasswordRecoveryController {
     }
     // mở form đổi pass
     @GetMapping("/resetPasswordF/{passwordToken}")
-    public String resetPasswordF(@PathVariable(value="passwordToken") String passwordToken,Model model){
+    public String resetPasswordF(@PathVariable(value="passwordToken") String passwordToken,Model model,HttpServletResponse response){
         // đọ tất cả tên tài khoản với token - giải pháp tạm thời
 
         Iterable<UserInfo> users = userService.findAll();
@@ -80,6 +80,7 @@ public class PasswordRecoveryController {
                     break;
                 }
         }
+        if(recoveredUser==null) return "redirect:/";
         return "Pages/modal-user/user-resetpassword-changepassword";
     }
     // đổi pass
