@@ -107,85 +107,32 @@
                 <ul>
                     <li> <a href="index.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
                     <li class="list-divider"></li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Lịch đặt phòng </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a href="all-booking.html"> All Booking </a></li>
-                            <li><a href="edit-booking.html"> Edit Booking </a></li>
-                            <li><a href="add-booking.html"> Add Booking </a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Manage Hotel </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/homepageHotel}"> All Hotel </a></li>
+                            <li><a th:href="@{/listBooking}"> Lịch đặt phòng </a></li>
 
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý khách sạn  </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/roomHomepage}">All Rooms </a></li>
-                            <!--                            <li><a href="edit-room.html"> Edit Rooms </a></li>-->
-                            <!--                            <li><a href="add-room.html"> Add Rooms </a></li>-->
+                            <li><a class="active" th:href="@{/homepageHotel}"> Tất cả </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Phòng </span> <span class="menu-arrow"></span></a>
+                        <ul class="submenu_class" style="display: none;">
+                            <li><a th:href="@{/roomHomepage}">Tất cả </a></li>
+
                         </ul>
                     </li>
 
-                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Employees </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Bài viết </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a href="employees.html">Employees List </a></li>
-                            <li><a href="leaves.html">Leaves </a></li>
-                            <li><a href="holidays.html">Holidays </a></li>
-                            <li><a href="attendance.html">Attendance </a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu"> <a href="#"><i class="far fa-money-bill-alt"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="invoices.html">Invoices </a></li>
-                            <li><a href="payments.html">Payments </a></li>
-                            <li><a href="expenses.html">Expenses </a></li>
-                            <li><a href="taxes.html">Taxes </a></li>
-                            <li><a href="provident-fund.html">Provident Fund </a></li>
+                            <li><a th:href="@{/manageBlog}">Bài viết </a></li>
+
                         </ul>
                     </li>
 
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="blog.html">Blog </a></li>
-                            <li><a href="blog-details.html">Blog Veiw </a></li>
-                            <li><a href="add-blog.html">Add Blog </a></li>
-                            <li><a href="edit-blog.html">Edit Blog </a></li>
-                        </ul>
-                    </li>
-                    <li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
-                    <li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
-                    <li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="expense-reports.html">Expense Report </a></li>
-                            <li><a href="invoice-reports.html">Invoice Report </a></li>
-                        </ul>
-                    </li>
-                    <li> <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a> </li>
-                    <li class="list-divider"></li>
-                    <li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>
-
-                    <li class="submenu"> <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="login.html">Login </a></li>
-                            <li><a href="register.html">Register </a></li>
-                            <li><a href="forgot-password.html">Forgot Password </a></li>
-                            <li><a href="change-password.html">Change Password </a></li>
-                            <li><a href="lock-screen.html">Lockscreen </a></li>
-                            <li><a href="profile.html">Profile </a></li>
-                            <li><a href="gallery.html">Gallery </a></li>
-                            <li><a href="error-404.html">404 Error </a></li>
-                            <li><a href="error-500.html">500 Error </a></li>
-                            <li><a href="blank-page.html">Blank Page </a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-share-alt"></i> <span> Multi Level </span> <span class="menu-arrow"></span></a>
-                        <ul class="submenu_class" style="display: none;">
-                            <li><a href="">Level 1 </a></li>
-                            <li><a href="">Level 2 </a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
