@@ -80,6 +80,7 @@ public class PasswordRecoveryController {
                     break;
                 }
         }
+        if(recoveredUser==null) return "redirect:/";
         return "Pages/modal-user/user-resetpassword-changepassword";
     }
     // đổi pass
