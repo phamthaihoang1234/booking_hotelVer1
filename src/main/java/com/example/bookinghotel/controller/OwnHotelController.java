@@ -74,7 +74,7 @@ public class OwnHotelController {
         return userName;
     }
 
-    @Value("E:/ListRoom/file/")
+    @Value("C:/ListRoom/file/")
     private String fileUpload;
 
     @PostMapping("/saveOwner")
