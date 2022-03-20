@@ -119,7 +119,7 @@
                     <div class="col">
                         <div class="mt-5">
                             <h4 class="card-title float-left mt-2">Quản lý khách sạn</h4> <a
-                                th:href="@{/CreateHotelOfAdmin}" class="btn btn-primary float-right veiwbutton">Thêm khách sạn</a></div>
+                                th:href="@{/ShowDetailsOfHotelOfAdmin}" class="btn btn-primary float-right veiwbutton">Thêm khách sạn</a></div>
                     </div>
                 </div>
             </div>
@@ -164,7 +164,7 @@
 
                                         <td>
                                             <div class="btn btn-sm bg-success-light mr-2"
-                                                 th:text="${h.getStatus()} ? 'Tạm dừng' : 'Đang hoạt động'"></div>
+                                                 th:text="${h.getStatus()} ? 'Đang hoạt động' : 'Đang hoạt động'"></div>
                                         </td>
 <!--                                        <td class="text-right">-->
 <!--                                            <div class="dropdown dropdown-action"><a href="#"-->

@@ -85,12 +85,14 @@ public class ManageHotelController {
 
     @PostMapping("/CreateHotelOfAdmin")
     public String CreateHotelOfAdmin(Model model, @ModelAttribute Hotel hotel) {
+        Iterable<Hotel> hotelList = null;
         System.out.println(hotel.getId());
         System.out.println(hotel.getNameOfHotel());
         System.out.println(hotel.getAddressOfHotel());
         hotel.setUser(userService.findByUserName(getPrincipal()));
         hotelService.save(hotel);
-        model.addAttribute("hotel", new Hotel());
+        hotelList = hotelService.findAll();
+        model.addAttribute("hotels", hotelList);
         model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
         return "Pages/hotelManage/all-hotel-admin";
     }
