@@ -76,7 +76,7 @@ public class BookingController {
     @GetMapping("/listBookingOfAdmin")
     public String listBookingOfAdmin(Model model,
                                      @RequestParam(name = "start_date", required = false) String start_date,
-                                     @RequestParam(name = "end_date", required = false) String end_date) {
+                                     @RequestParam(name = "end_date", required = false) String end_date ,@RequestParam(name = "name", required = false) String userName) {
 
         model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -86,18 +86,35 @@ public class BookingController {
         System.out.println("ngay ket thuc: " + end_date);
         Iterable<Booking> bookingList = null;
         System.out.println("Class: BookingController | Method: listAllBookingOfUser | ID User:" + userService.findByUserName(this.getPrincipal()).getId());
-        if (StringUtils.hasText(start_date) && StringUtils.hasText(end_date)) {
-            bookingList = bookingRepository.findAllBookingAdminAndStartDateEndDate(LocalDate.parse(start_date, formatter), LocalDate.parse(end_date, formatter));
+        if(StringUtils.hasText(userName)){
+            model.addAttribute("name", userName);
+            if (StringUtils.hasText(start_date) && StringUtils.hasText(end_date)) {
+                bookingList = bookingRepository.findAllBookingAdminAndStartDateEndDateAndNameUser(LocalDate.parse(start_date, formatter), LocalDate.parse(end_date, formatter),userName);
 
-        } else if (StringUtils.hasText(start_date)) {
-            bookingList = bookingRepository.findAllBookingByAdminAndStartDate(LocalDate.parse(start_date, formatter));
+            } else if (StringUtils.hasText(start_date)) {
+                bookingList = bookingRepository.findAllBookingByAdminAndStartDateAndNameUser(LocalDate.parse(start_date, formatter),userName);
 
-        } else if (StringUtils.hasText(end_date)) {
-            bookingList = bookingRepository.findAllBookingByAdminAndEndDate(LocalDate.parse(end_date, formatter));
+            } else if (StringUtils.hasText(end_date)) {
+                bookingList = bookingRepository.findAllBookingByAdminAndEndDateAndNameUser(LocalDate.parse(end_date, formatter),userName);
 
-        } else {
-            bookingList = bookingRepository.findAllBookingAdmin();
+            } else {
+                bookingList = bookingRepository.findAllBookingAdminAndNameUser(userName);
+            }
+        }else{
+            if (StringUtils.hasText(start_date) && StringUtils.hasText(end_date)) {
+                bookingList = bookingRepository.findAllBookingAdminAndStartDateEndDate(LocalDate.parse(start_date, formatter), LocalDate.parse(end_date, formatter));
+
+            } else if (StringUtils.hasText(start_date)) {
+                bookingList = bookingRepository.findAllBookingByAdminAndStartDate(LocalDate.parse(start_date, formatter));
+
+            } else if (StringUtils.hasText(end_date)) {
+                bookingList = bookingRepository.findAllBookingByAdminAndEndDate(LocalDate.parse(end_date, formatter));
+
+            } else {
+                bookingList = bookingRepository.findAllBookingAdmin();
+            }
         }
+
         model.addAttribute("bookingList", bookingList);
         model.addAttribute("start_date", start_date);
         model.addAttribute("end_date", end_date);

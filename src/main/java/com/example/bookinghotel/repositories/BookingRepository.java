@@ -79,25 +79,56 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
     // Get data booking for Admin (Creator: QUangNHHE130717)
     @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
             "inner join rooms on bookings.room_id = rooms.id " +
-            "inner join hotel on rooms.hotel_id = hotel.id and bookings.status=1 ",nativeQuery = true)
+            "  inner join users on bookings.user_id = users.id " +
+            "inner join hotel on rooms.hotel_id = hotel.id where bookings.status=1 ",nativeQuery = true)
     Iterable<Booking> findAllBookingAdmin();
 
     @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
             "inner join rooms on bookings.room_id = rooms.id " +
+            "  inner join users on bookings.user_id = users.id " +
             "inner join hotel on rooms.hotel_id = hotel.id " +
             "where  bookings.start_date >= ?1",nativeQuery = true)
     Iterable<Booking> findAllBookingByAdminAndStartDate(LocalDate dateStar);
 
     @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
             "inner join rooms on bookings.room_id = rooms.id " +
+            "  inner join users on bookings.user_id = users.id " +
             "inner join hotel on rooms.hotel_id = hotel.id " +
             "where bookings.end_date <= ?1",nativeQuery = true)
     Iterable<Booking> findAllBookingByAdminAndEndDate(LocalDate dateEnd);
 
     @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
             "inner join rooms on bookings.room_id = rooms.id " +
+            "  inner join users on bookings.user_id = users.id " +
             "inner join hotel on rooms.hotel_id = hotel.id " +
             "where bookings.start_date >= ?1 and bookings.end_date <= ?2",nativeQuery = true)
     Iterable<Booking> findAllBookingAdminAndStartDateEndDate(LocalDate dateStart,LocalDate dateEnd);
+
+    @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
+            "inner join rooms on bookings.room_id = rooms.id " +
+            "  inner join users on bookings.user_id = users.id " +
+            "inner join hotel on rooms.hotel_id = hotel.id where bookings.status=1 and users.name like concat('%',?1,'%')",nativeQuery = true)
+    Iterable<Booking> findAllBookingAdminAndNameUser(String nameUser);
+
+    @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
+            "inner join rooms on bookings.room_id = rooms.id " +
+            "  inner join users on bookings.user_id = users.id " +
+            "inner join hotel on rooms.hotel_id = hotel.id " +
+            "where  bookings.start_date >= ?1 and users.name like concat('%',?2,'%')",nativeQuery = true)
+    Iterable<Booking> findAllBookingByAdminAndStartDateAndNameUser(LocalDate dateStar, String nameUser);
+
+    @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
+            "inner join rooms on bookings.room_id = rooms.id " +
+            "  inner join users on bookings.user_id = users.id " +
+            "inner join hotel on rooms.hotel_id = hotel.id " +
+            "where bookings.end_date <= ?1 and users.name like concat('%',?2,'%')",nativeQuery = true)
+    Iterable<Booking> findAllBookingByAdminAndEndDateAndNameUser(LocalDate dateEnd, String nameUser);
+
+    @Query(value = "SELECT bookings.id,bookings.start_date,bookings.end_date,bookings.number_of_guests,bookings.room_id,bookings.num_night,bookings.total_prize,bookings.status,bookings.user_id,rooms.name,hotel.name_of_hotel FROM booking_hotelver10.bookings " +
+            "inner join rooms on bookings.room_id = rooms.id " +
+            "  inner join users on bookings.user_id = users.id " +
+            "inner join hotel on rooms.hotel_id = hotel.id " +
+            "where bookings.start_date >= ?1 and bookings.end_date <= ?2 and users.name like concat('%',?3,'%')",nativeQuery = true)
+    Iterable<Booking> findAllBookingAdminAndStartDateEndDateAndNameUser(LocalDate dateStart,LocalDate dateEnd, String nameUser);
 
 }
