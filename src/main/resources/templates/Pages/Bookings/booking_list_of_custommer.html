@@ -63,10 +63,10 @@
 <div class="main-wrapper">
     <div class="header">
         <div class="header-left">
-            <a href="http://localhost:8090/" class="logo"> <img src="../assets/img/hotel_logo.png" width="50" height="70"
+            <a href="/" class="logo"> <img src="../assets/img/hotel_logo.png" width="50" height="70"
                                                        alt="logo">
                 <span class="logoclass">HOTEL</span> </a>
-            <a href="../index.html" class="logo logo-small"> <img src="../assets/img/hotel_logo.png" alt="Logo"
+            <a href="/" class="logo logo-small"> <img src="../assets/img/hotel_logo.png" alt="Logo"
                                                                   width="30"
                                                                   height="30"> </a>
         </div>
@@ -166,7 +166,7 @@
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
-                    <li><a href="http://localhost:8090/"><i class="fas fa-tachometer-alt"></i> <span>Trang chủ</span></a></li>
+                    <li><a href="/"><i class="fas fa-tachometer-alt"></i> <span>Trang chủ</span></a></li>
                     <li class="list-divider"></li>
                     <li class="submenu"><a href="#"><i class="fas fa-user"></i> <span> Tài khoản </span> <span
                             class="menu-arrow"></span></a>
@@ -279,7 +279,7 @@
                                         <!--                                        <td><span th:text="${booking.getStatus()}"></span></td>-->
                                         <td>
                                             <div class="btn btn-sm bg-success-light mr-2"
-                                                 th:text="${booking.getStatus()} ? 'Đã hoàn thành' : 'Đã đặt'"></div>
+                                                 th:text="${booking.getStatus()} ? 'Đặt thành công' : 'Đặt thành công'"></div>
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action"><a href="#"
@@ -288,8 +288,8 @@
                                                                                      aria-expanded="false"><i
                                                     class="fas fa-ellipsis-v ellipse_color"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item"
-                                                       th:href="@{editBooking/(id=${booking.getId()})}">Chỉnh sửa</a>
+<!--                                                    <a class="dropdown-item"-->
+<!--                                                       th:href="@{editBooking/(id=${booking.getId()})}">Chỉnh sửa</a>-->
                                                     <a class="dropdown-item delBtn"
                                                        th:href="@{deleteBookingOfCustomer/(id=${booking.getId()})}"><i
                                                             class="fas fa-trash-alt m-r-5"></i>Xóa</a>

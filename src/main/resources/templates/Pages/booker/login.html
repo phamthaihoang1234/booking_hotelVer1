@@ -25,9 +25,12 @@
             <div class="card-header">
                 <h3>Sign In</h3>
                 <div class="d-flex justify-content-end social_icon">
-                    <span><i class="fab fa-facebook-square"></i></span>
-                    <span><i class="fab fa-google-plus-square"></i></span>
-                    <span><i class="fab fa-twitter-square"></i></span>
+                    <a th:href="@{/}">
+                        <span><i class="fa fa-home" aria-hidden="true"></i></span>
+                    </a>
+<!--                    <span><i class="fab fa-facebook-square"></i></span>-->
+<!--                    <span><i class="fab fa-google-plus-square"></i></span>-->
+<!--                    <span><i class="fab fa-twitter-square"></i></span>-->
                 </div>
             </div>
             <div class="card-body">
@@ -47,6 +50,13 @@
                     </div>
                     <div class="row align-items-center remember">
                         <input type="checkbox" name="remember-me">Remember Me
+                            <p  style="color: red;margin-top: 12px;" th:if="${errol}" th:text="${errol}"></p>
+
+
+
+
+
+
                     </div>
 <!--                    phan dung them-->
                     <div class="row align-items-center remember">
@@ -60,12 +70,12 @@
 
                 </form>
             </div>
-            <div class="card-footer">
-                <div class="d-flex justify-content-center links">
-                    Are you want to return hompage?<a th:href="@{/}">Homepage</a>
-                </div>
+<!--            <div class="card-footer">-->
+<!--                <div class="d-flex justify-content-center links">-->
+<!--                    Are you want to return hompage?<a th:href="@{/}">Homepage</a>-->
+<!--                </div>-->
 
-            </div>
+<!--            </div>-->
         </div>
     </div>
 </div>

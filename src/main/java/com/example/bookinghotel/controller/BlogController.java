@@ -56,7 +56,7 @@ public class BlogController {
         return "/Pages/Blog/all-blog";
     }
 
-    @Value("E:/ListRoom/file/")
+    @Value("C:/ListRoom/file/")
     private String fileUpload;
 
     @GetMapping("/createBlog")

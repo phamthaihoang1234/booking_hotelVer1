@@ -63,8 +63,8 @@
 <div class="main-wrapper">
     <div class="header">
         <div class="header-left">
-            <a href="http://localhost:8090/" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
-            <a href="http://localhost:8090/" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
+            <a href="/" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
+            <a href="/" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
         </div>
         <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
         <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
@@ -153,7 +153,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <form th:action="@{/listAllBookingOfCustomer}">
+                    <form th:action="@{/listBookingOfAdmin}">
                         <div class="row formtype">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -183,6 +183,11 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label>Tên tài khoản</label>
+                                    <input class="form-control" name="name" id="name" type="text" th:value="${name}" placeholder="Tên tài khoản"> </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label>Tìm kiếm</label>
                                     <button type="submit" class="btn btn-success btn-block mt-0 search_button"> Tìm
                                         kiếm
@@ -206,6 +211,7 @@
                                     <tr>
                                         <th>Kiểu phòng</th>
                                         <th>Tên khách sạn</th>
+                                        <th>Tên khách hàng</th>
                                         <th>Số khách</th>
                                         <th>Ngày nhận phòng</th>
                                         <th>Ngày trả phòng</th>
@@ -213,7 +219,7 @@
                                         <th>Email</th>
                                         <th>Điện thoại</th>
                                         <th>Trang thái</th>
-                                        <th></th>
+<!--                                        <th></th>-->
                                         <!--                                        <th class="text-right">Actions</th>-->
                                     </tr>
                                     </thead>
@@ -223,6 +229,7 @@
                                         </td>
                                         <th><span th:text="${booking.getRoom().getHotel().getNameOfHotel()}"></span>
                                         </th>
+                                        <td><span th:text="${booking.getUser().getName()}"></span></td>
                                         <td><span th:text="${booking.getNumberOfGuests()}"></span></td>
                                         <td><span th:text="${booking.getStartDate()}"></span></td>
                                         <td><span th:text="${booking.getEndDate()}"></span></td>
@@ -232,24 +239,24 @@
                                         <!--                                        <td><span th:text="${booking.getStatus()}"></span></td>-->
                                         <td>
                                             <div class="btn btn-sm bg-success-light mr-2"
-                                                 th:text="${booking.getStatus()} ? 'Đã hoàn thành' : 'Đã đặt'"></div>
+                                                 th:text="${booking.getStatus()==1} ? 'Đã đặt' : 'Đã đặt'"></div>
                                         </td>
-                                        <td class="text-right">
-                                            <div class="dropdown dropdown-action"><a href="#"
-                                                                                     class="action-icon dropdown-toggle"
-                                                                                     data-toggle="dropdown"
-                                                                                     aria-expanded="false"><i
-                                                    class="fas fa-ellipsis-v ellipse_color"></i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item"
-                                                       th:href="@{editBooking/(id=${booking.getId()})}">Chỉnh sửa</a>
-                                                    <a class="dropdown-item delBtn"
-                                                       th:href="@{deleteBooking/(id=${booking.getId()})}"><i
-                                                            class="fas fa-trash-alt m-r-5"></i>Xóa</a>
+<!--                                        <td class="text-right">-->
+<!--                                            <div class="dropdown dropdown-action"><a href="#"-->
+<!--                                                                                     class="action-icon dropdown-toggle"-->
+<!--                                                                                     data-toggle="dropdown"-->
+<!--                                                                                     aria-expanded="false"><i-->
+<!--                                                    class="fas fa-ellipsis-v ellipse_color"></i></a>-->
+<!--                                                <div class="dropdown-menu dropdown-menu-right">-->
+<!--&lt;!&ndash;                                                    <a class="dropdown-item"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                       th:href="@{editBooking/(id=${booking.getId()})}">Chỉnh sửa</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <a class="dropdown-item delBtn"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                       th:href="@{deleteBookingOfCustomer/(id=${booking.getId()})}"><i&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            class="fas fa-trash-alt m-r-5"></i>Xóa</a>&ndash;&gt;-->
 
-                                                </div>
-                                            </div>
-                                        </td>
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
                                     </tr>
                                     </tbody>
                                 </table>

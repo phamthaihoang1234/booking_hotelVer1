@@ -7,6 +7,7 @@ import com.example.bookinghotel.repositories.RoomImageRepository;
 import com.example.bookinghotel.repositories.RoomRepository;
 import com.example.bookinghotel.services.HotelService;
 import com.example.bookinghotel.services.RoomService;
+import com.example.bookinghotel.services.TermOfUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ public class RoomDetailsController {
 
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private TermOfUserService termOfUserService;
 
     @Autowired
     private RoomImageRepository roomImageRepository;
@@ -34,6 +38,9 @@ public class RoomDetailsController {
         //lay ra link iframe gg map
         model.addAttribute("iframe", roomService.findById(id).get().getHotel().getIframe());
 
+        model.addAttribute("termOfUSer", termOfUserService.findById(1L).get());
+
+        System.out.println("Class: RoomDetailsController | Method: roomDetails | termOfUserService.Details: "+ termOfUserService.findById(1L).get().getDetails());
 
 
         return "Room/room-details";
