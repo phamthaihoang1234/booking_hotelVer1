@@ -288,8 +288,8 @@
                                                                                      aria-expanded="false"><i
                                                     class="fas fa-ellipsis-v ellipse_color"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-<!--                                                    <a class="dropdown-item"-->
-<!--                                                       th:href="@{editBooking/(id=${booking.getId()})}">Chỉnh sửa</a>-->
+                                                    <a class="dropdown-item"
+                                                       th:href="@{/report/(id=${booking.getRoom().getId()})}">Báo cáo</a>
                                                     <a class="dropdown-item delBtn"
                                                        th:href="@{deleteBookingOfCustomer/(id=${booking.getId()})}"><i
                                                             class="fas fa-trash-alt m-r-5"></i>Xóa</a>

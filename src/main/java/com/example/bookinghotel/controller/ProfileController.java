@@ -34,7 +34,7 @@ public class ProfileController {
     }
 
     @PostMapping("/saveEditProfile")
-    public String updateProfile(@ModelAttribute UserInfo userInfo) {
+    public String updateProfile(@ModelAttribute UserInfo userInfo,Model model) {
         UserInfo oldUserInfo = userService.findByUserName(this.getPrincipal());
         oldUserInfo.setName(userInfo.getName());
         oldUserInfo.setEmail(userInfo.getEmail());
@@ -44,6 +44,7 @@ public class ProfileController {
         System.out.println("Class: ProfileControler | Method: updateProfile |  " + oldUserInfo.getName());
         try {
             userService.updateInfor(oldUserInfo);
+            model.addAttribute("userInfo", userService.findByUserName(this.getPrincipal()));
         } catch (Exception e) {
             e.printStackTrace();
         }
