@@ -88,6 +88,7 @@ public class PasswordRecoveryController {
     public void resetPassword(@RequestParam("username") String username, @RequestParam("password") String password,HttpServletResponse response) throws Exception {
         UserInfo user = userService.findByUserName(username);
         user.setPassword(password);
+        user.setPasswordToken("");
         userService.save(user);
         try(PrintWriter out = response.getWriter()){
 
