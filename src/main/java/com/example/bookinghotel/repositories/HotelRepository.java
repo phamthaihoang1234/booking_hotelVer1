@@ -14,7 +14,7 @@ public interface HotelRepository extends CrudRepository<Hotel, Long> {
             "on Hotel_Property_id = Hotel_property.id " +
             "where hotel.address_of_hotel LIKE CONCAT('%',?1,'%') and Hotel_Property.type LIKE CONCAT('%',?2,'%') ")
     Iterable<Hotel> findByHotel_addressContainingAndHotel_property(String contains,String hotelProperty);
-    @Query(nativeQuery = true,value = "select hotel.* from hotel where hotel.name_of_hotel = ?1")
+    @Query(nativeQuery = true,value = "select hotel.* from hotel where hotel.name_of_hotel like ?1")
     Optional<Hotel> findByNameOfHotel(String hotel_name);
 
 

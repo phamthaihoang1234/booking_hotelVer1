@@ -4032,11 +4032,27 @@
                 </div>
 
                 <div style="width: 100%; text-align: center; margin-top: 10px">
-                    <a href="#" style="color: rgb(220,30,40)">Các điều khoản và Điều kiện</a>
+                    <label style="color: rgb(220,30,40)" data-toggle="modal" data-target="#exampleModal">
+                        Các điều khoản và Điều kiện
+                    </label>
                 </div>
+                <!-- Button trigger modal -->
             </div>
 
-
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                           <b> <h4 class="modal-title" id="exampleModalLabel" >Điều khoản và điều kiện</h4></b>
+                        </div>
+                        <div class="modal-body"  th:text="${termOfUSer.details}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- sau khi click DAT PHONG -->
             <div id="right-aboutHotel-2" style="width: 90%; margin: auto; margin-top: 15px; display: none; bottom: 0">
@@ -4204,6 +4220,7 @@
             return false;
         }
     </script>
+    <!-- Modal -->
 
     <!--JavaScript-->
     <script src="../../static/js/room-bookings.js"></script>

@@ -20,9 +20,9 @@
 <div class="main-wrapper">
     <div class="header">
         <div class="header-left">
-            <a href="http://localhost:8090/" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70"
+            <a href="/" class="logo"> <img src="assets/img/hotel_logo.png" width="50" height="70"
                                                                 alt="logo"> <span class="logoclass">HOTEL</span> </a>
-            <a href="http://localhost:8090/" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo"
+            <a href="/" class="logo logo-small"> <img src="assets/img/hotel_logo.png" alt="Logo"
                                                                            width="30" height="30"> </a>
         </div>
         <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
@@ -119,8 +119,7 @@
                     <div class="col">
                         <div class="mt-5">
                             <h4 class="card-title float-left mt-2">Quản lý khách sạn</h4> <a
-                                th:href="@{/showFormCreHotel}" class="btn btn-primary float-right veiwbutton">Add
-                            Hotels</a></div>
+                                th:href="@{/ShowDetailsOfHotelOfAdmin}" class="btn btn-primary float-right veiwbutton">Thêm khách sạn</a></div>
                     </div>
                 </div>
             </div>
@@ -155,7 +154,6 @@
                                         <th>Tên</th>
                                         <th>Địa chỉ</th>
                                         <th>Tình trạng</th>
-                                        <th class="text-right"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -166,21 +164,21 @@
 
                                         <td>
                                             <div class="btn btn-sm bg-success-light mr-2"
-                                                 th:text="${h.getStatus()} ? 'Tạm dừng' : 'Đang hoạt động'"></div>
+                                                 th:text="${h.getStatus()} ? 'Đang hoạt động' : 'Đang hoạt động'"></div>
                                         </td>
-                                        <td class="text-right">
-                                            <div class="dropdown dropdown-action"><a href="#"
-                                                                                     class="action-icon dropdown-toggle"
-                                                                                     data-toggle="dropdown"
-                                                                                     aria-expanded="false"><i
-                                                    class="fas fa-ellipsis-v ellipse_color"></i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <!--                                                    <a class="dropdown-item" th:href="@{findOne/{id}(id=${h.id})}"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>-->
-                                                    <a class="dropdown-item delBtn" th:href="@{delete/(id=${h.id})}"><i
-                                                            class="fas fa-trash-alt m-r-5"></i> Xóa</a>
-                                                </div>
-                                            </div>
-                                        </td>
+<!--                                        <td class="text-right">-->
+<!--                                            <div class="dropdown dropdown-action"><a href="#"-->
+<!--                                                                                     class="action-icon dropdown-toggle"-->
+<!--                                                                                     data-toggle="dropdown"-->
+<!--                                                                                     aria-expanded="false"><i-->
+<!--                                                    class="fas fa-ellipsis-v ellipse_color"></i></a>-->
+<!--                                                <div class="dropdown-menu dropdown-menu-right">-->
+<!--                                                    &lt;!&ndash;                                                    <a class="dropdown-item" th:href="@{findOne/{id}(id=${h.id})}"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a>&ndash;&gt;-->
+<!--                                                    <a class="dropdown-item delBtn" th:href="@{delete/(id=${h.id})}"><i-->
+<!--                                                            class="fas fa-trash-alt m-r-5"></i> Xóa</a>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
 
                                     </tr>
 
