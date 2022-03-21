@@ -56,27 +56,27 @@ public class UserController {
 
         if (result.hasErrors()) {
             if(userService.findByUserName(user.getUsername()) != null){
-                model.addAttribute("errolUsername", "Username was existed");
+                model.addAttribute("errolUsername", "Tên đăng nhập đã tồn tại");
             }
             if(userService.findByEmail(user.getEmail()) != null) {
-                model.addAttribute("errolEmail", "Email was existed");
+                model.addAttribute("errolEmail", "Email đã tồn tại");
             }
             return "/Pages/modal-user/user-signup";
         }
         else if(userService.findByUserName(user.getUsername()) != null){
-            model.addAttribute("errolUsername", "Username was existed");
+            model.addAttribute("errolUsername", "Tên đăng nhập đã tồn tại");
             if(userService.findByEmail(user.getEmail()) != null) {
-                model.addAttribute("errolEmail", "Email was existed");
+                model.addAttribute("errolEmail", "Email đã tồn tại");
             }
             return "/Pages/modal-user/user-signup";
         }
         else if(userService.findByEmail(user.getEmail()) != null){
-            model.addAttribute("errolEmail", "Email was existed");
+            model.addAttribute("errolEmail", "Email đã tồn tại");
             return "/Pages/modal-user/user-signup";
         }
         else {
             //user.setPassword(passwordEncoder.encode(user.getPassword()));
-            redirect.addFlashAttribute("globalMessage", "Register successfully.");
+            redirect.addFlashAttribute("globalMessage", "Đăng ký thành công.");
                 userService.save(user);
                 return "redirect:/signup";
 

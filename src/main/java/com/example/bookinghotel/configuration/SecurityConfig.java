@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -88,7 +90,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 http.authorizeRequests().and() //
                 .rememberMe().tokenRepository(this.persistentTokenRepository()) //
-                .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
+                .tokenValiditySeconds(1*24*60*60);
+//                        .and().sessionManagement()
+//                        .invalidSessionUrl("/"); // 24h
+
+    }
+
+    @Bean
+    public SessionRegistry sessionRegistry(){
+        SessionRegistry sessionRegistry = new SessionRegistryImpl() ;
+        return sessionRegistry;
 
     }
 

@@ -85,7 +85,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="topnav-dropdown-footer"> <a href="#">View all Notifications</a> </div>
+                    <div class="topnav-dropdown-footer"> <a href="#">Thông báo</a> </div>
                 </div>
             </li>
             <li class="nav-item dropdown has-arrow" th:if="${#authorization.expression('isAuthenticated()')}">
@@ -107,16 +107,16 @@
                 <ul>
                     <li> <a href="index.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
                     <li class="list-divider"></li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Lịch đặt phòng </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a href="all-booking.html"> All Booking </a></li>
-                            <li><a href="edit-booking.html"> Edit Booking </a></li>
-                            <li><a href="add-booking.html"> Add Booking </a></li>
+                            <li><a th:href="@{/listBooking}"> Lịch đặt phòng </a></li>
+
                         </ul>
                     </li>
-                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Manage Hotel </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Quản lý khách sạn </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/homepageHotel}"> All Hotel </a></li>
+                            <li><a class="active" th:href="@{/homepageHotel}"> Tất cả khách sạn </a></li>
+                            <li><a class="active" th:href="@{/hotelReportList}">Hotel Report </a></li>
 
                         </ul>
                     </li>
@@ -156,14 +156,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Số điện thoại</label>
-                                    <div>
-                                        <input type="text" class="form-control"  placeholder="Số điện thoại" required >
-                                    </div>
-                                </div>
-                            </div>
+<!--                            <div class="col-md-4">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Số điện thoại</label>-->
+<!--                                    <div>-->
+<!--                                        <input type="text" class="form-control"  placeholder="Số điện thoại" required >-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -186,7 +186,7 @@
 
 
                         </div>
-                        <button type="submit" class="btn btn-primary buttonedit1">Create Hotel</button>
+                        <button type="submit" class="btn btn-primary buttonedit1">Lưu thông tin</button>
                     </form>
                 </div>
             </div>

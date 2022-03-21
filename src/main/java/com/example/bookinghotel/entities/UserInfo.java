@@ -20,7 +20,7 @@ public class UserInfo extends AbstractEntity implements Serializable {
 
     @NotBlank
     @NotNull
-    @Size(min = 5, message = "Username should be more than 4 letters")
+    @Size(min = 5, message = "Tên đăng nhập phải lớn hơn 4 kí tự")
     private String username;
     private String name;
 
@@ -28,12 +28,12 @@ public class UserInfo extends AbstractEntity implements Serializable {
 
     @NotEmpty
     @Column(unique = true)
-    @Email
+    @Email(message = "Email không hợp lệ")
     private String email;
 
 
     @NotEmpty
-    @Size(min = 6, message = "Password should be more than 5 letters" )
+    @Size(min = 6, message = "Mật khẩu phải lớn hơn 5 kí tự" )
     private String password;
 
     @NotNull
@@ -42,8 +42,8 @@ public class UserInfo extends AbstractEntity implements Serializable {
 //    private LocalDate dateOfBirth;
 
 
-    @Size(max = 10, min = 10, message = "Mobile number should be of 10 digits")
-    @Pattern(regexp = "[0-9]{10}" ,message = "Phone number is invalid" )
+    @Size(max = 10, min = 10, message = "Số điện thoại phải có 10 chữ số")
+    @Pattern(regexp = "[0-9]{10}" ,message = "Số điện thoại không hợp lệ" )
     @NotNull
     @NotEmpty
     private String phoneNumber;
